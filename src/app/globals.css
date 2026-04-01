@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* ============================================
+   ORBBI — Sistema de diseño
+   Filosofía: minimalista, acromático, Stripe-like
+   ============================================ */
+
+@theme {
+  /* Paleta */
+  --color-obsidian: #0f0f0f;
+  --color-grafito: #1a1a1a;
+  --color-ceniza: #888780;
+  --color-humo: #D3D1C7;
+  --color-marfil: #F1EFE8;
+  --color-señal: #378ADD;
+
+  /* Radios */
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-bubble: 16px;
+
+  /* Espaciado 8px system */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+}
+
+/* ============================================
+   Base
+   ============================================ */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #0f0f0f;
+  background-color: #ffffff;
+}
+
+/* Scrollbar sutil */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #D3D1C7;
+  border-radius: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background-color: #888780;
+}
+
+/* ============================================
+   Tipografía
+   Pesos permitidos: 300, 400, 500 ÚNICAMENTE
+   ============================================ */
+.text-display {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.text-heading {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
+}
+
+.text-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.text-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888780;
+}
+
+.text-caption {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888780;
+}
