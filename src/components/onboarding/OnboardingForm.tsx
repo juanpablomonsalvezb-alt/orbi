@@ -81,7 +81,8 @@ export default function OnboardingForm() {
         .from('conversaciones')
         .insert({
           empresa_id: empresa.id,
-          titulo: 'Mi primera conversación',
+          titulo: 'Chat con Gerente General',
+          agente_tipo: 'general',
         })
         .select()
         .single()

@@ -31,9 +31,9 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ conversaciones: data })
 }
 
-// POST: crear nueva conversación
+// POST: crear nueva conversación con agente específico
 export async function POST(request: NextRequest) {
-  const { empresa_id, titulo } = await request.json()
+  const { empresa_id, titulo, agente_tipo } = await request.json()
 
   if (!empresa_id) {
     return NextResponse.json({ error: 'empresa_id requerido' }, { status: 400 })
@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
     .insert({
       empresa_id,
       titulo: titulo || 'Nueva conversación',
+      agente_tipo: agente_tipo || 'general',
     })
     .select()
     .single()

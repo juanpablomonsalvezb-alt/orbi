@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
 
-// /chat sin ID: crea o redirige a la conversación más reciente
+// /chat sin ID: redirige a la conversación más reciente o crea una con el Gerente General
 export default function ChatIndexPage() {
   const router = useRouter()
 
@@ -21,7 +21,6 @@ export default function ChatIndexPage() {
 
       if (!empresa) return
 
-      // Si no completó onboarding, redirigir allá
       if (!empresa.onboarding_completado) {
         router.push('/onboarding')
         return
@@ -38,12 +37,13 @@ export default function ChatIndexPage() {
       if (conversaciones && conversaciones.length > 0) {
         router.push(`/chat/${conversaciones[0].id}`)
       } else {
-        // Crear primera conversación
+        // Crear primera conversación con el Gerente General
         const { data: nueva } = await supabase
           .from('conversaciones')
           .insert({
             empresa_id: empresa.id,
-            titulo: 'Nueva conversación',
+            titulo: 'Chat con Gerente General',
+            agente_tipo: 'general',
           })
           .select()
           .single()
@@ -56,8 +56,8 @@ export default function ChatIndexPage() {
   }, [router])
 
   return (
-    <div className="flex h-screen items-center justify-center bg-white">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+    <div className="flex h-screen items-center justify-center bg-obsidian">
+      <div className="animate-spin rounded-full h-6 w-6 border-b border-ceniza" />
     </div>
   )
 }

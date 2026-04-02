@@ -199,7 +199,12 @@ export default function ChatPage() {
         </header>
 
         {/* Mensajes */}
-        <ChatMessages mensajes={mensajes} cargando={cargando} />
+        <ChatMessages
+          mensajes={mensajes}
+          cargando={cargando}
+          agenteTipo={agenteTipo}
+          onSugerencia={enviarMensaje}
+        />
 
         {/* Input */}
         <ChatInput onEnviar={enviarMensaje} deshabilitado={cargando} />
