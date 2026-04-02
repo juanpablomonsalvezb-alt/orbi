@@ -108,11 +108,11 @@ export default function OnboardingForm() {
           <div key={b.num} className="flex-1">
             <div
               className={`h-[2px] transition-colors ${
-                b.num <= bloqueActual ? 'bg-obsidian' : 'bg-humo'
+                b.num <= bloqueActual ? 'bg-ink' : 'bg-border-light'
               }`}
             />
             <p className={`text-[11px] mt-2 ${
-              b.num === bloqueActual ? 'text-obsidian font-medium' : 'text-ceniza'
+              b.num === bloqueActual ? 'text-ink font-medium' : 'text-muted'
             }`}>
               {b.nombre}
             </p>
@@ -121,10 +121,10 @@ export default function OnboardingForm() {
       </div>
 
       {/* Título del bloque */}
-      <h2 className="text-heading text-obsidian mb-1">
+      <h2 className="text-lg font-medium text-ink mb-1">
         {bloques[bloqueActual - 1].nombre}
       </h2>
-      <p className="text-caption mb-8">
+      <p className="text-sm text-muted mb-8">
         {bloqueActual === 1 && 'Cuéntanos sobre tu empresa para que orbbi la conozca.'}
         {bloqueActual === 2 && 'Información financiera básica para entender tu negocio.'}
         {bloqueActual === 3 && 'Sobre tus clientes y el mercado donde compites.'}
@@ -132,7 +132,7 @@ export default function OnboardingForm() {
       </p>
 
       {error && (
-        <div className="bg-red-50 text-red-600 text-[13px] rounded-[8px] px-4 py-3 mb-4">
+        <div className="bg-accent-bg border border-accent/15 text-accent text-sm rounded-md px-3 py-2.5 mb-5">
           {error}
         </div>
       )}
@@ -154,8 +154,8 @@ export default function OnboardingForm() {
         <button
           onClick={bloqueAnterior}
           disabled={bloqueActual === 1}
-          className="rounded-[8px] border border-ceniza/50 px-5 py-2.5 text-[14px] font-medium text-obsidian
-                     hover:bg-marfil transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="rounded-md border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink
+                     hover:bg-ivory-mid transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
           Anterior
         </button>
@@ -164,8 +164,8 @@ export default function OnboardingForm() {
           <button
             onClick={siguienteBloque}
             disabled={!bloqueCompleto}
-            className="rounded-[8px] bg-obsidian px-5 py-2.5 text-white text-[14px] font-medium
-                       hover:bg-grafito transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="rounded-md bg-ink px-5 py-2.5 text-white text-sm font-medium
+                       hover:bg-ink-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Siguiente
           </button>
@@ -173,8 +173,8 @@ export default function OnboardingForm() {
           <button
             onClick={guardarOnboarding}
             disabled={!bloqueCompleto || cargando}
-            className="rounded-[8px] bg-obsidian px-5 py-2.5 text-white text-[14px] font-medium
-                       hover:bg-grafito transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="rounded-md bg-ink px-5 py-2.5 text-white text-sm font-medium
+                       hover:bg-ink-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {cargando ? 'Guardando...' : 'Comenzar con orbbi'}
           </button>

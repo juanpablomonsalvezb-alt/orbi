@@ -7,274 +7,212 @@ const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94]
 
 type Billing = 'monthly' | 'annual'
 
-interface Plan {
-  nombre: string
-  descripcion: string
-  precioMensual: number
-  precioAnual: number
-  features: { texto: string; incluido: boolean }[]
-  destacado?: boolean
+function FadeIn({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, ease }} className={className}>{children}</motion.div>
+  )
 }
 
-const PLANES: Plan[] = [
+const PLANES = [
   {
-    nombre: 'Solo',
-    descripcion: 'Para microempresas y emprendedores',
-    precioMensual: 29, precioAnual: 295.80,
+    nombre: 'Solo', desc: 'Para microempresas y emprendedores',
+    mensual: 29, anual: 295.80,
     features: [
-      { texto: '1 agente incluido (Gerente General)', incluido: true },
-      { texto: 'Onboarding guiado del negocio', incluido: true },
-      { texto: 'Chat ilimitado con el agente', incluido: true },
-      { texto: 'Resumen semanal automático', incluido: true },
-      { texto: 'Agentes adicionales à la carte', incluido: false },
-      { texto: 'Soporte prioritario', incluido: false },
+      { t: '1 agente (Gerente General)', ok: true },
+      { t: 'Onboarding guiado', ok: true },
+      { t: 'Chat ilimitado', ok: true },
+      { t: 'Resumen semanal', ok: true },
+      { t: 'Agentes adicionales', ok: false },
+      { t: 'Soporte prioritario', ok: false },
     ],
   },
   {
-    nombre: 'Equipo',
-    descripcion: 'Para negocios con operación activa',
-    precioMensual: 79, precioAnual: 805.80, destacado: true,
+    nombre: 'Equipo', desc: 'Para negocios con operación activa',
+    mensual: 79, anual: 805.80, destacado: true,
     features: [
-      { texto: '3 agentes incluidos a elegir', incluido: true },
-      { texto: 'Onboarding guiado del negocio', incluido: true },
-      { texto: 'Chat ilimitado con todos los agentes', incluido: true },
-      { texto: 'Resumen semanal automático', incluido: true },
-      { texto: 'Agentes adicionales à la carte', incluido: true },
-      { texto: 'Soporte prioritario', incluido: true },
+      { t: '3 agentes a elegir', ok: true },
+      { t: 'Onboarding guiado', ok: true },
+      { t: 'Chat ilimitado', ok: true },
+      { t: 'Resumen semanal', ok: true },
+      { t: 'Agentes adicionales', ok: true },
+      { t: 'Soporte prioritario', ok: true },
     ],
   },
   {
-    nombre: 'Empresa',
-    descripcion: 'Para medianas empresas con múltiples áreas',
-    precioMensual: 249, precioAnual: 2539.80,
+    nombre: 'Empresa', desc: 'Para medianas empresas',
+    mensual: 249, anual: 2539.80,
     features: [
-      { texto: 'Todos los agentes incluidos (7)', incluido: true },
-      { texto: 'Onboarding personalizado con consultor', incluido: true },
-      { texto: 'Chat ilimitado con todos los agentes', incluido: true },
-      { texto: 'Reportes semanales y mensuales', incluido: true },
-      { texto: 'Agentes adicionales à la carte', incluido: true },
-      { texto: 'Soporte prioritario 24/7', incluido: true },
+      { t: 'Los 7 agentes', ok: true },
+      { t: 'Onboarding con consultor', ok: true },
+      { t: 'Chat ilimitado', ok: true },
+      { t: 'Reportes semanales y mensuales', ok: true },
+      { t: 'Agentes adicionales', ok: true },
+      { t: 'Soporte 24/7', ok: true },
     ],
   },
 ]
 
 const AGENTES = [
-  { nombre: 'Gerente General', rol: 'Estrategia y operaciones', precio: 'Incluido' },
-  { nombre: 'Financiero', rol: 'Finanzas y contabilidad', precio: '+$19/mes' },
-  { nombre: 'Ventas', rol: 'Pipeline y conversión', precio: '+$19/mes' },
-  { nombre: 'Marketing', rol: 'Campañas y ROI', precio: '+$19/mes' },
-  { nombre: 'RRHH', rol: 'Personas y cultura', precio: '+$19/mes' },
-  { nombre: 'Inventario', rol: 'Stock y logística', precio: '+$19/mes' },
-  { nombre: 'Legal', rol: 'Contratos y cumplimiento', precio: '+$19/mes' },
+  { n: 'Gerente General', r: 'Estrategia y operaciones', p: 'Incluido' },
+  { n: 'Financiero', r: 'Flujo de caja y márgenes', p: '+$19/mes' },
+  { n: 'Ventas', r: 'Pipeline y conversión', p: '+$19/mes' },
+  { n: 'Marketing', r: 'Campañas y ROI', p: '+$19/mes' },
+  { n: 'RRHH', r: 'Personas y cultura', p: '+$19/mes' },
+  { n: 'Inventario', r: 'Stock y logística', p: '+$19/mes' },
+  { n: 'Legal', r: 'Contratos y cumplimiento', p: '+$19/mes' },
 ]
 
 const FAQS = [
-  { pregunta: '¿Puedo cancelar cuando quiera?', respuesta: 'Sí. En el plan mensual cancelas sin penalidad. En el anual tienes acceso hasta el fin del período.' },
-  { pregunta: '¿Qué pasa después de los 14 días gratis?', respuesta: 'Te pedimos una tarjeta para continuar. Si no sigues, no se cobra nada.' },
-  { pregunta: '¿Puedo cambiar de plan?', respuesta: 'Sí. Si subes se cobra la diferencia proporcional. Si bajas, aplica al siguiente ciclo.' },
+  { q: '¿Puedo cancelar cuando quiera?', a: 'Sí. Mensual cancelas sin penalidad. Anual tienes acceso hasta el fin del período.' },
+  { q: '¿Qué pasa después de los 14 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra.' },
+  { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
 ]
-
-const stagger = {
-  c: { hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } },
-  i: { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } } },
-}
-
-function Reveal({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease }} className={className}>
-      {children}
-    </motion.div>
-  )
-}
-
-function Toggle({ billing, onChange }: { billing: Billing; onChange: (b: Billing) => void }) {
-  return (
-    <div className="flex items-center justify-center gap-4">
-      <span className={`text-[14px] transition-colors duration-200 ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}>Mensual</span>
-      <button onClick={() => onChange(billing === 'monthly' ? 'annual' : 'monthly')}
-        className="relative w-12 h-6 rounded-full bg-border-light transition-colors duration-200">
-        <motion.span className="absolute top-[3px] w-[18px] h-[18px] rounded-full"
-          animate={{ x: billing === 'annual' ? 27 : 3, backgroundColor: billing === 'annual' ? '#c6613f' : '#87867f' }}
-          transition={{ duration: 0.2, ease }} />
-      </button>
-      <span className={`text-[14px] transition-colors duration-200 ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}>Anual</span>
-      <motion.span className="text-[11px] font-medium px-2 py-1 rounded-[4px] bg-accent-bg text-accent"
-        animate={{ opacity: billing === 'annual' ? 1 : 0, x: billing === 'annual' ? 0 : -8 }}
-        transition={{ duration: 0.2 }}>
-        -15%
-      </motion.span>
-    </div>
-  )
-}
-
-function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
-  const anual = billing === 'annual'
-  const equiv = (plan.precioAnual / 12).toFixed(0)
-  const ahorro = ((plan.precioMensual * 12) - plan.precioAnual).toFixed(0)
-
-  return (
-    <div className={`rounded-[16px] p-7 flex flex-col relative overflow-hidden ${
-      plan.destacado
-        ? 'bg-ink text-ivory'
-        : 'card-premium'
-    }`}>
-      {/* Ambient glow for highlighted card */}
-      {plan.destacado && (
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-accent/[0.06] blur-[60px] pointer-events-none" />
-      )}
-
-      {plan.destacado && (
-        <span className="absolute -top-3 left-7 bg-accent text-ivory text-[11px] font-medium px-3 py-1 rounded-[4px] z-10">
-          Más popular
-        </span>
-      )}
-
-      <div className="relative z-10">
-        <h3 className="tracking-[-0.3px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '24px' }}>
-          {plan.nombre}
-        </h3>
-        <p className={`text-[13px] mt-1 ${plan.destacado ? 'text-border' : 'text-muted'}`}>{plan.descripcion}</p>
-
-        <div className="mt-6 mb-7">
-          {anual ? (
-            <>
-              <span className={`text-[13px] line-through ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>
-                ${plan.precioMensual}/mes
-              </span>
-              <div className="flex items-baseline gap-1 mt-1">
-                <span className="tracking-[-2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '44px', fontWeight: 400 }}>
-                  ${plan.precioAnual.toLocaleString('es-CL')}
-                </span>
-                <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/año</span>
-              </div>
-              <p className={`text-[12px] mt-1 ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>
-                ~${equiv}/mes · Ahorras ${ahorro}
-              </p>
-            </>
-          ) : (
-            <div className="flex items-baseline gap-1">
-              <span className="tracking-[-2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '44px', fontWeight: 400 }}>
-                ${plan.precioMensual}
-              </span>
-              <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/mes</span>
-            </div>
-          )}
-        </div>
-
-        <ul className="space-y-3 flex-1">
-          {plan.features.map((f, i) => (
-            <li key={i} className="flex items-start gap-2.5">
-              {f.incluido ? (
-                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" className="mt-0.5 shrink-0">
-                  <path d="M3 8.5L6.5 12L13 4" stroke={plan.destacado ? '#d97757' : '#c6613f'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" className="mt-1 shrink-0">
-                  <path d="M4 4L12 12M12 4L4 12" stroke={plan.destacado ? '#b0aea5' : '#d1cfc5'} strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              )}
-              <span className={`text-[13px] leading-[1.5] ${!f.incluido ? (plan.destacado ? 'text-border/40' : 'text-muted/40') : ''}`}>
-                {f.texto}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <button className={`w-full mt-7 rounded-[4px] px-5 py-3 text-[14px] font-medium transition-all duration-200 hover:-translate-y-px active:scale-[0.98] ${
-          plan.destacado
-            ? 'bg-ivory text-ink hover:bg-ivory-mid'
-            : 'bg-ink text-ivory hover:bg-ink-mid'
-        }`}>
-          Empezar gratis 14 días
-        </button>
-      </div>
-    </div>
-  )
-}
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>('annual')
 
   return (
-    <div className="bg-ivory-mid noise-texture">
-      <div className="max-w-[1100px] mx-auto" style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 4vw, 5rem)' }}>
+    <div className="bg-ivory-mid">
+      <div className="max-w-5xl mx-auto px-6" style={{ padding: 'clamp(50px, 8vw, 100px) 24px' }}>
 
-        <Reveal>
-          <div className="text-center" style={{ marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
-            <p className="t-detail text-accent mb-4">Precios</p>
-            <h1 className="t-display text-ink">Un agente para cada<br />área de tu negocio</h1>
-            <p className="t-body mt-4 max-w-md mx-auto">
-              Elige el plan que se ajuste a tu operación. Todos incluyen 14 días gratis.
+        {/* Header */}
+        <FadeIn>
+          <div className="text-center mb-10">
+            <p className="text-xs font-medium uppercase tracking-[0.15em] text-accent mb-3">Precios</p>
+            <h1 className="text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 400, letterSpacing: '-0.8px', lineHeight: 1.1 }}>
+              Un agente para cada área de tu negocio
+            </h1>
+            <p className="text-sm text-ink-light mt-3 max-w-md mx-auto" style={{ fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.6 }}>
+              Todos los planes incluyen 14 días gratis.
             </p>
           </div>
-        </Reveal>
+        </FadeIn>
 
-        <Reveal className="mb-12">
-          <Toggle billing={billing} onChange={setBilling} />
-        </Reveal>
+        {/* Toggle */}
+        <FadeIn className="mb-10">
+          <div className="flex items-center justify-center gap-3">
+            <span className={`text-sm ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}>Mensual</span>
+            <button onClick={() => setBilling(billing === 'monthly' ? 'annual' : 'monthly')}
+              className="relative w-11 h-[22px] rounded-full bg-border-light">
+              <motion.span className="absolute top-[3px] w-4 h-4 rounded-full"
+                animate={{ x: billing === 'annual' ? 24 : 3, backgroundColor: billing === 'annual' ? '#c6613f' : '#87867f' }}
+                transition={{ duration: 0.2 }} />
+            </button>
+            <span className={`text-sm ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}>Anual</span>
+            {billing === 'annual' && (
+              <span className="text-[11px] font-medium text-accent bg-accent-bg px-2 py-0.5 rounded">-15%</span>
+            )}
+          </div>
+        </FadeIn>
 
-        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start"
-          style={{ marginBottom: 'clamp(5rem, 8vw, 8rem)' }}
-          variants={stagger.c} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          {PLANES.map((plan) => (
-            <motion.div key={plan.nombre} variants={stagger.i}>
-              <PlanCard plan={plan} billing={billing} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Plans */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
+          {PLANES.map((plan, pi) => {
+            const anual = billing === 'annual'
+            const equiv = (plan.anual / 12).toFixed(0)
+            return (
+              <motion.div key={plan.nombre}
+                className={`rounded-xl p-6 ${plan.destacado ? 'bg-ink text-ivory relative' : 'border border-ink/[0.06] bg-ivory'}`}
+                initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.4, ease, delay: pi * 0.08 }}>
+
+                {plan.destacado && (
+                  <span className="absolute -top-2.5 left-6 bg-accent text-ivory text-[11px] font-medium px-2.5 py-0.5 rounded">
+                    Más popular
+                  </span>
+                )}
+
+                <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '20px' }}>{plan.nombre}</p>
+                <p className={`text-xs mt-1 ${plan.destacado ? 'text-border' : 'text-muted'}`}>{plan.desc}</p>
+
+                <div className="mt-5 mb-6">
+                  {anual ? (
+                    <>
+                      <span className={`text-xs line-through ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>${plan.mensual}/mes</span>
+                      <div className="flex items-baseline gap-1 mt-0.5">
+                        <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>
+                          ${plan.anual.toLocaleString('es-CL')}
+                        </span>
+                        <span className={`text-xs ${plan.destacado ? 'text-border' : 'text-muted'}`}>/año</span>
+                      </div>
+                      <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>~${equiv}/mes</p>
+                    </>
+                  ) : (
+                    <div className="flex items-baseline gap-1">
+                      <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>${plan.mensual}</span>
+                      <span className={`text-xs ${plan.destacado ? 'text-border' : 'text-muted'}`}>/mes</span>
+                    </div>
+                  )}
+                </div>
+
+                <ul className="space-y-2.5 mb-6">
+                  {plan.features.map((f, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      {f.ok ? (
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                          <path d="M3 8.5L6.5 12L13 4" stroke={plan.destacado ? '#d97757' : '#c6613f'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      ) : (
+                        <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                          <path d="M4 4L12 12M12 4L4 12" stroke={plan.destacado ? '#87867f' : '#d1cfc5'} strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                      )}
+                      <span className={`text-sm ${!f.ok ? (plan.destacado ? 'text-muted' : 'text-muted/40') : ''}`}>{f.t}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button className={`w-full rounded-md py-2.5 text-sm font-medium transition-colors ${
+                  plan.destacado ? 'bg-ivory text-ink hover:bg-ivory-mid' : 'bg-ink text-ivory hover:bg-ink-mid'
+                }`}>
+                  Empezar gratis 14 días
+                </button>
+              </motion.div>
+            )
+          })}
+        </div>
 
         {/* Separator */}
-        <div className="separator" style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }} />
+        <div className="h-px bg-ink/[0.06] mb-16" />
 
         {/* Agentes à la carte */}
-        <Reveal className="mb-20">
-          <div className="md:flex md:items-end md:justify-between mb-8">
+        <FadeIn className="mb-20">
+          <div className="md:flex md:justify-between md:items-end mb-6">
             <div>
-              <p className="t-detail text-muted mb-3">Personaliza</p>
-              <h2 className="t-heading text-ink">Agentes adicionales — à la carte</h2>
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-muted mb-2">Personaliza</p>
+              <h2 className="text-lg font-medium text-ink">Agentes adicionales</h2>
             </div>
-            <p className="t-small text-muted mt-3 md:mt-0">Agrega solo lo que necesitas</p>
+            <p className="text-sm text-muted mt-2 md:mt-0">Agrega solo lo que necesitas</p>
           </div>
-
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-            variants={stagger.c} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {AGENTES.map((a) => (
-              <motion.div key={a.nombre} variants={stagger.i}
-                className="card-premium px-5 py-4 flex items-center justify-between group cursor-default">
+              <div key={a.n} className="border border-ink/[0.06] rounded-lg px-4 py-3 bg-ivory flex items-center justify-between hover:border-ink/[0.12] transition-colors">
                 <div>
-                  <p className="text-[14px] text-ink font-normal group-hover:text-accent transition-colors duration-200">{a.nombre}</p>
-                  <p className="text-[11px] text-muted mt-0.5">{a.rol}</p>
+                  <p className="text-sm text-ink">{a.n}</p>
+                  <p className="text-[11px] text-muted">{a.r}</p>
                 </div>
-                <span className={`text-[13px] font-medium ${a.precio === 'Incluido' ? 'text-muted/40' : 'text-accent'}`}>
-                  {a.precio}
-                </span>
-              </motion.div>
+                <span className={`text-sm font-medium ${a.p === 'Incluido' ? 'text-muted/40' : 'text-accent'}`}>{a.p}</span>
+              </div>
             ))}
-          </motion.div>
-        </Reveal>
+          </div>
+        </FadeIn>
 
         {/* FAQ */}
-        <Reveal>
-          <div className="max-w-xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="t-detail text-muted mb-3">FAQ</p>
-              <h2 className="t-heading text-ink">Preguntas frecuentes</h2>
-            </div>
-            <div className="space-y-0">
-              {FAQS.map((faq, i) => (
-                <div key={i} className="py-6 border-b border-border-light/60 last:border-none">
-                  <h4 className="text-ink tracking-[-0.2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '16px' }}>
-                    {faq.pregunta}
-                  </h4>
-                  <p className="t-small text-muted mt-2">{faq.respuesta}</p>
-                </div>
-              ))}
-            </div>
+        <FadeIn>
+          <div className="max-w-lg mx-auto">
+            <p className="text-xs font-medium uppercase tracking-[0.15em] text-muted mb-2">FAQ</p>
+            <h2 className="text-lg font-medium text-ink mb-6">Preguntas frecuentes</h2>
+            {FAQS.map((f, i) => (
+              <div key={i} className="py-5 border-b border-ink/[0.06] last:border-none">
+                <p className="text-sm font-medium text-ink">{f.q}</p>
+                <p className="text-sm text-muted mt-1.5 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
           </div>
-        </Reveal>
+        </FadeIn>
       </div>
     </div>
   )

@@ -11,8 +11,8 @@ interface QuestionBlockProps {
 export default function QuestionBlock({ pregunta, valor, onChange }: QuestionBlockProps) {
   return (
     <div>
-      <label className="block text-[14px] font-normal text-obsidian mb-2">
-        <span className="text-señal font-medium mr-1.5">{pregunta.orden}.</span>
+      <label className="block text-sm text-ink mb-2">
+        <span className="text-accent font-medium mr-1">{pregunta.orden}.</span>
         {pregunta.pregunta}
       </label>
       <textarea
@@ -20,9 +20,9 @@ export default function QuestionBlock({ pregunta, valor, onChange }: QuestionBlo
         onChange={(e) => onChange(e.target.value)}
         placeholder={pregunta.placeholder}
         rows={2}
-        className="w-full rounded-[8px] border border-humo px-3.5 py-2.5 text-[14px] font-normal
-                   resize-none bg-transparent placeholder:text-ceniza
-                   focus:outline-none focus:border-obsidian transition-colors"
+        className="w-full rounded-md border border-ink/[0.08] px-3 py-2.5 text-sm text-ink bg-ivory
+                   resize-none placeholder:text-muted/50
+                   focus:outline-none focus:border-ink/25 transition-colors"
       />
     </div>
   )
