@@ -299,6 +299,311 @@ function CTA() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// PROBLEM SOLVERS — 3 feature icon cards
+// ═══════════════════════════════════════════════════════════════════
+
+function ProblemSolversSection() {
+  const features = [
+    {
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
+        </svg>
+      ),
+      title: 'Resuelve problemas junto a ti',
+      desc: 'Orbbi construye sobre tus ideas, expande tu lógica y simplifica la complejidad paso a paso para cada área de tu negocio.',
+    },
+    {
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 16h18" /><path d="M8 20V16" /><path d="M12 20V16" /><path d="M16 20V16" /><path d="M7 12l3-3 2 2 5-5" />
+        </svg>
+      ),
+      title: 'Aborda tu trabajo más difícil',
+      desc: 'Colaboración experta en lo que necesitas resolver — desde análisis financiero crítico hasta estrategia comercial.',
+    },
+    {
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2" /><rect x="4" y="3" width="16" height="4" rx="1" /><path d="M10 14h4" />
+        </svg>
+      ),
+      title: 'Explora lo que sigue',
+      desc: 'Como un equipo experto en tu bolsillo, colaborar con Orbbi expande lo que puedes construir por tu cuenta.',
+    },
+  ]
+
+  return (
+    <section className="bg-ivory">
+      <div className="space-main" />
+      <div className="u-container">
+        <FadeIn>
+          <p className="u-detail-s mb-4" style={{ color: '#d97757' }}>Diseñado para quienes deciden</p>
+          <h2 className="u-display-l mb-2" style={{ maxWidth: '24ch' }}>
+            <AnimatedWords>La IA para quienes toman decisiones</AnimatedWords>
+          </h2>
+          <p className="u-paragraph-s mb-12" style={{ maxWidth: '50ch' }}>
+            Delega tareas complejas a agentes especializados.
+            Orbbi trabaja con tus datos para darte respuestas accionables.
+          </p>
+        </FadeIn>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((f, i) => (
+            <FadeIn key={f.title} delay={i * 0.08}>
+              <div className="bg-ivory-mid border border-cloud-light/50 rounded-lg p-6 h-full">
+                <div className="text-clay mb-4">{f.icon}</div>
+                <h3 className="text-ink mb-2" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '18px' }}>
+                  {f.title}
+                </h3>
+                <p className="text-sm text-ink-light leading-relaxed">{f.desc}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// USE CASES TABS — 6 tabs (Finanzas, Ventas, Marketing, RRHH, Inventario, Legal)
+// ═══════════════════════════════════════════════════════════════════
+
+const TABS_DATA = [
+  {
+    id: 'finanzas', label: 'Finanzas', color: '#d97757',
+    title: 'Controla tus finanzas con claridad',
+    desc: 'Analiza flujo de caja, márgenes, ratios y proyecciones. El agente financiero detecta problemas antes de que se conviertan en crisis y sugiere acciones correctivas basadas en datos reales.',
+  },
+  {
+    id: 'ventas', label: 'Ventas', color: '#c6613f',
+    title: 'Optimiza tu pipeline de ventas',
+    desc: 'Monitorea tu embudo, analiza retención, CAC/LTV y tasas de cierre. Recibe alertas cuando un indicador requiere atención y recomendaciones para mejorar tu conversión.',
+  },
+  {
+    id: 'marketing', label: 'Marketing', color: '#87867f',
+    title: 'Maximiza el ROI de tus campañas',
+    desc: 'Evalúa canales, posicionamiento y contenido. Identifica qué inversiones generan mayor retorno y recibe estrategias adaptadas al mercado latinoamericano.',
+  },
+  {
+    id: 'rrhh', label: 'RRHH', color: '#5e5d59',
+    title: 'Gestiona tu equipo con inteligencia',
+    desc: 'Desde contratación hasta desempeño. Analiza cultura organizacional, sugiere mejoras en delegación y ayuda a construir equipos de alto rendimiento.',
+  },
+  {
+    id: 'inventario', label: 'Inventario', color: '#3d3d3a',
+    title: 'Optimiza tu cadena de suministro',
+    desc: 'Controla stock, proveedores, logística y rotación. Predice necesidades de reabastecimiento y sugiere mejoras en tu operación logística.',
+  },
+  {
+    id: 'legal', label: 'Legal', color: '#b0aea5',
+    title: 'Mantente al día con regulaciones',
+    desc: 'Revisa contratos, cumplimiento normativo, permisos y regulación. Recibe alertas sobre cambios legales que impactan tu industria.',
+  },
+]
+
+function UseCasesTabSection() {
+  const [active, setActive] = useState(0)
+  const tab = TABS_DATA[active]
+
+  return (
+    <section className="bg-ivory-dark">
+      <div className="space-main" />
+      <div className="u-container">
+        <FadeIn>
+          <p className="u-detail-s mb-4" style={{ color: '#d97757' }}>Agentes especializados</p>
+          <h2 className="u-display-l mb-10" style={{ maxWidth: '24ch' }}>
+            <AnimatedWords>Cómo puedes usar Orbbi</AnimatedWords>
+          </h2>
+        </FadeIn>
+
+        {/* Tab buttons */}
+        <FadeIn delay={0.1}>
+          <div className="flex flex-wrap gap-2 mb-8">
+            {TABS_DATA.map((t, i) => (
+              <button key={t.id} onClick={() => setActive(i)}
+                className={`text-xs font-medium px-4 py-2 rounded-full transition-colors ${
+                  i === active
+                    ? 'bg-ink text-ivory'
+                    : 'bg-ivory-mid text-ink-light hover:bg-cloud-light/60'
+                }`}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </FadeIn>
+
+        {/* Tab content */}
+        <div className="grid-12">
+          <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full flex flex-col justify-center">
+            <FadeIn key={tab.id}>
+              <h3 className="u-display-s mb-4">{tab.title}</h3>
+              <p className="u-paragraph-s mb-6" style={{ maxWidth: '40ch' }}>{tab.desc}</p>
+              <Link href="/registro" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:opacity-70 transition-opacity">
+                Probar este agente
+                <svg width="18" height="18" viewBox="0 0 30 30" fill="none">
+                  <path d="M25.98 15.66L17.54 24.1a.94.94 0 01-1.33-1.33l6.84-6.84H4.69a.94.94 0 010-1.87h18.36l-6.84-6.84a.94.94 0 011.33-1.33l8.44 8.44a.94.94 0 010 1.33z" fill="currentColor"/>
+                </svg>
+              </Link>
+            </FadeIn>
+          </div>
+          <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
+            <FadeIn key={tab.id + '-card'}>
+              <div className="rounded-lg overflow-hidden" style={{ backgroundColor: tab.color, minHeight: 320 }}>
+                <div className="p-8 flex items-end h-full min-h-[320px]">
+                  <div>
+                    <p className="text-ivory/70 text-xs uppercase tracking-wider mb-2">Agente {tab.label}</p>
+                    <p className="text-ivory text-lg font-medium" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                      {tab.title}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MODEL CARDS → PLANES DE ORBBI
+// ═══════════════════════════════════════════════════════════════════
+
+function PlanesSection() {
+  const planes = [
+    {
+      nombre: 'Básico',
+      desc: 'Para emprendedores que quieren empezar',
+      features: ['1 agente (Gerente General)', 'Consultas básicas', 'Onboarding guiado', 'Soporte por email'],
+    },
+    {
+      nombre: 'Pro',
+      desc: 'Para negocios en crecimiento',
+      features: ['7 agentes especializados', 'Reportes semanales automáticos', 'Análisis avanzado de indicadores', 'Soporte prioritario'],
+    },
+    {
+      nombre: 'Enterprise',
+      desc: 'Para empresas que necesitan todo',
+      features: ['Agentes ilimitados', 'API de integración', 'Soporte dedicado 24/7', 'Personalización completa'],
+    },
+  ]
+
+  return (
+    <section className="bg-ivory">
+      <div className="space-main" />
+      <div className="u-container max-w-3xl mx-auto">
+        <FadeIn>
+          <p className="u-detail-s mb-4 text-center" style={{ color: '#d97757' }}>Planes flexibles</p>
+          <h2 className="u-display-l mb-10 text-center" style={{ maxWidth: '24ch', margin: '0 auto' }}>
+            <AnimatedWords>Planes de Orbbi</AnimatedWords>
+          </h2>
+        </FadeIn>
+        <div className="space-y-4">
+          {planes.map((p, i) => (
+            <FadeIn key={p.nombre} delay={i * 0.08}>
+              <div className="bg-ivory-mid border border-cloud-light/50 rounded-lg p-6 md:p-8">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="u-display-s mb-1">{p.nombre}</h3>
+                    <p className="u-paragraph-s mb-4">{p.desc}</p>
+                    <ul className="space-y-1">
+                      {p.features.map((f) => (
+                        <li key={f} className="text-sm text-ink-light flex items-center gap-2">
+                          <span className="text-clay">•</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Link href="/precios" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:opacity-70 transition-opacity shrink-0 mt-2 md:mt-0">
+                    Ver detalles
+                    <svg width="16" height="16" viewBox="0 0 30 30" fill="none">
+                      <path d="M25.98 15.66L17.54 24.1a.94.94 0 01-1.33-1.33l6.84-6.84H4.69a.94.94 0 010-1.87h18.36l-6.84-6.84a.94.94 0 011.33-1.33l8.44 8.44a.94.94 0 010 1.33z" fill="currentColor"/>
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// LATEST RELEASES — Novedades
+// ═══════════════════════════════════════════════════════════════════
+
+function NovedadesSection() {
+  const items = [
+    { title: 'Agente Financiero mejorado', tag: 'Producto' },
+    { title: 'Reportes semanales automáticos', tag: 'Funcionalidad' },
+    { title: 'Integración con WhatsApp', tag: 'Producto' },
+    { title: 'Base de conocimiento ampliada', tag: 'Metodología' },
+    { title: 'Dashboard ejecutivo en tiempo real', tag: 'Funcionalidad' },
+  ]
+
+  return (
+    <section className="bg-ivory-dark">
+      <div className="space-medium" />
+      <div className="u-container max-w-3xl mx-auto">
+        <FadeIn>
+          <p className="u-detail-s mb-4" style={{ color: '#d97757' }}>Novedades</p>
+          <h2 className="u-display-s mb-8">Explora las últimas novedades</h2>
+        </FadeIn>
+        <ul>
+          {items.map((item, i) => (
+            <FadeIn key={item.title} delay={i * 0.05}>
+              <li className="flex items-center justify-between py-4 border-b border-cloud-light/40 group cursor-pointer hover:opacity-70 transition-opacity">
+                <span className="text-sm font-medium text-ink">{item.title}</span>
+                <span className="text-xs text-muted">{item.tag}</span>
+              </li>
+            </FadeIn>
+          ))}
+        </ul>
+      </div>
+      <div className="space-medium" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// FINAL CTA
+// ═══════════════════════════════════════════════════════════════════
+
+function FinalCTA() {
+  return (
+    <section className="bg-ivory">
+      <div className="space-main" />
+      <div className="u-container text-center">
+        <FadeIn>
+          <h2 className="u-display-l mx-auto" style={{ maxWidth: '22ch' }}>
+            <AnimatedWords>¿Qué desafío enfrenta tu negocio?</AnimatedWords>
+          </h2>
+          <p className="u-paragraph-s mt-4 mb-8 mx-auto" style={{ maxWidth: '48ch' }}>
+            Empieza hoy con Orbbi. Configura tu agente en 5 minutos
+            y recibe tu primer análisis antes de terminar el café.
+          </p>
+          <Link href="/registro"
+            className="inline-flex items-center gap-2 bg-ink text-ivory text-sm font-medium px-6 py-3 rounded hover:opacity-90 transition-opacity">
+            Comenzar gratis
+            <svg width="20" height="20" viewBox="0 0 30 30" fill="none">
+              <path d="M25.98 15.66L17.54 24.1a.94.94 0 01-1.33-1.33l6.84-6.84H4.69a.94.94 0 010-1.87h18.36l-6.84-6.84a.94.94 0 011.33-1.33l8.44 8.44a.94.94 0 010 1.33z" fill="currentColor"/>
+            </svg>
+          </Link>
+        </FadeIn>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // FOOTER (matches Anthropic: dark bg, multi-column, social icons)
 // ═══════════════════════════════════════════════════════════════════
 
@@ -356,6 +661,11 @@ export default function Home() {
       <MissionSection />
       <AgentesSection />
       <CTA />
+      <ProblemSolversSection />
+      <UseCasesTabSection />
+      <PlanesSection />
+      <NovedadesSection />
+      <FinalCTA />
       <Footer />
     </main>
   )
