@@ -9,29 +9,116 @@
   --color-ink-mid: #3d3d3a;
   --color-ink-light: #5e5d59;
   --color-muted: #87867f;
-  --color-border: #b0aea5;
-  --color-border-light: #d1cfc5;
+  --color-cloud: #b0aea5;
+  --color-cloud-light: #d1cfc5;
+  --color-clay: #d97757;
   --color-accent: #c6613f;
-  --color-accent-light: #d97757;
-  --color-accent-bg: #f3e8e2;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { background-color: #f0eee6; }
 body {
+  margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #141413;
   background: #f0eee6;
 }
 
-::selection { background: rgba(204, 120, 92, 0.3); }
+/* ── Selection ── */
+::selection { background: rgba(204, 120, 92, 0.5); }
 
+/* ── Site layout (matches Anthropic exactly) ── */
+:root {
+  --site-margin: clamp(2rem, 1.08rem + 3.92vw, 5rem);
+  --nav-height: 4.25rem;
+}
+
+.u-container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--site-margin);
+  padding-right: var(--site-margin);
+}
+
+/* ── Typography scale (matches Anthropic's fluid clamp) ── */
+.u-display-xl {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(2.5rem, 2.04rem + 1.96vw, 4rem);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+.u-display-l {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(2rem, 1.69rem + 1.31vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.u-display-s {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.25rem, 1.17rem + 0.33vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.u-paragraph-l {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.375rem, 1.34rem + 0.16vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5e5d59;
+}
+
+.u-paragraph-s {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1rem, 0.96rem + 0.16vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5e5d59;
+}
+
+.u-detail-s {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.6875rem, 0.67rem + 0.08vw, 0.75rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.13px;
+  color: #87867f;
+}
+
+/* ── Section spacing (matches Anthropic's size tokens) ── */
+.space-main { padding-top: clamp(5rem, 3.78rem + 5.22vw, 9rem); padding-bottom: clamp(5rem, 3.78rem + 5.22vw, 9rem); }
+.space-medium { padding-top: clamp(3rem, 2.02rem + 0.98vw, 5rem); padding-bottom: clamp(3rem, 2.02rem + 0.98vw, 5rem); }
+.space-small { padding-top: clamp(2rem, 1.67rem + 0.33vw, 2.5rem); padding-bottom: clamp(2rem, 1.67rem + 0.33vw, 2.5rem); }
+
+/* ── Grid (matches Anthropic's 12-col) ── */
+.grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem; }
+@media (max-width: 768px) { .grid-12 { grid-template-columns: 1fr; } }
+
+/* ── Cards (matches Anthropic's article_card) ── */
+.card-hover:hover .card-img { transform: scale(1.05); }
+.card-img { transition: transform 0.2s ease; }
+
+/* ── Footer dark theme ── */
+.footer-dark {
+  background-color: #141413;
+  color: #f0eee6;
+}
+.footer-dark a { color: #b0aea5; text-decoration: none; }
+.footer-dark a:hover { color: #f0eee6; }
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f0eee6; }
 ::-webkit-scrollbar-thumb { background: #d1cfc5; border-radius: 3px; }
 
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
