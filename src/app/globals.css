@@ -1,109 +1,113 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #0f0f0f;
-  --color-grafito: #1a1a1a;
-  --color-ceniza: #888780;
-  --color-humo: #D3D1C7;
-  --color-marfil: #F1EFE8;
+  /* Fondos cálidos (ivory family) */
+  --color-ivory: #faf9f5;
+  --color-ivory-mid: #f0eee6;
+  --color-ivory-dark: #e8e6dc;
+  --color-oat: #e3dacc;
+
+  /* Textos (slate family) */
+  --color-ink: #141413;
+  --color-ink-mid: #3d3d3a;
+  --color-ink-light: #5e5d59;
+
+  /* Neutros (cloud family) */
+  --color-muted: #87867f;
+  --color-border: #b0aea5;
+  --color-border-light: #d1cfc5;
+
+  /* Acento */
+  --color-accent: #c6613f;
+  --color-accent-light: #d97757;
+  --color-accent-bg: #f3e8e2;
+
+  /* Señal (interactivos) */
   --color-señal: #378ADD;
 }
 
 /* ============================================
-   ORBBI — Premium Foundation
+   Base
    ============================================ */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #0f0f0f;
-  background: #0f0f0f;
-  overflow-x: hidden;
+  color: #141413;
+  background: #f0eee6;
 }
 
 ::selection {
-  background: #378ADD;
-  color: #fff;
+  background: rgba(204, 120, 92, 0.35);
 }
 
 /* ============================================
-   Tipografía
+   Tipografía fluid
    ============================================ */
 
 .t-hero {
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 300;
-  letter-spacing: -3px;
-  line-height: 0.95;
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: #141413;
 }
 
 .t-display {
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 300;
-  letter-spacing: -1.5px;
-  line-height: 1.05;
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  color: #141413;
 }
 
-.t-title {
-  font-size: clamp(18px, 2.5vw, 24px);
-  font-weight: 400;
+.t-heading {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 500;
   letter-spacing: -0.3px;
   line-height: 1.3;
+  color: #141413;
+}
+
+.t-subhead {
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5e5d59;
 }
 
 .t-body {
-  font-size: 15px;
+  font-family: 'Source Serif 4', 'Georgia', serif;
+  font-size: clamp(16px, 1.2vw, 18px);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.6;
+  color: #5e5d59;
 }
 
 .t-small {
-  font-size: 13px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: #5e5d59;
 }
 
-.t-micro {
-  font-size: 11px;
+.t-detail {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-/* ============================================
-   Dot grid background
-   ============================================ */
-
-.bg-dots {
-  background-image: radial-gradient(circle, #888780 0.5px, transparent 0.5px);
-  background-size: 24px 24px;
-  background-position: center;
-}
-
-.bg-dots-light {
-  background-image: radial-gradient(circle, #D3D1C7 0.5px, transparent 0.5px);
-  background-size: 24px 24px;
-  background-position: center;
-}
-
-/* ============================================
-   Glow
-   ============================================ */
-
-.glow-señal {
-  box-shadow: 0 0 80px 20px rgba(55, 138, 221, 0.08);
-}
-
-.glow-orb {
-  background: radial-gradient(circle, rgba(55, 138, 221, 0.12) 0%, transparent 70%);
+  letter-spacing: 0.08em;
+  color: #87867f;
 }
 
 /* ============================================
@@ -111,7 +115,7 @@ body {
    ============================================ */
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -120,34 +124,14 @@ body {
   to { opacity: 1; }
 }
 
-@keyframes orbit-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes line-draw {
-  from { stroke-dashoffset: 200; }
-  to { stroke-dashoffset: 0; }
-}
-
 .anim-fade-up {
   opacity: 0;
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .anim-fade-in {
   opacity: 0;
-  animation: fade-in 0.6s ease forwards;
+  animation: fade-in 0.4s ease-out forwards;
 }
 
 .d1 { animation-delay: 0.1s; }
@@ -155,13 +139,12 @@ body {
 .d3 { animation-delay: 0.35s; }
 .d4 { animation-delay: 0.5s; }
 .d5 { animation-delay: 0.65s; }
-.d6 { animation-delay: 0.8s; }
 
 /* ============================================
    Scrollbar
    ============================================ */
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0f0f0f; }
-::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #888780; }
+::-webkit-scrollbar-track { background: #f0eee6; }
+::-webkit-scrollbar-thumb { background: #d1cfc5; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #b0aea5; }

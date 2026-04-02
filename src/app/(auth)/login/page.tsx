@@ -19,21 +19,14 @@ export default function LoginPage() {
 
     try {
       const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
-
       if (authError) {
         setError(authError.message === 'Invalid login credentials' ? 'Email o contraseña incorrectos' : authError.message)
         return
       }
-
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
-
       const { data: empresa } = await supabase
-        .from('empresas')
-        .select('onboarding_completado')
-        .eq('user_id', user.id)
-        .single()
-
+        .from('empresas').select('onboarding_completado').eq('user_id', user.id).single()
       router.push(!empresa || !empresa.onboarding_completado ? '/onboarding' : '/chat')
     } catch {
       setError('Error al iniciar sesión')
@@ -44,64 +37,49 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h2 className="text-[28px] font-light text-obsidian tracking-[-0.8px] leading-[1.1]">
-        Bienvenido
-        <br />
-        de vuelta
+      <h2 className="tracking-[-0.5px] leading-[1.1] text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '28px', fontWeight: 400 }}>
+        Bienvenido de vuelta
       </h2>
-      <p className="t-small text-ceniza mt-3 mb-10">
+      <p className="t-small text-muted mt-2 mb-8">
         Ingresa para hablar con tu agente.
       </p>
 
       {error && (
-        <div className="rounded-[8px] bg-red-50 border border-red-100 px-4 py-3 mb-6">
-          <p className="t-small text-red-600">{error}</p>
+        <div className="rounded-[4px] bg-accent-bg border border-accent/20 px-4 py-3 mb-6">
+          <p className="text-[13px] text-accent">{error}</p>
         </div>
       )}
 
       <form onSubmit={handleLogin} className="space-y-5">
         <div>
-          <label className="t-micro text-ceniza mb-2.5 block">Email</label>
+          <label className="t-detail mb-2 block">Email</label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
             placeholder="tu@empresa.com"
-            className="w-full rounded-[8px] border border-humo bg-white px-4 py-3 text-[14px] text-obsidian
-                       placeholder:text-ceniza/50 focus:outline-none focus:border-obsidian transition-colors"
+            className="w-full rounded-[4px] border border-border-light bg-ivory px-3.5 py-3 text-[14px] text-ink
+                       placeholder:text-muted/60 focus:outline-none focus:border-ink transition-colors duration-200"
           />
         </div>
-
         <div>
-          <label className="t-micro text-ceniza mb-2.5 block">Contraseña</label>
+          <label className="t-detail mb-2 block">Contraseña</label>
           <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            type="password" value={password} onChange={(e) => setPassword(e.target.value)} required
             placeholder="••••••••"
-            className="w-full rounded-[8px] border border-humo bg-white px-4 py-3 text-[14px] text-obsidian
-                       placeholder:text-ceniza/50 focus:outline-none focus:border-obsidian transition-colors"
+            className="w-full rounded-[4px] border border-border-light bg-ivory px-3.5 py-3 text-[14px] text-ink
+                       placeholder:text-muted/60 focus:outline-none focus:border-ink transition-colors duration-200"
           />
         </div>
-
-        <button
-          type="submit"
-          disabled={cargando}
-          className="w-full rounded-[8px] bg-obsidian text-white px-5 py-3 text-[14px] font-medium
-                     hover:bg-grafito transition-all duration-300 disabled:opacity-40"
-        >
+        <button type="submit" disabled={cargando}
+          className="w-full rounded-[4px] bg-ink text-ivory px-5 py-3 text-[14px] font-medium
+                     hover:bg-ink-mid transition-colors duration-200 disabled:opacity-40">
           {cargando ? 'Ingresando...' : 'Ingresar'}
         </button>
       </form>
 
-      <div className="mt-10 pt-6 border-t border-humo/40">
-        <p className="t-small text-ceniza text-center">
+      <div className="mt-8 pt-6 border-t border-border-light">
+        <p className="t-small text-muted text-center">
           ¿No tienes cuenta?{' '}
-          <Link href="/registro" className="text-señal hover:underline font-medium">
-            Crea una gratis
-          </Link>
+          <Link href="/registro" className="text-accent hover:underline font-medium">Crea una gratis</Link>
         </p>
       </div>
     </div>
