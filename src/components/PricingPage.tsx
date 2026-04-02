@@ -1,6 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+
+const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94]
 
 type Billing = 'monthly' | 'annual'
 
@@ -71,28 +74,38 @@ const FAQS = [
   { pregunta: '¿Puedo cambiar de plan?', respuesta: 'Sí. Si subes se cobra la diferencia proporcional. Si bajas, aplica al siguiente ciclo.' },
 ]
 
+const stagger = {
+  c: { hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } },
+  i: { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } } },
+}
+
+function Reveal({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease }} className={className}>
+      {children}
+    </motion.div>
+  )
+}
+
 function Toggle({ billing, onChange }: { billing: Billing; onChange: (b: Billing) => void }) {
   return (
-    <div className="flex items-center justify-center space-x-4">
-      <span className={`text-[14px] transition-colors duration-200 ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}>
-        Mensual
-      </span>
-      <button
-        onClick={() => onChange(billing === 'monthly' ? 'annual' : 'monthly')}
-        className="relative w-12 h-6 rounded-full bg-border-light transition-colors duration-200"
-      >
-        <span className={`absolute top-[3px] w-[18px] h-[18px] rounded-full transition-all duration-200 ${
-          billing === 'annual' ? 'translate-x-[27px] bg-accent' : 'translate-x-[3px] bg-muted'
-        }`} />
+    <div className="flex items-center justify-center gap-4">
+      <span className={`text-[14px] transition-colors duration-200 ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}>Mensual</span>
+      <button onClick={() => onChange(billing === 'monthly' ? 'annual' : 'monthly')}
+        className="relative w-12 h-6 rounded-full bg-border-light transition-colors duration-200">
+        <motion.span className="absolute top-[3px] w-[18px] h-[18px] rounded-full"
+          animate={{ x: billing === 'annual' ? 27 : 3, backgroundColor: billing === 'annual' ? '#c6613f' : '#87867f' }}
+          transition={{ duration: 0.2, ease }} />
       </button>
-      <span className={`text-[14px] transition-colors duration-200 ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}>
-        Anual
-      </span>
-      <span className={`text-[11px] font-medium px-2 py-1 rounded-[4px] transition-all duration-200 ${
-        billing === 'annual' ? 'bg-accent-bg text-accent opacity-100' : 'opacity-0'
-      }`}>
+      <span className={`text-[14px] transition-colors duration-200 ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}>Anual</span>
+      <motion.span className="text-[11px] font-medium px-2 py-1 rounded-[4px] bg-accent-bg text-accent"
+        animate={{ opacity: billing === 'annual' ? 1 : 0, x: billing === 'annual' ? 0 : -8 }}
+        transition={{ duration: 0.2 }}>
         -15%
-      </span>
+      </motion.span>
     </div>
   )
 }
@@ -103,78 +116,81 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
   const ahorro = ((plan.precioMensual * 12) - plan.precioAnual).toFixed(0)
 
   return (
-    <div className={`rounded-[12px] p-7 flex flex-col relative ${
+    <div className={`rounded-[16px] p-7 flex flex-col relative overflow-hidden ${
       plan.destacado
         ? 'bg-ink text-ivory'
-        : 'bg-ivory border border-border-light'
+        : 'card-premium'
     }`}>
+      {/* Ambient glow for highlighted card */}
       {plan.destacado && (
-        <span className="absolute -top-3 left-7 bg-accent text-ivory text-[11px] font-medium px-3 py-1 rounded-[4px]">
+        <div className="absolute top-0 right-0 w-[200px] h-[200px] rounded-full bg-accent/[0.06] blur-[60px] pointer-events-none" />
+      )}
+
+      {plan.destacado && (
+        <span className="absolute -top-3 left-7 bg-accent text-ivory text-[11px] font-medium px-3 py-1 rounded-[4px] z-10">
           Más popular
         </span>
       )}
 
-      <h3 className="text-[22px] font-normal tracking-[-0.3px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-        {plan.nombre}
-      </h3>
-      <p className={`text-[13px] mt-1 ${plan.destacado ? 'text-border' : 'text-muted'}`}>
-        {plan.descripcion}
-      </p>
+      <div className="relative z-10">
+        <h3 className="tracking-[-0.3px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '24px' }}>
+          {plan.nombre}
+        </h3>
+        <p className={`text-[13px] mt-1 ${plan.destacado ? 'text-border' : 'text-muted'}`}>{plan.descripcion}</p>
 
-      <div className="mt-5 mb-7">
-        {anual ? (
-          <>
-            <span className={`text-[13px] line-through ${plan.destacado ? 'text-border/60' : 'text-muted/60'}`}>
-              ${plan.precioMensual}/mes
-            </span>
-            <div className="flex items-baseline space-x-1 mt-1">
-              <span className="text-[40px] font-light tracking-[-1.5px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                ${plan.precioAnual.toLocaleString('es-CL')}
+        <div className="mt-6 mb-7">
+          {anual ? (
+            <>
+              <span className={`text-[13px] line-through ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>
+                ${plan.precioMensual}/mes
               </span>
-              <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/año</span>
+              <div className="flex items-baseline gap-1 mt-1">
+                <span className="tracking-[-2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '44px', fontWeight: 400 }}>
+                  ${plan.precioAnual.toLocaleString('es-CL')}
+                </span>
+                <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/año</span>
+              </div>
+              <p className={`text-[12px] mt-1 ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>
+                ~${equiv}/mes · Ahorras ${ahorro}
+              </p>
+            </>
+          ) : (
+            <div className="flex items-baseline gap-1">
+              <span className="tracking-[-2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '44px', fontWeight: 400 }}>
+                ${plan.precioMensual}
+              </span>
+              <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/mes</span>
             </div>
-            <p className={`text-[12px] mt-1 ${plan.destacado ? 'text-border/60' : 'text-muted/60'}`}>
-              ~${equiv}/mes · Ahorras ${ahorro}
-            </p>
-          </>
-        ) : (
-          <div className="flex items-baseline space-x-1">
-            <span className="text-[40px] font-light tracking-[-1.5px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-              ${plan.precioMensual}
-            </span>
-            <span className={`text-[13px] ${plan.destacado ? 'text-border' : 'text-muted'}`}>/mes</span>
-          </div>
-        )}
+          )}
+        </div>
+
+        <ul className="space-y-3 flex-1">
+          {plan.features.map((f, i) => (
+            <li key={i} className="flex items-start gap-2.5">
+              {f.incluido ? (
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" className="mt-0.5 shrink-0">
+                  <path d="M3 8.5L6.5 12L13 4" stroke={plan.destacado ? '#d97757' : '#c6613f'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" className="mt-1 shrink-0">
+                  <path d="M4 4L12 12M12 4L4 12" stroke={plan.destacado ? '#b0aea5' : '#d1cfc5'} strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              )}
+              <span className={`text-[13px] leading-[1.5] ${!f.incluido ? (plan.destacado ? 'text-border/40' : 'text-muted/40') : ''}`}>
+                {f.texto}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <button className={`w-full mt-7 rounded-[4px] px-5 py-3 text-[14px] font-medium transition-all duration-200 hover:-translate-y-px active:scale-[0.98] ${
+          plan.destacado
+            ? 'bg-ivory text-ink hover:bg-ivory-mid'
+            : 'bg-ink text-ivory hover:bg-ink-mid'
+        }`}>
+          Empezar gratis 14 días
+        </button>
       </div>
-
-      <ul className="space-y-3 flex-1">
-        {plan.features.map((f, i) => (
-          <li key={i} className="flex items-start space-x-2.5">
-            {f.incluido ? (
-              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" className="mt-0.5 flex-shrink-0">
-                <path d="M3 8.5L6.5 12L13 4" stroke={plan.destacado ? '#d97757' : '#c6613f'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" className="mt-1 flex-shrink-0">
-                <path d="M4 4L12 12M12 4L4 12" stroke={plan.destacado ? '#b0aea5' : '#d1cfc5'} strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            )}
-            <span className={`text-[13px] leading-[1.5] ${
-              f.incluido ? '' : plan.destacado ? 'text-border/40' : 'text-muted/40'
-            }`}>
-              {f.texto}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <button className={`w-full mt-7 rounded-[4px] px-5 py-3 text-[14px] font-medium transition-colors duration-200 ${
-        plan.destacado
-          ? 'bg-ivory text-ink hover:bg-ivory-mid'
-          : 'bg-ink text-ivory hover:bg-ink-mid'
-      }`}>
-        Empezar gratis 14 días
-      </button>
     </div>
   )
 }
@@ -183,74 +199,82 @@ export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>('annual')
 
   return (
-    <div className="bg-ivory-mid">
+    <div className="bg-ivory-mid noise-texture">
       <div className="max-w-[1100px] mx-auto" style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 4vw, 5rem)' }}>
 
-        <div className="text-center" style={{ marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
-          <p className="t-detail text-accent mb-4">Precios</p>
-          <h1 className="t-display">
-            Un agente para cada
-            <br />área de tu negocio
-          </h1>
-          <p className="t-body mt-4 max-w-md mx-auto">
-            Elige el plan que se ajuste a tu operación. Todos incluyen 14 días gratis.
-          </p>
-        </div>
+        <Reveal>
+          <div className="text-center" style={{ marginBottom: 'clamp(2rem, 4vw, 4rem)' }}>
+            <p className="t-detail text-accent mb-4">Precios</p>
+            <h1 className="t-display text-ink">Un agente para cada<br />área de tu negocio</h1>
+            <p className="t-body mt-4 max-w-md mx-auto">
+              Elige el plan que se ajuste a tu operación. Todos incluyen 14 días gratis.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="mb-12">
+        <Reveal className="mb-12">
           <Toggle billing={billing} onChange={setBilling} />
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start" style={{ marginBottom: 'clamp(5rem, 8vw, 8rem)' }}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start"
+          style={{ marginBottom: 'clamp(5rem, 8vw, 8rem)' }}
+          variants={stagger.c} initial="hidden" whileInView="show" viewport={{ once: true }}>
           {PLANES.map((plan) => (
-            <PlanCard key={plan.nombre} plan={plan} billing={billing} />
+            <motion.div key={plan.nombre} variants={stagger.i}>
+              <PlanCard plan={plan} billing={billing} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Separator */}
+        <div className="separator" style={{ marginBottom: 'clamp(3rem, 5vw, 5rem)' }} />
 
         {/* Agentes à la carte */}
-        <div style={{ marginBottom: 'clamp(5rem, 8vw, 8rem)' }}>
+        <Reveal className="mb-20">
           <div className="md:flex md:items-end md:justify-between mb-8">
             <div>
               <p className="t-detail text-muted mb-3">Personaliza</p>
-              <h2 className="t-heading">Agentes adicionales — à la carte</h2>
+              <h2 className="t-heading text-ink">Agentes adicionales — à la carte</h2>
             </div>
             <p className="t-small text-muted mt-3 md:mt-0">Agrega solo lo que necesitas</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+            variants={stagger.c} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {AGENTES.map((a) => (
-              <div key={a.nombre}
-                className="rounded-[8px] border border-border-light bg-ivory px-5 py-4 flex items-center justify-between
-                           hover:border-border transition-colors duration-200">
+              <motion.div key={a.nombre} variants={stagger.i}
+                className="card-premium px-5 py-4 flex items-center justify-between group cursor-default">
                 <div>
-                  <p className="text-[14px] text-ink font-normal">{a.nombre}</p>
+                  <p className="text-[14px] text-ink font-normal group-hover:text-accent transition-colors duration-200">{a.nombre}</p>
                   <p className="text-[11px] text-muted mt-0.5">{a.rol}</p>
                 </div>
                 <span className={`text-[13px] font-medium ${a.precio === 'Incluido' ? 'text-muted/40' : 'text-accent'}`}>
                   {a.precio}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </Reveal>
 
         {/* FAQ */}
-        <div className="max-w-xl mx-auto">
-          <div className="text-center mb-10">
-            <p className="t-detail text-muted mb-3">FAQ</p>
-            <h2 className="t-heading">Preguntas frecuentes</h2>
+        <Reveal>
+          <div className="max-w-xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="t-detail text-muted mb-3">FAQ</p>
+              <h2 className="t-heading text-ink">Preguntas frecuentes</h2>
+            </div>
+            <div className="space-y-0">
+              {FAQS.map((faq, i) => (
+                <div key={i} className="py-6 border-b border-border-light/60 last:border-none">
+                  <h4 className="text-ink tracking-[-0.2px]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '16px' }}>
+                    {faq.pregunta}
+                  </h4>
+                  <p className="t-small text-muted mt-2">{faq.respuesta}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="space-y-7">
-            {FAQS.map((faq, i) => (
-              <div key={i} className="border-b border-border-light pb-7">
-                <h4 className="text-[15px] font-normal text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                  {faq.pregunta}
-                </h4>
-                <p className="t-small text-muted mt-2">{faq.respuesta}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   )
