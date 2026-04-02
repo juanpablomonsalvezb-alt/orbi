@@ -6,7 +6,6 @@
    ============================================ */
 
 @theme {
-  /* Paleta */
   --color-obsidian: #0f0f0f;
   --color-grafito: #1a1a1a;
   --color-ceniza: #888780;
@@ -14,24 +13,24 @@
   --color-marfil: #F1EFE8;
   --color-señal: #378ADD;
 
-  /* Radios */
   --radius-button: 8px;
   --radius-card: 12px;
   --radius-bubble: 16px;
-
-  /* Espaciado 8px system */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
 }
 
 /* ============================================
    Base
    ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +39,74 @@ body {
   background-color: #ffffff;
 }
 
-/* Scrollbar sutil */
+::selection {
+  background-color: #378ADD;
+  color: #ffffff;
+}
+
+/* ============================================
+   Tipografía
+   Pesos: 300, 400, 500 ÚNICAMENTE
+   ============================================ */
+.text-display {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.text-display-sm {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 300;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.text-heading {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
+}
+
+.text-heading-lg {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.text-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #888780;
+}
+
+.text-body-lg {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #888780;
+}
+
+.text-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #888780;
+}
+
+.text-caption {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888780;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
 .overflow-y-auto::-webkit-scrollbar {
   width: 4px;
 }
@@ -59,39 +125,43 @@ body {
 }
 
 /* ============================================
-   Tipografía
-   Pesos permitidos: 300, 400, 500 ÚNICAMENTE
+   Animaciones sutiles
    ============================================ */
-.text-display {
-  font-size: 36px;
-  font-weight: 300;
-  letter-spacing: -1px;
-  line-height: 1.2;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.text-heading {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.3px;
-  line-height: 1.4;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.text-body {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.7;
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
 }
 
-.text-label {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #888780;
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
 }
 
-.text-caption {
-  font-size: 12px;
-  font-weight: 400;
-  color: #888780;
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
 }
+
+.animate-orbit {
+  animation: orbit 8s linear infinite;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
