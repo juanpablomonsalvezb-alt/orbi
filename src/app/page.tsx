@@ -4,95 +4,39 @@ import Link from 'next/link'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 
 // ============================================
-// ICONOS PARA FEATURES
+// NAV
 // ============================================
 
-function IconChat() {
+function Nav() {
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-    </svg>
-  )
-}
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="h-16 flex items-center justify-between border-b border-white/[0.06]">
+          <OrbiLogo size={26} color="light" />
 
-function IconChart() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 20V10M12 20V4M6 20v-6" />
-    </svg>
-  )
-}
+          <div className="hidden md:flex items-center space-x-10">
+            <Link href="#producto" className="t-small text-ceniza hover:text-white transition-colors duration-300">
+              Producto
+            </Link>
+            <Link href="#agentes" className="t-small text-ceniza hover:text-white transition-colors duration-300">
+              Agentes
+            </Link>
+            <Link href="/precios" className="t-small text-ceniza hover:text-white transition-colors duration-300">
+              Precios
+            </Link>
+          </div>
 
-function IconShield() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  )
-}
-
-function IconZap() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  )
-}
-
-function IconUsers() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-    </svg>
-  )
-}
-
-function IconClock() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  )
-}
-
-// ============================================
-// NAVBAR
-// ============================================
-
-function LandingNav() {
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-humo/30">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-        <OrbiLogo size={28} className="text-obsidian" />
-
-        <div className="hidden md:flex items-center space-x-8">
-          <Link href="#features" className="text-[13px] text-ceniza hover:text-obsidian transition-colors">
-            Funciones
-          </Link>
-          <Link href="#agentes" className="text-[13px] text-ceniza hover:text-obsidian transition-colors">
-            Agentes
-          </Link>
-          <Link href="/precios" className="text-[13px] text-ceniza hover:text-obsidian transition-colors">
-            Precios
-          </Link>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          <Link
-            href="/login"
-            className="text-[13px] text-ceniza hover:text-obsidian transition-colors"
-          >
-            Iniciar sesión
-          </Link>
-          <Link
-            href="/registro"
-            className="rounded-[8px] bg-obsidian text-white px-4 py-2 text-[13px] font-medium hover:bg-grafito transition-colors"
-          >
-            Empezar gratis
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link href="/login" className="t-small text-ceniza hover:text-white transition-colors duration-300">
+              Entrar
+            </Link>
+            <Link
+              href="/registro"
+              className="rounded-[8px] bg-white text-obsidian px-4 py-2 text-[13px] font-medium hover:bg-marfil transition-colors duration-300"
+            >
+              Probar gratis
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
@@ -100,85 +44,167 @@ function LandingNav() {
 }
 
 // ============================================
-// HERO
+// HERO — Fullscreen, dark, orbital visual
 // ============================================
 
 function Hero() {
   return (
-    <section className="pt-32 pb-24 md:pt-40 md:pb-32 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        {/* Label */}
-        <div className="animate-fade-up">
-          <span className="text-label bg-marfil px-3 py-1.5 rounded-full">
-            Inteligencia artificial para PYMEs
-          </span>
-        </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* Orbital background element */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="relative w-[600px] h-[600px] md:w-[800px] md:h-[800px]">
+          {/* Anillos orbitales */}
+          <div className="absolute inset-0 rounded-full border border-white/[0.04]" />
+          <div className="absolute inset-[15%] rounded-full border border-white/[0.06]" />
+          <div className="absolute inset-[30%] rounded-full border border-white/[0.08]" />
+          <div className="absolute inset-[45%] rounded-full border border-white/[0.03]" />
 
-        {/* Título */}
-        <h1 className="text-display text-obsidian mt-8 animate-fade-up delay-100">
-          El agente que orbita
-          <br />
-          tu negocio 24/7
-        </h1>
-
-        {/* Subtítulo */}
-        <p className="text-body-lg mt-6 max-w-lg mx-auto animate-fade-up delay-200">
-          Un gerente de operaciones virtual que conoce tu empresa en profundidad.
-          Monitorea, analiza y te ayuda a tomar mejores decisiones.
-        </p>
-
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10 animate-fade-up delay-300">
-          <Link
-            href="/registro"
-            className="rounded-[8px] bg-obsidian text-white px-6 py-3 text-[14px] font-medium hover:bg-grafito transition-colors"
-          >
-            Comenzar gratis — 14 días
-          </Link>
-          <Link
-            href="/precios"
-            className="rounded-[8px] border border-humo text-obsidian px-6 py-3 text-[14px] font-medium hover:bg-marfil transition-colors"
-          >
-            Ver planes
-          </Link>
-        </div>
-
-        {/* Trust line */}
-        <p className="text-caption mt-6 animate-fade-up delay-400">
-          Sin tarjeta de crédito · Configuración en 5 minutos
-        </p>
-      </div>
-
-      {/* Visual: mock del chat */}
-      <div className="max-w-2xl mx-auto mt-16 animate-fade-up delay-500">
-        <div className="rounded-[16px] bg-obsidian p-6 md:p-8">
-          {/* Header del mock */}
-          <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-white/10">
-            <OrbiLogo size={20} showText={false} className="text-white" />
-            <div>
-              <p className="text-[13px] text-white font-medium">orbbi</p>
-              <p className="text-[11px] text-ceniza">Gerente virtual · en línea</p>
+          {/* Punto orbitante */}
+          <div className="absolute inset-0" style={{ animation: 'orbit-slow 20s linear infinite' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="w-3 h-3 rounded-full bg-señal" />
+              <div className="absolute inset-0 w-3 h-3 rounded-full bg-señal animate-ping opacity-30" />
             </div>
           </div>
 
-          {/* Mensajes mock */}
-          <div className="space-y-4">
+          {/* Segundo punto orbitante */}
+          <div className="absolute inset-[15%]" style={{ animation: 'orbit-slow 14s linear reverse infinite' }}>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+            </div>
+          </div>
+
+          {/* Glow central */}
+          <div className="absolute inset-[35%] glow-orb rounded-full" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl text-center">
+        <div className="anim-fade-up">
+          <span className="t-micro text-señal">Inteligencia artificial para PYMEs</span>
+        </div>
+
+        <h1 className="t-hero text-white mt-6 anim-fade-up d1">
+          Tu gerente
+          <br />
+          <span className="text-ceniza">nunca duerme</span>
+        </h1>
+
+        <p className="t-body text-ceniza mt-8 max-w-md mx-auto anim-fade-up d2">
+          Un agente de IA que conoce tu negocio en profundidad.
+          Analiza, alerta y te ayuda a decidir — disponible 24/7.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10 anim-fade-up d3">
+          <Link
+            href="/registro"
+            className="rounded-[8px] bg-white text-obsidian px-7 py-3 text-[14px] font-medium hover:bg-marfil transition-all duration-300 hover:scale-[1.02]"
+          >
+            Comenzar gratis
+          </Link>
+          <Link
+            href="#producto"
+            className="rounded-[8px] border border-white/10 text-white px-7 py-3 text-[14px] font-normal hover:border-white/25 transition-all duration-300"
+          >
+            Cómo funciona
+          </Link>
+        </div>
+
+        <p className="t-small text-ceniza/50 mt-5 anim-fade-up d4">
+          14 días gratis · Sin tarjeta · Configura en 5 minutos
+        </p>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 anim-fade-in d6">
+        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent to-ceniza/30" />
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// DEMO — Chat mock on dark background
+// ============================================
+
+function Demo() {
+  return (
+    <section className="relative py-32 px-6">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-16">
+          <p className="t-micro text-ceniza mb-4">Así se ve</p>
+          <h2 className="t-display text-white">
+            Una conversación con tu negocio
+          </h2>
+        </div>
+
+        <div className="rounded-[16px] border border-white/[0.06] bg-grafito/50 backdrop-blur-sm overflow-hidden">
+          {/* Barra superior */}
+          <div className="flex items-center space-x-3 px-6 py-4 border-b border-white/[0.06]">
+            <div className="flex space-x-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+            </div>
+            <div className="flex-1 flex items-center justify-center space-x-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-señal" style={{ animation: 'pulse-soft 2s ease infinite' }} />
+              <span className="t-small text-ceniza">orbbi · en línea</span>
+            </div>
+          </div>
+
+          {/* Mensajes */}
+          <div className="p-6 md:p-8 space-y-5">
+            {/* Usuario */}
             <div className="flex justify-end">
-              <div className="bg-white rounded-[16px] rounded-br-[4px] px-4 py-3 max-w-[80%]">
-                <p className="text-[13px] text-obsidian leading-[1.6]">
-                  ¿Cómo estuvieron las ventas este mes comparado con el anterior?
+              <div className="bg-white/[0.06] border border-white/[0.06] rounded-[14px] rounded-br-[4px] px-5 py-3.5 max-w-[75%]">
+                <p className="t-small text-white/80">
+                  ¿Cómo estuvo marzo comparado con febrero?
                 </p>
               </div>
             </div>
 
+            {/* Agente */}
             <div className="flex justify-start">
-              <div className="bg-grafito rounded-[16px] rounded-bl-[4px] px-4 py-3 max-w-[85%]">
-                <p className="text-[13px] text-white/90 leading-[1.6]">
-                  Las ventas de marzo fueron $4.2M, un 18% más que febrero ($3.5M).
-                  El canal Instagram creció 32% y ya representa el 45% de tus ventas totales.
-                  Te recomiendo aumentar la inversión ahí y reducir el gasto en Facebook
-                  que solo trae el 8%.
+              <div className="bg-white/[0.03] border border-white/[0.04] rounded-[14px] rounded-bl-[4px] px-5 py-3.5 max-w-[85%]">
+                <p className="t-small text-white/90 leading-[1.7]">
+                  Marzo cerró en <span className="text-señal font-medium">$4.2M</span>, un 18% arriba de febrero.
+                  Instagram creció fuerte: ya es el 45% de tus ventas.
+                  Facebook solo trae el 8% — te recomiendo mover ese presupuesto a Instagram
+                  y testear TikTok el próximo mes.
                 </p>
+              </div>
+            </div>
+
+            {/* Usuario */}
+            <div className="flex justify-end">
+              <div className="bg-white/[0.06] border border-white/[0.06] rounded-[14px] rounded-br-[4px] px-5 py-3.5 max-w-[75%]">
+                <p className="t-small text-white/80">
+                  ¿Y el margen? Siento que bajó
+                </p>
+              </div>
+            </div>
+
+            {/* Agente */}
+            <div className="flex justify-start">
+              <div className="bg-white/[0.03] border border-white/[0.04] rounded-[14px] rounded-bl-[4px] px-5 py-3.5 max-w-[85%]">
+                <p className="t-small text-white/90 leading-[1.7]">
+                  Tienes razón. El margen bruto bajó de 34% a 28%.
+                  El problema son los <span className="text-señal font-medium">costos de envío</span>, que subieron 40% por el nuevo proveedor.
+                  ¿Quieres que analice alternativas de logística?
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Input mock */}
+          <div className="px-6 md:px-8 pb-6">
+            <div className="rounded-[8px] border border-white/[0.06] bg-white/[0.02] px-4 py-3 flex items-center justify-between">
+              <span className="t-small text-ceniza/40">Escribe tu mensaje...</span>
+              <div className="w-7 h-7 rounded-[6px] bg-señal/80 flex items-center justify-center">
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
+                  <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
               </div>
             </div>
           </div>
@@ -189,68 +215,89 @@ function Hero() {
 }
 
 // ============================================
-// FEATURES
+// PRODUCTO — Bento grid
 // ============================================
 
-const FEATURES = [
-  {
-    icono: <IconChat />,
-    titulo: 'Chat inteligente',
-    descripcion: 'Conversa con un agente que conoce cada detalle de tu negocio. Sin respuestas genéricas.',
-  },
-  {
-    icono: <IconChart />,
-    titulo: 'Análisis en tiempo real',
-    descripcion: 'Indicadores clave, tendencias y alertas automáticas basadas en tus datos.',
-  },
-  {
-    icono: <IconZap />,
-    titulo: 'Decisiones más rápidas',
-    descripcion: 'Recomendaciones específicas para tu negocio. El agente detecta problemas y oportunidades.',
-  },
-  {
-    icono: <IconClock />,
-    titulo: 'Resúmenes semanales',
-    descripcion: 'Cada lunes recibes un reporte con lo que pasó, lo que viene y lo que debes atender.',
-  },
-  {
-    icono: <IconUsers />,
-    titulo: 'Múltiples agentes',
-    descripcion: 'Finanzas, ventas, marketing, RRHH — cada área con su propio agente especializado.',
-  },
-  {
-    icono: <IconShield />,
-    titulo: 'Datos privados y seguros',
-    descripcion: 'Tu información está aislada y encriptada. Nadie más accede a los datos de tu empresa.',
-  },
-]
-
-function Features() {
+function Producto() {
   return (
-    <section id="features" className="py-24 px-6 bg-marfil">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-label mb-3">Funciones</p>
-          <h2 className="text-display-sm text-obsidian">
-            Todo lo que un gerente haría,
-            <br className="hidden md:block" />
-            pero disponible 24/7
+    <section id="producto" className="py-32 px-6 bg-marfil">
+      <div className="max-w-[1100px] mx-auto">
+        <div className="text-center mb-20">
+          <p className="t-micro text-ceniza mb-4">Producto</p>
+          <h2 className="t-display text-obsidian">
+            No es un chatbot.
+            <br />
+            <span className="text-ceniza">Es un gerente.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((f, i) => (
-            <div
-              key={i}
-              className="bg-white border border-humo/40 rounded-[12px] p-6 hover:border-humo transition-colors"
-            >
-              <div className="w-10 h-10 rounded-[10px] bg-marfil flex items-center justify-center text-obsidian mb-4">
-                {f.icono}
-              </div>
-              <h3 className="text-[15px] font-medium text-obsidian mb-2">{f.titulo}</h3>
-              <p className="text-[13px] text-ceniza leading-[1.6]">{f.descripcion}</p>
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+          {/* Card grande — Contexto profundo */}
+          <div className="md:col-span-4 bg-white border border-humo/40 rounded-[16px] p-8 md:p-10 flex flex-col justify-between min-h-[280px]">
+            <div>
+              <p className="t-micro text-señal mb-4">Memoria</p>
+              <h3 className="t-title text-obsidian">
+                Conoce tu negocio mejor que cualquier consultor
+              </h3>
+              <p className="t-body text-ceniza mt-3 max-w-md">
+                14 preguntas configuran un perfil completo: giro, finanzas, clientes, metas.
+                Cada respuesta del agente es específica para ti.
+              </p>
             </div>
-          ))}
+            <div className="flex space-x-2 mt-8">
+              {['Ventas', 'Costos', 'Clientes', 'Metas'].map((t) => (
+                <span key={t} className="text-[11px] text-ceniza bg-marfil px-3 py-1.5 rounded-full">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Card — 24/7 */}
+          <div className="md:col-span-2 bg-obsidian rounded-[16px] p-8 flex flex-col justify-between min-h-[280px]">
+            <p className="t-micro text-señal mb-4">Disponibilidad</p>
+            <div>
+              <p className="text-[56px] font-light text-white tracking-[-2px] leading-none">24/7</p>
+              <p className="t-small text-ceniza mt-3">
+                Sin horarios. Sin esperas. Sin agendar reuniones.
+                Tu gerente responde al instante.
+              </p>
+            </div>
+          </div>
+
+          {/* Card — Alertas */}
+          <div className="md:col-span-2 bg-obsidian rounded-[16px] p-8 flex flex-col justify-between min-h-[240px]">
+            <p className="t-micro text-señal mb-4">Alertas</p>
+            <div>
+              <p className="t-title text-white">Detecta problemas antes que tú</p>
+              <p className="t-small text-ceniza mt-3">
+                Si algo se sale de rango — margen, costos, ventas — te avisa directamente.
+              </p>
+            </div>
+          </div>
+
+          {/* Card — Resúmenes */}
+          <div className="md:col-span-2 bg-white border border-humo/40 rounded-[16px] p-8 flex flex-col justify-between min-h-[240px]">
+            <p className="t-micro text-ceniza mb-4">Reportes</p>
+            <div>
+              <p className="t-title text-obsidian">Resumen semanal automático</p>
+              <p className="t-small text-ceniza mt-3">
+                Cada lunes: qué pasó, qué viene, qué debes atender. Sin pedirlo.
+              </p>
+            </div>
+          </div>
+
+          {/* Card — Decisiones */}
+          <div className="md:col-span-2 bg-white border border-humo/40 rounded-[16px] p-8 flex flex-col justify-between min-h-[240px]">
+            <p className="t-micro text-ceniza mb-4">Decisiones</p>
+            <div>
+              <p className="t-title text-obsidian">Recomendaciones con fundamento</p>
+              <p className="t-small text-ceniza mt-3">
+                No adivina. Analiza tus datos y te dice por qué recomienda cada acción.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -261,43 +308,48 @@ function Features() {
 // AGENTES
 // ============================================
 
-const AGENTES_PREVIEW = [
-  { nombre: 'Gerente General', rol: 'Estrategia y operaciones diarias', emoji: '🎯' },
-  { nombre: 'Financiero', rol: 'Flujo de caja, márgenes, costos', emoji: '📊' },
-  { nombre: 'Ventas', rol: 'Pipeline, conversión, clientes', emoji: '📈' },
-  { nombre: 'Marketing', rol: 'Campañas, posicionamiento, ROI', emoji: '🎯' },
-  { nombre: 'RRHH', rol: 'Personas, cultura, contrataciones', emoji: '👥' },
-  { nombre: 'Inventario', rol: 'Stock, logística, proveedores', emoji: '📦' },
-  { nombre: 'Legal', rol: 'Contratos, cumplimiento, riesgos', emoji: '⚖️' },
+const AGENTES = [
+  { nombre: 'General', area: 'Estrategia y operaciones', desc: 'Visión completa del negocio. Tu punto de partida.' },
+  { nombre: 'Financiero', area: 'Flujo de caja y márgenes', desc: 'Controla costos, proyecta ingresos, detecta fugas.' },
+  { nombre: 'Ventas', area: 'Pipeline y conversión', desc: 'Analiza canales, mide conversión, identifica oportunidades.' },
+  { nombre: 'Marketing', area: 'Campañas y ROI', desc: 'Evalúa qué canal rinde y dónde invertir más.' },
+  { nombre: 'RRHH', area: 'Personas y cultura', desc: 'Contrataciones, clima laboral, productividad.' },
+  { nombre: 'Inventario', area: 'Stock y logística', desc: 'Rotación, proveedores, puntos de quiebre.' },
+  { nombre: 'Legal', area: 'Contratos y cumplimiento', desc: 'Riesgos regulatorios, contratos, obligaciones.' },
 ]
 
 function AgentesSection() {
   return (
-    <section id="agentes" className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-label mb-3">Agentes especializados</p>
-          <h2 className="text-display-sm text-obsidian">
-            Un equipo completo de IA
-            <br className="hidden md:block" />
-            para cada área de tu negocio
-          </h2>
-          <p className="text-body-lg mt-4 max-w-lg mx-auto">
-            Cada agente está entrenado para su área. Elige los que necesites.
+    <section id="agentes" className="py-32 px-6">
+      <div className="max-w-[1100px] mx-auto">
+        <div className="md:flex md:items-end md:justify-between mb-16">
+          <div>
+            <p className="t-micro text-señal mb-4">7 agentes</p>
+            <h2 className="t-display text-white max-w-lg">
+              Un equipo completo.
+              <br />
+              <span className="text-ceniza">Tú eliges quiénes.</span>
+            </h2>
+          </div>
+          <p className="t-body text-ceniza max-w-sm mt-6 md:mt-0">
+            Cada agente está entrenado para su área.
+            Comienza con uno, agrega los que necesites.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {AGENTES_PREVIEW.map((a, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {AGENTES.map((a, i) => (
             <div
               key={i}
-              className="bg-marfil rounded-[12px] p-5 text-center hover:bg-humo/30 transition-colors"
+              className="group rounded-[12px] border border-white/[0.06] bg-white/[0.02] p-6
+                         hover:border-señal/30 hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center mx-auto mb-3 text-lg">
-                {a.emoji}
+              <div className="flex items-center justify-between mb-4">
+                <span className="t-micro text-ceniza">{a.area}</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-señal opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <p className="text-[14px] font-medium text-obsidian">{a.nombre}</p>
-              <p className="text-[12px] text-ceniza mt-1">{a.rol}</p>
+              <h3 className="text-[18px] font-normal text-white tracking-[-0.3px]">{a.nombre}</h3>
+              <p className="t-small text-ceniza mt-2">{a.desc}</p>
             </div>
           ))}
         </div>
@@ -310,31 +362,36 @@ function AgentesSection() {
 // CÓMO FUNCIONA
 // ============================================
 
-function ComoFunciona() {
+function Proceso() {
   const pasos = [
-    { num: '01', titulo: 'Crea tu cuenta', desc: 'Registro en 30 segundos. Sin tarjeta de crédito.' },
-    { num: '02', titulo: 'Cuenta sobre tu negocio', desc: '14 preguntas que configuran tu agente personalizado.' },
-    { num: '03', titulo: 'Habla con tu gerente virtual', desc: 'Pregunta, decide y actúa con datos de tu negocio.' },
+    { num: '01', titulo: 'Crea tu cuenta', desc: '30 segundos. Sin tarjeta.' },
+    { num: '02', titulo: 'Responde 14 preguntas', desc: 'Tu agente aprende tu negocio.' },
+    { num: '03', titulo: 'Conversa y decide', desc: 'Datos reales, recomendaciones específicas.' },
   ]
 
   return (
-    <section className="py-24 px-6 bg-obsidian text-white">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-ceniza mb-3">Cómo funciona</p>
-          <h2 className="text-display-sm text-white">
-            Configurado en 5 minutos.
-            <br className="hidden md:block" />
-            Listo para siempre.
+    <section className="py-32 px-6 border-t border-white/[0.04]">
+      <div className="max-w-[900px] mx-auto">
+        <div className="text-center mb-20">
+          <p className="t-micro text-ceniza mb-4">Proceso</p>
+          <h2 className="t-display text-white">
+            5 minutos para configurar.
+            <br />
+            <span className="text-ceniza">Listo para siempre.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {pasos.map((p, i) => (
-            <div key={i} className="text-center md:text-left">
-              <span className="text-señal text-[13px] font-medium">{p.num}</span>
-              <h3 className="text-[17px] font-medium text-white mt-2 mb-2">{p.titulo}</h3>
-              <p className="text-[14px] text-ceniza leading-[1.6]">{p.desc}</p>
+            <div key={i} className="relative">
+              <span className="text-[64px] font-light text-white/[0.04] leading-none absolute -top-4 -left-2">
+                {p.num}
+              </span>
+              <div className="relative pt-12">
+                <div className="w-8 h-[1px] bg-señal mb-5" />
+                <h3 className="text-[17px] font-medium text-white mb-2">{p.titulo}</h3>
+                <p className="t-small text-ceniza">{p.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -349,24 +406,29 @@ function ComoFunciona() {
 
 function CTAFinal() {
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-display-sm text-obsidian">
-          Tu negocio merece un gerente
-          <br className="hidden md:block" />
-          que nunca duerme
+    <section className="py-32 px-6 relative overflow-hidden">
+      {/* Glow de fondo */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] glow-orb pointer-events-none" />
+
+      <div className="relative z-10 max-w-2xl mx-auto text-center">
+        <h2 className="t-display text-white">
+          Tu negocio merece
+          <br />
+          un gerente que
+          <br />
+          <span className="text-señal">nunca duerme</span>
         </h2>
-        <p className="text-body-lg mt-4 max-w-md mx-auto">
-          Prueba Orbbi gratis por 14 días. Sin compromiso, sin tarjeta.
-        </p>
-        <div className="mt-8">
+
+        <div className="mt-10">
           <Link
             href="/registro"
-            className="inline-block rounded-[8px] bg-obsidian text-white px-8 py-3.5 text-[14px] font-medium hover:bg-grafito transition-colors"
+            className="inline-block rounded-[8px] bg-white text-obsidian px-8 py-3.5 text-[14px] font-medium hover:bg-marfil transition-all duration-300 hover:scale-[1.02]"
           >
-            Comenzar gratis
+            Comenzar gratis — 14 días
           </Link>
         </div>
+
+        <p className="t-small text-ceniza/40 mt-5">Sin compromiso · Sin tarjeta de crédito</p>
       </div>
     </section>
   )
@@ -378,19 +440,19 @@ function CTAFinal() {
 
 function Footer() {
   return (
-    <footer className="border-t border-humo/40 py-10 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <OrbiLogo size={22} className="text-obsidian" />
-        <div className="flex items-center space-x-6">
-          <Link href="/precios" className="text-[12px] text-ceniza hover:text-obsidian transition-colors">
+    <footer className="border-t border-white/[0.04] py-10 px-6">
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <OrbiLogo size={22} color="light" />
+        <div className="flex items-center space-x-8">
+          <Link href="/precios" className="t-small text-ceniza hover:text-white transition-colors duration-300">
             Precios
           </Link>
-          <Link href="/login" className="text-[12px] text-ceniza hover:text-obsidian transition-colors">
-            Iniciar sesión
+          <Link href="/login" className="t-small text-ceniza hover:text-white transition-colors duration-300">
+            Entrar
           </Link>
         </div>
-        <p className="text-[11px] text-ceniza">
-          © 2026 Orbbi. Todos los derechos reservados.
+        <p className="text-[11px] text-ceniza/40">
+          © 2026 Orbbi
         </p>
       </div>
     </footer>
@@ -398,17 +460,18 @@ function Footer() {
 }
 
 // ============================================
-// PÁGINA COMPLETA
+// PAGE
 // ============================================
 
 export default function Home() {
   return (
-    <main>
-      <LandingNav />
+    <main className="bg-obsidian">
+      <Nav />
       <Hero />
-      <Features />
+      <Demo />
+      <Producto />
       <AgentesSection />
-      <ComoFunciona />
+      <Proceso />
       <CTAFinal />
       <Footer />
     </main>

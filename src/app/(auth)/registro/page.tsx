@@ -19,39 +19,20 @@ export default function RegistroPage() {
     setCargando(true)
 
     try {
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-      })
+      const { data: authData, error: authError } = await supabase.auth.signUp({ email, password })
 
       if (authError) {
-        setError(
-          authError.message === 'User already registered'
-            ? 'Este email ya está registrado'
-            : authError.message
-        )
+        setError(authError.message === 'User already registered' ? 'Este email ya está registrado' : authError.message)
         return
       }
 
-      if (!authData.user) {
-        setError('Error al crear la cuenta')
-        return
-      }
+      if (!authData.user) { setError('Error al crear la cuenta'); return }
 
       const { error: empresaError } = await supabase
         .from('empresas')
-        .insert({
-          user_id: authData.user.id,
-          nombre: nombreEmpresa,
-          email,
-          onboarding_completado: false,
-        })
+        .insert({ user_id: authData.user.id, nombre: nombreEmpresa, email, onboarding_completado: false })
 
-      if (empresaError) {
-        console.error('Error creando empresa:', empresaError)
-        setError('Error al registrar la empresa')
-        return
-      }
+      if (empresaError) { setError('Error al registrar la empresa'); return }
 
       router.push('/onboarding')
     } catch {
@@ -63,82 +44,78 @@ export default function RegistroPage() {
 
   return (
     <div>
-      <h2 className="text-[24px] font-light text-obsidian tracking-[-0.5px] mb-2">
-        Crea tu cuenta
+      <h2 className="text-[28px] font-light text-obsidian tracking-[-0.8px] leading-[1.1]">
+        Crea tu
+        <br />
+        cuenta
       </h2>
-      <p className="text-[14px] text-ceniza mb-8">
+      <p className="t-small text-ceniza mt-3 mb-10">
         14 días gratis. Sin tarjeta de crédito.
       </p>
 
       {error && (
-        <div className="bg-red-50 text-red-600 text-[13px] rounded-[8px] px-4 py-3 mb-6 border border-red-100">
-          {error}
+        <div className="rounded-[8px] bg-red-50 border border-red-100 px-4 py-3 mb-6">
+          <p className="t-small text-red-600">{error}</p>
         </div>
       )}
 
       <form onSubmit={handleRegistro} className="space-y-5">
         <div>
-          <label htmlFor="empresa" className="text-label mb-2 block">Nombre de tu empresa</label>
+          <label className="t-micro text-ceniza mb-2.5 block">Empresa</label>
           <input
-            id="empresa"
             type="text"
             value={nombreEmpresa}
             onChange={(e) => setNombreEmpresa(e.target.value)}
             required
             placeholder="Ej: Café Don Pedro"
-            className="w-full rounded-[8px] border border-humo px-3.5 py-3 text-[14px]
-                       placeholder:text-ceniza/60 bg-white
-                       focus:outline-none focus:border-obsidian transition-colors"
+            className="w-full rounded-[8px] border border-humo bg-white px-4 py-3 text-[14px] text-obsidian
+                       placeholder:text-ceniza/50 focus:outline-none focus:border-obsidian transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="text-label mb-2 block">Email</label>
+          <label className="t-micro text-ceniza mb-2.5 block">Email</label>
           <input
-            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="tu@empresa.com"
-            className="w-full rounded-[8px] border border-humo px-3.5 py-3 text-[14px]
-                       placeholder:text-ceniza/60 bg-white
-                       focus:outline-none focus:border-obsidian transition-colors"
+            className="w-full rounded-[8px] border border-humo bg-white px-4 py-3 text-[14px] text-obsidian
+                       placeholder:text-ceniza/50 focus:outline-none focus:border-obsidian transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="text-label mb-2 block">Contraseña</label>
+          <label className="t-micro text-ceniza mb-2.5 block">Contraseña</label>
           <input
-            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
             placeholder="Mínimo 6 caracteres"
-            className="w-full rounded-[8px] border border-humo px-3.5 py-3 text-[14px]
-                       placeholder:text-ceniza/60 bg-white
-                       focus:outline-none focus:border-obsidian transition-colors"
+            className="w-full rounded-[8px] border border-humo bg-white px-4 py-3 text-[14px] text-obsidian
+                       placeholder:text-ceniza/50 focus:outline-none focus:border-obsidian transition-colors"
           />
         </div>
 
         <button
           type="submit"
           disabled={cargando}
-          className="w-full rounded-[8px] bg-obsidian px-5 py-3 text-white text-[14px] font-medium
-                     hover:bg-grafito transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full rounded-[8px] bg-obsidian text-white px-5 py-3 text-[14px] font-medium
+                     hover:bg-grafito transition-all duration-300 disabled:opacity-40"
         >
           {cargando ? 'Creando cuenta...' : 'Comenzar gratis'}
         </button>
       </form>
 
-      <p className="text-[11px] text-ceniza/60 text-center mt-4 leading-[1.5]">
-        Al registrarte aceptas los términos de servicio y la política de privacidad.
+      <p className="text-[11px] text-ceniza/40 text-center mt-4 leading-[1.5]">
+        Al registrarte aceptas los términos de servicio.
       </p>
 
-      <div className="mt-8 pt-6 border-t border-humo/30">
-        <p className="text-[13px] text-ceniza text-center">
+      <div className="mt-10 pt-6 border-t border-humo/40">
+        <p className="t-small text-ceniza text-center">
           ¿Ya tienes cuenta?{' '}
           <Link href="/login" className="text-señal hover:underline font-medium">
             Inicia sesión
