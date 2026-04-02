@@ -72,27 +72,96 @@ function Nav() {
 // 1. HERO (full width, bg-ivory-dark)
 // ═══════════════════════════════════════════════════════════════════
 
+// ── Hero animated network (right side) ──
+function HeroNetwork() {
+  const nodes = [
+    { x: 100, y: 65, label: 'General', r: 16 },
+    { x: 38, y: 28, label: 'Finanzas', r: 11 },
+    { x: 162, y: 28, label: 'Ventas', r: 11 },
+    { x: 24, y: 100, label: 'RRHH', r: 10 },
+    { x: 176, y: 100, label: 'Marketing', r: 10 },
+    { x: 55, y: 125, label: 'Inventario', r: 9 },
+    { x: 145, y: 125, label: 'Legal', r: 9 },
+  ]
+  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,3],[2,4],[5,6]]
+
+  return (
+    <svg viewBox="0 0 200 145" className="w-full max-w-sm mx-auto">
+      {edges.map(([a,b],i) => (
+        <motion.line key={i}
+          x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
+          stroke="#d1cfc5" strokeWidth={1}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.6 + i * 0.06, ease: [0.25,0.46,0.45,0.94] }}
+        />
+      ))}
+      {nodes.map((n,i) => (
+        <g key={i}>
+          <motion.circle cx={n.x} cy={n.y} r={n.r}
+            fill={i===0 ? '#d97757' : '#f0eee6'} stroke={i===0 ? '#c6613f' : '#d1cfc5'} strokeWidth={1.5}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: [0.16,1,0.3,1] }}
+          />
+          <motion.text x={n.x} y={n.y + 3} textAnchor="middle" fill={i===0 ? '#fff' : '#5e5d59'}
+            fontSize={i===0 ? 7 : 6} fontFamily="Inter, system-ui, sans-serif" fontWeight={i===0 ? 600 : 400}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.8 + i * 0.08 }}
+          >{n.label}</motion.text>
+        </g>
+      ))}
+      {/* Pulse on center */}
+      <motion.circle cx={100} cy={65} r={16} fill="none" stroke="#d97757" strokeWidth={1}
+        animate={{ r: [16, 28, 16], opacity: [0.5, 0, 0.5] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      {/* Floating particles */}
+      {[...Array(8)].map((_,i) => (
+        <motion.circle key={`p${i}`}
+          cx={30 + Math.random() * 140} cy={20 + Math.random() * 110} r={1.5}
+          fill={`rgba(217,119,87,${0.15 + Math.random() * 0.2})`}
+          animate={{ opacity: [0, 0.6, 0], cy: [20 + Math.random()*110, Math.random()*60, -10] }}
+          transition={{ duration: 3 + Math.random()*2, delay: Math.random()*2, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      ))}
+    </svg>
+  )
+}
+
 function Hero() {
   return (
     <header className="bg-ivory-dark">
-      <div className="space-main" />
+      <div style={{ paddingTop: 'clamp(3rem, 2rem + 3vw, 5rem)' }} />
       <div className="u-container">
         <div className="grid-12 items-center">
-          {/* Left 7 cols: heading + subtitle + prompt bar */}
+          {/* Left 7 cols */}
           <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
-            <h1 className="u-display-xl mb-6">
+            <motion.h1 className="u-display-xl mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
+            >
               <AnimatedWords>
                 Conoce a tu socio estratégico
               </AnimatedWords>
-            </h1>
-            <FadeIn delay={0.3}>
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.25,0.46,0.45,0.94] }}
+            >
               <p className="u-paragraph-l mb-8" style={{ maxWidth: '42ch' }}>
                 Orbbi es un equipo de agentes de IA que conoce tu empresa en
                 profundidad. Analiza, decide, ejecuta y reporta — disponible
                 24/7 para que tu negocio nunca se detenga.
               </p>
-            </FadeIn>
-            <FadeIn delay={0.5}>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: [0.25,0.46,0.45,0.94] }}
+            >
               <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm" style={{ maxWidth: '480px' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#87867f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -107,20 +176,22 @@ function Hero() {
                   Preguntar
                 </Link>
               </div>
-            </FadeIn>
+            </motion.div>
           </div>
 
-          {/* Right 5 cols: decorative placeholder */}
+          {/* Right 5 cols: Animated agent network */}
           <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full max-md:mt-8">
-            <FadeIn delay={0.4}>
-              <div className="bg-oat rounded-2xl flex items-center justify-center" style={{ aspectRatio: '1/1', maxHeight: '480px' }}>
-                <OrbiLogo size={64} color="dark" />
-              </div>
-            </FadeIn>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16,1,0.3,1] }}
+            >
+              <HeroNetwork />
+            </motion.div>
           </div>
         </div>
       </div>
-      <div className="space-medium" />
+      <div style={{ paddingBottom: 'clamp(3rem, 2rem + 3vw, 5rem)' }} />
     </header>
   )
 }
