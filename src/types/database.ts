@@ -1,3 +1,5 @@
+import { TipoAgente } from '@/lib/prompts'
+
 // Tipos que reflejan las tablas de Supabase
 
 export interface Empresa {
@@ -25,6 +27,7 @@ export interface Conversacion {
   id: string
   empresa_id: string
   titulo: string
+  agente_tipo: TipoAgente
   created_at: string
   updated_at: string
 }

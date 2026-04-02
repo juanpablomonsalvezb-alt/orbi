@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { buildSystemPrompt } from '@/lib/prompts'
+import { buildSystemPrompt, TipoAgente } from '@/lib/prompts'
 import { enviarMensajeGemini, GeminiMessage } from '@/lib/gemini'
 
-// Cliente Supabase con service role para API routes
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,7 +14,6 @@ export async function POST(request: NextRequest) {
   try {
     const { mensaje, conversacion_id, empresa_id } = await request.json()
 
-    // Validar campos requeridos
     if (!mensaje || !conversacion_id || !empresa_id) {
       return NextResponse.json(
         { error: 'Faltan campos requeridos: mensaje, conversacion_id, empresa_id' },
@@ -33,23 +31,29 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (errorEmpresa || !empresa) {
-      return NextResponse.json(
-        { error: 'Empresa no encontrada' },
-        { status: 404 }
-      )
+      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
     }
 
-    // 2. Obtener contexto del onboarding
+    // 2. Obtener tipo de agente de la conversación
+    const { data: conversacion } = await supabase
+      .from('conversaciones')
+      .select('agente_tipo')
+      .eq('id', conversacion_id)
+      .single()
+
+    const agenteTipo = (conversacion?.agente_tipo || 'general') as TipoAgente
+
+    // 3. Obtener contexto del onboarding
     const { data: contexto } = await supabase
       .from('contexto')
       .select('*')
       .eq('empresa_id', empresa_id)
       .order('orden', { ascending: true })
 
-    // 3. Construir system prompt con el contexto del negocio
-    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [])
+    // 4. Construir system prompt con contexto del negocio + tipo de agente
+    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo)
 
-    // 4. Obtener historial de la conversación (últimos 20 mensajes para no exceder tokens)
+    // 5. Obtener historial (últimos 20 mensajes)
     const { data: historialDB } = await supabase
       .from('mensajes')
       .select('rol, contenido')
@@ -57,16 +61,15 @@ export async function POST(request: NextRequest) {
       .order('created_at', { ascending: true })
       .limit(20)
 
-    // Convertir historial al formato de Gemini
     const historial: GeminiMessage[] = (historialDB || []).map((msg) => ({
       role: msg.rol === 'user' ? 'user' : 'model',
       parts: [{ text: msg.contenido }]
     }))
 
-    // 5. Enviar a Gemini y obtener respuesta
+    // 6. Enviar a Gemini
     const respuestaTexto = await enviarMensajeGemini(systemPrompt, historial, mensaje)
 
-    // 6. Guardar respuesta del agente en Supabase
+    // 7. Guardar respuesta
     const { data: mensajeGuardado, error: errorGuardar } = await supabase
       .from('mensajes')
       .insert({
@@ -79,19 +82,15 @@ export async function POST(request: NextRequest) {
 
     if (errorGuardar) {
       console.error('Error guardando respuesta:', errorGuardar)
-      return NextResponse.json(
-        { error: 'Error guardando la respuesta' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Error guardando la respuesta' }, { status: 500 })
     }
 
-    // 7. Actualizar timestamp de la conversación
+    // 8. Actualizar timestamp
     await supabase
       .from('conversaciones')
       .update({ updated_at: new Date().toISOString() })
       .eq('id', conversacion_id)
 
-    // 8. Retornar respuesta del agente
     return NextResponse.json({
       mensaje: {
         id: mensajeGuardado.id,
@@ -102,9 +101,6 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error en /api/chat:', error)
-    return NextResponse.json(
-      { error: 'Error interno del servidor' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
   }
 }

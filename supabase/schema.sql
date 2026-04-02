@@ -45,6 +45,7 @@ CREATE TABLE conversaciones (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
   titulo TEXT NOT NULL DEFAULT 'Nueva conversación',
+  agente_tipo TEXT NOT NULL DEFAULT 'general' CHECK (agente_tipo IN ('general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

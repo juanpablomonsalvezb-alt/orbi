@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
 import { ChatMessage } from '@/types/chat'
 import { Conversacion } from '@/types/database'
+import { AGENTES, TipoAgente } from '@/lib/prompts'
 import ChatMessages from '@/components/chat/ChatMessages'
 import ChatInput from '@/components/chat/ChatInput'
 import ChatSidebar from '@/components/chat/ChatSidebar'
@@ -17,6 +18,7 @@ export default function ChatPage() {
   const [mensajes, setMensajes] = useState<ChatMessage[]>([])
   const [conversaciones, setConversaciones] = useState<Conversacion[]>([])
   const [empresaId, setEmpresaId] = useState<string>('')
+  const [agenteTipo, setAgenteTipo] = useState<TipoAgente>('general')
   const [cargando, setCargando] = useState(false)
   const [cargandoInicial, setCargandoInicial] = useState(true)
 
@@ -42,6 +44,10 @@ export default function ChatPage() {
           .order('updated_at', { ascending: false })
 
         if (convs) setConversaciones(convs)
+
+        // Obtener tipo de agente de la conversación actual
+        const convActual = convs?.find(c => c.id === conversacionId)
+        if (convActual) setAgenteTipo(convActual.agente_tipo || 'general')
 
         const { data: msgs } = await supabase
           .from('mensajes')
@@ -90,7 +96,6 @@ export default function ChatPage() {
       })
 
       const data = await response.json()
-
       if (data.error) throw new Error(data.error)
 
       setMensajes((prev) => [...prev, data.mensaje])
@@ -124,14 +129,19 @@ export default function ChatPage() {
     }
   }, [empresaId, cargando, conversacionId, mensajes.length])
 
-  const crearConversacion = async () => {
+  // Crear nueva conversación con un agente específico
+  const crearConversacion = async (tipo: TipoAgente) => {
     if (!empresaId) return
+
+    const agente = AGENTES.find(a => a.tipo === tipo)
+    const titulo = agente ? `Chat con ${agente.nombre}` : 'Nueva conversación'
 
     const { data } = await supabase
       .from('conversaciones')
       .insert({
         empresa_id: empresaId,
-        titulo: 'Nueva conversación'
+        titulo,
+        agente_tipo: tipo
       })
       .select()
       .single()
@@ -142,6 +152,9 @@ export default function ChatPage() {
     }
   }
 
+  // Info del agente actual
+  const agenteActual = AGENTES.find(a => a.tipo === agenteTipo) || AGENTES[0]
+
   if (cargandoInicial) {
     return (
       <div className="flex h-screen items-center justify-center bg-obsidian">
@@ -151,7 +164,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-obsidian">
       {/* Sidebar */}
       <ChatSidebar
         conversaciones={conversaciones}
@@ -161,13 +174,17 @@ export default function ChatPage() {
 
       {/* Área principal del chat */}
       <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="h-14 border-b border-humo/50 bg-white px-6 flex items-center justify-between">
+        {/* Header con info del agente */}
+        <header className="h-14 border-b border-white/[0.06] bg-grafito/50 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <OrbiLogo size={24} showText={false} className="text-obsidian" />
+            <OrbiLogo size={20} showText={false} color="light" />
             <div>
-              <h1 className="text-[14px] font-medium text-obsidian">orbbi</h1>
-              <p className="text-[11px] text-ceniza">Tu gerente virtual</p>
+              <div className="flex items-center space-x-2">
+                <h1 className="text-[14px] font-normal text-white">{agenteActual.nombre}</h1>
+                <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-señal/15 text-señal">
+                  {agenteActual.rol}
+                </span>
+              </div>
             </div>
           </div>
           <button
@@ -175,16 +192,16 @@ export default function ChatPage() {
               await supabase.auth.signOut()
               window.location.href = '/login'
             }}
-            className="text-[13px] text-ceniza hover:text-obsidian transition-colors"
+            className="text-[12px] text-ceniza/40 hover:text-white transition-colors"
           >
             Salir
           </button>
         </header>
 
-        {/* Mensajes — fondo oscuro */}
+        {/* Mensajes */}
         <ChatMessages mensajes={mensajes} cargando={cargando} />
 
-        {/* Input — fondo oscuro */}
+        {/* Input */}
         <ChatInput onEnviar={enviarMensaje} deshabilitado={cargando} />
       </div>
     </div>
