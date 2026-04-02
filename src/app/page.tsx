@@ -53,9 +53,9 @@ function Nav() {
       <div className="u-container h-full flex items-center justify-between">
         <Link href="/"><OrbiLogo size={36} color="dark" /></Link>
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#producto" className="text-sm text-ink-light hover:text-ink transition-colors">Producto</Link>
-          <Link href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</Link>
-          <Link href="/precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</Link>
+          <a href="#producto" className="text-sm text-ink-light hover:text-ink transition-colors">Producto</a>
+          <a href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</a>
+          <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="text-sm text-ink-light hover:text-ink transition-colors hidden sm:block">Entrar</Link>
@@ -628,7 +628,7 @@ function PlanesSection() {
   ]
 
   return (
-    <section className="bg-ivory-mid">
+    <section id="precios" className="bg-ivory-mid">
       <div className="space-main" />
       <div className="u-container">
         <FadeIn className="text-center mb-12">
