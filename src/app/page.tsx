@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import OrbiLogo from '@/components/ui/OrbiLogo'
+import PricingPage from '@/components/PricingPage'
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94]
 
@@ -609,74 +610,9 @@ function VideoSection() {
 // ═══════════════════════════════════════════════════════════════════
 
 function PlanesSection() {
-  const planes = [
-    {
-      nombre: 'Básico',
-      desc: 'Ideal para emprendedores que quieren empezar a tomar mejores decisiones con IA.',
-      features: ['1 agente', 'Consultas básicas', 'Onboarding guiado', 'Soporte email'],
-    },
-    {
-      nombre: 'Pro',
-      desc: 'Para negocios en crecimiento que necesitan análisis profundo y reportes automatizados.',
-      features: ['7 agentes', 'Reportes semanales', 'Análisis avanzado', 'Soporte prioritario'],
-    },
-    {
-      nombre: 'Enterprise',
-      desc: 'Para empresas que necesitan personalización completa, integraciones y soporte dedicado.',
-      features: ['Agentes ilimitados', 'API integración', 'Soporte 24/7', 'White-label'],
-    },
-  ]
-
   return (
-    <section id="precios" className="bg-ivory-mid">
-      <div className="space-main" />
-      <div className="u-container">
-        <FadeIn className="text-center mb-12">
-          <div className="flex justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="7" width="20" height="14" rx="2" /><rect x="4" y="3" width="16" height="4" rx="1" /><path d="M10 14h4" />
-            </svg>
-          </div>
-          <h2 className="u-display-l">
-            <AnimatedWords>Planes de Orbbi</AnimatedWords>
-          </h2>
-        </FadeIn>
-
-        <div className="max-w-3xl mx-auto space-y-4">
-          {planes.map((p, i) => (
-            <FadeIn key={p.nombre} delay={i * 0.08}>
-              <div className="bg-white rounded-2xl p-8 shadow-sm">
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  {/* Left: plan name */}
-                  <div className="md:w-1/3 shrink-0">
-                    <h3 className="u-display-s">{p.nombre}</h3>
-                  </div>
-                  {/* Right: desc, features, link */}
-                  <div className="flex-1">
-                    <p className="u-paragraph-s mb-4">{p.desc}</p>
-                    <p className="text-sm text-ink-light mb-5">
-                      {p.features.map((f, fi) => (
-                        <span key={fi}>
-                          {fi > 0 && <span className="mx-2 text-cloud">·</span>}
-                          {f}
-                        </span>
-                      ))}
-                    </p>
-                    <Link href="/precios"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-ink border border-cloud-light rounded-lg px-4 py-2 hover:bg-ivory-mid transition-colors">
-                      Ver detalles
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-      <div className="space-main" />
+    <section id="precios">
+      <PricingPage />
     </section>
   )
 }
