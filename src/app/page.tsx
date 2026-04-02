@@ -51,7 +51,7 @@ function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-ivory-mid" style={{ height: 'var(--nav-height)' }}>
       <div className="u-container h-full flex items-center justify-between">
-        <Link href="/"><OrbiLogo size={24} color="dark" /></Link>
+        <Link href="/"><OrbiLogo size={36} color="dark" /></Link>
         <div className="hidden md:flex items-center gap-8">
           <Link href="#producto" className="text-sm text-ink-light hover:text-ink transition-colors">Producto</Link>
           <Link href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</Link>
@@ -684,7 +684,7 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Logo column (2 cols) */}
           <div className="col-span-2">
-            <OrbiLogo size={28} color="light" />
+            <OrbiLogo size={36} color="light" />
             {/* Mini prompt */}
             <div className="flex items-center gap-2 bg-ink-mid rounded-lg px-3 py-2 mt-6 mb-4" style={{ maxWidth: '280px' }}>
               <input
