@@ -72,60 +72,171 @@ function Nav() {
 // 1. HERO (full width, bg-ivory-dark)
 // ═══════════════════════════════════════════════════════════════════
 
-// ── Hero animated network (right side) ──
+// ── Hero animated network — 6 agents, large circles, floating motion ──
 function HeroNetwork() {
   const nodes = [
-    { x: 100, y: 65, label: 'General', r: 16 },
-    { x: 38, y: 28, label: 'Finanzas', r: 11 },
-    { x: 162, y: 28, label: 'Ventas', r: 11 },
-    { x: 24, y: 100, label: 'RRHH', r: 10 },
-    { x: 176, y: 100, label: 'Marketing', r: 10 },
-    { x: 55, y: 125, label: 'Inventario', r: 9 },
-    { x: 145, y: 125, label: 'Legal', r: 9 },
+    { x: 250, y: 175, label: 'General', r: 58 },
+    { x: 100, y: 70, label: 'Finanzas', r: 42 },
+    { x: 400, y: 70, label: 'Ventas', r: 42 },
+    { x: 60, y: 280, label: 'RRHH', r: 38 },
+    { x: 440, y: 280, label: 'Marketing', r: 38 },
+    { x: 250, y: 355, label: 'Inventario', r: 36 },
   ]
-  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,3],[2,4],[5,6]]
+  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[1,3],[2,4],[3,5],[4,5]]
+
+  // Each node floats gently in a unique pattern
+  const floats = [
+    { x: [0, 0, 0], y: [0, -6, 0] },         // General — gentle up/down
+    { x: [0, -5, 0], y: [0, -4, 0] },         // Finanzas
+    { x: [0, 5, 0], y: [0, -4, 0] },          // Ventas
+    { x: [0, -6, 0], y: [0, 4, 0] },          // RRHH
+    { x: [0, 6, 0], y: [0, 4, 0] },           // Marketing
+    { x: [0, 0, 0], y: [0, 5, 0] },           // Inventario
+  ]
 
   return (
-    <svg viewBox="0 0 200 145" className="w-full max-w-sm mx-auto">
+    <svg viewBox="0 0 500 400" className="w-full mx-auto" style={{ maxWidth: 480 }}>
+      {/* Edges */}
       {edges.map(([a,b],i) => (
         <motion.line key={i}
           x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
-          stroke="#d1cfc5" strokeWidth={1}
+          stroke="#d1cfc5" strokeWidth={1.5}
           initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.5 }}
-          transition={{ duration: 0.7, delay: 0.6 + i * 0.06, ease: [0.25,0.46,0.45,0.94] }}
+          animate={{ pathLength: 1, opacity: 0.35 }}
+          transition={{ duration: 0.9, delay: 0.5 + i * 0.07, ease: [0.25,0.46,0.45,0.94] }}
         />
       ))}
+      {/* Nodes — each floats independently */}
       {nodes.map((n,i) => (
-        <g key={i}>
+        <motion.g key={i}
+          animate={{ x: floats[i].x, y: floats[i].y }}
+          transition={{ duration: 4 + i * 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut', delay: i * 0.3 }}
+        >
+          {/* Circle */}
           <motion.circle cx={n.x} cy={n.y} r={n.r}
-            fill={i===0 ? '#d97757' : '#f0eee6'} stroke={i===0 ? '#c6613f' : '#d1cfc5'} strokeWidth={1.5}
+            fill={i===0 ? '#d97757' : '#f0eee6'} stroke={i===0 ? '#c6613f' : '#d1cfc5'} strokeWidth={2}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: [0.16,1,0.3,1] }}
+            transition={{ duration: 0.6, delay: 0.3 + i * 0.1, ease: [0.16,1,0.3,1] }}
           />
-          <motion.text x={n.x} y={n.y + 3} textAnchor="middle" fill={i===0 ? '#fff' : '#5e5d59'}
-            fontSize={i===0 ? 7 : 6} fontFamily="Inter, system-ui, sans-serif" fontWeight={i===0 ? 600 : 400}
+          {/* Label */}
+          <motion.text x={n.x} y={n.y + (i===0 ? 6 : 5)} textAnchor="middle"
+            fill={i===0 ? '#fff' : '#5e5d59'}
+            fontSize={i===0 ? 20 : 15} fontFamily="'Source Serif 4', Georgia, serif" fontWeight={i===0 ? 500 : 400}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.8 + i * 0.08 }}
+            transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }}
           >{n.label}</motion.text>
-        </g>
+        </motion.g>
       ))}
-      {/* Pulse on center */}
-      <motion.circle cx={100} cy={65} r={16} fill="none" stroke="#d97757" strokeWidth={1}
-        animate={{ r: [16, 28, 16], opacity: [0.5, 0, 0.5] }}
+      {/* Pulse rings on center */}
+      <motion.circle cx={250} cy={175} r={58} fill="none" stroke="#d97757" strokeWidth={1.5}
+        animate={{ r: [58, 85, 58], opacity: [0.35, 0, 0.35] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.circle cx={250} cy={175} r={58} fill="none" stroke="#d97757" strokeWidth={0.8}
+        animate={{ r: [58, 100, 58], opacity: [0.2, 0, 0.2] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
       />
       {/* Floating particles */}
       {[...Array(8)].map((_,i) => (
         <motion.circle key={`p${i}`}
-          cx={30 + Math.random() * 140} cy={20 + Math.random() * 110} r={1.5}
-          fill={`rgba(217,119,87,${0.15 + Math.random() * 0.2})`}
-          animate={{ opacity: [0, 0.6, 0], cy: [20 + Math.random()*110, Math.random()*60, -10] }}
+          cx={50 + Math.random() * 400} cy={30 + Math.random() * 340} r={2}
+          fill={`rgba(217,119,87,${0.1 + Math.random() * 0.15})`}
+          animate={{ opacity: [0, 0.5, 0], cy: [30 + Math.random()*340, Math.random()*170, -10] }}
           transition={{ duration: 3 + Math.random()*2, delay: Math.random()*2, repeat: Infinity, ease: 'easeInOut' }}
         />
       ))}
     </svg>
+  )
+}
+
+// ── Animated metric ring (reusable) ──
+const RING_R = 42
+const RING_C = 2 * Math.PI * RING_R
+
+function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string }) {
+  const [display, setDisplay] = useState(0)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true })
+  useEffect(() => {
+    if (!inView) return
+    const start = performance.now()
+    function tick(now: number) {
+      const p = Math.min((now - start) / 1400, 1)
+      setDisplay(Math.round(value * (1 - Math.pow(1 - p, 3))))
+      if (p < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [inView, value])
+  return <span ref={ref}>{display}{suffix}</span>
+}
+
+function MetricRing({ value, max, label, color, delay = 0 }: {
+  value: number; max: number; label: string; color: string; delay?: number
+}) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const pct = Math.max(0, Math.min(1, value / max))
+  return (
+    <motion.div ref={ref} className="flex flex-col items-center"
+      initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay, ease }}
+    >
+      <div className="relative w-24 h-24">
+        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+          <circle cx={50} cy={50} r={RING_R} fill="none" stroke="#e3dacc" strokeWidth={5} />
+          {inView && (
+            <motion.circle cx={50} cy={50} r={RING_R} fill="none" stroke={color} strokeWidth={5} strokeLinecap="round"
+              strokeDasharray={RING_C}
+              initial={{ strokeDashoffset: RING_C }}
+              animate={{ strokeDashoffset: RING_C * (1 - pct) }}
+              transition={{ duration: 1.6, delay: delay + 0.2, ease }}
+            />
+          )}
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-xl font-semibold text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+            <AnimatedNumber value={value} suffix="%" />
+          </span>
+        </div>
+      </div>
+      <p className="text-xs font-medium text-ink mt-2">{label}</p>
+    </motion.div>
+  )
+}
+
+// ── Sparkline chart (reusable) ──
+function SparklineChart() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const data = [320, 380, 350, 420, 480, 460, 520, 580, 550, 620, 680, 710]
+  const w = 260, h = 50
+  const min = Math.min(...data) - 20, max = Math.max(...data) + 20
+  const pts = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / (max - min)) * h}`).join(' ')
+  const area = `M0,${h} L${data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / (max - min)) * h}`).join(' L')} L${w},${h} Z`
+
+  return (
+    <div ref={ref} className="bg-white rounded-xl border border-cloud-light/50 p-5 w-full">
+      <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Ingresos mensuales</p>
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="spFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#d97757" stopOpacity={0.15} />
+            <stop offset="100%" stopColor="#d97757" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <motion.path d={area} fill="url(#spFill)" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.4 }} />
+        <motion.polyline points={pts} fill="none" stroke="#d97757" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+          initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}}
+          transition={{ duration: 1.4, delay: 0.3, ease }}
+        />
+      </svg>
+      <div className="flex justify-between mt-2">
+        <span className="text-xs text-muted">Ene</span>
+        <span className="text-xs font-medium text-ink">$710K</span>
+        <span className="text-xs text-muted">Dic</span>
+      </div>
+    </div>
   )
 }
 
@@ -282,11 +393,18 @@ function ProblemSolversSection() {
               </FadeIn>
             ))}
           </div>
-          <div style={{ gridColumn: 'span 6' }} className="max-md:col-span-full flex items-center justify-center">
-            <FadeIn delay={0.2}>
-              <div className="bg-ivory rounded-2xl flex items-center justify-center w-full" style={{ aspectRatio: '1/1', maxWidth: '420px' }}>
-                <OrbiLogo size={56} color="dark" />
+          <div style={{ gridColumn: 'span 6' }} className="max-md:col-span-full flex flex-col items-center justify-center gap-6">
+            {/* Animated metric rings */}
+            <FadeIn delay={0.15}>
+              <div className="flex items-center justify-center gap-8">
+                <MetricRing value={78} max={100} label="Ventas" color="#d97757" delay={0} />
+                <MetricRing value={92} max={100} label="Margen" color="#22c55e" delay={0.15} />
+                <MetricRing value={65} max={100} label="Cobertura" color="#f59e0b" delay={0.3} />
               </div>
+            </FadeIn>
+            {/* Animated sparkline */}
+            <FadeIn delay={0.3} className="w-full max-w-sm">
+              <SparklineChart />
             </FadeIn>
           </div>
         </div>
