@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { buildSystemPrompt, TipoAgente } from '@/lib/prompts'
+import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
+import type { TipoAgente } from '@/lib/prompts'
 import { enviarMensajeGemini, GeminiMessage } from '@/lib/gemini'
 import { sendWhatsAppMessage } from '@/lib/whatsapp'
 
@@ -122,7 +123,7 @@ export async function POST(request: NextRequest) {
       .order('orden', { ascending: true })
 
     // 5. Construir system prompt (Gerente General por defecto)
-    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], 'general')
+    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], 'general', messageText)
 
     // 6. Obtener historial (últimos 20 mensajes)
     const { data: historialDB } = await supabase

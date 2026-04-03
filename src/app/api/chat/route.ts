@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { buildSystemPrompt, TipoAgente } from '@/lib/prompts'
+import { TipoAgente } from '@/lib/prompts'
+import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 import { GeminiMessage } from '@/lib/gemini'
 import { streamMensajeGemini } from '@/lib/gemini-stream'
 import { rateLimit } from '@/lib/rate-limit'
@@ -161,10 +162,7 @@ export async function POST(request: NextRequest) {
       .eq('empresa_id', empresa_id)
       .order('orden', { ascending: true })
 
-    // 5. Construir system prompt
-    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo)
-
-    // 6. Obtener historial (últimos 20 mensajes)
+    // 5. Obtener historial (últimos 20 mensajes)
     const { data: historialDB } = await supabase
       .from('mensajes')
       .select('rol, contenido')
@@ -176,6 +174,10 @@ export async function POST(request: NextRequest) {
       role: msg.rol === 'user' ? 'user' : 'model',
       parts: [{ text: msg.contenido }]
     }))
+
+    // 6. Construir system prompt con RAG (knowledge base relevante al mensaje)
+    const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
+    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto)
 
     // 7. Process file attachment if present
     let mensajeConArchivo = mensaje

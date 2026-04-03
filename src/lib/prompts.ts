@@ -390,7 +390,9 @@ ${REGLAS_BASE}`
 export function buildSystemPrompt(
   nombreEmpresa: string,
   contexto: Contexto[],
-  tipoAgente: TipoAgente = 'general'
+  tipoAgente: TipoAgente = 'general',
+  userMessage: string = '',
+  conversationHistory: string = ''
 ): string {
   const ctx = buildContextoNegocio(contexto)
 
@@ -404,5 +406,9 @@ export function buildSystemPrompt(
     legal: PROMPT_LEGAL,
   }
 
-  return builders[tipoAgente](nombreEmpresa, ctx)
+  let prompt = builders[tipoAgente](nombreEmpresa, ctx)
+
+  return prompt
 }
+
+// Note: For RAG-enhanced prompts with knowledge base, use buildSystemPromptWithRAG from '@/lib/prompts-server'
