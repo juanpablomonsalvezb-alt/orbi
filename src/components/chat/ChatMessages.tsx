@@ -123,6 +123,17 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
                 </button>
               ))}
             </div>
+
+            {/* Google Sheets tip */}
+            <div className="mt-8 flex items-start gap-3 px-4 py-3 bg-[#f7f6f3] rounded-lg border border-[#e9e9e7]">
+              <span className="text-[16px] mt-0.5">📊</span>
+              <div>
+                <p className="text-[13px] text-[#37352f] font-medium">Conecta tus datos reales</p>
+                <p className="text-[12px] text-[#9b9a97] mt-0.5">
+                  Pega un link de Google Sheets en el chat y el agente analizará tus números reales — ventas, costos, inventario.
+                </p>
+              </div>
+            </div>
           </div>
         )}
 

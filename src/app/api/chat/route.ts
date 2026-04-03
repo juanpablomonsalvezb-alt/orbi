@@ -4,6 +4,7 @@ import { TipoAgente } from '@/lib/prompts'
 import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 import { streamGroq, GroqMessage } from '@/lib/groq'
 import { rateLimit } from '@/lib/rate-limit'
+import { readGoogleSheet, parseSheetUrl } from '@/lib/google-sheets'
 
 function getSupabase() {
   return createClient(
@@ -179,8 +180,21 @@ export async function POST(request: NextRequest) {
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
     const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo, empresa_id)
 
-    // 7. Process file attachment if present
+    // 6.5. Detect Google Sheets URL in message and auto-read
     let mensajeConArchivo = mensaje
+    const sheetsMatch = mensaje.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+[^\s]*/g)
+    if (sheetsMatch && sheetsMatch[0]) {
+      try {
+        const sheetData = await readGoogleSheet(sheetsMatch[0])
+        mensajeConArchivo = `${mensaje}\n\n[DATOS DE GOOGLE SHEETS - LEÍDOS EN TIEMPO REAL]\n${sheetData}`
+        console.log('Google Sheet read successfully:', sheetData.length, 'chars')
+      } catch (err) {
+        console.error('Error reading Google Sheet:', err)
+        mensajeConArchivo = `${mensaje}\n\n(El usuario compartió un link de Google Sheets pero no se pudo leer. Posiblemente no tiene permisos públicos. Pídele que cambie los permisos a "Cualquier persona con el enlace puede ver".)`
+      }
+    }
+
+    // 7. Process file attachment if present
     let imagePart: { inlineData: { data: string; mimeType: string } } | null = null
 
     if (archivo_id) {
