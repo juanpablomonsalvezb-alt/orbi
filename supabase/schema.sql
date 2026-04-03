@@ -177,3 +177,48 @@ CREATE TRIGGER trigger_contexto_updated
 CREATE TRIGGER trigger_conversaciones_updated
   BEFORE UPDATE ON conversaciones
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ============================================
+-- TABLA: archivos
+-- Archivos subidos por usuarios para compartir con agentes
+-- ============================================
+CREATE TABLE archivos (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  nombre TEXT NOT NULL,
+  tipo TEXT NOT NULL,
+  tamano INTEGER NOT NULL,
+  storage_path TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_archivos_empresa ON archivos(empresa_id);
+ALTER TABLE archivos ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "archivos_select" ON archivos FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "archivos_insert" ON archivos FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "archivos_delete" ON archivos FOR DELETE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+
+-- ============================================
+-- TABLA: empresa_usuarios (multi-user support)
+-- ============================================
+CREATE TABLE empresa_usuarios (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  rol TEXT NOT NULL DEFAULT 'miembro' CHECK (rol IN ('admin', 'miembro')),
+  email TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE(empresa_id, user_id)
+);
+CREATE INDEX idx_empresa_usuarios_empresa ON empresa_usuarios(empresa_id);
+CREATE INDEX idx_empresa_usuarios_user ON empresa_usuarios(user_id);
+ALTER TABLE empresa_usuarios ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "empresa_usuarios_select" ON empresa_usuarios FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "empresa_usuarios_insert" ON empresa_usuarios FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "empresa_usuarios_delete" ON empresa_usuarios FOR DELETE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+
+-- ============================================
+-- MIGRACIÓN: WhatsApp Integration
+-- Columna telefono para vincular empresa con número de WhatsApp
+-- ============================================
+ALTER TABLE empresas ADD COLUMN IF NOT EXISTS telefono TEXT;
+CREATE INDEX IF NOT EXISTS idx_empresas_telefono ON empresas(telefono);

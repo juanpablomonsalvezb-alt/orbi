@@ -2,9 +2,12 @@
 
 import { useState } from 'react'
 import { ChatMessage } from '@/types/chat'
+import DocumentButton, { hasDocumentKeywords } from '@/components/chat/DocumentButton'
 
 interface MessageBubbleProps {
   mensaje: ChatMessage
+  empresaId?: string
+  agente?: string
 }
 
 function FormatearTexto({ texto }: { texto: string }) {
@@ -51,7 +54,7 @@ function renderInline(texto: string) {
   })
 }
 
-export default function MessageBubble({ mensaje }: MessageBubbleProps) {
+export default function MessageBubble({ mensaje, empresaId, agente }: MessageBubbleProps) {
   const esUsuario = mensaje.rol === 'user'
   const [copiado, setCopiado] = useState(false)
 
@@ -98,6 +101,15 @@ export default function MessageBubble({ mensaje }: MessageBubbleProps) {
             <FormatearTexto texto={mensaje.contenido} />
           )}
         </div>
+
+        {/* Botón de descarga de documento cuando el asistente lo ofrece */}
+        {!esUsuario && empresaId && hasDocumentKeywords(mensaje.contenido) && (
+          <DocumentButton
+            contenido={mensaje.contenido}
+            empresaId={empresaId}
+            agente={agente || 'Gerente General'}
+          />
+        )}
 
         <p className="text-[10px] text-ceniza/30 mt-2 text-right">
           {new Date(mensaje.created_at).toLocaleTimeString('es-CL', {

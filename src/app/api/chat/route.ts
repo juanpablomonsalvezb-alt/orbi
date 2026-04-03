@@ -12,9 +12,85 @@ function getSupabase() {
   )
 }
 
+/** Extract text content from a CSV buffer */
+function extraerTextoCSV(buffer: ArrayBuffer): string {
+  const decoder = new TextDecoder('utf-8')
+  const text = decoder.decode(buffer)
+  // Limit to first 5000 chars to avoid overwhelming the model
+  return text.length > 5000 ? text.substring(0, 5000) + '\n... (contenido truncado)' : text
+}
+
+/** Try to extract readable text from an Excel file (basic approach: read shared strings XML) */
+function extraerTextoExcel(buffer: ArrayBuffer): string {
+  // For xlsx files, we do a simple text extraction from the binary
+  // A full parser would need a library, but we can extract visible ASCII/UTF-8 strings
+  const decoder = new TextDecoder('utf-8', { fatal: false })
+  const raw = decoder.decode(buffer)
+
+  // xlsx is actually a zip file with XML inside; extract text between XML tags
+  const textMatches: string[] = []
+  const regex = /<t[^>]*>([^<]+)<\/t>/g
+  let match
+  while ((match = regex.exec(raw)) !== null) {
+    textMatches.push(match[1])
+  }
+
+  if (textMatches.length > 0) {
+    const text = textMatches.join(' | ')
+    return text.length > 5000 ? text.substring(0, 5000) + '\n... (contenido truncado)' : text
+  }
+
+  return '(No se pudo extraer texto del archivo Excel. El usuario adjuntó una hoja de cálculo.)'
+}
+
+/** Try to extract text from a PDF (basic approach) */
+function extraerTextoPDF(buffer: ArrayBuffer): string {
+  const decoder = new TextDecoder('latin1', { fatal: false })
+  const raw = decoder.decode(buffer)
+
+  // Very basic PDF text extraction: find text between BT and ET operators
+  const textChunks: string[] = []
+  const regex = /\(([^)]{1,500})\)/g
+  let match
+  while ((match = regex.exec(raw)) !== null) {
+    const text = match[1].replace(/\\[nrt]/g, ' ').trim()
+    if (text.length > 2 && /[a-zA-ZáéíóúñÁÉÍÓÚÑ]/.test(text)) {
+      textChunks.push(text)
+    }
+  }
+
+  if (textChunks.length > 0) {
+    const text = textChunks.join(' ')
+    return text.length > 5000 ? text.substring(0, 5000) + '\n... (contenido truncado)' : text
+  }
+
+  return '(No se pudo extraer texto del PDF. El usuario adjuntó un documento PDF.)'
+}
+
+/** Try to extract text from a Word doc/docx */
+function extraerTextoWord(buffer: ArrayBuffer): string {
+  const decoder = new TextDecoder('utf-8', { fatal: false })
+  const raw = decoder.decode(buffer)
+
+  // docx is zip with XML; extract text from <w:t> tags
+  const textMatches: string[] = []
+  const regex = /<w:t[^>]*>([^<]+)<\/w:t>/g
+  let match
+  while ((match = regex.exec(raw)) !== null) {
+    textMatches.push(match[1])
+  }
+
+  if (textMatches.length > 0) {
+    const text = textMatches.join(' ')
+    return text.length > 5000 ? text.substring(0, 5000) + '\n... (contenido truncado)' : text
+  }
+
+  return '(No se pudo extraer texto del documento Word. El usuario adjuntó un archivo .doc/.docx.)'
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { mensaje, conversacion_id, empresa_id } = await request.json()
+    const { mensaje, conversacion_id, empresa_id, archivo_id } = await request.json()
 
     if (!mensaje || !conversacion_id || !empresa_id) {
       return NextResponse.json(
@@ -101,8 +177,75 @@ export async function POST(request: NextRequest) {
       parts: [{ text: msg.contenido }]
     }))
 
-    // 7. Stream response from Gemini
-    const result = await streamMensajeGemini(systemPrompt, historial, mensaje)
+    // 7. Process file attachment if present
+    let mensajeConArchivo = mensaje
+    let imagePart: { inlineData: { data: string; mimeType: string } } | null = null
+
+    if (archivo_id) {
+      try {
+        // Fetch file metadata
+        const { data: archivo, error: archivoError } = await supabase
+          .from('archivos')
+          .select('*')
+          .eq('id', archivo_id)
+          .single()
+
+        if (!archivoError && archivo) {
+          // Download file from storage
+          const { data: fileData, error: downloadError } = await supabase.storage
+            .from('archivos')
+            .download(archivo.storage_path)
+
+          if (!downloadError && fileData) {
+            const buffer = await fileData.arrayBuffer()
+
+            if (archivo.tipo === 'imagen') {
+              // For images: prepare inline data for Gemini multimodal
+              const base64 = Buffer.from(buffer).toString('base64')
+              const ext = archivo.nombre.split('.').pop()?.toLowerCase() || 'png'
+              const mimeType = ext === 'png' ? 'image/png' : 'image/jpeg'
+              imagePart = {
+                inlineData: {
+                  data: base64,
+                  mimeType,
+                }
+              }
+              mensajeConArchivo = `${mensaje}\n\n[El usuario adjuntó una imagen: ${archivo.nombre}. Analízala y responde en contexto.]`
+            } else if (archivo.tipo === 'hoja_calculo') {
+              const ext = archivo.nombre.split('.').pop()?.toLowerCase() || ''
+              let textoExtraido: string
+              if (ext === 'csv') {
+                textoExtraido = extraerTextoCSV(buffer)
+              } else {
+                textoExtraido = extraerTextoExcel(buffer)
+              }
+              mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
+            } else if (archivo.tipo === 'pdf') {
+              const textoExtraido = extraerTextoPDF(buffer)
+              mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo PDF: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
+            } else if (archivo.tipo === 'documento') {
+              const textoExtraido = extraerTextoWord(buffer)
+              mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un documento Word: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
+            } else {
+              mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo: ${archivo.nombre} (tipo: ${archivo.tipo}).`
+            }
+          }
+        }
+      } catch (fileError) {
+        console.error('Error procesando archivo adjunto:', fileError)
+        // Continue without file context rather than failing the whole request
+        mensajeConArchivo = `${mensaje}\n\n(El usuario intentó adjuntar un archivo pero no se pudo procesar.)`
+      }
+    }
+
+    // 8. Stream response from Gemini
+    let result
+    if (imagePart) {
+      // For images, use multimodal: send message with image inline data
+      result = await streamMensajeGeminiConImagen(systemPrompt, historial, mensajeConArchivo, imagePart)
+    } else {
+      result = await streamMensajeGemini(systemPrompt, historial, mensajeConArchivo)
+    }
 
     let fullResponse = ''
 
@@ -166,4 +309,45 @@ function getAgentesPermitidos(plan: string): TipoAgente[] {
     case 'free': return ['general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal'] // Trial gets all
     default: return ['general']
   }
+}
+
+// Helper: stream Gemini with an image part (multimodal)
+async function streamMensajeGeminiConImagen(
+  systemPrompt: string,
+  historial: GeminiMessage[],
+  mensaje: string,
+  imagePart: { inlineData: { data: string; mimeType: string } }
+) {
+  // Dynamic import to avoid circular dependency issues
+  const { GoogleGenerativeAI } = await import('@google/generative-ai')
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
+  const modelo = genAI.getGenerativeModel({
+    model: 'gemini-2.0-flash',
+    generationConfig: {
+      temperature: 0.7,
+      topP: 0.9,
+      maxOutputTokens: 2048,
+    }
+  })
+
+  const chat = modelo.startChat({
+    history: [
+      {
+        role: 'user',
+        parts: [{ text: `INSTRUCCIONES DEL SISTEMA:\n${systemPrompt}\n\nResponde "Entendido" para confirmar.` }]
+      },
+      {
+        role: 'model',
+        parts: [{ text: 'Entendido. Estoy listo para asistirte como tu gerente de operaciones virtual.' }]
+      },
+      ...historial
+    ]
+  })
+
+  const result = await chat.sendMessageStream([
+    { text: mensaje },
+    imagePart,
+  ])
+
+  return result
 }

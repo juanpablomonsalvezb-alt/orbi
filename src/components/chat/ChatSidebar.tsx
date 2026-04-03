@@ -148,8 +148,31 @@ export default function ChatSidebar({
         ))}
       </div>
 
-      {/* Footer with upgrade link */}
+      {/* Footer with dashboard + upgrade link */}
       <div className="p-4 border-t border-white/[0.06] space-y-2">
+        <a
+          href="/dashboard"
+          className="flex items-center justify-center gap-1.5 text-[11px] text-white/50 hover:text-white/80 transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="12" width="4" height="9" rx="1" />
+            <rect x="10" y="7" width="4" height="14" rx="1" />
+            <rect x="17" y="3" width="4" height="18" rx="1" />
+          </svg>
+          Panel de control
+        </a>
+        <a
+          href="/equipo"
+          className="flex items-center justify-center gap-1.5 text-[11px] text-white/50 hover:text-white/80 transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Equipo
+        </a>
         <a href="/#precios" className="block text-center text-[11px] text-señal hover:text-señal/80 transition-colors">
           Actualizar plan
         </a>

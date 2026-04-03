@@ -7,7 +7,7 @@ import { ChatMessage } from '@/types/chat'
 import { Conversacion } from '@/types/database'
 import { AGENTES, TipoAgente } from '@/lib/prompts'
 import ChatMessages from '@/components/chat/ChatMessages'
-import ChatInput from '@/components/chat/ChatInput'
+import ChatInput, { ArchivoInfo } from '@/components/chat/ChatInput'
 import ChatSidebar from '@/components/chat/ChatSidebar'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 
@@ -70,14 +70,19 @@ export default function ChatPage() {
     cargarDatos()
   }, [conversacionId])
 
-  const enviarMensaje = useCallback(async (texto: string) => {
+  const enviarMensaje = useCallback(async (texto: string, archivo?: ArchivoInfo) => {
     if (!empresaId || cargando) return
     setError(null)
+
+    // Build display text: if there's a file, show it in the message
+    const contenidoDisplay = archivo
+      ? `${texto}\n\n📎 ${archivo.nombre}`
+      : texto
 
     const mensajeUsuario: ChatMessage = {
       id: crypto.randomUUID(),
       rol: 'user',
-      contenido: texto,
+      contenido: contenidoDisplay,
       created_at: new Date().toISOString()
     }
     setMensajes((prev) => [...prev, mensajeUsuario])
@@ -88,7 +93,7 @@ export default function ChatPage() {
       await supabase.from('mensajes').insert({
         conversacion_id: conversacionId,
         rol: 'user',
-        contenido: texto
+        contenido: contenidoDisplay
       })
 
       // Use streaming API
@@ -99,7 +104,8 @@ export default function ChatPage() {
         body: JSON.stringify({
           mensaje: texto,
           conversacion_id: conversacionId,
-          empresa_id: empresaId
+          empresa_id: empresaId,
+          ...(archivo ? { archivo_id: archivo.id } : {}),
         }),
         signal: abortRef.current.signal,
       })
@@ -316,11 +322,11 @@ export default function ChatPage() {
           cargando={cargando}
           streamingText={streamingText}
           agenteTipo={agenteTipo}
-          onSugerencia={enviarMensaje}
+          onSugerencia={(texto: string) => enviarMensaje(texto)}
         />
 
         {/* Input */}
-        <ChatInput onEnviar={enviarMensaje} deshabilitado={cargando} />
+        <ChatInput onEnviar={enviarMensaje} deshabilitado={cargando} empresaId={empresaId} />
       </div>
     </div>
   )
