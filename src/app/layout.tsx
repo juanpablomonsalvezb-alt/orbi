@@ -18,8 +18,8 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: 'Orbbi — El agente que orbita tu negocio 24/7',
-  description: 'Agentes de IA especializados para PYMEs en Latinoamérica. Finanzas, ventas, marketing, RRHH, inventario y legal — todo en un solo lugar. 48 horas gratis.',
+  title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
+  description: 'El directorio completo que solo las grandes empresas podían pagar. Finanzas, ventas, marketing, RRHH, inventario y legal — 7 agentes de IA que conocen tu negocio. 48 horas gratis.',
   keywords: ['IA para PYMEs', 'agente virtual', 'gestión empresarial', 'inteligencia artificial', 'PYME', 'Latinoamérica', 'CFO virtual', 'consultor IA'],
   authors: [{ name: 'Orbbi' }],
   creator: 'Orbbi',
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     locale: 'es_CL',
     url: '/',
     siteName: 'Orbbi',
-    title: 'Orbbi — El agente que orbita tu negocio 24/7',
-    description: 'Agentes de IA especializados para PYMEs: finanzas, ventas, marketing, RRHH, inventario y legal. Prueba gratis 48 horas.',
+    title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
+    description: 'El directorio que solo las grandes empresas podían pagar. 7 agentes de IA especializados para tu negocio. Prueba gratis 48 horas.',
     images: [
       {
         url: '/og-image.png',

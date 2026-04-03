@@ -255,7 +255,7 @@ function Hero() {
               transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
             >
               <AnimatedWords>
-                Conoce a tu socio estratégico
+                7 gerentes. 24/7. $29/mes.
               </AnimatedWords>
             </motion.h1>
             <motion.div
@@ -263,10 +263,10 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.25,0.46,0.45,0.94] }}
             >
-              <p className="u-paragraph-l mb-8" style={{ maxWidth: '42ch' }}>
-                Orbbi es un equipo de agentes de IA que conoce tu empresa en
-                profundidad. Analiza, decide, ejecuta y reporta — disponible
-                24/7 para que tu negocio nunca se detenga.
+              <p className="u-paragraph-l mb-8" style={{ maxWidth: '44ch' }}>
+                Las grandes empresas tienen un directorio completo: finanzas,
+                ventas, marketing, RRHH, legal. Tu PYME ahora también — por
+                menos de lo que pagas de internet.
               </p>
             </motion.div>
             <motion.div
@@ -320,8 +320,8 @@ function ProblemSolversSection() {
           <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
         </svg>
       ),
-      title: 'Resuelve problemas junto a ti',
-      desc: 'Orbbi construye sobre tus ideas, expande tu lógica y simplifica la complejidad paso a paso para cada área de tu negocio.',
+      title: 'Tu equipo directivo completo',
+      desc: 'Finanzas, ventas, marketing, RRHH, inventario y legal — 7 gerentes especializados que antes solo las grandes empresas podían pagar.',
     },
     {
       icon: (
@@ -329,8 +329,8 @@ function ProblemSolversSection() {
           <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 16h18" /><path d="M7 12l3-3 2 2 5-5" />
         </svg>
       ),
-      title: 'Aborda tu trabajo más difícil',
-      desc: 'Colaboración experta en lo que necesitas resolver — desde análisis financiero crítico hasta estrategia comercial.',
+      title: 'Conoce tu negocio mejor que tú',
+      desc: 'Cada agente aprende de tu empresa: tus números, clientes, metas y dolores. No da consejos genéricos — da recomendaciones específicas para TU negocio.',
     },
     {
       icon: (
@@ -338,8 +338,8 @@ function ProblemSolversSection() {
           <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
         </svg>
       ),
-      title: 'Explora lo que sigue',
-      desc: 'Como un equipo experto en tu bolsillo, colaborar con Orbbi expande lo que puedes construir por tu cuenta.',
+      title: 'Tu negocio nunca más decide solo',
+      desc: 'Antes de cada decisión importante — subir precios, contratar, invertir — pregúntale a tu equipo. Disponible a las 3AM de un domingo.',
     },
   ]
 
@@ -355,11 +355,11 @@ function ProblemSolversSection() {
             </svg>
           </div>
           <h2 className="u-display-l mb-4">
-            <AnimatedWords>La IA para quienes toman decisiones</AnimatedWords>
+            <AnimatedWords>Lo que antes costaba $15M al mes, ahora cuesta $29</AnimatedWords>
           </h2>
           <p className="u-paragraph-s mx-auto" style={{ maxWidth: '50ch' }}>
-            Delega tareas complejas a agentes especializados.
-            Orbbi trabaja con tus datos para darte respuestas accionables.
+            Un equipo directivo completo que conoce tu negocio en profundidad.
+            Cada agente es un especialista que trabaja solo para ti, 24/7.
           </p>
         </FadeIn>
 
@@ -367,7 +367,7 @@ function ProblemSolversSection() {
         <FadeIn delay={0.15} className="mb-16">
           <div className="bg-white rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
             <p className="u-paragraph-s text-ink" style={{ color: '#141413' }}>
-              Configura tu agente en 5 minutos y recibe tu primer análisis hoy.
+              7 preguntas sobre tu negocio. 2 minutos. Y tu equipo directivo empieza a trabajar.
             </p>
             <Link href="/registro" className="bg-clay text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shrink-0">
               Comenzar gratis
@@ -480,7 +480,7 @@ function UseCasesTabSection() {
             </svg>
           </div>
           <h2 className="u-display-l">
-            <AnimatedWords>Cómo usar Orbbi</AnimatedWords>
+            <AnimatedWords>Tu directorio trabaja así</AnimatedWords>
           </h2>
         </FadeIn>
 
@@ -566,7 +566,7 @@ function VideoSection() {
             </svg>
           </div>
           <h2 className="u-display-l">
-            <AnimatedWords>Sigue pensando con Orbbi</AnimatedWords>
+            <AnimatedWords>Mira cómo funciona</AnimatedWords>
           </h2>
         </FadeIn>
 
@@ -586,15 +586,15 @@ function VideoSection() {
         <div className="grid-12">
           <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full">
             <FadeIn>
-              <h3 className="u-display-s">Tu colaborador de confianza</h3>
+              <h3 className="u-display-s">No es un chatbot. Es tu equipo.</h3>
             </FadeIn>
           </div>
           <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full flex items-end">
             <FadeIn delay={0.1}>
               <p className="u-paragraph-s" style={{ maxWidth: '48ch' }}>
-                Orbbi no solo responde preguntas. Analiza contexto, anticipa problemas,
-                sugiere acciones y aprende de tu negocio cada semana. Es la diferencia
-                entre buscar información y tener un socio que piensa contigo.
+                Orbbi recuerda cada conversación, hace seguimiento de las tareas
+                que recomendó, y cuando detecta un problema fuera de su área,
+                te conecta con el agente correcto. Como un equipo real.
               </p>
             </FadeIn>
           </div>
@@ -691,7 +691,7 @@ function FinalCTA() {
               {/* Left: heading */}
               <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full">
                 <h2 className="u-display-l">
-                  <AnimatedWords>¿Qué desafío enfrenta tu negocio?</AnimatedWords>
+                  <AnimatedWords>¿Listo para tener tu propio directorio?</AnimatedWords>
                 </h2>
               </div>
               {/* Right: prompt bar */}
