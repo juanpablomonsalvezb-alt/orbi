@@ -36,7 +36,7 @@ export async function buildTaskContext(empresaId: string): Promise<string> {
     .in('estado', ['pendiente', 'en_progreso'])
     .order('prioridad', { ascending: true })
     .order('created_at', { ascending: false })
-    .limit(15)
+    .limit(5)
 
   if (error || !tareas || tareas.length === 0) {
     return ''

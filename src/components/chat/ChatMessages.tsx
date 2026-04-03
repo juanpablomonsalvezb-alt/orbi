@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { ChatMessage } from '@/types/chat'
 import { TipoAgente } from '@/lib/prompts'
 import { CrossReferral } from '@/lib/cross-referral'
@@ -27,39 +27,98 @@ const SUGERENCIAS: Record<TipoAgente, string[]> = {
   legal: ['¿Qué obligaciones fiscales tengo?', '¿Necesito contrato para este servicio?', '¿Cumplo con la ley laboral?'],
 }
 
+/**
+ * Hook that buffers incoming streaming text and releases it character by character
+ * at a controlled rate, creating a smooth typewriter effect regardless of API speed.
+ */
+function useTypewriter(incomingText: string, charsPerSecond: number = 40) {
+  const [displayText, setDisplayText] = useState('')
+  const bufferRef = useRef('')
+  const displayRef = useRef('')
+  const rafRef = useRef<number | null>(null)
+  const lastTimeRef = useRef(0)
+
+  // Update buffer when new text arrives
+  useEffect(() => {
+    bufferRef.current = incomingText
+  }, [incomingText])
+
+  // Reset when streaming stops
+  useEffect(() => {
+    if (!incomingText) {
+      setDisplayText('')
+      displayRef.current = ''
+      bufferRef.current = ''
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [incomingText])
+
+  // Animation loop — releases chars at controlled rate
+  const animate = useCallback((timestamp: number) => {
+    if (!bufferRef.current) {
+      rafRef.current = requestAnimationFrame(animate)
+      return
+    }
+
+    const elapsed = timestamp - lastTimeRef.current
+    const msPerChar = 1000 / charsPerSecond
+
+    if (elapsed >= msPerChar && displayRef.current.length < bufferRef.current.length) {
+      // Release multiple chars if we're behind
+      const charsToAdd = Math.min(
+        Math.floor(elapsed / msPerChar),
+        bufferRef.current.length - displayRef.current.length,
+        3 // max 3 chars at a time for smoothness
+      )
+      displayRef.current = bufferRef.current.slice(0, displayRef.current.length + charsToAdd)
+      setDisplayText(displayRef.current)
+      lastTimeRef.current = timestamp
+    }
+
+    rafRef.current = requestAnimationFrame(animate)
+  }, [charsPerSecond])
+
+  useEffect(() => {
+    if (incomingText) {
+      lastTimeRef.current = performance.now()
+      rafRef.current = requestAnimationFrame(animate)
+    }
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [incomingText, animate])
+
+  const isTyping = displayText.length < (incomingText?.length || 0)
+
+  return { displayText, isTyping }
+}
+
 export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
+  const { displayText, isTyping } = useTypewriter(streamingText, 50)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [mensajes, streamingText])
+  }, [mensajes, displayText])
 
   return (
-    <div className="flex-1 overflow-y-auto bg-ivory-mid">
-      <div className="max-w-[720px] mx-auto px-6 py-10">
+    <div className="flex-1 overflow-y-auto bg-white">
+      <div className="max-w-[900px] mx-auto px-10 py-10">
 
-        {/* Empty state — editorial, premium */}
-        {mensajes.length === 0 && !cargando && (
-          <div className="flex flex-col items-center pt-20">
-            {/* Decorative circle */}
-            <div className="w-16 h-16 rounded-full bg-oat/60 flex items-center justify-center mb-8">
-              <div className="w-8 h-8 rounded-full bg-clay/20 flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full bg-clay/60" />
-              </div>
-            </div>
-            <h2 className="u-display-s text-ink mb-2">¿En qué puedo ayudarte?</h2>
-            <p className="text-sm text-muted mb-10" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+        {/* Empty state */}
+        {mensajes.length === 0 && !cargando && !streamingText && (
+          <div className="flex flex-col items-start pt-16">
+            <p className="text-[32px] text-[#37352f]" style={{ fontFamily: "'Source Serif 4', Georgia, serif", letterSpacing: '-0.5px', fontWeight: 400 }}>
+              ¿En qué puedo ayudarte?
+            </p>
+            <p className="text-[15px] text-[#9b9a97] mt-2 mb-10">
               Elige una sugerencia o escribe tu pregunta
             </p>
-            <div className="grid grid-cols-1 gap-2.5 w-full max-w-lg">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
               {SUGERENCIAS[agenteTipo].map((s, i) => (
                 <button key={i} onClick={() => onSugerencia?.(s)}
-                  className="text-left px-5 py-4 rounded-xl bg-ivory shadow-sm border border-ink/[0.04]
-                             hover:shadow-md hover:border-ink/[0.08] transition-all duration-200 group">
-                  <p className="text-[14px] text-ink-light group-hover:text-ink transition-colors"
-                     style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                    {s}
-                  </p>
+                  className="text-left px-5 py-4 rounded-lg text-[14px] text-[#37352f] border border-[#e9e9e7]
+                             hover:bg-[#f7f6f3] hover:border-[#d3d3d0] transition-all"
+                  style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  {s}
                 </button>
               ))}
             </div>
@@ -80,53 +139,36 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
           </div>
         ))}
 
-        {/* Streaming */}
-        {streamingText && (
-          <div className="mb-6">
-            <div className="bg-ivory rounded-2xl shadow-sm border border-ink/[0.04] px-6 py-5">
-              <div className="text-[15px] leading-[1.8] text-ink-light whitespace-pre-wrap"
+        {/* Streaming with typewriter */}
+        {(displayText || (cargando && !streamingText)) && (
+          <div className="mb-8 py-4 border-l-2 border-[#e9e9e7] pl-6">
+            {displayText ? (
+              <div className="text-[15px] leading-[1.85] text-[#37352f] whitespace-pre-wrap"
                    style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                {streamingText}
-                <span className="inline-block w-0.5 h-5 bg-clay ml-1 animate-pulse rounded-full" />
+                {displayText}
+                {isTyping && <span className="inline-block w-[2px] h-[1.1em] bg-clay ml-0.5 animate-pulse rounded-sm align-text-bottom" />}
               </div>
-            </div>
+            ) : (
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce" />
+                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce [animation-delay:0.15s]" />
+                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce [animation-delay:0.3s]" />
+              </div>
+            )}
           </div>
         )}
 
-        {/* Follow-up chips after last assistant message */}
+        {/* Follow-up chips */}
         {!cargando && !streamingText && mensajes.length > 0 && mensajes[mensajes.length - 1].rol === 'assistant' && onSugerencia && (
-          <div className="flex flex-wrap gap-2 mb-6 ml-1">
-            <button onClick={() => onSugerencia('Profundiza en esto')}
-              className="text-[12px] text-ink-light bg-ivory border border-ink/[0.06] px-3.5 py-1.5 rounded-full hover:border-ink/[0.12] hover:shadow-sm transition-all"
-              style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-              Profundizar
-            </button>
-            <button onClick={() => onSugerencia('Dame un plan de acción concreto')}
-              className="text-[12px] text-ink-light bg-ivory border border-ink/[0.06] px-3.5 py-1.5 rounded-full hover:border-ink/[0.12] hover:shadow-sm transition-all"
-              style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-              Plan de acción
-            </button>
-            <button onClick={() => onSugerencia('¿Qué más deberíamos revisar?')}
-              className="text-[12px] text-ink-light bg-ivory border border-ink/[0.06] px-3.5 py-1.5 rounded-full hover:border-ink/[0.12] hover:shadow-sm transition-all"
-              style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-              Siguiente tema
-            </button>
-          </div>
-        )}
-
-        {/* Loading */}
-        {cargando && !streamingText && (
-          <div className="mb-6">
-            <div className="bg-ivory rounded-2xl shadow-sm border border-ink/[0.04] px-6 py-5 inline-block">
-              <div className="flex items-center gap-2">
-                <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-clay/30 rounded-full animate-bounce" />
-                  <span className="w-2 h-2 bg-clay/30 rounded-full animate-bounce [animation-delay:0.15s]" />
-                  <span className="w-2 h-2 bg-clay/30 rounded-full animate-bounce [animation-delay:0.3s]" />
-                </div>
-                <span className="text-[12px] text-muted ml-1">Pensando...</span>
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-2 mb-6 mt-2">
+            {['Profundizar', 'Plan de acción', 'Siguiente tema'].map(label => (
+              <button key={label}
+                onClick={() => onSugerencia(label === 'Profundizar' ? 'Profundiza en esto' : label === 'Plan de acción' ? 'Dame un plan de acción concreto' : '¿Qué más deberíamos revisar?')}
+                className="text-[12px] text-[#9b9a97] border border-[#e9e9e7] px-3 py-1.5 rounded-md
+                           hover:bg-[#f7f6f3] hover:text-[#37352f] hover:border-[#d3d3d0] transition-all">
+                {label}
+              </button>
+            ))}
           </div>
         )}
 

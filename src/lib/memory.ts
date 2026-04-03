@@ -27,7 +27,7 @@ const CATEGORY_ORDER = ['dato', 'decision', 'meta', 'alerta', 'tarea']
 
 /**
  * Builds a memory context string from stored memories for injection into prompts.
- * Groups by category and caps at 2000 chars total.
+ * Groups by category and caps at 800 chars total.
  */
 export async function buildMemoryContext(empresaId: string): Promise<string> {
   const supabase = getSupabase()
@@ -66,8 +66,8 @@ export async function buildMemoryContext(empresaId: string): Promise<string> {
     }
   }
 
-  // Cap at 2000 chars
-  if (result.length > 2000) {
+  // Cap at 800 chars
+  if (result.length > 800) {
     result = result.substring(0, 1997) + '...'
   }
 

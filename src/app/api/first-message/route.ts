@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
-import { sendGroq, GroqMessage } from '@/lib/groq'
+import { streamGroq } from '@/lib/groq'
 import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 
 function getSupabase() {
@@ -49,37 +49,64 @@ export async function POST(request: NextRequest) {
       'saludo inicial', '', estilo || 'directo', empresa_id
     )
 
-    // Special prompt for the first message
-    const firstMessagePrompt = `Esta es tu PRIMERA interacción con el dueño de ${empresa.nombre}.
-No esperes a que te pregunte — tú inicias la conversación como un consultor que acaba de revisar el expediente del cliente.
+    // Special prompt — VERY short, like a consultant's opening line
+    const firstMessagePrompt = `Primera interacción con ${empresa.nombre}. Saluda en MÁXIMO 2-3 oraciones cortas:
+- Menciona UN dato concreto de su negocio que ya conoces
+- Haz UNA pregunta directa sobre lo más urgente
 
-INSTRUCCIONES PARA TU MENSAJE INICIAL:
-1. Saluda brevemente por el nombre de la empresa (no genérico)
-2. Menciona 1-2 datos específicos que ya conoces de su negocio (del onboarding)
-3. Identifica el punto más crítico o interesante que detectas
-4. Propón 2-3 temas concretos para trabajar hoy, basados en lo que sabes
-5. Termina con una pregunta directa que invite a profundizar
+NO más de 40 palabras total. NO te presentes. NO hagas listas. NO digas "¿en qué puedo ayudarte?". Solo el dato + la pregunta.
 
-NO digas "¿en qué puedo ayudarte?" — eso es genérico.
-NO te presentes como IA ni como chatbot.
-Actúa como si fueras un consultor que llega a una reunión preparado.
+Ejemplo: "Vi que tu mayor dolor es no saber cuánto ganas realmente. ¿Tienes desglose de costos por producto o trabajas con un número general?"
 
-Máximo 150 palabras. Sé específico, no genérico.`
+Así de corto.`
 
-    const response = await sendGroq(systemPrompt, [], firstMessagePrompt)
+    // Stream the first message
+    const groqStream = await streamGroq(systemPrompt, [], firstMessagePrompt)
 
-    // Save the first message to DB
-    const { data: mensajeGuardado } = await supabase
-      .from('mensajes')
-      .insert({
-        conversacion_id,
-        rol: 'assistant',
-        contenido: response,
-      })
-      .select()
-      .single()
+    let fullResponse = ''
+    const encoder = new TextEncoder()
+    const decoder = new TextDecoder()
 
-    return NextResponse.json({ mensaje: mensajeGuardado })
+    const readableStream = new ReadableStream({
+      async start(controller) {
+        try {
+          const reader = groqStream.getReader()
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+            const chunk = decoder.decode(value, { stream: true })
+            for (const line of chunk.split('\n')) {
+              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+                try {
+                  const data = JSON.parse(line.slice(6))
+                  const text = data.choices?.[0]?.delta?.content || ''
+                  if (text) {
+                    fullResponse += text
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+                  }
+                } catch { /* skip */ }
+              }
+            }
+          }
+
+          // Save to DB after streaming completes
+          const { data: mensajeGuardado } = await supabase
+            .from('mensajes')
+            .insert({ conversacion_id, rol: 'assistant', contenido: fullResponse })
+            .select().single()
+
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true, mensaje: mensajeGuardado })}\n\n`))
+          controller.close()
+        } catch (err) {
+          console.error('First message stream error:', err)
+          controller.close()
+        }
+      }
+    })
+
+    return new Response(readableStream, {
+      headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' },
+    })
   } catch (error) {
     console.error('Error generating first message:', error)
     return NextResponse.json({ error: 'Error generando mensaje inicial' }, { status: 500 })

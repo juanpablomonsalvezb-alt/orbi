@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { enviarMensajeGemini } from '@/lib/gemini'
+import { sendGroq } from '@/lib/groq'
 
 function getSupabase() {
   return createClient(
@@ -39,8 +39,8 @@ ${message}
 Contexto del usuario:
 ${userMessage || ''}`
 
-    // Use Gemini to extract memories
-    const response = await enviarMensajeGemini(
+    // Use Groq to extract memories
+    const response = await sendGroq(
       'Eres un extractor de datos. Solo respondes con JSON arrays válidos. Sin markdown, sin explicaciones.',
       [],
       prompt

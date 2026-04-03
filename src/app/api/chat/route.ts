@@ -168,7 +168,7 @@ export async function POST(request: NextRequest) {
       .select('rol, contenido')
       .eq('conversacion_id', conversacion_id)
       .order('created_at', { ascending: true })
-      .limit(20)
+      .limit(10)
 
     const historial: GroqMessage[] = (historialDB || []).map((msg) => ({
       role: msg.rol === 'user' ? 'user' as const : 'assistant' as const,

@@ -57,32 +57,81 @@ export function CalloutBox({ variant = 'tip', title, children }: {
 export function DataTable({ headers, rows }: {
   headers: string[]; rows: string[][]
 }) {
+  // Detect numeric columns for chart generation
+  const numericColIndex = headers.length > 1 ? findNumericColumn(rows) : -1
+  const hasChart = numericColIndex > 0 && rows.length >= 2
+
   return (
-    <div className="my-3 overflow-x-auto rounded-lg border border-ink/[0.06]">
-      <table className="w-full text-[13px]">
-        <thead>
-          <tr className="bg-ivory-mid border-b border-ink/[0.06]">
-            {headers.map((h, i) => (
-              <th key={i} className="text-left px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, ri) => (
-            <tr key={ri} className={`border-b border-ink/[0.03] ${ri % 2 === 1 ? 'bg-ivory-mid/30' : ''}`}>
-              {row.map((cell, ci) => (
-                <td key={ci} className="px-4 py-2.5 text-ink-light" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                  {cell}
-                </td>
+    <div className="my-5">
+      {/* Table */}
+      <div className="overflow-x-auto rounded-lg border border-[#e9e9e7]">
+        <table className="w-full text-[14px]">
+          <thead>
+            <tr className="bg-[#f7f6f3] border-b border-[#e9e9e7]">
+              {headers.map((h, i) => (
+                <th key={i} className="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#9b9a97]">
+                  {h}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr key={ri} className="border-b border-[#f0f0ee] last:border-none hover:bg-[#fafaf9] transition-colors">
+                {row.map((cell, ci) => (
+                  <td key={ci} className={`px-5 py-3 ${ci === 0 ? 'font-medium text-[#37352f]' : 'text-[#6b6b6b]'}`}
+                      style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                    {renderCellContent(cell)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Auto-generated bar chart from numeric data */}
+      {hasChart && (
+        <div className="mt-4 px-1">
+          <InlineBarChart data={extractChartData(rows, numericColIndex)} />
+        </div>
+      )}
     </div>
   )
+}
+
+function renderCellContent(cell: string) {
+  if (cell.includes('🟢') || cell.includes('✅')) return <span className="text-green-600">{cell}</span>
+  if (cell.includes('🔴')) return <span className="text-red-500 font-medium">{cell}</span>
+  if (cell.includes('⚠️')) return <span className="text-amber-600">{cell}</span>
+  if (cell.includes('❌')) return <span className="text-red-400">{cell}</span>
+  // Highlight percentages
+  const pctMatch = cell.match(/^[\d,.]+%$/)
+  if (pctMatch) return <span className="font-medium text-[#37352f] tabular-nums">{cell}</span>
+  // Highlight currency
+  const currMatch = cell.match(/^\$[\d,.]+/)
+  if (currMatch) return <span className="font-medium text-[#37352f] tabular-nums">{cell}</span>
+  return cell
+}
+
+function findNumericColumn(rows: string[][]): number {
+  for (let ci = 1; ci < (rows[0]?.length || 0); ci++) {
+    const numericCount = rows.filter(row => {
+      const val = row[ci]?.replace(/[$%,.\s]/g, '')
+      return val && !isNaN(Number(val))
+    }).length
+    if (numericCount >= rows.length * 0.6) return ci
+  }
+  return -1
+}
+
+function extractChartData(rows: string[][], colIndex: number): { label: string; value: number; max: number }[] {
+  const data = rows.map(row => ({
+    label: row[0] || '',
+    value: parseFloat(row[colIndex]?.replace(/[$%,\s]/g, '') || '0'),
+  }))
+  const max = Math.max(...data.map(d => d.value), 1)
+  return data.map(d => ({ ...d, max }))
 }
 
 // ============================================
@@ -132,6 +181,48 @@ export function StatusBadge({ status, label }: { status: 'good' | 'warning' | 'c
       <span className={`w-1.5 h-1.5 rounded-full ${status === 'good' ? 'bg-green-500' : status === 'warning' ? 'bg-amber-500' : 'bg-red-500'}`} />
       {label || style.label}
     </span>
+  )
+}
+
+// ============================================
+// INLINE BAR CHART — Auto-generated from table data
+// ============================================
+export function InlineBarChart({ data }: { data: { label: string; value: number; max: number }[] }) {
+  return (
+    <div className="my-4 space-y-2.5">
+      {data.map((item, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <span className="text-[12px] text-[#37352f] w-[100px] truncate text-right">{item.label}</span>
+          <div className="flex-1 h-[22px] bg-[#f7f6f3] rounded-md overflow-hidden relative">
+            <div
+              className="h-full bg-gradient-to-r from-clay/80 to-clay rounded-md transition-all duration-700"
+              style={{ width: `${Math.min(100, (item.value / item.max) * 100)}%` }}
+            />
+          </div>
+          <span className="text-[12px] text-[#37352f] font-medium w-[60px] tabular-nums">{item.value.toLocaleString()}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ============================================
+// SPARKLINE — Mini inline chart
+// ============================================
+export function Sparkline({ values, color = '#d97757' }: { values: number[]; color?: string }) {
+  if (values.length < 2) return null
+  const h = 32
+  const w = 120
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const range = max - min || 1
+  const points = values.map((v, i) => `${(i / (values.length - 1)) * w},${h - ((v - min) / range) * (h - 4) - 2}`).join(' ')
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="inline-block align-middle ml-2" width={w} height={h}>
+      <polyline points={points} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={w} cy={parseFloat(points.split(' ').pop()?.split(',')[1] || '0')} r={2.5} fill={color} />
+    </svg>
   )
 }
 

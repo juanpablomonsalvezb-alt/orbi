@@ -152,8 +152,8 @@ export function retrieveKnowledge(
   agenteTipo: TipoAgente,
   userMessage: string,
   conversationHistory: string = '',
-  maxSections: number = 3,
-  maxTotalChars: number = 4000
+  maxSections: number = 1,
+  maxTotalChars: number = 1000
 ): string {
   const sections = loadSections(agenteTipo)
   if (sections.length === 0) return ''

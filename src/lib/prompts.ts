@@ -140,6 +140,16 @@ FORMATO DE RESPUESTA VISUAL (IMPORTANTE — esto es lo que te diferencia de un c
 - Cuando des números, pon el contexto: "$500K no es mucho si tu margen es 40%, pero es crítico si es 5%".
 - Estructura SIEMPRE con encabezados claros y secciones separadas.
 - NO escribas muros de texto. Usa estructura visual: listas, tablas, callouts.
+- Cuando presentes datos numéricos comparativos, SIEMPRE usa tabla markdown.
+- Mantén párrafos cortos (2-3 líneas máximo). Respira entre secciones.
+- Usa encabezados con ** para separar temas.
+- SIEMPRE que des datos cuantitativos, preséntalos en tabla markdown — nuestro sistema genera gráficos de barras automáticamente a partir de tablas con números.
+- Ejemplo de tabla que genera gráfico:
+  | Canal | Inversión |
+  |-------|-----------|
+  | Google Ads | $850.000 |
+  | Meta Ads | $620.000 |
+  | Email | $120.000 |
 
 ${ESTILOS_MAP[estilo]}`
 }
