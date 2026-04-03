@@ -57,6 +57,7 @@ function Nav() {
           <a href="#producto" className="text-sm text-ink-light hover:text-ink transition-colors">Producto</a>
           <a href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</a>
           <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
+          <a href="#contacto" className="text-sm text-ink-light hover:text-ink transition-colors">Contacto</a>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="text-sm text-ink-light hover:text-ink transition-colors hidden sm:block">Entrar</Link>
@@ -681,39 +682,105 @@ function NovedadesSection() {
 // ═══════════════════════════════════════════════════════════════════
 
 function FinalCTA() {
+  const [form, setForm] = useState({ nombre: '', email: '', mensaje: '' })
+  const [estado, setEstado] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+
+  const enviar = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!form.nombre || !form.email || !form.mensaje) return
+    setEstado('sending')
+    try {
+      const res = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setEstado('sent')
+        setForm({ nombre: '', email: '', mensaje: '' })
+      } else {
+        setEstado('error')
+      }
+    } catch {
+      setEstado('error')
+    }
+  }
+
   return (
-    <section className="bg-ivory">
+    <section id="contacto" className="bg-ivory">
       <div className="space-main" />
       <div className="u-container">
-        <FadeIn>
-          <div className="bg-white rounded-2xl shadow-sm" style={{ padding: 'clamp(2.5rem, 2rem + 2vw, 5rem)' }}>
-            <div className="grid-12 items-center">
-              {/* Left: heading */}
-              <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full">
-                <h2 className="u-display-l">
-                  <AnimatedWords>¿Listo para tener tu propio directorio?</AnimatedWords>
-                </h2>
-              </div>
-              {/* Right: prompt bar */}
-              <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
-                <div className="flex items-center gap-2 bg-ivory rounded-xl px-4 py-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#87867f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                  </svg>
-                  <input
-                    type="text"
-                    placeholder="Describe tu desafío..."
-                    className="flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
-                    readOnly
-                  />
-                  <Link href="/registro" className="bg-clay text-white text-sm font-medium px-5 py-2 rounded-lg hover:opacity-90 transition-opacity shrink-0">
-                    Preguntar a Orbbi
-                  </Link>
-                </div>
-              </div>
-            </div>
+        <div className="grid-12">
+          {/* Left: heading */}
+          <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full">
+            <FadeIn>
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-accent mb-3">Contacto</p>
+              <h2 className="u-display-l mb-4">
+                <AnimatedWords>¿Tienes preguntas? Escríbenos</AnimatedWords>
+              </h2>
+              <p className="u-paragraph-s" style={{ maxWidth: '36ch' }}>
+                Nuestro equipo te responderá en menos de 24 horas.
+              </p>
+            </FadeIn>
           </div>
-        </FadeIn>
+
+          {/* Right: form */}
+          <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
+            <FadeIn delay={0.1}>
+              {estado === 'sent' ? (
+                <div className="bg-white rounded-2xl shadow-sm p-10 text-center">
+                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round"><path d="M20 6L9 17l-5-5" /></svg>
+                  </div>
+                  <h3 className="text-lg text-ink font-medium mb-2" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>Mensaje enviado</h3>
+                  <p className="text-sm text-muted">Te responderemos pronto a {form.email || 'tu email'}.</p>
+                </div>
+              ) : (
+                <form onSubmit={enviar} className="bg-white rounded-2xl shadow-sm p-8 space-y-5">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium uppercase tracking-[0.1em] text-muted block mb-1.5">Nombre</label>
+                      <input
+                        type="text" required value={form.nombre}
+                        onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+                        placeholder="Tu nombre"
+                        className="w-full border border-ink/[0.08] rounded-lg px-4 py-2.5 text-sm text-ink bg-ivory placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium uppercase tracking-[0.1em] text-muted block mb-1.5">Email</label>
+                      <input
+                        type="email" required value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        placeholder="tu@email.com"
+                        className="w-full border border-ink/[0.08] rounded-lg px-4 py-2.5 text-sm text-ink bg-ivory placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium uppercase tracking-[0.1em] text-muted block mb-1.5">Mensaje</label>
+                    <textarea
+                      required rows={4} value={form.mensaje}
+                      onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
+                      placeholder="¿En qué podemos ayudarte?"
+                      className="w-full border border-ink/[0.08] rounded-lg px-4 py-2.5 text-sm text-ink bg-ivory placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors resize-none"
+                    />
+                  </div>
+                  {estado === 'error' && (
+                    <p className="text-sm text-red-500">Error al enviar. Intenta de nuevo.</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={estado === 'sending'}
+                    className="bg-ink text-ivory rounded-lg px-6 py-3 text-sm font-medium hover:bg-ink-mid transition-colors disabled:opacity-40"
+                  >
+                    {estado === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
+                  </button>
+                </form>
+              )}
+            </FadeIn>
+          </div>
+        </div>
       </div>
       <div className="space-main" />
     </section>
