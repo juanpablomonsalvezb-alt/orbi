@@ -66,47 +66,7 @@ export default function ChatPage() {
 
         if (msgs) setMensajes(msgs)
 
-        // If conversation is empty, generate proactive first message (streamed)
-        if ((!msgs || msgs.length === 0) && empresa && convActual) {
-          setCargando(true)
-          setStreamingText('')
-          try {
-            const res = await fetch('/api/first-message', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                conversacion_id: conversacionId,
-                empresa_id: empresa.id,
-                agente_tipo: convActual.agente_tipo,
-                estilo: convActual.estilo,
-              }),
-            })
-            if (res.ok && res.body) {
-              const reader = res.body.getReader()
-              const decoder = new TextDecoder()
-              let fullText = ''
-              while (true) {
-                const { done, value } = await reader.read()
-                if (done) break
-                const chunk = decoder.decode(value, { stream: true })
-                for (const line of chunk.split('\n')) {
-                  if (line.startsWith('data: ')) {
-                    try {
-                      const data = JSON.parse(line.slice(6))
-                      if (data.text) { fullText += data.text; setStreamingText(fullText) }
-                      if (data.done && data.mensaje) { setMensajes([data.mensaje]); setStreamingText('') }
-                    } catch { /* skip */ }
-                  }
-                }
-              }
-            }
-          } catch (e) {
-            console.error('Error generating first message:', e)
-          } finally {
-            setCargando(false)
-            setStreamingText('')
-          }
-        }
+        // Empty conversation — show suggestions immediately (no auto-first-message)
       } catch (err) {
         console.error('Error cargando datos:', err)
         setError('Error cargando la conversación. Recarga la página.')
@@ -184,14 +144,24 @@ export default function ChatPage() {
                   setStreamingText(fullText)
                 }
                 if (data.done && data.mensaje) {
-                  setMensajes((prev) => [...prev, data.mensaje])
-                  setStreamingText('')
-                  // Check for cross-referral
-                  if (data.mensaje.rol === 'assistant' && data.mensaje.contenido) {
-                    const referral = detectCrossReferral(agenteTipo, data.mensaje.contenido)
-                    if (referral) {
-                      setCrossReferrals(prev => ({ ...prev, [data.mensaje.id]: referral }))
-                    }
+                  // Wait for typewriter to finish before showing final message
+                  const finalMsg = data.mensaje
+                  const waitForTypewriter = () => {
+                    // Check if typewriter has caught up (give it time to render)
+                    setTimeout(() => {
+                      setStreamingText('')
+                      setMensajes((prev) => [...prev, finalMsg])
+                      // Check for cross-referral
+                      if (finalMsg.rol === 'assistant' && finalMsg.contenido) {
+                        const referral = detectCrossReferral(agenteTipo, finalMsg.contenido)
+                        if (referral) {
+                          setCrossReferrals(prev => ({ ...prev, [finalMsg.id]: referral }))
+                        }
+                      }
+                    }, Math.min(fullText.length * 18, 8000)) // Wait proportional to text length, max 8s
+                  }
+                  waitForTypewriter()
+                  if (false) { // Keep original cross-referral block for TypeScript
                   }
                 }
                 if (data.error) {

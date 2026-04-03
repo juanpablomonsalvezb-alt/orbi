@@ -146,32 +146,42 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
             {display ? (
               <div className="text-[15px] leading-[1.85] text-[#37352f] whitespace-pre-wrap"
                    style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                {display}
+                {display.split('\n').filter(l => !l.trim().startsWith('>>>')).join('\n')}
                 {isTyping && <span className="inline-block w-[2px] h-[1.1em] bg-clay ml-0.5 animate-pulse rounded-sm align-text-bottom" />}
               </div>
             ) : (
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce" />
-                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce [animation-delay:0.15s]" />
-                <span className="w-1.5 h-1.5 bg-clay/40 rounded-full animate-bounce [animation-delay:0.3s]" />
+              <div className="flex items-center gap-2">
+                <svg width="20" height="20" viewBox="0 0 40 40" className="animate-spin" style={{ animationDuration: '2s' }}>
+                  <circle cx="20" cy="20" r="8" fill="#d97757" opacity="0.8" />
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="#d97757" strokeWidth="1.5" opacity="0.3" />
+                  <circle cx="20" cy="5" r="3" fill="#d97757" opacity="0.5" />
+                  <circle cx="35" cy="20" r="2.5" fill="#d97757" opacity="0.4" />
+                </svg>
+                <span className="text-[12px] text-[#9b9a97]">Pensando...</span>
               </div>
             )}
           </div>
         )}
 
-        {/* Follow-up chips */}
-        {!cargando && !streamingText && mensajes.length > 0 && mensajes[mensajes.length - 1].rol === 'assistant' && onSugerencia && (
-          <div className="flex flex-wrap gap-2 mb-6 mt-2">
-            {['Profundizar', 'Plan de acción', 'Siguiente tema'].map(label => (
-              <button key={label}
-                onClick={() => onSugerencia(label === 'Profundizar' ? 'Profundiza en esto' : label === 'Plan de acción' ? 'Dame un plan de acción concreto' : '¿Qué más deberíamos revisar?')}
-                className="text-[12px] text-[#9b9a97] border border-[#e9e9e7] px-3 py-1.5 rounded-md
-                           hover:bg-[#f7f6f3] hover:text-[#37352f] hover:border-[#d3d3d0] transition-all">
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Contextual follow-up options — parsed from agent response */}
+        {!cargando && !streamingText && mensajes.length > 0 && mensajes[mensajes.length - 1].rol === 'assistant' && onSugerencia && (() => {
+          const lastMsg = mensajes[mensajes.length - 1].contenido
+          const options = lastMsg.split('\n').filter(l => l.trim().startsWith('>>>')).map(l => l.trim().replace(/^>>>/, '').trim())
+          const displayOptions = options.length >= 2 ? options : ['Profundizar en esto', 'Siguiente tema', '¿Qué más deberíamos revisar?']
+          return (
+            <div className="flex flex-col gap-2 mb-6 mt-3 max-w-[500px]">
+              {displayOptions.slice(0, 3).map((opt, i) => (
+                <button key={i}
+                  onClick={() => onSugerencia(opt)}
+                  className="text-left text-[13px] text-[#37352f] border border-[#e9e9e7] px-4 py-2.5 rounded-lg
+                             hover:bg-[#f7f6f3] hover:border-[#d3d3d0] transition-all"
+                  style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          )
+        })()}
 
         <div ref={endRef} />
       </div>

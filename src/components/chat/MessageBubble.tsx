@@ -52,9 +52,11 @@ function FormatearTexto({ texto }: { texto: string }) {
 }
 
 function RichResponse({ texto }: { texto: string }) {
-  const blocks = parseRichContent(texto)
+  // Strip >>> follow-up options from display (they're rendered as buttons separately)
+  const cleanText = texto.split('\n').filter(l => !l.trim().startsWith('>>>')).join('\n').trimEnd()
+  const blocks = parseRichContent(cleanText)
   if (blocks.length === 1 && blocks[0].type === 'text') {
-    return <FormatearTexto texto={texto} />
+    return <FormatearTexto texto={cleanText} />
   }
   return (
     <div className="space-y-1">

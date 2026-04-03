@@ -7,6 +7,26 @@ export interface GroqMessage {
 }
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions'
+
+// Fallback chain: Groq → OpenRouter (free models)
+function getProvider(): { url: string; key: string; model: string } {
+  // OpenRouter first (no daily limit), Groq as fallback
+  if (process.env.OPENROUTER_API_KEY) {
+    return { url: OPENROUTER_URL, key: process.env.OPENROUTER_API_KEY, model: 'qwen/qwen3.6-plus:free' }
+  }
+  if (process.env.GROQ_API_KEY) {
+    return { url: GROQ_URL, key: process.env.GROQ_API_KEY, model: 'llama-3.3-70b-versatile' }
+  }
+  throw new Error('No LLM API key configured')
+}
+
+function getFallback(): { url: string; key: string; model: string } | null {
+  if (process.env.GROQ_API_KEY) {
+    return { url: GROQ_URL, key: process.env.GROQ_API_KEY, model: 'llama-3.3-70b-versatile' }
+  }
+  return null
+}
 
 export async function streamGroq(
   systemPrompt: string,
@@ -19,27 +39,33 @@ export async function streamGroq(
     { role: 'user', content: mensajeNuevo },
   ]
 
-  const response = await fetch(GROQ_URL, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages,
-      temperature: 0.7,
-      max_tokens: 2048,
-      stream: true,
-    }),
-  })
+  const providers = [getProvider(), getFallback()].filter(Boolean) as { url: string; key: string; model: string }[]
 
-  if (!response.ok) {
-    const err = await response.text()
-    throw new Error(`Groq error ${response.status}: ${err}`)
+  for (const provider of providers) {
+    try {
+      const response = await fetch(provider.url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${provider.key}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: provider.model,
+          messages,
+          temperature: 0.7,
+          max_tokens: 400,
+          stream: true,
+        }),
+      })
+
+      if (response.ok) return response.body!
+      console.log(`${provider.url} failed (${response.status}), trying next...`)
+    } catch (err) {
+      console.log(`${provider.url} error, trying next...`, err)
+    }
   }
 
-  return response.body!
+  throw new Error('All LLM providers failed')
 }
 
 export async function sendGroq(
@@ -53,26 +79,35 @@ export async function sendGroq(
     { role: 'user', content: mensajeNuevo },
   ]
 
-  const response = await fetch(GROQ_URL, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages,
-      temperature: 0.7,
-      max_tokens: 2048,
-      stream: false,
-    }),
-  })
+  const providers = [getProvider(), getFallback()].filter(Boolean) as { url: string; key: string; model: string }[]
 
-  if (!response.ok) {
-    const err = await response.text()
-    throw new Error(`Groq error ${response.status}: ${err}`)
+  for (const provider of providers) {
+    try {
+      const response = await fetch(provider.url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${provider.key}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: provider.model,
+          messages,
+          temperature: 0.7,
+          max_tokens: 400,
+          stream: false,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        return data.choices[0].message.content
+      }
+
+      console.log(`${provider.url} failed (${response.status}), trying next...`)
+    } catch (err) {
+      console.log(`${provider.url} error, trying next...`, err)
+    }
   }
 
-  const data = await response.json()
-  return data.choices[0].message.content
+  throw new Error('All LLM providers failed')
 }
