@@ -1283,4 +1283,626 @@ Los derechos de autor se generan automáticamente con la creación de la obra, s
 
 > **RECORDATORIO FINAL:** Este documento es una guía informativa general. Las leyes cambian, los montos se actualizan y cada situación tiene particularidades. **Siempre consulte a un abogado especializado** antes de tomar decisiones legales importantes para su negocio. La información aquí contenida no reemplaza el asesoramiento profesional individualizado.
 
-*Última actualización: Abril 2026*
+---
+
+## 9. Derecho Laboral Esencial por Pais
+
+> Datos actualizados a 2025-2026. Las cifras de salario minimo pueden cambiar anualmente. Verificar siempre con fuentes oficiales.
+
+### 9.1 Chile
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo** | $500,000 CLP/mes (desde julio 2024, con ajuste a $510,000 proyectado 2026) |
+| **Jornada laboral** | 45 horas semanales → en transicion a 40 horas (Ley 40 horas: 2024-2028 gradual). 2026: 42 horas semanales |
+| **Horas extras** | Maximo 2 horas diarias. Se pagan con recargo del 50% sobre hora ordinaria |
+| **Vacaciones** | 15 dias habiles anuales (despues de 1 ano). Se acumulan hasta 2 periodos |
+| **Indemnizacion por despido** | 1 mes de sueldo por ano trabajado (tope 11 anos = 11 meses). Solo si despido es "por necesidades de la empresa" o injustificado. Si es por falta grave del trabajador (art. 160), no hay indemnizacion |
+| **Periodo de prueba** | No existe como tal en la ley chilena. Se usa contrato a plazo fijo (hasta 1 ano, renovable 1 vez) |
+| **Tipos de contrato** | Plazo fijo (max 1 ano, renovable 1 vez → se convierte en indefinido), Indefinido, Por obra o faena, Part-time |
+| **Contribuciones empleador** | AFP: ~10.6% (cargo trabajador) + SIS 1.53% (cargo empleador). Salud: 7% (cargo trabajador). Seguro cesantia: 2.4% (cargo empleador contrato indefinido), 3% (plazo fijo). Mutual seguridad: 0.93% base + adicional por riesgo |
+| **Gratificacion legal** | 25% de la remuneracion anual (tope 4.75 ingresos minimos mensuales) o prorrateo mensual |
+
+### 9.2 Mexico
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo** | $278.80 MXN/dia general (2025). Zona Libre Frontera Norte: $419.88 MXN/dia. Se ajusta cada enero |
+| **Jornada laboral** | Diurna: 8 horas. Nocturna: 7 horas. Mixta: 7.5 horas. 6 dias por semana |
+| **Horas extras** | Primeras 9 extras/semana: 200% del salario normal. Excedentes: 300% |
+| **Vacaciones** | 12 dias primer ano (reforma 2023), +2 dias por ano hasta 20 dias, luego +2 cada 5 anos. Prima vacacional: 25% del salario vacacional |
+| **Indemnizacion por despido** | Despido injustificado: 3 meses de salario + 20 dias por ano trabajado + prima de antigueedad (12 dias por ano, tope 2 salarios minimos/dia). Despido justificado: solo prima de antigueedad si tiene 15+ anos |
+| **Periodo de prueba** | Hasta 30 dias (180 dias para puestos directivos/gerenciales). Debe constar por escrito |
+| **Tipos de contrato** | Tiempo indeterminado, Tiempo determinado, Obra determinada, Capacitacion inicial (hasta 3 meses), Periodo de prueba |
+| **Contribuciones empleador** | IMSS cuota patronal: ~25-30% sobre salario (varias ramas). INFONAVIT: 5%. SAR/AFORE: 2% (subiendo a 2025+). Impuesto sobre nomina: 2-3% (varia por estado). Total empleador: ~35-40% sobre salario |
+| **Aguinaldo** | 15 dias de salario minimo (proporcional si tiene menos de 1 ano). Se paga antes del 20 de diciembre |
+| **PTU (Reparto de utilidades)** | 10% de las utilidades antes de impuestos. Tope: 3 meses de salario o promedio de PTU ultimos 3 anos (lo que sea mas favorable al trabajador). Se paga en mayo |
+
+### 9.3 Colombia
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo** | $1,423,500 COP/mes (2025) + auxilio de transporte $200,000 COP para quienes ganan hasta 2 SMMLV |
+| **Jornada laboral** | 47 horas semanales (en reduccion gradual: 2024: 47h, 2025: 46h, 2026: 42h — Ley 2101 de 2021) |
+| **Horas extras** | Diurna: +25%. Nocturna: +75%. Dominical/festivo: +75% (diurna) o +150% (nocturna) |
+| **Vacaciones** | 15 dias habiles por ano trabajado |
+| **Indemnizacion por despido** | Contrato indefinido: hasta 1 ano: 30 dias de salario. Mas de 1 ano: 30 dias + 20 dias por cada ano adicional (salario < 10 SMMLV) o 20 + 15 dias por ano adicional (salario >= 10 SMMLV). Contrato a termino fijo: salario por el tiempo restante del contrato |
+| **Periodo de prueba** | Maximo 2 meses (contrato indefinido). Contrato a termino fijo <1 ano: maximo 1/5 del termino. Debe constar por escrito |
+| **Tipos de contrato** | Termino indefinido, Termino fijo (max 3 anos, renovable), Obra o labor, Prestacion de servicios (civil, no laboral) |
+| **Contribuciones empleador** | Salud: 8.5% (empleador). Pension: 12% (empleador). ARL: 0.522-6.96% segun riesgo. Caja compensacion: 4%. ICBF: 3%. SENA: 2%. Total empleador: ~30-35% sobre salario |
+| **Prestaciones adicionales** | Prima de servicios: 1 mes de salario/ano (mitad en junio, mitad en diciembre). Cesantias: 1 mes de salario/ano (se consignan en fondo antes de 15 feb). Intereses sobre cesantias: 12% anual sobre cesantias |
+
+### 9.4 Peru
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo (RMV)** | S/1,025/mes (desde mayo 2022, pendiente ajuste 2025-2026) |
+| **Jornada laboral** | 48 horas semanales (8 horas diarias, 6 dias) |
+| **Horas extras** | Primeras 2 horas: +25%. Horas siguientes: +35% |
+| **Vacaciones** | 30 dias calendario por ano trabajado. Pueden reducirse a 15 dias con compensacion economica del resto |
+| **Indemnizacion por despido** | Contrato indefinido: 1.5 remuneraciones por ano (tope 12 remuneraciones). Contrato a plazo fijo: 1.5 remuneraciones por mes faltante (tope 12) |
+| **Periodo de prueba** | 3 meses (trabajadores regulares). 6 meses (trabajadores de confianza). 12 meses (personal de direccion) |
+| **Tipos de contrato** | Indefinido, Plazo fijo/determinado (temporal, accidental, obra), Part-time (<4 horas diarias) |
+| **Contribuciones empleador** | EsSalud: 9% sobre remuneracion. SCTR (alto riesgo): 0.53%+. Vida Ley (seguro obligatorio): ~0.5%. CTS: 1 remuneracion/ano (deposito semestral). Total empleador: ~12-15% |
+| **Gratificaciones** | 2 gratificaciones al ano (julio y diciembre), equivalentes a 1 remuneracion completa cada una |
+| **CTS (Compensacion por Tiempo de Servicios)** | 1 remuneracion por ano (deposito en mayo y noviembre, 50% cada uno). Es un ahorro de proteccion ante desempleo |
+
+### 9.5 Argentina
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo (SMVM)** | $271,571.22 ARS/mes (enero 2025, se actualiza frecuentemente por inflacion). Verificar siempre en argentina.gob.ar |
+| **Jornada laboral** | 48 horas semanales (8 horas diarias o 9 si hay dia compensatorio) |
+| **Horas extras** | Dias habiles: +50%. Sabados despues de 13h, domingos y feriados: +100% |
+| **Vacaciones** | Hasta 5 anos antigueedad: 14 dias corridos. 5-10 anos: 21 dias. 10-20 anos: 28 dias. Mas de 20 anos: 35 dias |
+| **Indemnizacion por despido** | 1 mes de sueldo por ano trabajado (base: mejor remuneracion mensual habitual del ultimo ano). Minimo: 2 meses de sueldo. Sin tope de anos (a diferencia de Chile). Preaviso: 15 dias (prueba), 1 mes (<5 anos), 2 meses (5+ anos). Multas por no registrar o registrar mal |
+| **Periodo de prueba** | 3 meses. El empleador puede despedir sin causa y sin indemnizacion durante este periodo |
+| **Tipos de contrato** | Indeterminado (regla general), Plazo fijo (max 5 anos), Temporada, Eventual, Part-time, Pasantia |
+| **Contribuciones empleador** | Jubilacion: 10.17%. INSSJP (PAMI): 1.50%. Obra social: 6%. Asignaciones familiares: 4.44%. Fondo Nacional Empleo: 0.89%. ART: variable (~3-5%). Total empleador: ~26-28% |
+| **Aguinaldo (SAC)** | 2 pagos al ano (junio y diciembre). Cada uno = 50% de la mejor remuneracion mensual del semestre |
+
+### 9.6 Bolivia
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo** | Bs 2,500/mes (2025, ajuste anual por decreto) |
+| **Jornada laboral** | 48 horas semanales (8 horas diarias). Mujeres y menores: 40 horas semanales |
+| **Horas extras** | +100% sobre hora ordinaria (horas extras). Trabajo nocturno: +25-50% |
+| **Vacaciones** | 1-5 anos: 15 dias habiles. 5-10 anos: 20 dias. 10+ anos: 30 dias |
+| **Indemnizacion por despido** | 1 mes de sueldo por ano trabajado (proporcional). Sin tope de anos. Si el trabajador renuncia voluntariamente despues de 5 anos: tiene derecho a desahucio (3 meses de sueldo) |
+| **Periodo de prueba** | 90 dias. Puede despedirse sin indemnizacion, pero si con finiquito de haberes |
+| **Tipos de contrato** | Indefinido (regla general despues de prueba), Plazo fijo (max 1 ano), Eventual, Por temporada |
+| **Contribuciones empleador** | AFP: 1.71% (riesgo comun) + 10% (aporte trabajador). CNS (salud): 10% cargo empleador. Pro-vivienda: 2%. Total empleador: ~16-18% |
+| **Aguinaldo** | 1 mes de sueldo, pagado en diciembre. Doble aguinaldo si el PIB crece >4.5% (Decreto 1802) |
+
+### 9.7 Ecuador
+
+| Concepto | Detalle |
+|----------|---------|
+| **Salario minimo (SBU)** | $460 USD/mes (2025). Se ajusta anualmente |
+| **Jornada laboral** | 40 horas semanales (8 horas diarias, 5 dias). Maximo 12 horas con jornadas especiales |
+| **Horas extras** | Horas suplementarias (despues de jornada, hasta 4h): +50% primeras 2h, +100% siguientes. Horas extras (fin de semana/feriados): +100% |
+| **Vacaciones** | 15 dias por ano. A partir del 5to ano: +1 dia adicional por ano (max 30 dias totales) |
+| **Indemnizacion por despido (desahucio)** | 25% de la ultima remuneracion por cada ano trabajado. Despido intempestivo: hasta 3 anos: 3 meses. 3+ anos: 1 mes por ano (min 3 meses, sin tope legal explicito pero jurisprudencia marca limites) |
+| **Periodo de prueba** | 90 dias. No renovable. Debe constar por escrito |
+| **Tipos de contrato** | Indefinido (regla general desde 2015), Plazo fijo (excepcional), Eventual, Ocasional, Temporada, Part-time |
+| **Contribuciones empleador** | IESS: 11.15% (empleador). Fondo de reserva: 8.33% (despues de 1 ano). IECE + SECAP: 1%. Total empleador: ~20.5% |
+| **Decimo tercer sueldo** | 1 remuneracion completa/ano (pagada hasta 24 diciembre o acumulada mensual) |
+| **Decimo cuarto sueldo** | 1 SBU ($460 USD en 2025) al ano. Costa/Insular: hasta 15 marzo. Sierra/Oriente: hasta 15 agosto |
+
+### 9.8 Tabla Comparativa Regional
+
+| Concepto | Chile | Mexico | Colombia | Peru | Argentina | Bolivia | Ecuador |
+|----------|-------|--------|----------|------|-----------|---------|---------|
+| Salario minimo (USD aprox) | $530 | $410 | $340 | $270 | $260* | $360 | $460 |
+| Jornada semanal (horas) | 42 (2026) | 48 | 46 (2025) | 48 | 48 | 48 | 40 |
+| Vacaciones minimas (dias) | 15 hab | 12+ | 15 hab | 30 cal | 14 corr | 15 hab | 15 |
+| Indemnizacion (meses/ano) | 1 (tope 11) | ~1.7 | 1-1.5 | 1.5 (tope 12) | 1 (sin tope) | 1 (sin tope) | 0.25-1 |
+| Periodo de prueba (meses) | No formal | 1 | 2 | 3 | 3 | 3 | 3 |
+| Costo empleador (% salario) | ~15-20% | ~35-40% | ~30-35% | ~12-15% | ~26-28% | ~16-18% | ~20.5% |
+| Aguinaldo/gratificaciones | Gratificacion | Aguinaldo 15d | Prima 1 mes | 2 gratificaciones | SAC 2 pagos | Aguinaldo 1 mes | 13ro + 14to |
+
+*Argentina: tipo de cambio muy variable; verificar al momento.
+
+---
+
+## 10. Clausulas Esenciales de Contratos Tipo
+
+> Templates de clausulas clave. Adaptar a legislacion local con abogado. Estos modelos sirven como punto de partida.
+
+### 10.1 Contrato de Trabajo — Clausulas Esenciales
+
+```
+CONTRATO INDIVIDUAL DE TRABAJO
+
+En [ciudad], a [fecha], entre:
+
+EMPLEADOR: [Razon social], RUT/RFC/NIT [numero], representado por
+[nombre representante], domiciliado en [direccion], en adelante "la Empresa";
+
+TRABAJADOR: [Nombre completo], [nacionalidad], [cedula/RUT/CURP],
+domiciliado en [direccion], en adelante "el Trabajador";
+
+Se ha convenido el siguiente contrato de trabajo:
+
+PRIMERO — FUNCIONES: El Trabajador se obliga a desempenar el cargo de
+[cargo], realizando las siguientes funciones principales:
+a) [funcion 1]
+b) [funcion 2]
+c) [funcion 3]
+d) Y las demas funciones que le encomiende su jefatura directa,
+   relacionadas con su cargo.
+
+SEGUNDO — LUGAR DE TRABAJO: El Trabajador prestara servicios en
+[direccion del lugar de trabajo]. [Si aplica: "Con posibilidad de
+trabajo remoto parcial/total segun politica de la empresa."]
+
+TERCERO — JORNADA: La jornada de trabajo sera de [X] horas semanales,
+distribuidas de [lunes] a [viernes], de [hora inicio] a [hora termino],
+con [X] minutos de colacion.
+
+CUARTO — REMUNERACION: El Trabajador recibira una remuneracion mensual
+bruta de $[monto] [moneda], pagadera el [dia] de cada mes por
+[transferencia bancaria a cuenta numero X].
+Se incluyen las siguientes asignaciones:
+- Sueldo base: $[monto]
+- [Bonos/comisiones/otros: detallar]
+
+QUINTO — DURACION: El presente contrato es de duracion [indefinida /
+a plazo fijo hasta el DD/MM/AAAA / por obra o faena determinada].
+
+SEXTO — PERIODO DE PRUEBA: [Si aplica en la jurisdiccion]
+Los primeros [X] dias/meses constituyen periodo de prueba conforme a
+la legislacion vigente.
+
+SEPTIMO — CONFIDENCIALIDAD: El Trabajador se obliga a mantener estricta
+reserva sobre toda informacion confidencial de la Empresa, sus clientes
+y proveedores, durante la vigencia del contrato y por [2] anos despues
+de su termino.
+
+OCTAVO — PROPIEDAD INTELECTUAL: Todo trabajo, creacion, invencion o
+desarrollo realizado por el Trabajador en el ejercicio de sus funciones
+sera propiedad exclusiva de la Empresa.
+
+NOVENO — LEGISLACION APLICABLE: El presente contrato se rige por la
+legislacion laboral de [pais] vigente. Para todo lo no previsto se
+estara a las disposiciones del [Codigo del Trabajo / Ley Federal del
+Trabajo / Codigo Sustantivo del Trabajo / etc.].
+
+
+________________________          ________________________
+Firma Empleador                   Firma Trabajador
+[Nombre]                          [Nombre]
+RUT/RFC: [numero]                 RUT/CI: [numero]
+```
+
+### 10.2 Acuerdo de Confidencialidad (NDA)
+
+```
+ACUERDO DE CONFIDENCIALIDAD
+
+En [ciudad], a [fecha], entre:
+
+PARTE DIVULGADORA: [Empresa], RUT/RFC/NIT [numero], representada
+por [nombre], en adelante "la Empresa";
+
+PARTE RECEPTORA: [Nombre persona/empresa], [identificacion],
+en adelante "el Receptor";
+
+CLAUSULAS:
+
+PRIMERA — OBJETO: El presente acuerdo tiene por objeto proteger la
+informacion confidencial que la Empresa comparta con el Receptor en
+el contexto de [describir relacion: negociacion comercial, prestacion
+de servicios, evaluacion de sociedad, etc.].
+
+SEGUNDA — INFORMACION CONFIDENCIAL: Se considera informacion
+confidencial toda informacion revelada por la Empresa, incluyendo
+pero no limitada a:
+a) Informacion financiera (ventas, costos, margenes, proyecciones)
+b) Base de datos de clientes y proveedores
+c) Estrategias comerciales y de marketing
+d) Procesos operativos y know-how
+e) Desarrollos tecnologicos y propiedad intelectual
+f) Cualquier informacion marcada como "confidencial"
+
+TERCERA — OBLIGACIONES DEL RECEPTOR:
+a) No divulgar la informacion confidencial a terceros
+b) Usar la informacion solo para el proposito descrito en este acuerdo
+c) Proteger la informacion con el mismo cuidado que protege su propia
+   informacion confidencial (y nunca con menos que cuidado razonable)
+d) Limitar el acceso a la informacion a quienes necesiten conocerla
+
+CUARTA — EXCEPCIONES: No se considera confidencial la informacion que:
+a) Sea de dominio publico sin culpa del Receptor
+b) El Receptor ya poseia antes de recibirla
+c) Sea recibida legitimamente de un tercero sin obligacion de secreto
+d) Deba revelarse por orden judicial o requerimiento legal
+
+QUINTA — DURACION: Este acuerdo tendra vigencia de [2-5] anos contados
+desde su firma, independientemente de si la relacion comercial termina
+antes.
+
+SEXTA — PENALIDAD: El incumplimiento de este acuerdo dara derecho a la
+Empresa a reclamar indemnizacion por los danos y perjuicios causados,
+sin perjuicio de las acciones legales que correspondan.
+
+SEPTIMA — DEVOLUCION: Al terminar la relacion o a requerimiento de la
+Empresa, el Receptor devolvera o destruira toda informacion confidencial
+recibida, incluyendo copias fisicas y digitales.
+
+OCTAVA — JURISDICCION: Para efectos del presente acuerdo, las partes
+se someten a la jurisdiccion de los tribunales de [ciudad, pais].
+
+
+________________________          ________________________
+Firma Empresa                     Firma Receptor
+```
+
+### 10.3 Contrato de Prestacion de Servicios
+
+```
+CONTRATO DE PRESTACION DE SERVICIOS PROFESIONALES
+
+En [ciudad], a [fecha], entre:
+
+CLIENTE: [Razon social], RUT/RFC/NIT [numero], representado por [nombre],
+domiciliado en [direccion], en adelante "el Cliente";
+
+PRESTADOR: [Razon social o nombre persona], RUT/RFC/NIT [numero],
+domiciliado en [direccion], en adelante "el Prestador";
+
+CLAUSULAS:
+
+PRIMERA — OBJETO: El Prestador se obliga a realizar los siguientes
+servicios para el Cliente:
+[Descripcion detallada de los servicios a prestar. Ser MUY especifico:
+que se entrega, en que formato, que alcance tiene, que NO incluye.]
+
+SEGUNDA — PLAZO: Los servicios se prestaran desde el [fecha inicio]
+hasta el [fecha termino]. [O: "por un plazo de [X] meses, renovable
+de mutuo acuerdo."]
+
+TERCERA — HONORARIOS Y FORMA DE PAGO:
+- Monto total: $[monto] [moneda] + impuestos aplicables
+- Calendario de pagos:
+  * [50%] a la firma del contrato: $[monto]
+  * [25%] a la entrega de [hito 1]: $[monto]
+  * [25%] a la entrega final: $[monto]
+- Forma de pago: transferencia bancaria a [datos bancarios]
+- Plazo de pago: [X] dias desde la emision de la factura/boleta
+
+CUARTA — ENTREGABLES: El Prestador entregara:
+a) [Entregable 1 + formato + fecha]
+b) [Entregable 2 + formato + fecha]
+c) [Entregable 3 + formato + fecha]
+
+QUINTA — INDEPENDENCIA: El Prestador actua como contratista independiente,
+no como empleado del Cliente. El Prestador es responsable de sus propias
+obligaciones tributarias y de seguridad social. No existe relacion de
+subordinacion ni dependencia.
+
+SEXTA — CONFIDENCIALIDAD: El Prestador se obliga a mantener reserva
+sobre toda informacion del Cliente a la que acceda durante la prestacion
+de los servicios.
+
+SEPTIMA — PROPIEDAD INTELECTUAL: Los trabajos y entregables producidos
+bajo este contrato seran propiedad del Cliente una vez pagados en su
+totalidad. El Prestador podra incluirlos en su portafolio con
+autorizacion escrita del Cliente.
+
+OCTAVA — CAUSALES DE TERMINO:
+a) Cumplimiento del plazo o del servicio
+b) Mutuo acuerdo
+c) Incumplimiento grave de cualquiera de las partes (con aviso
+   escrito de [15] dias para subsanar)
+d) Caso fortuito o fuerza mayor
+
+NOVENA — PENALIDAD POR ATRASO: En caso de atraso del Prestador en los
+entregables, se aplicara un descuento de [1-2%] sobre el monto total
+por cada [semana] de atraso, hasta un maximo de [10-15%].
+
+
+________________________          ________________________
+Firma Cliente                     Firma Prestador
+```
+
+### 10.4 Contrato de Arriendo Comercial — Clausulas Clave
+
+```
+CLAUSULAS ESENCIALES PARA ARRIENDO/RENTA DE LOCAL COMERCIAL:
+
+1. IDENTIFICACION DEL INMUEBLE: Direccion exacta, metros cuadrados,
+   destino comercial permitido.
+
+2. PLAZO: Tipico LATAM: 1-3 anos con opcion de renovacion.
+   Clausula recomendada: "Renovacion automatica por periodos iguales
+   salvo aviso escrito con [60-90] dias de anticipacion."
+
+3. RENTA MENSUAL: Monto en [moneda local o UF/UDI si aplica].
+   Clausula de ajuste: "La renta se ajustara [anualmente/semestralmente]
+   segun [IPC/inflacion/UF/indice acordado]."
+
+4. GARANTIA: Tipico: 1-3 meses de renta. Especificar condiciones
+   de devolucion (estado del inmueble, plazos).
+
+5. GASTOS COMUNES Y SERVICIOS: Especificar quien paga:
+   - Gastos comunes: [arrendatario/arrendador]
+   - Agua, luz, gas: [arrendatario]
+   - Mantenimiento estructural: [arrendador]
+   - Reparaciones menores: [arrendatario]
+
+6. DESTINO: "El inmueble se destinara exclusivamente a [giro comercial].
+   El arrendatario no podra cambiar el giro sin autorizacion escrita."
+
+7. MEJORAS Y REMODELACIONES: "Toda mejora o remodelacion requiere
+   autorizacion escrita del arrendador. Las mejoras fijas quedan en
+   beneficio del inmueble. Las removibles pueden ser retiradas."
+
+8. SUBARRIENDO: "Queda prohibido el subarriendo total o parcial salvo
+   autorizacion escrita del arrendador."
+
+9. TERMINO ANTICIPADO: "Cualquier parte puede terminar con [3-6] meses
+   de anticipacion mediante aviso escrito. La parte que termine
+   anticipadamente pagara una penalidad de [X meses de renta]."
+
+10. SEGURO: "El arrendatario debera mantener seguro de responsabilidad
+    civil y seguro contra incendio durante toda la vigencia del contrato."
+```
+
+### 10.5 Contrato con Proveedores — Clausulas Clave
+
+```
+CLAUSULAS ESENCIALES PARA ACUERDO CON PROVEEDORES:
+
+1. PRODUCTOS/SERVICIOS: Descripcion detallada de lo que se provee.
+   Especificaciones tecnicas, calidad, estandares.
+
+2. PRECIOS Y CONDICIONES COMERCIALES:
+   - Lista de precios vigente (como anexo)
+   - Condiciones de ajuste: "[trimestral/semestral] con aviso de [30] dias"
+   - Moneda de facturacion
+   - Descuentos por volumen: [detallar escala]
+
+3. CONDICIONES DE PAGO:
+   - Plazo: [30/60/90] dias desde recepcion de factura
+   - Forma: transferencia, cheque, credito
+   - Interes por mora: [X%] mensual
+
+4. ENTREGA Y LOGISTICA:
+   - Lugar de entrega: [direccion]
+   - Plazo de entrega: [X] dias habiles desde orden de compra
+   - Flete: [a cargo de proveedor/comprador]
+   - Riesgo en transito: [proveedor hasta entrega]
+
+5. CALIDAD Y GARANTIA:
+   - Estandares de calidad exigidos
+   - Procedimiento de reclamo: [X] dias desde recepcion para reclamar
+   - Garantia de productos: [X] meses
+   - Procedimiento de devolucion
+
+6. EXCLUSIVIDAD (si aplica): "El Proveedor se compromete a no
+   suministrar los mismos productos a [competidores directos] en
+   [zona geografica] durante la vigencia."
+
+7. PENALIDADES POR INCUMPLIMIENTO:
+   - Atraso en entrega: [X%] descuento por dia/semana
+   - Productos defectuosos: reposicion sin costo + compensacion
+   - Incumplimiento reiterado: derecho a terminar sin penalidad
+
+8. VIGENCIA: [1 ano] renovable automaticamente salvo aviso de [60] dias.
+```
+
+---
+
+## 11. Constitucion de Empresas por Pais — Guia Practica
+
+### 11.1 Comparativa Regional
+
+| Aspecto | Chile (SpA) | Mexico (SAS) | Colombia (SAS) | Peru (SAC) | Argentina (SAS) | Bolivia (SRL) | Ecuador (SAS) |
+|---------|------------|-------------|----------------|-----------|----------------|--------------|--------------|
+| **Socios minimos** | 1 | 1 | 1 | 2 | 1 | 2 | 1 |
+| **Capital minimo** | Sin minimo | Sin minimo (ingresos <5M MXN) | Sin minimo | Sin minimo | 2 salarios minimos | Bs 1,000 (SRL) | Sin minimo |
+| **Tiempo constitucion** | 1 dia (online) | 1 dia (online) | 1-3 dias | 3-7 dias | 1 dia (online) | 15-30 dias | 5-10 dias |
+| **Costo constitucion** | $0 (online en tuempresaenundia.cl) | $0 (online en gob.mx) | ~$200,000-500,000 COP | S/300-800 | $0 (online) | Bs 500-2,000 | $200-600 USD |
+| **Registro tributario** | SII (RUT, automatico) | SAT (RFC, tramite) | DIAN (RUT, tramite) | SUNAT (RUC, tramite) | AFIP (CUIT, tramite) | SIN (NIT, tramite) | SRI (RUC, tramite) |
+| **Registro mercantil** | Incluido en constitucion | Incluido | Camara de Comercio | SUNARP | IGJ | FUNDEMPRESA | Registro Mercantil |
+
+### 11.2 Pasos por Pais
+
+#### Chile — Constitucion de SpA
+
+| Paso | Accion | Tiempo | Costo |
+|------|--------|--------|-------|
+| 1 | Ingresar a tuempresaenundia.cl con ClaveUnica | 1 hora | $0 |
+| 2 | Completar datos de la empresa (nombre, objeto, capital, administracion) | 30 min | $0 |
+| 3 | Firma electronica del acto constitutivo | Inmediato | $0 |
+| 4 | Publicacion automatica en Diario Oficial | Automatico | $0 |
+| 5 | Inscripcion automatica en Registro de Comercio | Automatico | $0 |
+| 6 | Obtener RUT en SII (Inicio de actividades) | 1-3 dias | $0 |
+| 7 | Obtener patente municipal (permiso de funcionamiento) | 7-15 dias | Variable por comuna |
+| 8 | Abrir cuenta bancaria empresarial | 3-7 dias | Variable por banco |
+| **Total** | | **1-3 semanas** | **~$50,000-200,000 CLP (patente)** |
+
+#### Mexico — Constitucion de SAS
+
+| Paso | Accion | Tiempo | Costo |
+|------|--------|--------|-------|
+| 1 | Obtener autorizacion de denominacion social (gob.mx/tuempresa) | 1 dia | $0 |
+| 2 | Constituir SAS en linea (gob.mx) con e.firma/FIEL | 1 dia | $0 |
+| 3 | Obtener RFC en SAT | 1-3 dias | $0 |
+| 4 | Alta en IMSS como patron (si tendras empleados) | 1-5 dias | $0 |
+| 5 | Inscripcion al padron de impuestos estatales | 1-5 dias | $0 |
+| 6 | Obtener licencia de funcionamiento municipal | 7-15 dias | $500-5,000 MXN |
+| 7 | Abrir cuenta bancaria empresarial | 3-7 dias | Variable |
+| **Total** | | **2-4 semanas** | **$500-5,000 MXN** |
+
+#### Colombia — Constitucion de SAS
+
+| Paso | Accion | Tiempo | Costo |
+|------|--------|--------|-------|
+| 1 | Verificar nombre (RUES) y redactar estatutos | 1-2 dias | $0 (si lo haces tu) |
+| 2 | Registrar en Camara de Comercio (presencial u online) | 1-3 dias | ~$200,000-500,000 COP |
+| 3 | Obtener NIT y RUT en DIAN | 1-3 dias | $0 |
+| 4 | Abrir cuenta bancaria | 3-7 dias | Variable |
+| 5 | Registrar libros contables en Camara de Comercio | 1-2 dias | ~$50,000 COP |
+| 6 | Inscribirse en ARL, caja de compensacion, EPS | 3-5 dias | $0 (registro) |
+| 7 | Obtener concepto de uso de suelo y licencia de funcionamiento | 7-15 dias | Variable por municipio |
+| **Total** | | **3-5 semanas** | **$300,000-800,000 COP** |
+
+#### Peru — Constitucion de SAC/SRL
+
+| Paso | Accion | Tiempo | Costo |
+|------|--------|--------|-------|
+| 1 | Reserva de nombre (SUNARP) | 1-3 dias | S/20 |
+| 2 | Minuta de constitucion (abogado) | 1-2 dias | S/200-500 |
+| 3 | Escritura publica (notaria) | 1-3 dias | S/150-400 |
+| 4 | Inscripcion en SUNARP | 3-7 dias | S/50-100 |
+| 5 | Obtener RUC en SUNAT | 1 dia | $0 |
+| 6 | Licencia de funcionamiento municipal | 7-15 dias | S/50-300 |
+| 7 | Abrir cuenta bancaria | 3-5 dias | Variable |
+| **Total** | | **3-5 semanas** | **S/500-1,500** |
+
+### 11.3 Obligaciones Anuales de Cumplimiento
+
+| Obligacion | Chile | Mexico | Colombia | Peru | Argentina | Bolivia | Ecuador |
+|-----------|-------|--------|----------|------|-----------|---------|---------|
+| Declaracion de renta anual | Abril | Marzo (PF), Marzo (PM) | Abril | Marzo-Abril | Junio | Abril | Abril |
+| IVA/impuesto al consumo | Mensual (F29) | Mensual | Bimestral | Mensual | Mensual | Mensual | Mensual/semestral |
+| Declaraciones laborales | Mensual (previred) | Bimestral (IMSS) | Mensual (PILA) | Mensual (PLAME) | Mensual (AFIP) | Mensual (CNS) | Mensual (IESS) |
+| Renovacion patente/licencia | Anual (julio) | Anual | Anual (Camara Comercio, marzo) | Anual | Anual | Anual | Anual |
+| Libros contables | Si (obligatorio) | Si | Si | Si | Si | Si | Si |
+| Auditoria externa | Solo SA abiertas | Solo grandes | Solo grandes (activos >30,000 SMMLV) | Solo grandes | Solo SA abiertas | Solo grandes | Solo grandes |
+
+---
+
+## 12. Proteccion de Datos Personales en LATAM
+
+### 12.1 Resumen por Pais
+
+| Pais | Ley principal | Autoridad de control | Multa maxima | Aplica a PYMEs |
+|------|-------------|---------------------|-------------|---------------|
+| **Chile** | Ley 21.719 (2024) — nueva ley de datos personales | Agencia de Proteccion de Datos Personales (creacion 2024-2025) | Hasta 20,000 UTM (~$1,400M CLP) por infracciones gravisimas | Si, a todas las empresas que traten datos |
+| **Mexico** | LFPDPPP (2010) + Ley General de Proteccion de Datos (sector publico) | INAI (Instituto Nacional de Transparencia) | Hasta $18,555,200 MXN (~100,000 UMA x 2) | Si, sin excepcion de tamano |
+| **Colombia** | Ley 1581 de 2012 + Decreto 1377 de 2013 | SIC (Superintendencia de Industria y Comercio) | Hasta 2,000 SMMLV (~$2,847M COP) | Si, a todas las empresas |
+| **Peru** | Ley 29733 (2011) + Reglamento D.S. 003-2013 | ANPD (Autoridad Nacional de Proteccion de Datos) | Hasta 100 UIT (~S/515,000) | Si, a todas las empresas |
+| **Argentina** | Ley 25.326 (2000) + proyecto de reforma en tramite | AAIP (Agencia de Acceso a la Informacion Publica) | Multas variables segun gravedad | Si, a todas las empresas |
+| **Bolivia** | No tiene ley especifica de datos personales. Constitucion (art. 130-131) + normativa sectorial | No hay autoridad especifica | No definida (accion de Habeas Data) | Baja regulacion, pero buenas practicas recomendadas |
+| **Ecuador** | Ley Organica de Proteccion de Datos Personales (2021, vigencia plena 2023) | Superintendencia de Proteccion de Datos (en implementacion) | Hasta 1% de facturacion anual | Si, a todas las empresas |
+
+### 12.2 Lo Que Toda PYME Necesita en su Sitio Web
+
+| Elemento | Que debe incluir | Obligatorio en |
+|----------|-----------------|---------------|
+| **Aviso de privacidad** | Identidad del responsable, datos recopilados, finalidad, derechos del titular, como ejercerlos, transferencias a terceros | Todos los paises |
+| **Banner de cookies** | Informar que se usan cookies, para que, permitir aceptar/rechazar | Chile (nueva ley), Mexico, Colombia, Ecuador |
+| **Formulario de derechos** | Mecanismo para que el titular pida acceso, rectificacion, cancelacion, oposicion (derechos ARCO) | Todos los paises |
+| **Registro de bases de datos** | Inscribir las bases de datos ante la autoridad | Colombia (obligatorio en SIC), Peru (en ANPD) |
+| **Consentimiento expreso** | Para datos sensibles, marketing directo, transferencias internacionales | Todos los paises |
+
+### 12.3 Checklist de Cumplimiento para PYMEs
+
+```
+[ ] 1. Tenemos aviso de privacidad publicado en nuestro sitio web
+[ ] 2. El aviso incluye: identidad, datos recopilados, finalidad, derechos
+[ ] 3. Tenemos consentimiento documentado de clientes para usar sus datos
+[ ] 4. Pedimos consentimiento especifico para enviar marketing (WhatsApp, email)
+[ ] 5. Tenemos un proceso para atender solicitudes de acceso/eliminacion de datos
+[ ] 6. Los datos de clientes estan almacenados de forma segura (password, acceso limitado)
+[ ] 7. Si usamos servicios en la nube (Google, HubSpot, etc.), verificamos que cumplan
+[ ] 8. Tenemos banner de cookies en el sitio web (si usamos cookies/analytics)
+[ ] 9. Si enviamos datos a otro pais, tenemos base legal para ello
+[ ] 10. Capacitamos al equipo sobre manejo basico de datos personales
+```
+
+### 12.4 Template de Aviso de Privacidad (Version Simplificada)
+
+```
+AVISO DE PRIVACIDAD — [NOMBRE DE LA EMPRESA]
+
+Ultima actualizacion: [fecha]
+
+1. RESPONSABLE
+[Nombre de la empresa], con domicilio en [direccion], es responsable
+del tratamiento de sus datos personales.
+
+2. DATOS QUE RECOPILAMOS
+- Nombre completo
+- Correo electronico
+- Numero de telefono/WhatsApp
+- [Otros datos especificos de tu negocio]
+
+3. FINALIDAD
+Utilizamos sus datos para:
+a) Brindarle nuestros productos/servicios
+b) Enviarle informacion relevante y promociones [con su consentimiento]
+c) Mejorar la experiencia de usuario en nuestro sitio web
+d) Cumplir con obligaciones legales
+
+4. SUS DERECHOS
+Usted tiene derecho a:
+- Acceder a sus datos personales
+- Rectificar datos incorrectos
+- Solicitar la eliminacion de sus datos
+- Oponerse al tratamiento de sus datos
+
+Para ejercer estos derechos, escribanos a: [email de contacto]
+Responderemos en un plazo maximo de [15-20] dias habiles.
+
+5. COOKIES
+Nuestro sitio web utiliza cookies para [analisis de trafico / mejorar
+la experiencia]. Puede configurar su navegador para rechazarlas.
+
+6. TRANSFERENCIA DE DATOS
+[Sus datos pueden ser compartidos con: prestadores de servicios de
+tecnologia, logistica, etc., quienes se obligan a protegerlos.]
+
+7. CAMBIOS
+Nos reservamos el derecho de actualizar este aviso. Cualquier cambio
+sera publicado en esta pagina.
+
+8. CONTACTO
+Para consultas sobre privacidad: [email] / [telefono]
+```
+
+---
+
+## 13. Errores Legales Comunes que Cometen las PYMEs
+
+### 13.1 Los 15 Errores Mas Costosos
+
+| # | Error | Consecuencia real | Como evitarlo |
+|---|-------|-------------------|---------------|
+| 1 | **Operar sin constituir formalmente la empresa** | No puedes emitir facturas, no accedes a creditos, responsabilidad personal ilimitada por deudas | Constituir SpA/SAS/SAC — en Chile y Mexico es gratis y toma 1 dia online |
+| 2 | **No hacer contrato escrito con empleados** | Se presume contrato indefinido con todas las prestaciones. Multas de inspeccion laboral: $500,000 CLP a $10M+ CLP (Chile), 50-5,000 UMA ($5,000-500,000 MXN) en Mexico | Firmar contrato ANTES del primer dia de trabajo. Siempre |
+| 3 | **Contratar por "prestacion de servicios" cuando es relacion laboral** | Inspeccion del trabajo puede reclasificar como empleado y exigir pago retroactivo de prestaciones, vacaciones, seguridad social + multas. En Colombia: $50M-500M COP en demandas | Si la persona cumple horario, usa tus herramientas, recibe instrucciones directas → es empleado. Contratalo como tal |
+| 4 | **No pagar horas extras ni llevar registro de asistencia** | Multas laborales + demandas. El trabajador puede reclamar hasta 2-5 anos de horas extras no pagadas | Implementar sistema de control de asistencia (app, biometrico, planilla). Pagar extras o compensar |
+| 5 | **No declarar ni pagar impuestos a tiempo** | Multas, intereses, recargos. En Chile: multa 10% + interes 1.5% mensual. Mexico: multa 55% + recargos. Colombia: sancion 5% por mes | Usar contador desde el dia 1. Configurar recordatorios. El costo del contador es menor que una multa |
+| 6 | **No tener aviso de privacidad ni pedir consentimiento para datos** | Multas de la autoridad de datos. En Mexico: hasta $18M MXN. En Colombia: hasta 2,000 SMMLV. Dano reputacional | Publicar aviso de privacidad en web. Pedir consentimiento para WhatsApp/email marketing |
+| 7 | **No registrar la marca** | Un tercero puede registrarla y obligarte a cambiar nombre, logo, dominio. Casos reales: PYMEs que perdieron su nombre despues de 10 anos | Registrar marca en el INPI/IMPI/SIC/INDECOPI del pais. Costo: $100-500 USD. Vale cada centavo |
+| 8 | **Firmar arriendo comercial sin revisar clausulas** | Clausulas abusivas de renovacion, penalidades, restricciones. PYMEs que pierden depositos de 3-6 meses por salir antes | Revisar con abogado ANTES de firmar. Negociar clausula de salida anticipada razonable |
+| 9 | **No tener contrato con socios** | Desacuerdos sin mecanismo de resolucion. Bloqueos societarios. Socios que se van con clientes o know-how | Pacto de accionistas/socios desde el dia 1: roles, decisiones, salida, no competencia, valoracion |
+| 10 | **No cumplir con seguridad social (salud, pension, ARL)** | Multas graves. En Colombia: deuda con intereses + sancion moratoria de 1 dia de salario por dia de mora. Si ocurre accidente sin ARL: el empleador responde con su patrimonio | Registrar a TODOS los trabajadores desde el primer dia. Sin excepciones |
+| 11 | **Despedir verbalmente o sin procedimiento legal** | Despido puede ser declarado nulo/injustificado → reintegro + salarios caidos + indemnizacion. En Chile: recargo del 30-80% sobre indemnizacion si el despido es injustificado | Seguir procedimiento legal de cada pais. Carta de despido. Causales. Pagar lo que corresponda |
+| 12 | **No emitir boletas/facturas por todas las ventas** | Evasion tributaria → multas, clausura temporal, antecedentes penales en casos graves | Emitir factura electronica por TODA venta, sin excepcion. Es la ley |
+| 13 | **Mezclar finanzas personales y de la empresa** | Pierde proteccion de responsabilidad limitada (velo corporativo). El SII/SAT/DIAN puede imputar ingresos personales como de la empresa y viceversa | Abrir cuenta bancaria empresarial. Nunca pagar gastos personales con cuenta de la empresa |
+| 14 | **No documentar acuerdos comerciales por escrito** | "Me dijo que me iba a pagar en 30 dias" no sirve en un juicio. Deudas incobrables por falta de evidencia | Todo acuerdo por escrito: email, contrato, orden de compra firmada. WhatsApp sirve como evidencia, pero un contrato es mejor |
+| 15 | **Ignorar normativa de proteccion al consumidor** | Multas del SERNAC/PROFECO/SIC. Obligacion de garantia legal, derecho a retracto, publicidad enganosa. En Chile: multas hasta 1,000 UTM (~$70M CLP) | Conocer la ley de consumidor de tu pais. Publicar politica de garantia y devolucion. No prometer lo que no puedes cumplir |
+
+### 13.2 Costo de NO Cumplir vs. Costo de Cumplir
+
+| Accion preventiva | Costo aproximado | Costo de NO hacerlo (riesgo) |
+|-------------------|-----------------|------------------------------|
+| Constituir empresa formalmente | $0-$500 USD | Responsabilidad ilimitada + no facturar |
+| Registrar marca | $100-500 USD | Perder el nombre del negocio ($10,000+ USD en danos) |
+| Contratar contador | $50-300 USD/mes | Multas tributarias de $500-50,000 USD |
+| Contratos de trabajo escritos | $50-200 USD (abogado) | Demandas laborales de $5,000-50,000 USD |
+| Aviso de privacidad | $0-100 USD (template) | Multas de $1,000-500,000 USD |
+| Revision de arriendo comercial | $100-300 USD (abogado) | Perder deposito + penalidades: $2,000-20,000 USD |
+| Pacto de socios | $200-800 USD (abogado) | Juicio societario: $10,000-100,000+ USD |
+
+---
+
+> **RECORDATORIO FINAL ACTUALIZADO:** Este documento expandido cubre legislacion laboral, contratos, constitucion de empresas, proteccion de datos y errores comunes para PYMEs en Chile, Mexico, Colombia, Peru, Argentina, Bolivia y Ecuador. Toda la informacion es general e informativa. Las leyes y montos cambian frecuentemente. **Siempre consulte a un abogado especializado** en la jurisdiccion correspondiente antes de tomar decisiones legales. La informacion aqui contenida no reemplaza el asesoramiento profesional individualizado.
+
+*Ultima actualizacion: Abril 2026*

@@ -1424,3 +1424,430 @@ Monitorear semanalmente y graficar tendencia:
 ---
 
 > **Nota:** Este documento es una guia practica orientada a PYMEs de Latinoamerica con 5-50 empleados. Las formulas, benchmarks y ejemplos estan calibrados para la realidad regional. Los valores en moneda son referenciales y deben ajustarse al pais y momento especifico.
+
+---
+
+## 11. Gestión de Inventario por Industria
+
+### 11.1 Restaurante — Gestión de Perecibles
+
+**Desafío principal:** Merma por vencimiento. Un restaurante promedio en LATAM pierde entre 5-10% de su inventario por desperdicio de alimentos.
+
+#### Sistema FIFO Estricto (First In, First Out)
+
+| Zona | Regla | Ejemplo |
+|------|-------|---------|
+| Refrigerador | Lo nuevo atrás, lo viejo adelante. Etiquetar con fecha de ingreso. | La leche que llega hoy va atrás de la de ayer |
+| Bodega seca | Mismo principio. Rotular cajas con fecha. | Harina del lunes se usa antes que la del miércoles |
+| Congelador | Etiquetar con fecha de congelamiento y fecha límite de uso | Pollo congelado el 01/03: usar antes del 01/06 |
+
+#### Frecuencia de Pedidos por Categoría
+
+| Categoría | Ejemplos | Frecuencia de pedido | Stock máximo |
+|-----------|----------|---------------------|--------------|
+| Ultra-perecibles | Pescado, mariscos, hojas verdes | Diario | 1-2 días |
+| Perecibles | Carnes, lácteos, frutas | 2-3 veces/semana | 3-4 días |
+| Semi-perecibles | Verduras duras, quesos maduros | Semanal | 5-7 días |
+| No perecibles | Arroz, pasta, aceite, enlatados | Quincenal/mensual | 15-30 días |
+| Insumos | Servilletas, desechables, limpieza | Mensual | 30 días |
+
+#### Hoja de Conteo Diario para Restaurante
+
+```
+CONTEO DIARIO DE INVENTARIO — RESTAURANTE
+Fecha: ___/___/______  Responsable: _______________
+
+PROTEÍNAS:
+Producto          | Stock inicio | Ingreso | Uso del día | Stock final | Merma
+Pollo (kg)        | ________     | _______ | _________   | _________   | _____
+Carne res (kg)    | ________     | _______ | _________   | _________   | _____
+Cerdo (kg)        | ________     | _______ | _________   | _________   | _____
+Pescado (kg)      | ________     | _______ | _________   | _________   | _____
+
+LÁCTEOS:
+Leche (lt)        | ________     | _______ | _________   | _________   | _____
+Queso (kg)        | ________     | _______ | _________   | _________   | _____
+Crema (lt)        | ________     | _______ | _________   | _________   | _____
+
+VERDURAS:
+Tomate (kg)       | ________     | _______ | _________   | _________   | _____
+Cebolla (kg)      | ________     | _______ | _________   | _________   | _____
+Lechuga (und)     | ________     | _______ | _________   | _________   | _____
+Papa (kg)         | ________     | _______ | _________   | _________   | _____
+
+MERMA DEL DÍA: $_________ | % sobre consumo: _________%
+Causa principal: □ Vencimiento  □ Preparación  □ Devolución  □ Otro: _____
+```
+
+#### Métricas Clave para Restaurante
+
+| Métrica | Fórmula | Meta |
+|---------|---------|------|
+| Costo de alimentos (Food Cost) | Costo ingredientes / Venta total | 28-35% |
+| Merma sobre compras | Valor merma / Valor compras del período | < 3% |
+| Rotación de inventario | Costo alimentos vendidos / Inventario promedio | 20-30x/mes |
+| Costo por plato | Costo ingredientes del plato / Precio de venta | < 30% |
+| Desperdicio por cubierto | Valor merma total / Número de cubiertos | Minimizar |
+
+### 11.2 Retail de Ropa — Temporadas y Tallas
+
+**Desafío principal:** Manejo de temporadas, tallas y markdown (rebajas). La ropa no vence pero se devalúa rápidamente.
+
+#### Ciclo de Compra por Temporada (Hemisferio Sur)
+
+| Temporada | Meses de venta | Compra/producción | Markdown inicia | Liquidación |
+|-----------|---------------|-------------------|-----------------|-------------|
+| Otoño-Invierno | Marzo - Agosto | Diciembre - Febrero | Julio | Agosto |
+| Primavera-Verano | Septiembre - Febrero | Junio - Agosto | Enero | Febrero |
+| Back to School | Febrero - Marzo | Noviembre - Enero | Abril | — |
+| Fiestas (Navidad) | Noviembre - Diciembre | Agosto - Octubre | Enero | Enero |
+
+#### Distribución de Compra por Talla (Referencia LATAM)
+
+| Talla | % de compra sugerido | Nota |
+|-------|---------------------|------|
+| XS / 36 | 5-8% | Pocas unidades, demanda menor |
+| S / 38 | 20-25% | Alta demanda |
+| M / 40 | 30-35% | La más vendida en LATAM |
+| L / 42 | 20-25% | Alta demanda |
+| XL / 44 | 10-15% | Creciente (tallas inclusivas) |
+| XXL+ / 46+ | 5-8% | Nicho creciente, poca oferta |
+
+> **Regla:** Comprar 60% del presupuesto en la primera compra de temporada. Guardar 40% para reposición de lo que se vende bien (compra reactiva).
+
+#### Estrategia de Markdown (Rebajas)
+
+| Semana en tienda | % de markdown | Regla |
+|------------------|---------------|-------|
+| Semanas 1-8 | 0% (precio full) | Temporada alta, no rebajar |
+| Semanas 9-12 | 20-30% off | Primera rebaja, atraer compra |
+| Semanas 13-16 | 40-50% off | Segunda rebaja, liquidar |
+| Semana 17+ | 60-70% off o outlet | Recuperar algo del costo |
+
+**Meta:** Vender el 70% de las unidades a precio full. Si vendes menos del 50% a precio full, estás comprando mal.
+
+### 11.3 Ferretería — Long Tail y Movimiento Lento
+
+**Desafío principal:** Miles de SKUs, muchos con movimiento lento, pero necesarios para no perder clientes.
+
+#### Clasificación de Productos de Ferretería
+
+| Categoría | Ejemplos | % de SKUs | % de ventas | Estrategia |
+|-----------|----------|-----------|-------------|------------|
+| Alto movimiento | Cemento, pintura, tubería PVC, cables | 10-15% | 60-70% | Stock permanente, nunca faltar |
+| Movimiento medio | Herramientas manuales, focos, pegamentos | 20-25% | 20-25% | Stock con punto de reorden |
+| Movimiento lento | Tornillos especiales, llaves poco comunes | 40-50% | 5-10% | Mínimo stock, pedir bajo demanda |
+| Estacional | Calefactores, ventiladores, impermeabilizantes | 10-15% | Variable | Comprar antes de temporada, liquidar al final |
+
+#### Gestión del Long Tail
+
+| Táctica | Implementación | Resultado esperado |
+|---------|---------------|-------------------|
+| Catálogo para pedido | Tener catálogo del proveedor para productos que no stock | No perder la venta, no cargar inventario |
+| Alianza con ferreterías vecinas | Acuerdo para prestarse productos poco comunes | Servir al cliente sin invertir |
+| Vitrina de muestra | Exhibir 1 unidad, tener stock mínimo, reponer rápido | Ocupar menos bodega |
+| Kit de proyecto | Vender kits (ej: "kit para instalar puerta") con todo incluido | Rotar productos lentos dentro de un paquete |
+| Liquidación trimestral | Identificar productos con +12 meses sin movimiento y liquidar | Recuperar capital muerto |
+
+### 11.4 Farmacia — Vencimientos y Regulación
+
+**Desafío principal:** Regulación estricta, fechas de vencimiento, y cadena de frío para algunos productos.
+
+#### Control de Vencimientos
+
+| Horizonte de vencimiento | Acción | Responsable |
+|--------------------------|--------|-------------|
+| > 12 meses | Stock normal, ubicar atrás | Bodeguero |
+| 6-12 meses | Ubicar al frente (FEFO: First Expired, First Out) | Bodeguero |
+| 3-6 meses | Alertar a compras, no reponer hasta agotar | Encargado |
+| 1-3 meses | Promoción/descuento, contactar proveedor para cambio | Administrador |
+| < 1 mes | Retiro de venta, gestión de devolución con laboratorio | Químico farmacéutico |
+| Vencido | Retiro inmediato, destrucción según norma, registro | QF + Registro |
+
+#### Productos Regulados — Consideraciones por País
+
+| Requisito | Chile | México | Colombia | Perú |
+|-----------|-------|--------|----------|------|
+| Registro sanitario obligatorio | ISP (INVIMA equiv.) | COFEPRIS | INVIMA | DIGEMID |
+| Receta médica retenida | Psicotrópicos, antibióticos | Psicotrópicos (Grupo I-IV) | Antibióticos, controlados | Psicotrópicos |
+| Registro de venta controlada | Sí, libro de registro | Sí, recetario electrónico | Sí, libro de control | Sí, registro |
+| Temperatura controlada | Registro diario de T° | NOM-059-SSA1 | BPA (Buenas Prácticas) | BPA DIGEMID |
+| Devolución a laboratorio | Sí, con guía de despacho | Con factura y nota de crédito | Sí, gestión con distribuidor | Sí, según contrato |
+
+### 11.5 E-commerce — Fulfillment y Devoluciones
+
+**Desafío principal:** Velocidad de despacho, precisión del picking, y gestión de devoluciones.
+
+#### Flujo de Fulfillment para PYME E-commerce
+
+| Paso | Acción | Tiempo máximo | Herramienta |
+|------|--------|--------------|-------------|
+| 1 | Recepción de orden | Inmediato (automático) | Plataforma (Shopify, WooCommerce, MercadoLibre) |
+| 2 | Picking (recoger productos) | 2 horas | Lista impresa o app de bodega |
+| 3 | Verificación (¿es lo que pidió?) | 5 minutos | Checklist visual, foto del pedido |
+| 4 | Embalaje | 10 minutos | Mesa de empaque estandarizada |
+| 5 | Etiquetado | 2 minutos | Impresora térmica + etiqueta courier |
+| 6 | Despacho a courier | Mismo día si antes de las 14:00 | Retiro en bodega o punto de entrega |
+| 7 | Notificación al cliente | Automático | Email/WhatsApp con tracking |
+
+#### Gestión de Devoluciones
+
+| Motivo | % habitual | Acción | Costo absorbido por |
+|--------|-----------|--------|---------------------|
+| Producto defectuoso | 15-20% | Cambio inmediato + envío gratis | Vendedor (reclamar a proveedor) |
+| Talla/color equivocado | 25-30% | Cambio, cliente paga envío (o split) | Compartido |
+| No era lo esperado | 20-25% | Devolución con restocking fee o sin costo | Depende de política |
+| Arrepentimiento | 15-20% | Según ley del país (retracto) | Vendedor si es por ley |
+| Llegó dañado | 10-15% | Cambio inmediato, reclamar a courier | Courier/seguro |
+
+**Política de devolución recomendada para PYME:**
+- Plazo: 10-15 días desde recepción (cumplir mínimo legal del país)
+- Condición: producto sin uso, con etiqueta, empaque original
+- Proceso: cliente contacta por WhatsApp/email → se genera código de devolución → envía → se verifica → reembolso o cambio en 5 días hábiles
+
+---
+
+## 12. Playbook de Negociación con Proveedores
+
+### 12.1 Las 10 Tácticas de Negociación para PYMEs LATAM
+
+| # | Táctica | Script / Cómo hacerlo | Cuándo usarla |
+|---|---------|----------------------|---------------|
+| 1 | **Pedir descuento por volumen** | "Si te aseguro un pedido de [X unidades] mensuales fijo por 6 meses, ¿qué precio me puedes hacer?" | Cuando tienes demanda estable y predecible |
+| 2 | **Ofrecer pago anticipado** | "Si te pago al contado o a 15 días en vez de 30, ¿me puedes dar un [3-5%] de descuento?" | Cuando tienes liquidez y el proveedor necesita cash flow |
+| 3 | **Pedir plazo de pago extendido** | "Estoy creciendo y necesito 60 días de crédito en vez de 30. Puedo darte un cheque a fecha / pagaré como garantía." | Cuando necesitas capital de trabajo |
+| 4 | **Cotizar con la competencia** | "Tengo una cotización de [competidor] a $[precio]. ¿Puedes igualar o mejorar?" (Tener la cotización real) | Siempre. Nunca comprar sin al menos 2 cotizaciones. |
+| 5 | **Negociar flete incluido** | "Si el pedido es mayor a $[monto], ¿me puedes incluir el despacho?" | Cuando el flete es un costo significativo |
+| 6 | **Pedir muestra gratis** | "Antes de hacer el pedido, ¿me puedes mandar una muestra para probar calidad?" | Cuando es proveedor nuevo o producto nuevo |
+| 7 | **Negociar devolución de no vendido** | "¿Puedo devolver lo que no se venda en 60 días? Así me animo a pedir más variedad." | Retail, productos de temporada |
+| 8 | **Pedir exclusividad de zona** | "Si soy tu único distribuidor en [zona/ciudad], ¿qué beneficio me das?" | Cuando tienes buena cobertura local |
+| 9 | **Agrupar compras con otros negocios** | Unirse con otros comercios del rubro para comprar en conjunto al proveedor | Cuando individualmente no llegas al mínimo de volumen |
+| 10 | **Relación de largo plazo** | "Llevo [X años] comprándote. Mis pagos siempre son puntuales. Creo que merezco un mejor precio." | Después de demostrar historial de buen cliente |
+
+### 12.2 Framework de Decisión: ¿Cuándo Cambiar de Proveedor?
+
+| Criterio | Peso | Proveedor actual | Proveedor nuevo | Instrucción |
+|----------|------|-----------------|-----------------|-------------|
+| Precio por unidad | 25% | Calificar 1-10 | Calificar 1-10 | Menor precio = mayor puntaje |
+| Calidad del producto | 20% | Calificar 1-10 | Calificar 1-10 | Basado en tasa de defectos |
+| Cumplimiento de entregas | 20% | Calificar 1-10 | Calificar 1-10 | % de entregas a tiempo y completas |
+| Plazo de crédito | 15% | Calificar 1-10 | Calificar 1-10 | Más días = mayor puntaje |
+| Servicio post-venta | 10% | Calificar 1-10 | Calificar 1-10 | Rapidez en resolver problemas |
+| Cercanía / logística | 10% | Calificar 1-10 | Calificar 1-10 | Menor tiempo/costo de envío |
+| **TOTAL PONDERADO** | 100% | Σ (calif × peso) | Σ (calif × peso) | **Si nuevo > actual + 1.5 pts: cambiar** |
+
+> **Regla de oro:** No cambiar proveedor solo por precio. El proveedor más barato que no cumple entregas te cuesta más que uno 10% más caro pero confiable.
+
+### 12.3 Cómo Manejar Aumentos de Precio del Proveedor
+
+| Paso | Acción | Script |
+|------|--------|--------|
+| 1 | No aceptar de inmediato | "Necesito revisarlo internamente. Te confirmo en [3-5 días]." |
+| 2 | Pedir justificación | "¿Me puedes detallar qué componente del costo subió y cuánto?" |
+| 3 | Negociar absorción parcial | "Entiendo el aumento, pero no puedo absorber el 100%. ¿Podemos partir la diferencia?" |
+| 4 | Negociar implementación gradual | "¿Puedes aplicar la mitad del aumento ahora y la otra mitad en 3 meses?" |
+| 5 | Pedir contraparte | "Si acepto el aumento, necesito que me mejores [plazo de pago / flete / volumen mínimo]." |
+| 6 | Evaluar alternativas | Cotizar con competencia. Informar (con tacto): "Estoy evaluando opciones." |
+| 7 | Trasladar al precio final | Si el aumento es general del mercado, ajustar tu precio de venta. |
+
+---
+
+## 13. Logística y Envíos en LATAM
+
+### 13.1 Couriers Principales por País
+
+#### Chile
+
+| Courier | Tipo de envío | Tiempo entrega RM | Tiempo regiones | Costo aprox. (paquete 1-3 kg) | Mejor para |
+|---------|--------------|-------------------|-----------------|-------------------------------|------------|
+| Chilexpress | Nacional + express | 1-2 días | 2-5 días | $3.000-6.000 CLP | Volumen alto, cobertura total |
+| Starken | Nacional (terrestre) | 1-2 días | 3-7 días | $2.500-5.000 CLP | Económico, paquetes pesados |
+| Blue Express | Nacional + e-commerce | 1-2 días | 2-4 días | $2.800-5.500 CLP | Integración con marketplaces |
+| Correos de Chile | Nacional + certificado | 2-3 días | 3-7 días | $2.000-4.000 CLP | Sobres, paquetes livianos |
+| DHL Express | Internacional | — | — | $15.000+ CLP | Envíos urgentes al extranjero |
+| Shipit (agregador) | Multi-courier | Variable | Variable | Comparador automático | PYMEs que quieren comparar |
+
+#### México
+
+| Courier | Tipo de envío | Tiempo CDMX | Tiempo nacional | Costo aprox. (1-3 kg) | Mejor para |
+|---------|--------------|-------------|-----------------|----------------------|------------|
+| Estafeta | Nacional + express | 1-2 días | 2-5 días | $100-200 MXN | Red amplia, confiable |
+| Fedex México | Nacional + internacional | 1-2 días | 2-4 días | $150-300 MXN | E-commerce, tracking |
+| DHL Express | Express + internacional | 1 día | 1-3 días | $180-350 MXN | Urgente, alto valor |
+| Redpack | Nacional económico | 2-3 días | 3-7 días | $80-160 MXN | Bajo costo, menos urgente |
+| 99 Minutos | Mismo día / Siguiente día | Mismo día | Principales ciudades | $70-130 MXN | E-commerce CDMX |
+| Envíoclick (agregador) | Multi-courier | Variable | Variable | Comparador | PYMEs multi-carrier |
+
+#### Colombia
+
+| Courier | Tipo de envío | Tiempo Bogotá | Tiempo nacional | Costo aprox. (1-3 kg) | Mejor para |
+|---------|--------------|---------------|-----------------|----------------------|------------|
+| Servientrega | Nacional + urbano | 1-2 días | 2-5 días | $8.000-15.000 COP | Mayor cobertura del país |
+| Coordinadora | Nacional + express | 1-2 días | 2-4 días | $10.000-18.000 COP | Servicio confiable |
+| Inter Rapidísimo | Nacional económico | 2-3 días | 3-8 días | $6.000-12.000 COP | Económico, zonas rurales |
+| TCC | Nacional + pesados | 2-3 días | 3-5 días | $9.000-16.000 COP | Paquetes grandes/pesados |
+| DHL Express | Internacional | — | — | $30.000+ COP | Exportaciones |
+| Envia.com (agregador) | Multi-courier | Variable | Variable | Comparador | Comparar tarifas |
+
+#### Perú
+
+| Courier | Tipo de envío | Tiempo Lima | Tiempo nacional | Costo aprox. (1-3 kg) | Mejor para |
+|---------|--------------|-------------|-----------------|----------------------|------------|
+| Olva Courier | Nacional + provincial | 1-2 días | 3-7 días | S/ 10-25 | Cobertura amplia |
+| Shalom | Nacional + económico | 2-3 días | 3-8 días | S/ 8-18 | Económico |
+| Cruz del Sur Cargo | Interprovincial | — | 1-3 días | S/ 12-30 | Ruta de buses, confiable |
+| DHL Express | Internacional | — | — | S/ 50+ | Exportaciones |
+| Rappi Envíos | Urbano mismo día | Mismo día | Lima/Arequipa | S/ 8-15 | Último kilómetro |
+
+#### Argentina
+
+| Courier | Tipo de envío | Tiempo CABA | Tiempo nacional | Costo aprox. (1-3 kg) | Mejor para |
+|---------|--------------|-------------|-----------------|----------------------|------------|
+| Correo Argentino | Nacional + Mercado Envíos | 2-5 días | 5-10 días | $1.500-4.000 ARS | Económico, cobertura total |
+| Andreani | Nacional + e-commerce | 1-3 días | 3-7 días | $2.000-5.000 ARS | E-commerce, good tracking |
+| OCA | Nacional | 2-4 días | 4-8 días | $1.800-4.500 ARS | Alternativa Correo Argentino |
+| Flex (MercadoLibre) | Urbano | 1-2 días | — | Variable | Vendedores MercadoLibre |
+
+### 13.2 Desafíos de Última Milla en LATAM
+
+| Desafío | Descripción | Solución |
+|---------|-------------|----------|
+| Direcciones imprecisas | "Al lado de la tienda azul, pasando el puente" | Pedir referencia + coordenadas Google Maps + teléfono |
+| Zonas inseguras | Courier no entra a ciertas colonias/barrios | Ofrecer punto de retiro alternativo (tienda partner, locker) |
+| Ausencia del receptor | 40-60% de intentos fallidos en primera visita | Confirmar horario por WhatsApp el día anterior |
+| Robos en tránsito | Paquetes que "se pierden" | Seguro de envío, empaque discreto, fotos pre-envío |
+| Costos altos en zonas rurales | Envío puede costar más que el producto | Consolidar envíos, alianza con transporte local |
+| Devoluciones costosas | Logística inversa poco desarrollada | Ofrecer reembolso sin devolución física para montos bajos |
+
+---
+
+## 14. Comparación de Software de Inventario para PYMEs
+
+### 14.1 Tabla Comparativa
+
+| Característica | Bsale | Defontana | Alegra | Odoo | Excel/Sheets |
+|---------------|-------|-----------|--------|------|-------------|
+| **País de origen** | Chile | Chile | Colombia | Bélgica (LATAM) | — |
+| **Precio mensual (USD)** | $29-89 | $50-150 | $15-50 | $0 (community) / $24+ | $0 |
+| **Facturación electrónica** | Sí (SII Chile integrado) | Sí (Chile, Perú) | Sí (Col, Mex, Arg, Chi) | Sí (con módulos) | No |
+| **Control de inventario** | Sí, incluido | Sí, módulo ERP | Básico (plan pagado) | Sí, completo | Manual |
+| **Punto de venta (POS)** | Sí, integrado | No nativo | No nativo | Sí, módulo | No |
+| **Multi-sucursal** | Sí (plan avanzado) | Sí | Sí (plan premium) | Sí | Manual |
+| **E-commerce integrado** | Sí (Shopify, ML) | Limitado | Limitado | Sí (completo) | No |
+| **Reportes de inventario** | Buenos | Muy buenos | Básicos | Excelentes | Tú los armas |
+| **Facilidad de uso** | ★★★★★ | ★★★ | ★★★★ | ★★ (curva alta) | ★★★ |
+| **Soporte en español** | Excelente | Excelente | Excelente | Bueno | — |
+| **App móvil** | Sí | No | Sí | Sí | Google Sheets app |
+| **Integraciones** | Mercado Libre, Shopify, bancos | ERP completo | Bancos, e-commerce | Miles (modular) | Zapier |
+| **Ideal para** | Retail, restaurant, e-commerce Chile | Empresas medianas Chile/Perú | PYMEs Colombia, México, Argentina | PYMEs técnicas que quieren ERP | Micro-negocios, inicio |
+
+### 14.2 ¿Cuál Elegir Según tu Situación?
+
+| Si tu situación es... | Recomendación | Por qué |
+|----------------------|---------------|---------|
+| Tienda/local en Chile, recién empezando | **Bsale** plan básico | Fácil, integrado con SII, POS incluido |
+| Restaurante en cualquier país LATAM | **Bsale** o **Poster POS** | POS + inventario + recetas integrado |
+| E-commerce en Colombia o México | **Alegra** + planilla de inventario | Facturación electrónica + contabilidad |
+| Empresa mediana con contabilidad compleja | **Defontana** | ERP completo, contabilidad avanzada |
+| Negocio técnico que quiere control total | **Odoo Community** | Gratis, poderoso, pero requiere implementación |
+| Micro-negocio con < 50 productos | **Google Sheets** con plantilla | $0, simple, accesible desde el celular |
+| Ferretería o negocio con +500 SKUs | **Odoo** o **Bsale** avanzado | Necesitas gestión robusta de catálogo |
+
+### 14.3 Template Básico de Inventario en Excel/Google Sheets
+
+| Columna | Contenido | Ejemplo |
+|---------|-----------|---------|
+| A | Código/SKU | PROD-001 |
+| B | Nombre del producto | Camiseta básica negra M |
+| C | Categoría | Ropa / Camisetas |
+| D | Proveedor | Textiles López |
+| E | Costo unitario | $5.500 |
+| F | Precio de venta | $12.990 |
+| G | Margen % | =((F-E)/F)*100 → 57.7% |
+| H | Stock actual | 25 |
+| I | Stock mínimo (reorden) | 10 |
+| J | Stock máximo | 50 |
+| K | Estado | =SI(H<=I,"PEDIR","OK") |
+| L | Valor en stock | =E*H → $137.500 |
+| M | Última entrada (fecha) | 15/03/2026 |
+| N | Última venta (fecha) | 01/04/2026 |
+| O | Ubicación en bodega | Estante B-3 |
+
+> **Tip:** Agregar formato condicional: rojo si stock ≤ mínimo, amarillo si stock < mínimo × 1.5, verde si OK.
+
+---
+
+## 15. Prevención de Pérdidas para PYMEs
+
+### 15.1 Causas de Merma (Shrinkage) en PYMEs LATAM
+
+| Causa | % del total de merma | Descripción |
+|-------|---------------------|-------------|
+| **Errores administrativos** | 30-35% | Errores de conteo, registro, recepción, precio mal ingresado |
+| **Robo interno (empleados)** | 25-30% | Desde llevarse un producto hasta manipular registros |
+| **Robo externo (clientes)** | 20-25% | Shoplifting, fraude con devoluciones |
+| **Fraude de proveedores** | 10-15% | Entregar menos de lo facturado, calidad inferior |
+| **Daño y vencimiento** | 5-10% | Productos dañados en bodega, vencidos, obsoletos |
+
+> **Benchmark:** La merma promedio en retail LATAM es 1.5-3% de las ventas. Si estás por encima del 3%, tienes un problema serio.
+
+### 15.2 Detección de Robo Interno
+
+| Señal de alerta | Qué observar | Acción |
+|----------------|-------------|--------|
+| Diferencias constantes en caja | Siempre falta dinero en el mismo turno | Auditoría de caja sorpresa, cámara |
+| Producto falta sin registro de venta | Conteo físico ≠ sistema, sin explicación | Conteo cíclico más frecuente, revisar accesos |
+| Anulaciones frecuentes | Un empleado anula muchas ventas | Revisar detalle de anulaciones, pedir justificación |
+| Descuentos no autorizados | Se aplican descuentos a "amigos" | Limitar quién puede dar descuentos en el sistema |
+| Basura sospechosa | Empaques vacíos en la basura sin registro de venta | Revisar basura al cierre (sí, es necesario) |
+| Horarios irregulares | Empleado llega antes o se queda después solo | Controlar acceso fuera de horario |
+| Estilo de vida inconsistente | Gastos que no cuadran con el sueldo | No es prueba, pero es señal para auditar |
+
+### 15.3 Prevención — Tácticas Prácticas
+
+#### Controles Administrativos
+
+| Control | Costo | Implementación | Efectividad |
+|---------|-------|---------------|-------------|
+| Conteos cíclicos semanales | $0 | Contar 10-20 productos "A" cada semana por sorpresa | Alta |
+| Doble conteo en recepción | $0 | Una persona recibe, otra verifica contra factura | Alta |
+| Conciliación diaria de caja | $0 | Contar caja al abrir y al cerrar, documentar diferencias | Alta |
+| Rotación de responsabilidades | $0 | No dejar a la misma persona siempre en caja/bodega | Media |
+| Auditorías sorpresa trimestrales | $0-200 | Inventario completo sin previo aviso | Alta |
+| Registro de merma/descarte | $0 | Formulario para cada producto descartado, con firma y motivo | Media |
+
+#### Controles Físicos
+
+| Control | Costo | Implementación | Efectividad |
+|---------|-------|---------------|-------------|
+| Cámaras de seguridad | $100-500 USD | Mínimo: caja, bodega, entrada. Que se vean (disuasión) | Alta |
+| Espejos convexos | $15-30 USD c/u | En esquinas y puntos ciegos de la tienda | Media |
+| Sensor antirrobo (EAS) | $300-1.000 USD | Para retail con productos de alto valor | Alta en retail |
+| Vitrina para productos caros | $50-200 USD | Productos de alto valor bajo llave | Alta |
+| Una sola salida | $0 | Diseñar flujo de tienda con entrada/salida controlada | Media |
+| Bolsas transparentes para empleados | $0 | Política de que mochilas/bolsos no entran a bodega | Media |
+
+#### Controles con Proveedores
+
+| Control | Implementación |
+|---------|---------------|
+| Siempre contar la mercadería al recibirla | No firmar la guía/factura sin verificar cantidad y calidad |
+| Pesar productos que se compran por peso | Tener balanza propia, no confiar solo en la del proveedor |
+| Revisar calidad aleatoriamente | Abrir 1 de cada 10 cajas para verificar contenido |
+| Comparar factura vs orden de compra | ¿Me cobró lo mismo que cotizó? ¿Las cantidades cuadran? |
+| Documentar rechazos | Si devuelves producto, dejar registro escrito con firma del chofer |
+
+### 15.4 Protocolo Cuando Detectas un Robo
+
+| Paso | Acción | Detalle |
+|------|--------|---------|
+| 1 | No confrontar inmediatamente | Reunir evidencia primero. Reacción impulsiva = error legal |
+| 2 | Documentar la evidencia | Cámaras, registros de sistema, testimonios, inventario |
+| 3 | Consultar abogado laboral | Antes de cualquier acción, confirmar que el proceso es legal |
+| 4 | Reunión formal con el empleado | Con testigo presente. Mostrar la evidencia. Escuchar su versión |
+| 5 | Decisión: amonestación o despido | Según gravedad y evidencia. Despido por falta grave si corresponde |
+| 6 | Si es despido: calcular finiquito según ley | En algunos países, robo comprobado = despido sin indemnización |
+| 7 | Comunicar al equipo sin detalles | "Hubo una situación que tuvimos que resolver" — no humillar públicamente |
+| 8 | Reforzar controles | Implementar lo que faltaba para que no vuelva a pasar |
+
+> **Nunca:** Retener el sueldo como "castigo", registrar pertenencias sin consentimiento, publicar fotos del "ladrón" en redes sociales. Todo eso es ilegal y te puede costar una demanda.

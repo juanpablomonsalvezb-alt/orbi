@@ -1161,3 +1161,482 @@ El agente puede usar este checklist para diagnosticar rapidamente la salud de un
 ---
 
 *Documento generado para el agente Gerente General de Orbbi. Todos los frameworks deben aplicarse con criterio al contexto especifico de cada PYME consultante, considerando pais, industria, tamano y etapa de desarrollo del negocio.*
+
+---
+
+## 13. Etapas de Crecimiento de una PYME
+
+> Cada etapa tiene desafíos distintos. Lo que funciona en una etapa puede ser un obstáculo en la siguiente. Valores de referencia en CLP (pesos chilenos).
+
+### 13.1 Las 5 Etapas
+
+| Etapa | Período típico | Ingresos anuales (CLP) | Empleados | Enfoque principal |
+|-------|---------------|------------------------|-----------|-------------------|
+| **1. Supervivencia** | 0-1 año | < $5M (~$5.400 USD) | 1-3 | No morir. Validar el producto/servicio |
+| **2. Estabilidad** | 1-3 años | $5M - $20M | 3-8 | Generar flujo constante. Primeros empleados |
+| **3. Crecimiento** | 3-5 años | $20M - $100M | 8-20 | Escalar ventas. Sistematizar procesos |
+| **4. Expansión** | 5-10 años | $100M - $500M | 20-50 | Segunda ubicación. Nuevos mercados |
+| **5. Madurez** | 10+ años | > $500M | 50+ | Profesionalizar. Innovar o estancarse |
+
+### 13.2 Etapa 1: Supervivencia (0-1 año, < $5M CLP)
+
+**La realidad:** El 60% de las PYMEs en LATAM no sobreviven el primer año.
+
+| Prioridad | Acción concreta | Error común |
+|-----------|----------------|-------------|
+| Validar demanda | Vender ANTES de perfeccionar el producto. Mínimo 10 ventas reales. | Pasar 6 meses "preparándose" sin vender nada |
+| Controlar el gasto | Presupuesto mínimo: local + producto + nada más. Reinvertir todo. | Gastar en logo caro, oficina bonita, tarjetas de presentación |
+| Conocer al cliente | Hablar con cada cliente. Preguntar: ¿por qué me compraste? ¿qué mejorarías? | Asumir que sabes lo que el mercado quiere |
+| Definir precio | Costear bien. Mínimo 40% margen bruto en productos, 50% en servicios. | Cobrar barato "para entrar al mercado" y nunca subir |
+| Flujo de caja | Cobrar rápido, pagar lo más tarde posible (sin abusar). | No separar plata personal de la del negocio |
+| Formalizar lo mínimo | Iniciar actividades / RFC / RUT. Emitir boletas/facturas. | Operar 100% informal y no poder acceder a crédito |
+
+**Métricas que importan en esta etapa:**
+- ¿Tengo ventas? (sí/no) → Si no, pivotar
+- ¿Me alcanza para pagar los costos fijos del mes? (punto de equilibrio)
+- ¿Los clientes repiten? (retención)
+
+### 13.3 Etapa 2: Estabilidad (1-3 años, $5M-$20M CLP)
+
+**La realidad:** Ya validaste que hay mercado. Ahora necesitas que funcione sin que tú hagas TODO.
+
+| Prioridad | Acción concreta | Error común |
+|-----------|----------------|-------------|
+| Primer empleado | Contratar para la tarea que más te quita tiempo y menos valor agrega | Contratar un amigo/familiar sin evaluar competencia |
+| Documentar procesos | Escribir cómo se hace cada cosa (aunque sea en un Google Doc simple) | "Todo está en mi cabeza" → el negocio depende 100% de ti |
+| Separar finanzas | Cuenta bancaria de empresa separada. Sueldo fijo para ti como dueño. | Mezclar gastos personales con los del negocio |
+| Construir marca | Presencia en redes sociales, Google My Business, reseñas de clientes | Depender solo del boca a boca |
+| Sistema básico | Implementar software de facturación y control (Bsale, Alegra, etc.) | Seguir con cuaderno y calculadora |
+| Primeros proveedores estables | Negociar condiciones, tener al menos 2 proveedores por insumo clave | Depender de un solo proveedor para todo |
+
+**Métricas que importan:**
+- Ventas mensuales (tendencia: ¿crecen?)
+- Margen bruto (¿es suficiente para pagar costos fijos + tu sueldo?)
+- Satisfacción del cliente (NPS o "¿nos recomendarías?")
+
+### 13.4 Etapa 3: Crecimiento (3-5 años, $20M-$100M CLP)
+
+**La realidad:** Estás creciendo pero todo se siente caótico. Necesitas estructura.
+
+| Prioridad | Acción concreta | Error común |
+|-----------|----------------|-------------|
+| Equipo funcional | 8-20 personas con roles definidos. Organigrama simple. | Todos le reportan al dueño directamente |
+| Procesos estandarizados | Manual de operaciones, checklist, protocolos de atención | Cada empleado hace las cosas "a su manera" |
+| Control financiero real | Contador dedicado (interno o externo). Estado de resultados mensual. | Solo mirar la cuenta del banco para saber "cómo vamos" |
+| Marketing consistente | Presupuesto fijo mensual para marketing (5-10% de las ventas) | Marketing solo cuando "sobra plata" |
+| Delegar de verdad | El dueño debe dejar de operar y empezar a dirigir | "Nadie lo hace tan bien como yo" → cuello de botella |
+| Crédito bancario | Historial financiero para acceder a línea de crédito | Nunca relacionarse con bancos hasta que es urgente |
+
+**Métricas que importan:**
+- Crecimiento mensual de ventas (meta: 5-15% mes a mes)
+- EBITDA (ganancia operativa real)
+- Rotación de personal (si es alta, hay problema de gestión)
+- Costo de adquisición de cliente (CAC)
+
+### 13.5 Etapa 4: Expansión (5-10 años, $100M-$500M CLP)
+
+**La realidad:** Es hora de multiplicar: segunda ubicación, nuevo canal, nueva línea de productos.
+
+| Prioridad | Acción concreta | Error común |
+|-----------|----------------|-------------|
+| Segunda ubicación o canal | Abrir solo cuando la primera opera sin ti. Clonar, no improvisar. | Abrir la segunda cuando la primera aún depende del dueño |
+| Gerencia media | Contratar o promover jefes de área que tomen decisiones | El dueño sigue decidiendo todo |
+| Sistemas integrados | ERP, CRM, dashboard de gestión. Datos en tiempo real. | Cada área con su propia planilla desconectada |
+| Planificación anual formal | Presupuesto anual, objetivos por área, revisión trimestral | Seguir operando "mes a mes" sin plan |
+| Cultura documentada | Valores, misión, protocolos. Lo que antes era "obvio" ahora hay que escribir. | "Siempre hemos sido así" no escala |
+| Asesoría profesional | Directorio asesor, mentores, abogado, contador de nivel | Seguir consultando solo al "compadre que sabe de negocios" |
+
+### 13.6 Etapa 5: Madurez (10+ años, > $500M CLP)
+
+**La realidad:** El negocio funciona, pero el riesgo es estancarse o volverse obsoleto.
+
+| Prioridad | Acción concreta | Error común |
+|-----------|----------------|-------------|
+| Innovación continua | Dedicar 5-10% del presupuesto a probar cosas nuevas | "Si funciona, no lo toques" hasta que la competencia te pasa |
+| Sucesión | Plan de sucesión (familiar o profesional). ¿Quién toma el mando si no estás? | "Voy a trabajar hasta que me muera" |
+| Profesionalización | Gerentes profesionales, procesos de clase media empresa | Resistir la profesionalización por miedo a perder control |
+| Diversificación | Nuevos productos, servicios, o mercados geográficos | Todos los huevos en una canasta |
+| Responsabilidad social | Impacto en la comunidad, empleados, medio ambiente | Ignorar stakeholders más allá de clientes y dueños |
+| Digitalización | Comercio electrónico, automatización, datos | "Siempre hemos vendido así" en un mundo que cambió |
+
+---
+
+## 14. Frameworks de Decisión para PYMEs
+
+### 14.1 Checklist: ¿Debo Abrir una Segunda Ubicación?
+
+> Solo abrir si cumples 8 de 10 criterios. Menos de 6: no estás listo.
+
+| # | Criterio | Detalle |
+|---|----------|---------|
+| 1 | La primera ubicación opera SIN que yo esté presente diariamente | Si aún dependes de ti para operar, no estás listo |
+| 2 | Tengo un gerente/encargado de confianza para la primera ubicación | Necesitas a alguien que la cuide mientras tú abres la otra |
+| 3 | Las ventas de la primera llevan 12+ meses estables o creciendo | No abrir desde una posición de desesperación |
+| 4 | Tengo los procesos documentados y replicables | Si no están escritos, no puedes clonar |
+| 5 | Tengo capital para 6 meses de operación de la nueva ubicación SIN depender de sus ventas | Las nuevas sedes tardan 3-6 meses en ser rentables |
+| 6 | Conozco el mercado de la nueva zona (competencia, clientes, tráfico) | No asumir que "si funciona aquí, funciona allá" |
+| 7 | Mi flujo de caja actual soporta la inversión sin comprometer la operación existente | No descapitalizar la primera para abrir la segunda |
+| 8 | Tengo equipo suficiente (o puedo contratar) para la nueva ubicación | No mover gente de la primera sede, debilitándola |
+| 9 | He calculado el punto de equilibrio de la nueva sede y es alcanzable en <6 meses | Si el break-even es a 12+ meses, el riesgo es alto |
+| 10 | Mi familia/socios están alineados con esta decisión | Una expansión es estrés, tiempo y riesgo. Todos deben estar a bordo |
+
+### 14.2 ¿Cuándo Contratar al Primer Empleado?
+
+| Señal | Descripción |
+|-------|-------------|
+| Estás rechazando clientes o pedidos por falta de capacidad | El costo de oportunidad de NO contratar es mayor que el sueldo |
+| Dedicas más del 50% de tu tiempo a tareas operativas repetitivas | Tu tiempo vale más en vender, negociar y planificar |
+| Tienes ingresos estables para pagar el sueldo por al menos 3 meses | No contratar si no puedes garantizar al menos un trimestre |
+| Sabes exactamente qué va a hacer esta persona | Tener la descripción de puesto ANTES de buscar |
+| Ya documentaste cómo hacer las tareas que vas a delegar | Si no puedes explicarlo, no puedes delegarlo |
+| ❌ "Necesito ayuda" sin saber en qué específicamente | Primero clarifica qué necesitas, luego contrata |
+| ❌ "Quiero crecer" pero no tienes más demanda | Más personas sin más ventas = más gasto sin más ingreso |
+| ❌ Un familiar necesita trabajo | NO es razón para contratar. Es caridad, no negocio |
+
+### 14.3 Árbol de Decisión: ¿Debo Subir los Precios?
+
+```
+¿Tu margen bruto es menor al 35%?
+├── SÍ → SUBE PRECIOS. Estás regalando tu trabajo.
+│         Hazlo ya, no esperes.
+│
+└── NO → ¿Tus costos subieron en los últimos 6 meses?
+          ├── SÍ → ¿Cuánto subieron?
+          │         ├── < 5% → Absorber si puedes. Optimizar costos primero.
+          │         ├── 5-15% → Subir precios proporcionalmente. Comunicar a clientes.
+          │         └── > 15% → Subir precios + revisar proveedor + ajustar producto.
+          │
+          └── NO → ¿Cuándo fue la última vez que subiste precios?
+                    ├── < 6 meses → Esperar. Evaluar en 3 meses.
+                    ├── 6-12 meses → Subir entre 3-7% (inflación normal LATAM).
+                    └── > 12 meses → SUBE PRECIOS. La inflación ya te comió el margen.
+
+¿Cómo comunicar la subida?
+- Aviso con 15-30 días de anticipación
+- Explicar brevemente: "Debido al aumento de costos de insumos..."
+- NO pedir disculpas. Es normal y necesario.
+- Ofrecer algo de valor: "Aprovecha el precio actual hasta [fecha]"
+```
+
+### 14.4 ¿Tomar Deuda o Seguir con Capital Propio (Bootstrap)?
+
+| Factor | Tomar deuda | Bootstrap |
+|--------|-------------|-----------|
+| Tienes un proyecto con retorno claro y calculado | Sí: "Con $10M de inversión, genero $3M adicionales al mes" | — |
+| Necesitas capital de trabajo estacional | Sí: línea de crédito para stockear pre-Navidad | — |
+| No tienes idea del retorno pero "se siente bien" | — | No endeudarse sin números |
+| La oportunidad es urgente y no tienes ahorros | Evaluar: ¿la oportunidad justifica el riesgo? | Si la oportunidad puede esperar, ahorrar primero |
+| Ya tienes deuda que consume >30% de tus ingresos | — | No más deuda. Primero sanear |
+| Tasa de interés < tu margen neto | Sí: si la deuda cuesta 12% anual y tu negocio rinde 25%, conviene | — |
+| Es para gasto corriente (pagar sueldos, arriendo) | ALERTA ROJA: si necesitas deuda para operar, el negocio tiene un problema estructural | — |
+
+**Reglas de deuda sana para PYMEs:**
+1. Nunca endeudarse para cubrir pérdidas operativas
+2. Cuota mensual no debe superar el 25% de la utilidad mensual
+3. Tener un plan de pago escrito ANTES de firmar
+4. Comparar al menos 3 opciones de crédito
+5. Preferir crédito con tasa fija sobre tasa variable en LATAM (la inflación es impredecible)
+
+### 14.5 ¿Cuándo Formalizar el Negocio?
+
+| Señal de que debes formalizar | Cómo hacerlo |
+|-------------------------------|-------------|
+| Facturas mensuales superan el límite de boleta/recibo | Iniciar actividades ante el organismo fiscal del país |
+| Quieres acceder a crédito bancario | Los bancos no prestan a informales |
+| Necesitas contratar empleados formalmente | Sin empresa formal, los contratos no tienen validez |
+| Un cliente grande te pide factura | Grandes empresas solo trabajan con proveedores formales |
+| Quieres postular a fondos/subsidios del gobierno | Todos requieren empresa constituida |
+| Facturas mensuales > $1-2M CLP / $20-40M COP / $5.000 USD equiv. | Ya estás en un nivel donde la informalidad es riesgo |
+
+### 14.6 Separación de un Socio / Co-fundador
+
+> Una de las decisiones más difíciles y donde más PYMEs se destruyen.
+
+| Paso | Acción | Detalle |
+|------|--------|---------|
+| 1 | Conversar directamente | Antes que nada, hablar honestamente: "Creo que no estamos alineados en [X]. ¿Cómo lo ves?" |
+| 2 | Definir qué quiere cada uno | ¿Uno quiere salir? ¿Ambos quieren quedarse pero no juntos? ¿Dividir el negocio? |
+| 3 | Valorar la empresa | Contratar un valuador externo o acordar un método (ej: 3x utilidad anual) |
+| 4 | Definir quién se queda y quién sale | El que se queda compra la parte del que sale. Acordar precio y plazo de pago. |
+| 5 | Involucrar abogado | Redactar acuerdo de separación, cesión de derechos, cláusula de no competencia |
+| 6 | Comunicar a empleados y clientes | Mensaje claro: "A partir de [fecha], [nombre] continúa liderando la empresa" |
+| 7 | Transferir conocimiento | El socio que sale debe documentar/transferir todo lo que maneja: contraseñas, contactos, procesos |
+
+**Cláusulas que deberían haber existido desde el día 1:**
+- Pacto de socios con porcentajes claros
+- Mecanismo de salida (buyout)
+- Cláusula de no competencia (2-3 años, misma industria/zona)
+- Vesting (si un socio se va en el primer año, pierde parte de su participación)
+- Definición de roles: quién decide qué
+
+---
+
+## 15. Ecosistema PYME por País
+
+### 15.1 Chile
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **CORFO** (Corporación de Fomento) | Subsidios, capital semilla, créditos blandos, garantías | corfo.cl — Postular en línea |
+| Fondo estatal | **SERCOTEC** | Subsidios para microempresas (<10 empleados): Capital Semilla, Crece, Digitaliza tu PYME | sercotec.cl — Convocatorias anuales |
+| Programa estatal | **ProChile** | Apoyo a exportación: ferias, misiones comerciales, mentoría export | prochile.gob.cl |
+| Aceleradora | **Start-Up Chile** | Capital + mentoría para startups (no solo tech) | startupchile.org |
+| Aceleradora | **Endeavor Chile** | Red de mentores para empresas de alto impacto | endeavor.cl |
+| Asociación | **ASECH** (Asociación de Emprendedores de Chile) | Networking, capacitación, representación gremial | asech.cl |
+| Capacitación gratis | **SENCE** cursos online | Cursos gratuitos de gestión, marketing, finanzas | sfrancochile.sence.cl |
+| Cámara de Comercio | **CCS** (Cámara de Comercio de Santiago) | Networking, certificados de origen, eventos | ccs.cl |
+| Red de mentores | **Red Mentora** | Mentores voluntarios para PYMEs | redmentora.cl |
+
+### 15.2 México
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **NAFIN** (Nacional Financiera) | Créditos PYMEs, cadenas productivas, garantías | nafin.com — A través de bancos aliados |
+| Programa estatal | **Tandas para el Bienestar** | Microcréditos sin intereses (hasta $20.000 MXN) | Bienestar.gob.mx |
+| Institución | **INADEM** (ahora programas en Secretaría de Economía) | Apoyos puntuales a MiPYMEs | economia.gob.mx |
+| Aceleradora | **Endeavor México** | Mentoría, red de contactos para scale-ups | endeavor.org.mx |
+| Aceleradora | **500 Global (LATAM)** | Inversión + programa de aceleración | 500.co |
+| Asociación | **CANACO** (Cámara Nacional de Comercio) | Representación gremial, capacitación, networking | canaco.com.mx (por ciudad) |
+| Asociación | **CANACINTRA** | Cámara de la industria de transformación | canacintra.org.mx |
+| Capacitación gratis | **MOOC UNAM / Coursera** | Cursos de administración, finanzas, marketing gratis | coursera.org/unam |
+| Incubadora | **Incubadoras INADEM certificadas** | Apoyo en plan de negocios, formalización | Buscar la más cercana en tu estado |
+
+### 15.3 Colombia
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **Bancóldex** | Créditos blandos para PYMEs a través de bancos | bancoldex.com |
+| Fondo estatal | **Fondo Emprender (SENA)** | Capital semilla no reembolsable para nuevos negocios | fondoemprender.com |
+| Programa estatal | **iNNpulsa Colombia** | Convocatorias de innovación, escalamiento, mentoría | innpulsacolombia.com |
+| Aceleradora | **Endeavor Colombia** | Red de mentores, contactos, selección de alto impacto | endeavor.org.co |
+| Aceleradora | **Wayra (Telefónica)** | Aceleración tech + inversión | wayra.com |
+| Asociación | **ACOPI** | Asociación de micro, pequeña y mediana empresa | acopi.org.co |
+| Cámara de Comercio | **CCB** (Cámara de Comercio de Bogotá) y otras | Registro mercantil, capacitación, networking, Bogotá Emprende | ccb.org.co |
+| Capacitación gratis | **SENA Virtual** | Miles de cursos gratis de todos los temas | oferta.senasofiaplus.edu.co |
+| Red de apoyo | **Red de Emprendimiento** | Conecta entidades de apoyo por departamento | redemprendimiento.com |
+
+### 15.4 Perú
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **COFIDE** | Créditos a PYMEs a través de bancos (segundo piso) | cofide.com.pe |
+| Programa estatal | **Startup Perú** | Capital semilla y aceleración para emprendimientos innovadores | start-up.pe |
+| Programa estatal | **Tu Empresa (PRODUCE)** | Formalización, capacitación, financiamiento | tuempresa.gob.pe |
+| Programa estatal | **Innóvate Perú** | Fondos concursables para innovación y emprendimiento | innovateperu.gob.pe |
+| Aceleradora | **Endeavor Perú** | Mentoría, red para scale-ups | endeavor.org.pe |
+| Asociación | **SNI** (Sociedad Nacional de Industrias) | Gremio industrial, capacitación, representación | sni.org.pe |
+| Cámara de Comercio | **CCL** (Cámara de Comercio de Lima) | Networking, capacitación, arbitraje | camaralima.org.pe |
+| Capacitación gratis | **Capacítate para el Empleo (Fundación Slim)** | Cursos gratuitos de negocios y oficios | capacitateparaelempleo.org |
+
+### 15.5 Argentina
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **FONDEP / Ministerio de Producción** | Créditos blandos, subsidios a tasa, programas de apoyo | argentina.gob.ar/produccion |
+| Programa estatal | **PAC (Programa de Apoyo a la Competitividad)** | ANR (aportes no reembolsables) para PYMEs | argentina.gob.ar/produccion/pyme |
+| Registro | **Registro PyME** | Beneficios fiscales, acceso a crédito, postulación a programas | pyme.afip.gob.ar |
+| Aceleradora | **Endeavor Argentina** | Red de mentores más grande de la región | endeavor.org.ar |
+| Aceleradora | **NXTP Labs** | Inversión + aceleración para startups tech LATAM | nxtplabs.com |
+| Asociación | **CAME** (Confederación Argentina de la Mediana Empresa) | Representación gremial, encuestas, lobby | redcame.org.ar |
+| Cámara de Comercio | **CAC** (Cámara Argentina de Comercio) | Networking, capacitación, certificados | cac.com.ar |
+| Capacitación gratis | **Argentina Programa / Cursos PyME** | Cursos gratuitos del gobierno | argentina.gob.ar/produccion/capacitacion |
+
+### 15.6 Bolivia
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Banco estatal | **BDP** (Banco de Desarrollo Productivo) | Créditos blandos para PYMEs productivas | bdp.com.bo |
+| Programa estatal | **Pro Bolivia** | Apoyo a la producción nacional, ferias, capacitación | probolivia.gob.bo |
+| Asociación | **CAINCO** (Cámara de Industria y Comercio de Santa Cruz) | Networking, capacitación, representación gremial | cainco.org.bo |
+| Asociación | **CEPB** (Confederación de Empresarios Privados) | Representación del sector privado | cepb.org.bo |
+| Incubadora | **Fundación Maya** | Apoyo a emprendedores, mentoría, capacitación | fundacionmaya.org.bo |
+| Capacitación | **Fundación Trabajo Empresa** | Capacitación técnica y empresarial | fte.edu.bo |
+
+### 15.7 Ecuador
+
+| Recurso | Nombre | Qué ofrece | Cómo acceder |
+|---------|--------|-----------|-------------|
+| Fondo estatal | **CFN** (Corporación Financiera Nacional) | Créditos para PYMEs, capital de trabajo, activos fijos | cfn.fin.ec |
+| Programa estatal | **BanEcuador** | Microcréditos y créditos para pequeños negocios | banecuador.fin.ec |
+| Programa estatal | **MIPRO** (Ministerio de Producción) | Programas de apoyo, ferias, capacitación | produccion.gob.ec |
+| Aceleradora | **Buen Trip Hub** | Aceleración, coworking, networking (Guayaquil) | buentriphub.com |
+| Asociación | **Cámara de Comercio de Quito** | Networking, capacitación, representación | ccq.ec |
+| Asociación | **Cámara de Comercio de Guayaquil** | Similar, zona costa | lacamara.org |
+| Capacitación gratis | **SECAP** (Servicio Ecuatoriano de Capacitación) | Cursos técnicos y empresariales gratuitos o subsidiados | secap.gob.ec |
+
+---
+
+## 16. Gestión de Crisis para PYMEs
+
+### 16.1 Crisis de Flujo de Caja (No Puedo Pagar la Nómina)
+
+**Severidad:** CRÍTICA. Tienes días, no semanas.
+
+| Paso | Acción | Plazo | Detalle |
+|------|--------|-------|---------|
+| 1 | Calcular exactamente cuánto falta y para cuándo | Hoy | No "me falta plata". Exacto: "Me faltan $2.3M para el día 5" |
+| 2 | Cobrar todo lo cobrable | Hoy-mañana | Llamar a cada cliente que te debe. Ofrecer descuento por pago inmediato (3-5%) |
+| 3 | Negociar con proveedores | Hoy-mañana | "Necesito 15 días más para pagarte. Te pago el [fecha] sin falta." |
+| 4 | Factoring/adelanto de facturas | 24-72 hrs | Si tienes facturas por cobrar, venderlas con descuento (10-15%) |
+| 5 | Línea de crédito de emergencia | 48-72 hrs | Si tienes línea aprobada, usarla. Si no, hablar con el banco. |
+| 6 | Inyección del dueño (si puede) | Inmediato | Préstamo personal al negocio. Documentar como préstamo de socio. |
+| 7 | Comunicar al equipo (si no alcanza) | Lo antes posible | "Tenemos un problema de caja. Voy a pagar [X% ahora] y el resto el [fecha]." |
+| 8 | Plan de contingencia | Esta semana | ¿Qué gastos puedo cortar? ¿Qué puedo vender? ¿Qué servicio puedo cobrar por adelantado? |
+
+**Lo que NUNCA hacer:**
+- Desaparecer sin pagar ni comunicar → demandas + pérdida total de confianza
+- Pedir préstamos informales a tasas usureras → empeora el problema
+- Pagar a proveedores antes que a empleados → los empleados tienen prioridad legal
+- Hacer como que no pasa nada → el equipo se entera y la confianza se destruye
+
+### 16.2 Pérdida del Cliente Principal (>30% de Ingresos)
+
+| Fase | Plazo | Acciones |
+|------|-------|----------|
+| **Shock (Día 1-3)** | Inmediato | 1. Confirmar la información. 2. Intentar recuperar: "¿Qué pasó? ¿Hay algo que podamos hacer?" 3. Pedir plazo de transición si es posible. |
+| **Evaluación (Día 4-7)** | 1 semana | 1. Calcular impacto exacto en ingresos y flujo de caja. 2. ¿Cuántos meses de runway tengo sin ese cliente? 3. ¿Tengo que reducir equipo/costos? |
+| **Plan de acción (Semana 2)** | 2 semanas | 1. Activar ventas agresivas: contactar clientes dormidos, prospectar nuevos. 2. Reducir costos no esenciales. 3. Renegociar contratos fijos. 4. Comunicar al equipo SIN pánico. |
+| **Ejecución (Mes 1-3)** | 1-3 meses | 1. Diversificar: ningún cliente debe ser >20% de tus ingresos. 2. Mejorar propuesta de valor. 3. Pipeline de ventas activo. 4. Monitorear flujo de caja semanalmente. |
+| **Prevención futura** | Permanente | Regla: si un cliente es >25% de tus ingresos, es una DEPENDENCIA, no un cliente. Diversificar ya. |
+
+### 16.3 Renuncia de Empleado Clave
+
+| Paso | Acción | Detalle |
+|------|--------|---------|
+| 1 | No reaccionar emocionalmente | "Gracias por decírmelo. ¿Puedes contarme por qué?" |
+| 2 | Evaluar si quieres retenerlo | ¿Es realmente clave? ¿Cuánto cuesta reemplazarlo vs mejorar su oferta? |
+| 3 | Si quieres retener: contra-oferta | No solo dinero: flexibilidad, título, proyecto, participación. ¿Qué lo haría quedarse? |
+| 4 | Si no puedes/quieres retener: transición | Pedir al menos 2-4 semanas de aviso. Que documente TODOS sus procesos. |
+| 5 | Transferir conocimiento | Lista de contactos, contraseñas, archivos, procesos, clientes que maneja |
+| 6 | Buscar reemplazo inmediato | Publicar la vacante el mismo día que confirma su salida |
+| 7 | Comunicar al equipo | "A partir del [fecha], [nombre] se va. Mientras encontramos reemplazo, [plan temporal]" |
+| 8 | Exit interview | "¿Qué podríamos haber hecho diferente? ¿Qué le dirías a mi siguiente contratación?" |
+
+**Prevención:**
+- Cross-training: que al menos 2 personas sepan hacer cada tarea crítica
+- Documentación: procesos escritos, no en la cabeza de una persona
+- Check-ins regulares: detectar insatisfacción ANTES de que renuncien
+- Compensación competitiva: revisar salarios vs mercado cada 6 meses
+
+### 16.4 Desastre Natural / Pandemia
+
+| Fase | Acciones inmediatas |
+|------|-------------------|
+| **Primeras 24 horas** | 1. Seguridad del equipo primero: ¿todos están bien? 2. Evaluar daños a local, inventario, equipos. 3. Contactar seguro (si tienes). 4. Comunicar a clientes: "Estamos operando / no operando temporalmente." |
+| **Primera semana** | 1. Calcular pérdidas. 2. Activar plan B de operación (remoto, ubicación temporal, delivery). 3. Contactar gobierno por programas de emergencia. 4. Renegociar arriendos y contratos. |
+| **Primer mes** | 1. Adaptar el modelo de negocio si es necesario (ej: restaurante → delivery). 2. Reducir costos a lo mínimo vital. 3. Postular a créditos de emergencia. 4. Mantener comunicación constante con el equipo. |
+| **Recuperación (3-6 meses)** | 1. Reconstruir gradualmente. 2. Documentar lecciones aprendidas. 3. Contratar seguro si no tenías. 4. Crear fondo de emergencia (3-6 meses de costos fijos). |
+
+### 16.5 Cambio Regulatorio que Afecta el Negocio
+
+> Ejemplo: aumento de impuestos, nueva regulación laboral, restricción de importaciones, nueva norma sanitaria.
+
+| Paso | Acción | Detalle |
+|------|--------|---------|
+| 1 | Entender el cambio exacto | Leer la norma, consultar con contador/abogado. No actuar por rumores. |
+| 2 | Cuantificar el impacto | ¿Cuánto me cuesta en dinero? ¿Cambia mi operación? ¿Tengo plazo para adaptarme? |
+| 3 | Evaluar opciones | ¿Puedo trasladar el costo al precio? ¿Debo cambiar proceso? ¿Necesito nuevo proveedor/estructura? |
+| 4 | Unirse al gremio | Las cámaras de comercio y asociaciones gremiales hacen lobby. Tu voz individual es pequeña; la colectiva pesa. |
+| 5 | Implementar cambios | Dar prioridad al cumplimiento. Las multas siempre cuestan más que adaptarse. |
+| 6 | Comunicar a clientes si los afecta | "Debido a [regulación], nuestros precios/procesos cambian a partir del [fecha]" |
+
+---
+
+## 17. Dinámicas de la Empresa Familiar
+
+> El 90% de las empresas en América Latina son familiares. El 70% no sobrevive la transición a la segunda generación. Esta sección aborda los desafíos más comunes.
+
+### 17.1 Conflictos Más Comunes y Cómo Resolverlos
+
+| Conflicto | Frecuencia | Causa raíz | Solución |
+|-----------|-----------|------------|----------|
+| **"Mi hermano no trabaja igual que yo pero gana lo mismo"** | Muy alta | Compensación por parentesco, no por desempeño | Implementar evaluación de desempeño para TODOS. Sueldos según puesto y mercado, no apellido. |
+| **"Mi papá no suelta el control"** | Alta | Fundador que no puede delegar | Proceso gradual: definir áreas donde el hijo decide solo. Reuniones semanales de reporte, no de permiso. |
+| **"Mi cuñado es incompetente pero no lo puedo despedir"** | Alta | Lealtad familiar > eficiencia empresarial | Conversación honesta con el familiar que lo trajo. Reubicar en rol acorde a su capacidad. Si no funciona, salida digna con apoyo económico. |
+| **"Llevamos las decisiones importantes a la mesa familiar"** | Media-Alta | No hay límites entre familia y empresa | Regla: las decisiones de negocio se toman en la oficina, en horario laboral, con datos. La cena es cena. |
+| **"Los empleados no familiares se sienten de segunda clase"** | Alta | Doble estándar, falta de meritocracia | Mismas reglas para todos. Ascensos basados en mérito. Incluir no familiares en decisiones. |
+| **"No sabemos quién es el jefe realmente"** | Media | Autoridad difusa entre familiares | Organigrama claro. UN gerente general con poder de decisión final. Los demás familiares son empleados o directores, no co-gerentes. |
+
+### 17.2 Plan de Sucesión
+
+> La sucesión NO es un evento, es un proceso de 3-5 años.
+
+#### Cronograma de Sucesión
+
+| Fase | Plazo | Actividades | Responsable |
+|------|-------|-------------|-------------|
+| **1. Preparación** | Año 1 | Identificar posibles sucesores (familiares y no familiares). Evaluar capacidades. Definir perfil del puesto. | Fundador + asesor externo |
+| **2. Formación** | Año 2-3 | Sucesor pasa por todas las áreas del negocio. Mentoría del fundador. Capacitación formal (diplomado, MBA). Delegar decisiones progresivamente. | Fundador + sucesor |
+| **3. Co-gestión** | Año 3-4 | Sucesor toma decisiones con supervisión. Presentar al sucesor a clientes, proveedores, bancos. El fundador empieza a retirarse de lo operativo. | Ambos |
+| **4. Transición** | Año 4-5 | Sucesor asume la gerencia general. Fundador pasa a rol de directorio/asesor. Firma de documentos legales de transferencia. | Sucesor + abogado |
+| **5. Consolidación** | Año 5+ | Sucesor opera de forma autónoma. Fundador disponible para consulta pero NO interviene en operación diaria. | Sucesor |
+
+#### Criterios para Elegir al Sucesor
+
+| Criterio | Peso | Cómo evaluarlo |
+|----------|------|---------------|
+| Capacidad de liderazgo | 25% | ¿El equipo lo respeta y lo sigue? |
+| Conocimiento del negocio | 20% | ¿Conoce la operación, los clientes, los números? |
+| Visión estratégica | 20% | ¿Tiene ideas para el futuro del negocio? |
+| Compromiso | 15% | ¿Quiere liderar este negocio o lo hace por obligación? |
+| Capacidad técnica / formación | 10% | ¿Tiene la educación y habilidades necesarias? |
+| Relación con el equipo | 10% | ¿Se lleva bien con empleados familiares y no familiares? |
+
+> **Verdad incómoda:** No todos los hijos quieren o pueden dirigir la empresa. Un buen hijo no es necesariamente un buen gerente. Y está bien.
+
+### 17.3 Separar Familia de Empresa
+
+**Estructura recomendada: El Consejo Familiar**
+
+| Elemento | Qué es | Frecuencia | Quiénes participan |
+|----------|--------|------------|-------------------|
+| **Asamblea Familiar** | Reunión de TODOS los familiares vinculados (dueños y no dueños) | Anual | Toda la familia |
+| **Consejo Familiar** | Grupo pequeño que representa a la familia ante la empresa | Trimestral | 3-5 familiares elegidos |
+| **Directorio de la Empresa** | Órgano de gobierno empresarial | Mensual/Trimestral | Gerente + directores (familiares y externos) |
+| **Protocolo Familiar** | Documento que regula la relación familia-empresa | Se firma una vez, se revisa cada 3-5 años | Todos firman |
+
+#### Contenido del Protocolo Familiar
+
+| Tema | Qué define | Ejemplo |
+|------|-----------|---------|
+| Acceso al empleo | ¿Qué familiares pueden trabajar en la empresa? | "Solo familiares con título profesional y 2+ años de experiencia fuera de la empresa familiar" |
+| Compensación | ¿Cómo se paga a los familiares? | "Según bandas salariales del mercado para el puesto. Ni más ni menos." |
+| Distribución de utilidades | ¿Cuánto se reparte y cuánto se reinvierte? | "50% de utilidades se reinvierte, 50% se distribuye según participación" |
+| Resolución de conflictos | ¿Quién media cuando hay desacuerdo? | "Asesor externo como mediador. Si no se resuelve, arbitraje." |
+| Sucesión | ¿Cómo se elige al próximo líder? | "Evaluación externa + aprobación del consejo familiar" |
+| Venta de participación | ¿Puede un familiar vender su parte? | "Derecho de primera opción para los demás familiares. No se vende a externos sin aprobación unánime." |
+| Salida voluntaria | ¿Qué pasa si un familiar quiere retirarse? | "Se compra su participación a valor libro + 20%, pagadero en 24 cuotas" |
+
+### 17.4 ¿Cuándo Traer Gerencia Profesional (No Familiar)?
+
+| Señal | Descripción |
+|-------|-------------|
+| La empresa creció más allá de la capacidad familiar | Facturación, empleados y complejidad requieren gerencia profesional |
+| Los conflictos familiares afectan el negocio | Las decisiones se toman por emociones, no por datos |
+| Ningún familiar tiene el perfil para el siguiente nivel | No hay sucesor capaz o interesado |
+| Se necesitan habilidades específicas | Transformación digital, expansión internacional, reestructuración financiera |
+| Los empleados no familiares se van | Falta de meritocracia espanta al talento externo |
+
+**Cómo integrar un gerente externo en empresa familiar:**
+
+| Paso | Acción | Error a evitar |
+|------|--------|---------------|
+| 1 | Definir claramente su autoridad por escrito | Que la familia siga decidiendo "por detrás" |
+| 2 | Darle acceso a toda la información financiera | Ocultar problemas y esperar que los "adivine" |
+| 3 | Presentarlo ante clientes, proveedores y equipo con respaldo total | "Es el gerente, pero pregúntame a mí" |
+| 4 | Darle al menos 12 meses para mostrar resultados | Esperar milagros en 3 meses |
+| 5 | Incluirlo en el directorio | Excluirlo de las decisiones estratégicas |
+| 6 | Compensación competitiva (mercado + bono por resultados) | Pagarle menos que a un familiar en puesto inferior |
+
+### 17.5 Estructuras Legales para Proteger Familia Y Empresa
+
+| Estructura | Qué protege | Para quién |
+|-----------|-------------|-----------|
+| **Sociedad por Acciones (SpA) en Chile / SAS en Colombia y Argentina** | Limita responsabilidad al capital aportado. Patrimonio personal protegido. | Cualquier PYME familiar |
+| **Holding familiar** | Centraliza participaciones de la familia. Facilita sucesión y planificación tributaria. | Empresas familiares con patrimonio significativo (>$500M CLP) |
+| **Fideicomiso** | Protege activos de la empresa ante problemas personales de los dueños (divorcio, deudas personales) | Patrimonios grandes o familias con conflictos previsibles |
+| **Pacto de accionistas** | Regula la relación entre socios/familiares: voto, venta, salida, dividendos | TODAS las empresas con más de un dueño |
+| **Testamento empresarial** | Define qué pasa con las acciones al fallecer un socio | TODOS los dueños. Sin testamento, se aplica ley de herencia y puede causar caos |
+| **Seguro de hombre clave** | Póliza que paga a la empresa si el líder fallece o queda incapacitado | Empresas donde 1 persona concentra relaciones clave |
+
+> **Consejo final:** El costo de un buen abogado que estructure estos documentos es una fracción de lo que cuesta un conflicto familiar que destruye una empresa. Es la mejor inversión que puede hacer una empresa familiar.

@@ -1312,3 +1312,442 @@ Firma:
 > 3. Adaptar al pais y rubro especifico del usuario
 > 4. Siempre terminar con UNA accion concreta que el usuario pueda hacer HOY
 > 5. Usar los scripts y templates tal cual, personalizandolos al caso
+
+---
+
+## 10. Scripts de Ventas por Industria
+
+> Scripts listos para copiar, pegar y personalizar. Adaptados a la cultura comercial de LATAM. Ajustar tuteo/usted segun pais y contexto.
+
+### 10.1 Nivel de Formalidad por Pais
+
+| Pais | Tratamiento comercial habitual | Notas |
+|------|-------------------------------|-------|
+| **Chile** | Tu (informal), Usted (primera reunion formal) | Se tutea rapido, pero comenzar con "usted" demuestra respeto |
+| **Mexico** | Usted (predomina en negocios) | Tuteo solo tras confianza establecida. "Licenciado/a" es comun |
+| **Colombia** | Usted (predomina en la mayoria del pais) | En Bogota casi siempre usted. En Costa Caribe mas informal |
+| **Peru** | Usted (contexto formal), Tu (informal) | En Lima se tutea mas; en provincias predomina usted |
+| **Argentina** | Vos (universal) | El voseo es la norma incluso en negocios. "Che" es comun |
+| **Bolivia** | Usted (predomina) | Muy formal en negocios. Tuteo solo con mucha confianza |
+| **Ecuador** | Usted (predomina en Sierra), Tu/Vos (Costa) | En Quito muy formal; en Guayaquil mas informal |
+
+### 10.2 Script: Llamada en Frio (Cold Call)
+
+**Contexto**: Primera llamada a un prospecto que no te conoce. Objetivo: agendar reunion, NO vender.
+
+**Version Chile/Argentina (tuteo/voseo):**
+```
+Tu: Hola [Nombre], como estas? Te habla [Tu nombre] de [Tu empresa].
+    Te llamo porque trabajamos con [tipo de negocio similar] en [ciudad]
+    ayudandolos a [beneficio principal]. Tienes un minutito?
+
+[Si dice SI]:
+Tu: Perfecto. Vi que tienes [algo especifico de su negocio - su local,
+    su pagina, su producto]. Lo que hacemos es [explicar en 1 frase].
+    Por ejemplo, con [cliente similar] logramos [resultado concreto con numero].
+    Te haria sentido agendar 15 minutos para mostrarte como?
+
+[Si dice NO TENGO TIEMPO]:
+Tu: Entiendo perfectamente, no te quiero quitar tiempo. Te puedo
+    mandar un WhatsApp con un resumen de 2 minutos y me dices si te
+    interesa? Cual es tu numero de WhatsApp?
+
+[Si dice NO ME INTERESA]:
+Tu: Sin problema. Solo para entender, ya tienen resuelto el tema de
+    [problema que resuelves]? [Escuchar]. Listo, te dejo mi dato por
+    si cambia la situacion. Exito!
+```
+
+**Version Mexico/Colombia/Peru (usted):**
+```
+Usted: Buenos dias [Nombre], como esta? Le habla [Tu nombre] de [Tu empresa].
+       Le llamo porque trabajamos con [tipo de negocio similar] en [ciudad]
+       ayudandoles a [beneficio principal]. Me permite un momento?
+
+[Si dice SI]:
+Usted: Muchas gracias. Vi que tiene [algo especifico]. Lo que hacemos es
+       [explicar en 1 frase]. Por ejemplo, con [cliente similar] logramos
+       [resultado con numero]. Le haria sentido agendar 15 minutos esta
+       semana para platicarle como funciona?
+
+[Si dice NO TENGO TIEMPO]:
+Usted: Entiendo perfecto, no le quito mas tiempo. Me permite enviarle
+       un mensaje por WhatsApp con un resumen breve? A que numero se lo mando?
+
+[Si dice NO ME INTERESA]:
+Usted: Claro que si, lo respeto totalmente. Solo para entender, ya tienen
+       resuelto el tema de [problema]? [Escuchar]. Perfecto, le dejo mi
+       contacto por si mas adelante le es util. Que le vaya muy bien!
+```
+
+### 10.3 Script: Primer Contacto por WhatsApp
+
+**Contexto**: Lead que llego por redes, formulario o referido. Objetivo: calificar y agendar.
+
+**Template universal (adaptar formalidad):**
+```
+Hola [Nombre]
+
+Soy [Tu nombre] de [Empresa]. [Vi tu mensaje en Instagram / Me paso tu
+contacto [Nombre referido] / Vi que llenaste el formulario].
+
+Nosotros ayudamos a [tipo de negocio] a [beneficio principal].
+Por ejemplo, [caso rapido: "un restaurante en Santiago aumento sus
+reservas un 40% en 2 meses"].
+
+Para ver si te podemos ayudar, me cuentas rapido:
+1. A que se dedica tu negocio?
+2. Cual es el principal desafio que tienes hoy?
+3. Cuantos empleados/sucursales tienes?
+
+Con eso te digo si hay match y agendamos una llamada corta de 15 min
+```
+
+**Errores comunes a evitar:**
+- NO enviar catalogo o precios sin antes calificar
+- NO escribir parrafos enormes (maximo 4 lineas por mensaje)
+- NO usar solo texto: incluir 1 emoji por mensaje maximo
+- NO demorar mas de 15 minutos en responder el primer mensaje
+
+### 10.4 Script: Follow-up Despues de Cotizacion
+
+**Contexto**: Enviaste cotizacion hace 48-72 horas y no hay respuesta.
+
+**Dia 2 (WhatsApp):**
+```
+Hola [Nombre], como estas?
+
+Te escribo para saber si pudiste revisar la cotizacion que te envie
+el [dia]. Tienes alguna duda o hay algo que quieras ajustar?
+
+Quedo atento
+```
+
+**Dia 5 (WhatsApp o llamada):**
+```
+Hola [Nombre], todo bien?
+
+Queria confirmar si la propuesta se ajusta a lo que necesitas.
+Si hay algo de presupuesto o alcance que debamos modificar, con
+gusto lo ajustamos.
+
+Te sirve una llamada rapida de 5 minutos para cerrar los detalles?
+```
+
+**Dia 10 (ultimo follow-up):**
+```
+Hola [Nombre], espero que estes bien.
+
+Entiendo que quizas no es el momento o decidieron ir por otro camino,
+y lo respeto totalmente. Solo queria dejarte la puerta abierta:
+si en el futuro necesitas [servicio], aqui estamos.
+
+Me confirmas si lo dejamos pendiente o si hay algo mas que pueda hacer?
+
+Saludos!
+```
+
+### 10.5 Script: Manejo de Objeciones de Cierre
+
+| Objecion | Respuesta recomendada |
+|----------|----------------------|
+| **"Esta muy caro"** | "Entiendo. Comparado con que referencia? [Escuchar]. Mira, el precio incluye [listar valor]. Si solo ves el costo es X, pero si consideras [ahorro/ganancia que genera], la inversion se paga sola en [tiempo]. Que presupuesto tenias en mente? Veamos como ajustarlo." |
+| **"Lo tengo que pensar"** | "Por supuesto. Para ayudarte a pensar mejor, que es lo que mas te preocupa: el precio, el resultado o el momento? [Escuchar]. Si es [respuesta], lo que puedo hacer es [solucion concreta]." |
+| **"Tengo que consultarlo con mi socio/esposa"** | "Claro, es importante. Cuando van a poder conversarlo? Te propongo esto: agendamos una llamada el [dia] con los dos? Asi respondo las dudas directamente." |
+| **"Ya trabajo con otro proveedor"** | "Que bueno que ya tienen resuelto eso. Estan 100% contentos o hay algo que mejorar? [Escuchar]. Mira, muchos clientes nos eligen como segundo proveedor/complemento. Te gustaria tener un punto de comparacion?" |
+| **"No es el momento"** | "Entiendo. Cuando seria mejor? [Escuchar]. Perfecto, te contacto en [fecha]. Mientras, te mando [recurso de valor] para que lo tengas. Por donde te lo envio?" |
+| **"Mandame la info por correo"** | "Con gusto. Pero para enviarte la info correcta, dejame hacerte 2 preguntas rapidas: [calificar]. Listo, te envio algo personalizado en los proximos 30 minutos." |
+| **"Y si no funciona?"** | "Es una preocupacion valida. Por eso [garantia/periodo de prueba/caso de exito]. Ademas, [X clientes] ya lo usan con [resultado]. Te gustaria hablar con uno de ellos?" |
+
+### 10.6 Script: Pedir Referidos
+
+**Contexto**: Cliente satisfecho, 1-2 semanas despues de entrega exitosa.
+
+```
+Hola [Nombre], como va todo con [producto/servicio]?
+
+Me alegra que te haya funcionado. Oye, te quiero pedir un favor:
+Conoces a 2-3 personas con un negocio similar que pudieran necesitar
+[lo que hicimos por ti]?
+
+No tiene que ser ahora — si se te ocurre alguien, solo pasame su
+WhatsApp o dile que me escriba.
+
+Como agradecimiento, [incentivo: descuento 10% proximo pedido / mes
+gratis / regalo].
+
+Gracias!
+```
+
+**Variante para Google Reviews:**
+```
+[Nombre], me ayudarias mucho si dejas una resena en Google de tu
+experiencia. Toma 1 minuto y nos ayuda a que mas negocios como el
+tuyo nos encuentren.
+
+Aqui esta el link directo: [link]
+
+Mil gracias!
+```
+
+---
+
+## 11. Estrategias de Precios con Ejemplos Reales LATAM
+
+### 11.1 Tabla Comparativa de 10 Estrategias
+
+| # | Estrategia | Definicion | Mejor para | Riesgo principal |
+|---|-----------|-----------|-----------|-----------------|
+| 1 | **Costo + margen** | Costo de produccion + % fijo de ganancia | Manufactura, alimentos, retail | Si el costo sube, el precio sube y puedes perder competitividad |
+| 2 | **Basada en valor** | Precio segun el valor percibido por el cliente | Servicios profesionales, consultoria, software | Requiere comunicar muy bien el valor |
+| 3 | **Competitiva** | Precio similar al de la competencia | Mercados comoditizados (ferreteria, abarrotes) | Carrera al fondo — siempre habra alguien mas barato |
+| 4 | **Penetracion** | Precio bajo al inicio para ganar mercado | Lanzamientos, e-commerce, nuevas categorias | Dificil subir precio despues; margen bajo al inicio |
+| 5 | **Descreme (Skimming)** | Precio alto al inicio, baja gradualmente | Tecnologia, moda, productos exclusivos | Requiere diferenciacion real; competencia puede copiar |
+| 6 | **Paquete (Bundle)** | Varios productos/servicios juntos a precio menor que individual | Restaurantes (combos), SaaS, servicios | El cliente puede no querer todo el paquete |
+| 7 | **Escalonada (Tiered)** | 3 niveles de precio con distintos beneficios | SaaS, membresias, servicios recurrentes | Complejidad; el plan intermedio debe ser el mas atractivo |
+| 8 | **Freemium** | Version gratis + version pagada premium | Apps, SaaS, contenido digital | Solo 2-5% convierten a pago; necesitas volumen |
+| 9 | **Dinamica** | Precio varia segun demanda, hora, temporada | Hoteleria, transporte, delivery, eventos | Clientes pueden sentirla injusta si no se comunica bien |
+| 10 | **Psicologica** | Precios que explotan sesgos cognitivos ($9.990 en vez de $10.000) | Todo retail y e-commerce | Efecto marginal; no compensa un producto malo |
+
+### 11.2 Ejemplos Reales por Estrategia
+
+**1. Costo + Margen — Panaderia en Bogota, Colombia**
+- Costo de produccion de 1 pan artesanal: $1,200 COP (harina, levadura, mano de obra, gas)
+- Margen objetivo: 60%
+- Precio de venta: $1,200 x 1.60 = **$1,920 COP** → se redondea a **$2,000 COP**
+- Ventaja: facil de calcular. Desventaja: no considera que el cliente pagaria $2,500 si el pan es premium
+
+**2. Basada en Valor — Consultora contable en Santiago, Chile**
+- Costo real del servicio mensual: $150,000 CLP (horas del contador)
+- Valor para el cliente: evita multas del SII de $1-5M CLP, ahorra 20 horas/mes del dueno
+- Precio cobrado: **$350,000 CLP/mes**
+- Justificacion: "Nuestro servicio te ahorra $1.2M al ano en multas y te libera 20 horas mensuales"
+
+**3. Competitiva — Ferreteria en Lima, Peru**
+- Revisa precios de Sodimac, Promart y ferreterias vecinas para cemento, pintura, herramientas
+- Fija precios 3-5% por debajo de grandes tiendas
+- Compensa con atencion personalizada y delivery gratis en zona
+- Precio cemento bolsa: Sodimac S/28.90, Ferreteria local: **S/27.50**
+
+**4. Penetracion — Tienda de ropa online en CDMX, Mexico**
+- Lanzamiento con precios 30% debajo del mercado por 3 meses
+- Playera basica: mercado $299 MXN, precio lanzamiento **$199 MXN**
+- Objetivo: conseguir 500 clientes y 100 resenas en MercadoLibre
+- Despues de 3 meses, sube a $279 MXN (aun competitivo, ya con reputacion)
+
+**5. Descreme — Academia de cursos online en Buenos Aires, Argentina**
+- Curso nuevo de marketing digital: precio lanzamiento **$45,000 ARS** (primeros 50 cupos)
+- Mes 2: baja a $35,000 ARS con contenido grabado (ya no es en vivo)
+- Mes 4: precio final $25,000 ARS (version grabada, sin mentoria)
+- Captura la disposicion a pagar mas de early adopters
+
+**6. Bundle — Restaurante en Quito, Ecuador**
+- Almuerzo individual: sopa $2.50, plato fuerte $4.50, jugo $1.50, postre $2.00 = **$10.50**
+- Combo almuerzo ejecutivo: **$7.99** (todo incluido)
+- El cliente siente ahorro de $2.51 (24%). El restaurante vende postre y jugo que muchos no pedirian
+- Ticket promedio sube de $6.00 (solo plato + jugo) a $7.99
+
+**7. Escalonada — Agencia de diseno en Medellin, Colombia**
+- Plan Basico: 4 piezas graficas/mes — **$350,000 COP/mes**
+- Plan Profesional: 10 piezas + manejo redes — **$750,000 COP/mes** ← mas popular
+- Plan Premium: 20 piezas + redes + pauta + estrategia — **$1,500,000 COP/mes**
+- El plan del medio siempre debe ser el que mas quieres vender (efecto ancla)
+
+**8. Freemium — App de facturacion en Chile**
+- Plan gratis: 10 facturas/mes, 1 usuario
+- Plan Pro: facturas ilimitadas, reportes, multi-usuario — **$19,990 CLP/mes**
+- Plan Empresa: API, integraciones, soporte prioritario — **$49,990 CLP/mes**
+- Conversion esperada: 3-5% de usuarios gratis pasan a Pro
+
+**9. Dinamica — Hotel boutique en Cartagena, Colombia**
+- Temporada baja (feb-may): **$180,000 COP/noche**
+- Temporada media (jun-oct): **$280,000 COP/noche**
+- Temporada alta (nov-ene, Semana Santa): **$420,000 COP/noche**
+- Fines de semana: +25% sobre tarifa base
+- Puentes festivos: +40% sobre tarifa base
+
+**10. Psicologica — E-commerce de accesorios en Mexico**
+- En vez de $300 MXN → **$299 MXN** (efecto de digito izquierdo)
+- En vez de $1,000 MXN → **$997 MXN** (parece calculado, no arbitrario)
+- Precio ancla: mostrar "Antes: ~~$599~~ Ahora: **$399 MXN**" (efecto de comparacion)
+- Envio "gratis" incluido en el precio: $350 → $399 con envio gratis (el cliente prefiere)
+- Paquetes de 3 por $999 en vez de $350 c/u (percepcion de oferta)
+
+### 11.3 Formula Rapida para Fijar Precio
+
+```
+PASO 1: Calcular costo total (materiales + mano de obra + gastos fijos prorrateados)
+PASO 2: Investigar precios de 3-5 competidores directos
+PASO 3: Definir tu margen minimo aceptable (tipico PYME LATAM: 30-60%)
+PASO 4: Evaluar valor percibido (el cliente pagaria mas?)
+PASO 5: Precio = MAX(costo x (1 + margen), precio de valor percibido x 0.8)
+PASO 6: Ajustar psicologicamente (terminar en 9, 7 o 5)
+PASO 7: Probar 30 dias y medir conversion
+```
+
+---
+
+## 12. Benchmarks de Canales de Venta LATAM
+
+### 12.1 Conversion y CAC por Canal
+
+| Canal | Tasa de conversion tipica | CAC promedio LATAM | Tiempo al primer cierre | Mejor para |
+|-------|--------------------------|-------------------|------------------------|-----------|
+| **WhatsApp Business** | 15-25% (de contacto a venta) | $2-8 USD | 1-7 dias | Cualquier PYME con venta consultiva |
+| **Instagram DM** | 5-12% | $5-15 USD | 3-14 dias | Moda, belleza, gastronomia, fitness |
+| **Facebook Marketplace** | 8-18% | $3-10 USD | 1-5 dias | Productos fisicos, usado, retail |
+| **MercadoLibre** | 3-8% (de visita a compra) | $8-25 USD | Inmediato a 3 dias | Productos estandarizados, electronics, hogar |
+| **Google My Business** | 10-20% (de busqueda a contacto) | $0 (organico) | 1-3 dias | Servicios locales, restaurantes, salud |
+| **Cold email** | 1-3% (de email a reunion) | $15-40 USD | 2-6 semanas | B2B, servicios profesionales |
+| **Referidos** | 30-50% | $0-5 USD | 1-14 dias | Todos. El canal mas rentable que existe |
+| **Ferias y eventos** | 10-25% (de contacto en feria a venta) | $20-80 USD por lead | 2-8 semanas | Manufactura, alimentos, B2B |
+| **Google Ads (Search)** | 5-12% (clic a lead) | $10-35 USD | 1-7 dias | Servicios con busqueda activa (plomero, abogado) |
+| **TikTok / Reels** | 1-4% (de vista a compra) | $5-20 USD | Inmediato a 7 dias | Productos virales, moda, food |
+
+### 12.2 Datos por Pais — WhatsApp Business
+
+| Metrica | Chile | Mexico | Colombia | Peru | Argentina | Bolivia | Ecuador |
+|---------|-------|--------|----------|------|-----------|---------|---------|
+| Penetracion WhatsApp (adultos) | 92% | 95% | 96% | 89% | 90% | 83% | 88% |
+| Tasa apertura mensajes business | 85-95% | 85-95% | 85-95% | 80-90% | 85-93% | 80-90% | 82-92% |
+| Tasa respuesta promedio | 35-45% | 30-40% | 35-50% | 30-40% | 30-40% | 25-35% | 28-38% |
+| Conversion contacto→venta | 18-25% | 15-22% | 20-28% | 15-20% | 15-22% | 12-18% | 14-20% |
+| Mejor horario para enviar | 10-12h, 17-19h | 10-13h, 18-20h | 9-12h, 18-20h | 10-12h, 17-19h | 10-12h, 18-20h | 10-12h, 15-17h | 9-12h, 17-19h |
+
+### 12.3 Datos por Pais — Instagram Comercial
+
+| Metrica | Chile | Mexico | Colombia | Peru | Argentina |
+|---------|-------|--------|----------|------|-----------|
+| Engagement rate promedio PYME | 2.5-4.5% | 2.0-3.8% | 3.0-5.5% | 2.5-4.0% | 2.8-5.0% |
+| Costo por clic (Meta Ads) | $0.15-0.40 USD | $0.08-0.25 USD | $0.05-0.18 USD | $0.06-0.20 USD | $0.04-0.15 USD |
+| Mejor dia para publicar | Mar-Jue | Mie-Vie | Mar-Jue | Mie-Vie | Lun-Mie |
+| Mejor hora | 12-14h, 19-21h | 13-15h, 20-22h | 12-14h, 19-21h | 12-14h, 19-21h | 13-15h, 20-22h |
+| Hashtags efectivos (cantidad) | 8-15 | 10-20 | 10-18 | 8-15 | 10-15 |
+
+### 12.4 MercadoLibre — Benchmarks por Categoria
+
+| Categoria | Margen tipico vendedor | Comision ML | Conversion visita→compra | Ticket promedio |
+|-----------|----------------------|-------------|-------------------------|-----------------|
+| Electronica | 15-25% | 11-16% + IVA | 4-8% | $80-250 USD |
+| Ropa y accesorios | 40-65% | 11-16% + IVA | 2-5% | $15-50 USD |
+| Hogar y muebles | 30-50% | 11-16% + IVA | 3-7% | $40-150 USD |
+| Herramientas | 25-40% | 11-16% + IVA | 5-10% | $20-80 USD |
+| Belleza y cuidado | 45-70% | 11-16% + IVA | 3-6% | $10-35 USD |
+| Automotriz (repuestos) | 30-50% | 11-16% + IVA | 6-12% | $15-60 USD |
+
+### 12.5 Referidos — Estructura de Programa
+
+| Elemento | Recomendacion PYME |
+|----------|-------------------|
+| Incentivo al que refiere | 10-15% descuento proximo pedido O regalo concreto |
+| Incentivo al referido | 5-10% descuento primera compra |
+| Mecanismo | Link personalizado, codigo, o simplemente "dile que vas de parte de [nombre]" |
+| Seguimiento | Registro manual en Excel o CRM. Agradecer siempre |
+| Momento de pedir | 7-14 dias despues de entrega exitosa |
+| Frecuencia | Maximo 1 vez por trimestre al mismo cliente |
+| Tasa de exito tipica | 1 de cada 5 clientes satisfechos refiere si le pides |
+| Meta razonable | 20-30% de nuevos clientes por referidos |
+
+---
+
+## 13. CRM y Herramientas de Gestion Comercial para PYMEs
+
+### 13.1 Comparativa de CRM
+
+| Herramienta | Precio mensual (USD) | Usuarios incluidos | Contactos | Mejor para | Curva de aprendizaje |
+|-------------|---------------------|-------------------|-----------|-----------|---------------------|
+| **Excel / Google Sheets** | $0 | Ilimitados | Ilimitados | PYMEs con <50 clientes activos | Baja |
+| **HubSpot CRM Free** | $0 | Ilimitados | 1,000,000 | PYMEs que quieren crecer sin pagar | Media |
+| **Pipedrive** | $14-99/usuario | 1 | Ilimitados | Equipos de venta de 2-10 personas | Media |
+| **Clientify** | $39-99 | 1-3 | 1,000-10,000 | PYMEs LATAM con foco en WhatsApp | Media |
+| **monday.com** | $0-19/usuario | 2 (gratis) | Segun plan | Equipos que ya usan monday para proyectos | Media-Alta |
+| **Notion** | $0-10/usuario | 1 (gratis) | Ilimitados (manual) | Solopreneurs organizados, equipos tech | Media |
+
+### 13.2 Detalle por Herramienta
+
+#### Excel / Google Sheets (Gratis)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $0 |
+| **Pros** | Ya lo conoces; 100% personalizable; sin limite de datos; funciona offline (Excel) |
+| **Contras** | Sin automatizaciones; facil que se desordene; no multiusuario simultaneo (Excel); sin recordatorios |
+| **Mejor para** | Negocios con <50 clientes activos y 1 vendedor |
+| **Template sugerido** | Columnas: Nombre, Empresa, Telefono/WhatsApp, Email, Etapa (Lead/Cotizado/Cerrado/Perdido), Monto, Fecha ultimo contacto, Proxima accion, Notas |
+| **Tip LATAM** | Usar Google Sheets compartido. Agregar columna "Fuente" (referido, Instagram, Google, etc.) para saber que canal funciona |
+
+#### HubSpot CRM Free
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $0 (plan free); $20/mes (Starter); $100/mes (Professional) |
+| **Pros** | Muy completo gratis; pipeline visual; tracking de emails; integracion con Gmail/Outlook; app movil |
+| **Contras** | Funciones avanzadas caras; soporte solo en planes pagos; puede ser abrumador al inicio |
+| **Mejor para** | PYMEs de 2-20 empleados que quieren profesionalizar ventas sin inversion inicial |
+| **Integraciones utiles** | Gmail, Outlook, WhatsApp (via integracion terceros), Zoom, Google Calendar |
+| **Tip LATAM** | Configurar pipeline en espanol con etapas: Nuevo Lead → Contactado → Cotizacion Enviada → Negociacion → Ganado/Perdido |
+
+#### Pipedrive
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $14 (Essential), $29 (Advanced), $49 (Professional), $99 (Power) por usuario/mes |
+| **Pros** | Interfaz visual intuitiva; hecho para vendedores; automatizaciones potentes; excelente app movil |
+| **Contras** | Sin plan gratis; costo escala rapido con equipo; marketing features limitados |
+| **Mejor para** | Equipos de venta de 3-10 personas con proceso definido |
+| **Integraciones utiles** | WhatsApp (via Twilio/360dialog), Slack, Zapier, Google Workspace |
+| **Tip LATAM** | Plan Essential ($14/usuario) es suficiente para la mayoria de PYMEs. Activar recordatorios de seguimiento automaticos |
+
+#### Clientify
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $39 (Solo), $79 (Growth), $99 (Enterprise) por mes |
+| **Pros** | Hecho para LATAM y Espana; integracion nativa WhatsApp; CRM + email marketing + landing pages; soporte en espanol |
+| **Contras** | Menos conocido; limites de contactos; puede ser lento en plan basico |
+| **Mejor para** | PYMEs LATAM que venden por WhatsApp y quieren todo en uno |
+| **Integraciones utiles** | WhatsApp Business API, Facebook Lead Ads, Instagram, WordPress |
+| **Tip LATAM** | Es el unico CRM con WhatsApp nativo incluido. Ideal si tu canal principal de venta es WhatsApp |
+
+#### monday.com
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $0 (Individual, 2 usuarios), $9 (Basic), $12 (Standard), $19 (Pro) por usuario/mes |
+| **Pros** | Muy visual; flexible para CRM + proyectos + operaciones; buenas automatizaciones |
+| **Contras** | No es un CRM nativo (hay que configurarlo); plan gratis muy limitado; costo sube rapido |
+| **Mejor para** | PYMEs que ya usan monday para gestionar proyectos y quieren agregar ventas ahi mismo |
+| **Tip LATAM** | Usar el template "CRM" predefinido. Agregar columna de WhatsApp con link directo (wa.me/numero) |
+
+#### Notion
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Precio** | $0 (gratis, 1 usuario), $10/usuario (Plus), $18/usuario (Business) |
+| **Pros** | Ultra flexible; se adapta a cualquier proceso; bonito; bases de datos relacionales; templates comunidad |
+| **Contras** | Hay que construir todo; sin automatizaciones nativas para ventas; sin integracion WhatsApp; sin pipeline nativo |
+| **Mejor para** | Solopreneurs tech-savvy que quieren un sistema a medida |
+| **Tip LATAM** | Buscar templates de CRM en espanol en la comunidad de Notion. Combinar con Zapier para automatizar |
+
+### 13.3 Guia de Decision Rapida
+
+```
+Cuantos vendedores tienes?
+├── Solo yo → Excel/Sheets o Notion
+├── 2-3 personas → HubSpot Free o Clientify
+├── 4-10 personas → Pipedrive o HubSpot Starter
+└── 10+ personas → HubSpot Professional o Pipedrive Professional
+
+Tu canal principal es WhatsApp?
+├── Si → Clientify (nativo) o Pipedrive + integracion
+└── No → HubSpot Free
+
+Tu presupuesto mensual para CRM?
+├── $0 → Sheets, HubSpot Free, Notion
+├── $15-50 USD → Pipedrive Essential, Clientify Solo
+└── $50-150 USD → Pipedrive Advanced, Clientify Growth, HubSpot Starter
+```
+
+---
+
+> **Nota para el agente**: Las secciones 10-13 complementan la base original. Al responder consultas sobre ventas, combinar la informacion de estas secciones con las secciones 1-9 originales para dar respuestas completas, con scripts listos para usar y datos concretos por pais.

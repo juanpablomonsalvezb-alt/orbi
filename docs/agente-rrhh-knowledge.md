@@ -2022,3 +2022,826 @@ Tiempo para cubrir (días) = Fecha de inicio del nuevo empleado - Fecha de solic
 ---
 
 *Este documento es una guía práctica y no sustituye asesoría legal específica. Las leyes laborales cambian frecuentemente. Siempre consultar con un abogado laboralista del país correspondiente para decisiones legales concretas.*
+
+---
+
+## 10. Benchmarks Salariales LATAM 2025-2026
+
+> Salarios mensuales brutos promedio para PYMEs (5-50 empleados). Datos referenciales basados en encuestas salariales regionales, portales de empleo y cámaras de comercio. Los valores varían según ciudad, industria y experiencia.
+
+### 10.1 Chile (CLP → USD referencial: 1 USD ≈ 920 CLP)
+
+| Cargo | Salario mensual bruto (CLP) | Equivalente USD | Rango |
+|-------|----------------------------|-----------------|-------|
+| Vendedor/a tienda | $550.000 - $750.000 | $598 - $815 | Sueldo mínimo + comisiones |
+| Administrativo/a | $600.000 - $850.000 | $652 - $924 | Depende de funciones |
+| Contador/a | $800.000 - $1.200.000 | $870 - $1.304 | Junior vs Senior |
+| Community Manager | $650.000 - $1.000.000 | $707 - $1.087 | Part-time vs full-time |
+| Programador/a Jr | $900.000 - $1.400.000 | $978 - $1.522 | Alta demanda |
+| Jefe de local | $750.000 - $1.100.000 | $815 - $1.196 | Incluye bono por metas |
+| Bodeguero/a | $500.000 - $650.000 | $543 - $707 | Cercano al mínimo |
+| Chofer | $550.000 - $800.000 | $598 - $870 | Varía según licencia |
+| Diseñador/a gráfico | $700.000 - $1.100.000 | $761 - $1.196 | Freelance suele ser más |
+
+**Sueldo mínimo Chile (2025):** $500.000 CLP (~$543 USD)
+
+### 10.2 México (MXN → USD referencial: 1 USD ≈ 17.5 MXN)
+
+| Cargo | Salario mensual bruto (MXN) | Equivalente USD | Rango |
+|-------|----------------------------|-----------------|-------|
+| Vendedor/a tienda | $8.500 - $12.000 | $486 - $686 | Base + comisiones |
+| Administrativo/a | $10.000 - $15.000 | $571 - $857 | CDMX paga más |
+| Contador/a | $13.000 - $22.000 | $743 - $1.257 | Depende si es CPA |
+| Community Manager | $10.000 - $16.000 | $571 - $914 | Más en CDMX/Monterrey |
+| Programador/a Jr | $15.000 - $25.000 | $857 - $1.429 | Remoto paga mejor |
+| Jefe de local | $12.000 - $18.000 | $686 - $1.029 | Retail/restaurante |
+| Bodeguero/a | $7.500 - $10.000 | $429 - $571 | Cercano al mínimo |
+| Chofer | $9.000 - $14.000 | $514 - $800 | Licencia tipo B/C |
+| Diseñador/a gráfico | $11.000 - $18.000 | $629 - $1.029 | Freelance común |
+
+**Sueldo mínimo México (2025):** $7.468 MXN zona general (~$427 USD)
+
+### 10.3 Colombia (COP → USD referencial: 1 USD ≈ 4.200 COP)
+
+| Cargo | Salario mensual bruto (COP) | Equivalente USD | Rango |
+|-------|----------------------------|-----------------|-------|
+| Vendedor/a tienda | $1.400.000 - $1.900.000 | $333 - $452 | SMLV + comisiones |
+| Administrativo/a | $1.500.000 - $2.200.000 | $357 - $524 | Bogotá paga más |
+| Contador/a | $2.000.000 - $3.500.000 | $476 - $833 | Con tarjeta profesional |
+| Community Manager | $1.500.000 - $2.500.000 | $357 - $595 | Ciudades principales |
+| Programador/a Jr | $2.500.000 - $4.500.000 | $595 - $1.071 | Alta demanda |
+| Jefe de local | $1.800.000 - $2.800.000 | $429 - $667 | Incluye variable |
+| Bodeguero/a | $1.300.000 - $1.600.000 | $310 - $381 | Cercano al SMLV |
+| Chofer | $1.400.000 - $2.000.000 | $333 - $476 | Según categoría |
+| Diseñador/a gráfico | $1.800.000 - $3.000.000 | $429 - $714 | Freelance crece |
+
+**Salario mínimo Colombia (2025):** $1.423.500 COP (~$339 USD) + auxilio transporte $200.000
+
+### 10.4 Perú (PEN → USD referencial: 1 USD ≈ 3.75 PEN)
+
+| Cargo | Salario mensual bruto (PEN) | Equivalente USD | Rango |
+|-------|----------------------------|-----------------|-------|
+| Vendedor/a tienda | S/ 1.200 - S/ 1.800 | $320 - $480 | RMV + comisiones |
+| Administrativo/a | S/ 1.400 - S/ 2.200 | $373 - $587 | Lima paga más |
+| Contador/a | S/ 2.000 - S/ 3.500 | $533 - $933 | CPC requerido |
+| Community Manager | S/ 1.300 - S/ 2.200 | $347 - $587 | Crecimiento rápido |
+| Programador/a Jr | S/ 2.200 - S/ 4.000 | $587 - $1.067 | Escasez de talento |
+| Jefe de local | S/ 1.800 - S/ 2.800 | $480 - $747 | Con variable |
+| Bodeguero/a | S/ 1.100 - S/ 1.400 | $293 - $373 | Cercano a RMV |
+| Chofer | S/ 1.300 - S/ 2.000 | $347 - $533 | Categoría A-II o más |
+| Diseñador/a gráfico | S/ 1.500 - S/ 2.800 | $400 - $747 | Freelance frecuente |
+
+**Remuneración Mínima Vital Perú (2025):** S/ 1.130 (~$301 USD)
+
+### 10.5 Argentina (ARS → USD referencial: 1 USD ≈ 1.150 ARS — tipo de cambio oficial, alta volatilidad)
+
+| Cargo | Salario mensual bruto (ARS) | Equivalente USD | Nota |
+|-------|----------------------------|-----------------|------|
+| Vendedor/a tienda | $650.000 - $950.000 | $565 - $826 | Paritarias sindicales |
+| Administrativo/a | $700.000 - $1.100.000 | $609 - $957 | CABA paga más |
+| Contador/a | $900.000 - $1.600.000 | $783 - $1.391 | Matriculado vale más |
+| Community Manager | $650.000 - $1.200.000 | $565 - $1.043 | Muchos freelance |
+| Programador/a Jr | $1.200.000 - $2.200.000 | $1.043 - $1.913 | Dolarizado de facto |
+| Jefe de local | $800.000 - $1.400.000 | $696 - $1.217 | Comercio/gastronomía |
+| Bodeguero/a | $550.000 - $750.000 | $478 - $652 | Convenio logística |
+| Chofer | $700.000 - $1.100.000 | $609 - $957 | Camioneros bien pago |
+| Diseñador/a gráfico | $750.000 - $1.300.000 | $652 - $1.130 | Remoto dolarizado |
+
+**Salario mínimo Argentina (2025):** ~$540.000 ARS (~$470 USD) — se actualiza frecuentemente
+
+### 10.6 Bolivia (BOB → USD referencial: 1 USD ≈ 6.9 BOB)
+
+| Cargo | Salario mensual bruto (BOB) | Equivalente USD | Rango |
+|-------|----------------------------|-----------------|-------|
+| Vendedor/a tienda | Bs 2.800 - Bs 3.800 | $406 - $551 | Mínimo + comisiones |
+| Administrativo/a | Bs 3.000 - Bs 4.500 | $435 - $652 | La Paz/Santa Cruz |
+| Contador/a | Bs 4.000 - Bs 7.000 | $580 - $1.014 | Auditor externo más |
+| Community Manager | Bs 3.000 - Bs 5.000 | $435 - $725 | Mercado pequeño |
+| Programador/a Jr | Bs 5.000 - Bs 9.000 | $725 - $1.304 | Escaso, paga bien |
+| Jefe de local | Bs 3.500 - Bs 5.500 | $507 - $797 | Con bonos |
+| Bodeguero/a | Bs 2.500 - Bs 3.200 | $362 - $464 | Cercano al mínimo |
+| Chofer | Bs 3.000 - Bs 4.500 | $435 - $652 | Según tipo de vehículo |
+| Diseñador/a gráfico | Bs 3.500 - Bs 6.000 | $507 - $870 | Freelance creciente |
+
+**Salario mínimo Bolivia (2025):** Bs 2.500 (~$362 USD)
+
+### 10.7 Ecuador (USD — economía dolarizada)
+
+| Cargo | Salario mensual bruto (USD) | Rango |
+|-------|----------------------------|-------|
+| Vendedor/a tienda | $460 - $650 | SBU + comisiones |
+| Administrativo/a | $500 - $800 | Quito/Guayaquil |
+| Contador/a | $700 - $1.200 | CPA valioso |
+| Community Manager | $500 - $850 | Crecimiento rápido |
+| Programador/a Jr | $800 - $1.400 | Mercado competitivo |
+| Jefe de local | $600 - $1.000 | Con variable |
+| Bodeguero/a | $460 - $550 | Cercano al SBU |
+| Chofer | $480 - $700 | Tipo de licencia |
+| Diseñador/a gráfico | $550 - $950 | Freelance frecuente |
+
+**Salario Básico Unificado Ecuador (2025):** $460 USD
+
+### 10.8 Resumen comparativo regional (USD, promedio mid-range)
+
+| Cargo | Chile | México | Colombia | Perú | Argentina | Bolivia | Ecuador |
+|-------|-------|--------|----------|------|-----------|---------|---------|
+| Vendedor/a | $707 | $586 | $393 | $400 | $696 | $478 | $555 |
+| Administrativo/a | $788 | $714 | $440 | $480 | $783 | $543 | $650 |
+| Contador/a | $1.087 | $1.000 | $655 | $733 | $1.087 | $797 | $950 |
+| Community Manager | $897 | $743 | $476 | $467 | $804 | $580 | $675 |
+| Programador/a Jr | $1.250 | $1.143 | $833 | $827 | $1.478 | $1.014 | $1.100 |
+| Jefe de local | $1.005 | $857 | $548 | $613 | $957 | $652 | $800 |
+| Bodeguero/a | $625 | $500 | $345 | $333 | $565 | $413 | $505 |
+| Chofer | $734 | $657 | $405 | $440 | $783 | $543 | $590 |
+| Diseñador/a | $978 | $829 | $571 | $573 | $891 | $688 | $750 |
+
+> **Nota:** Chile y Argentina tienen los salarios más altos en USD; Colombia y Perú los más competitivos. Argentina tiene alta volatilidad cambiaria. Programadores están dolarizados en toda la región.
+
+---
+
+## 11. Templates de Proceso de Contratación
+
+### 11.1 Template de Descripción de Puesto
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                  DESCRIPCIÓN DE PUESTO — [EMPRESA]                  ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║ TÍTULO DEL PUESTO: _________________________________________        ║
+║ ÁREA/DEPARTAMENTO: _________________________________________        ║
+║ REPORTA A: _________________________________________________        ║
+║ UBICACIÓN: __________________  MODALIDAD: Presencial / Híbrido / Remoto ║
+║ TIPO DE CONTRATO: Plazo fijo / Indefinido / Honorarios              ║
+║ RANGO SALARIAL: $_________ - $_________ bruto mensual               ║
+║ FECHA DE PUBLICACIÓN: ___/___/______                                 ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ PROPÓSITO DEL PUESTO (1-2 oraciones):                                ║
+║ ________________________________________________________________    ║
+║ ________________________________________________________________    ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ RESPONSABILIDADES PRINCIPALES (máximo 8):                            ║
+║                                                                      ║
+║ 1. ____________________________________________________________     ║
+║ 2. ____________________________________________________________     ║
+║ 3. ____________________________________________________________     ║
+║ 4. ____________________________________________________________     ║
+║ 5. ____________________________________________________________     ║
+║ 6. ____________________________________________________________     ║
+║ 7. ____________________________________________________________     ║
+║ 8. ____________________________________________________________     ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ REQUISITOS OBLIGATORIOS:                                             ║
+║                                                                      ║
+║ • Educación mínima: ___________________________________________     ║
+║ • Experiencia mínima: _________ años en ______________________     ║
+║ • Conocimientos técnicos: ____________________________________     ║
+║ • Herramientas/software: _____________________________________     ║
+║                                                                      ║
+║ REQUISITOS DESEABLES (no excluyentes):                               ║
+║                                                                      ║
+║ • _____________________________________________________________     ║
+║ • _____________________________________________________________     ║
+║ • _____________________________________________________________     ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ COMPETENCIAS BLANDAS REQUERIDAS (elegir 3-4):                        ║
+║                                                                      ║
+║ □ Trabajo en equipo        □ Comunicación efectiva                   ║
+║ □ Orientación al cliente   □ Proactividad                            ║
+║ □ Organización             □ Resolución de problemas                 ║
+║ □ Adaptabilidad            □ Liderazgo                               ║
+║ □ Tolerancia a la presión  □ Atención al detalle                     ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ INDICADORES DE ÉXITO (¿cómo se mide si hace bien su trabajo?):      ║
+║                                                                      ║
+║ A los 30 días: ______________________________________________        ║
+║ A los 90 días: ______________________________________________        ║
+║ A los 6 meses: ______________________________________________        ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ BENEFICIOS QUE OFRECEMOS:                                            ║
+║                                                                      ║
+║ • _____________________________________________________________     ║
+║ • _____________________________________________________________     ║
+║ • _____________________________________________________________     ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ PROCESO DE POSTULACIÓN:                                              ║
+║ Enviar CV a: _______________ con asunto: "Postulación [CARGO]"       ║
+║ Plazo: hasta el ___/___/______                                       ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+### 11.2 Banco de Preguntas para Entrevistas en PYMEs
+
+> 20 preguntas diseñadas para equipos pequeños donde cada persona cuenta. No son preguntas corporativas — son prácticas y reveladoras.
+
+**Bloque 1: Conocer a la persona (calentar la conversación)**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 1 | Cuéntame tu historia: ¿cómo llegaste a hacer lo que haces hoy? | Trayectoria, motivaciones, capacidad de síntesis |
+| 2 | ¿Qué es lo que más te gustó y lo que menos te gustó de tu último trabajo? | Honestidad, qué lo motiva/desmotiva |
+| 3 | Si le pregunto a tu último jefe cómo eras como empleado, ¿qué me diría? | Autoconocimiento, honestidad |
+
+**Bloque 2: Competencias para PYME (donde todos hacen de todo)**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 4 | En un equipo chico, a veces hay que hacer cosas fuera de tu cargo. Dame un ejemplo de cuando hiciste algo que "no te tocaba". | Flexibilidad, actitud |
+| 5 | ¿Cómo te organizas cuando tienes 5 tareas urgentes al mismo tiempo? | Priorización, manejo del estrés |
+| 6 | Cuéntame de una vez que cometiste un error en el trabajo. ¿Qué pasó y qué hiciste? | Responsabilidad, aprendizaje |
+| 7 | ¿Prefieres que te digan exactamente qué hacer o que te den el objetivo y tú busques cómo? | Autonomía vs estructura |
+
+**Bloque 3: Trabajo en equipo y comunicación**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 8 | ¿Cómo manejas un desacuerdo con un compañero de trabajo? | Resolución de conflictos |
+| 9 | Si un cliente se queja frente a ti de algo que no es tu culpa, ¿qué haces? | Orientación al cliente, madurez |
+| 10 | ¿Qué haces cuando tu jefe te da una instrucción que crees que está equivocada? | Comunicación, respeto, criterio |
+
+**Bloque 4: Situacionales (casos reales de PYME)**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 11 | Es viernes 6pm, queda una entrega pendiente para el lunes. Tu compañero se fue. ¿Qué haces? | Compromiso, límites sanos |
+| 12 | Un proveedor te entrega mercadería con error. Tu jefe no contesta el teléfono. ¿Qué haces? | Toma de decisiones bajo presión |
+| 13 | Llevas 2 semanas y te das cuenta que nadie te explicó bien un proceso. ¿Cómo lo resuelves? | Proactividad, comunicación |
+| 14 | Un cliente habitual pide un descuento que no estás autorizado a dar. ¿Cómo respondes? | Criterio comercial, lealtad |
+
+**Bloque 5: Motivación y fit cultural**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 15 | ¿Por qué te interesa trabajar en una empresa pequeña y no en una grande? | Motivación real, expectativas |
+| 16 | ¿Qué esperas de tu jefe directo? ¿Qué tipo de liderazgo te funciona mejor? | Compatibilidad con el dueño/gerente |
+| 17 | ¿Dónde te ves en 2 años? (No tiene que ser en esta empresa, sé honesto) | Ambición, estabilidad probable |
+| 18 | ¿Qué necesitas para ser feliz en un trabajo? | Valores, prioridades personales |
+
+**Bloque 6: Cierre y expectativas**
+
+| # | Pregunta | Qué evalúa |
+|---|----------|-------------|
+| 19 | ¿Cuál es tu expectativa de sueldo? (Si te ofrezco $X, ¿te parece razonable?) | Alineación salarial |
+| 20 | ¿Tienes alguna pregunta para mí sobre la empresa o el puesto? | Interés real, preparación |
+
+> **Tip:** Las mejores entrevistas en PYMEs son conversaciones, no interrogatorios. Deja que la persona hable el 70% del tiempo. Las pausas incómodas revelan más que las preguntas directas.
+
+### 11.3 Guión de Verificación de Referencias
+
+```
+GUIÓN PARA LLAMADA DE VERIFICACIÓN DE REFERENCIAS
+
+Llamar a: [Nombre del referente]
+Relación con el candidato: [Jefe directo / Compañero / Cliente]
+Empresa: [Nombre]
+Fecha de la llamada: ___/___/______
+
+INTRODUCCIÓN:
+"Buenos días/tardes, mi nombre es [tu nombre] de [tu empresa]. 
+Estamos considerando a [nombre del candidato] para un puesto de 
+[cargo] y nos dio su contacto como referencia. ¿Tiene 5 minutos 
+para responder unas preguntas breves?"
+
+PREGUNTAS:
+
+1. ¿Puede confirmarme el cargo que tuvo [nombre] y el período 
+   en que trabajaron juntos?
+   Respuesta: ________________________________________________
+
+2. ¿Cómo describiría su desempeño general en una palabra?
+   Respuesta: ________________________________________________
+
+3. ¿Cuáles eran sus principales fortalezas?
+   Respuesta: ________________________________________________
+
+4. Si tuviera que mencionar un área de mejora, ¿cuál sería?
+   Respuesta: ________________________________________________
+
+5. ¿Cómo era su relación con compañeros/equipo?
+   Respuesta: ________________________________________________
+
+6. ¿Era puntual y cumplía con sus horarios?
+   Respuesta: ________________________________________________
+
+7. ¿Cuál fue el motivo de su salida?
+   Respuesta: ________________________________________________
+
+8. En una escala del 1 al 10, ¿lo volvería a contratar?
+   Respuesta: ____  ¿Por qué? _______________________________
+
+CIERRE:
+"Muchas gracias por su tiempo. ¿Hay algo más que debería saber 
+sobre [nombre] que no le pregunté?"
+Respuesta: ___________________________________________________
+
+EVALUACIÓN GENERAL: □ Positiva  □ Neutral  □ Negativa
+NOTAS ADICIONALES: ___________________________________________
+```
+
+### 11.4 Template de Carta Oferta
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                       CARTA OFERTA LABORAL                           ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║ [Ciudad], [Fecha]                                                    ║
+║                                                                      ║
+║ Estimado/a [NOMBRE COMPLETO DEL CANDIDATO]:                         ║
+║                                                                      ║
+║ Nos complace comunicarle que, tras nuestro proceso de selección,    ║
+║ hemos decidido ofrecerle el puesto de:                               ║
+║                                                                      ║
+║ CARGO: [Título del puesto]                                           ║
+║ ÁREA: [Departamento]                                                 ║
+║ REPORTA A: [Nombre y cargo del jefe directo]                        ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ CONDICIONES DE LA OFERTA:                                            ║
+║                                                                      ║
+║ • Tipo de contrato: [Plazo fijo X meses / Indefinido]               ║
+║ • Fecha de inicio: [DD/MM/AAAA]                                     ║
+║ • Jornada: [Completa / Parcial] — [Horario]                         ║
+║ • Modalidad: [Presencial / Híbrido / Remoto]                        ║
+║ • Lugar de trabajo: [Dirección]                                      ║
+║                                                                      ║
+║ COMPENSACIÓN:                                                        ║
+║ • Salario bruto mensual: $[MONTO] [MONEDA]                          ║
+║ • Salario líquido estimado: ~$[MONTO] [MONEDA]                      ║
+║ • Pago: [Quincenal / Mensual] por [transferencia / cheque]          ║
+║ • Comisiones/bonos: [Describir si aplica, o "No aplica"]            ║
+║                                                                      ║
+║ BENEFICIOS ADICIONALES:                                              ║
+║ • [Listar: seguro, aguinaldo, días extra, capacitación, etc.]       ║
+║ • ____________________________________________________________      ║
+║ • ____________________________________________________________      ║
+║                                                                      ║
+║ ─────────────────────────────────────────────────────────────────── ║
+║ PERÍODO DE PRUEBA: [Según ley del país, ej: 3 meses en Chile]      ║
+║                                                                      ║
+║ Para confirmar su aceptación, le pedimos responder este correo      ║
+║ antes del [FECHA LÍMITE] indicando su conformidad.                   ║
+║                                                                      ║
+║ Quedamos a su disposición para cualquier consulta.                   ║
+║                                                                      ║
+║ Cordialmente,                                                        ║
+║                                                                      ║
+║ [Nombre]                                                             ║
+║ [Cargo]                                                              ║
+║ [Empresa]                                                            ║
+║ [Teléfono / Email]                                                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+### 11.5 Plan 30-60-90 Días para Nuevo Empleado en PYME
+
+#### Primeros 30 días: APRENDER
+
+| Semana | Objetivo | Actividades | Entregable |
+|--------|----------|-------------|------------|
+| 1 | Orientación y bienvenida | Conocer al equipo, recorrido por instalaciones, entregar herramientas, explicar reglas básicas | Checklist de onboarding firmado |
+| 2 | Entender el negocio | Acompañar al dueño/gerente un día, leer materiales clave, entender la propuesta de valor | Resumen escrito de lo que hace la empresa |
+| 3 | Conocer procesos del puesto | Shadowing con quien hacía la tarea antes, revisar documentación, practicar con supervisión | Lista de procesos clave del puesto |
+| 4 | Primera ejecución supervisada | Realizar tareas principales con supervisión cercana, resolver primeras dudas, reunión de feedback | Autoevaluación: ¿qué me falta aprender? |
+
+**Reunión de cierre mes 1:** 30 minutos con jefe directo. Preguntas: ¿Qué te ha sorprendido? ¿Qué necesitas? ¿Algo no es como esperabas?
+
+#### Días 31-60: CONTRIBUIR
+
+| Semana | Objetivo | Actividades | Entregable |
+|--------|----------|-------------|------------|
+| 5-6 | Ejecución autónoma | Asumir responsabilidades completas, reducir supervisión, resolver problemas simples solo | Reporte de actividades semanales |
+| 7-8 | Proponer mejoras | Identificar al menos 1 proceso que puede mejorar, proponer solución, colaborar con el equipo | Propuesta concreta de mejora (por simple que sea) |
+
+**Reunión de cierre mes 2:** ¿Está rindiendo según expectativas? ¿Se integró al equipo? Feedback bidireccional.
+
+#### Días 61-90: IMPACTAR
+
+| Semana | Objetivo | Actividades | Entregable |
+|--------|----------|-------------|------------|
+| 9-10 | Responsabilidad plena | Manejar su área sin supervisión constante, tomar decisiones de su nivel, entrenar a otros si aplica | KPIs del puesto en meta |
+| 11-12 | Planificación a futuro | Definir objetivos del próximo trimestre, identificar capacitación necesaria, consolidar relaciones | Plan de objetivos Q2 |
+
+**Reunión de cierre mes 3 (decisiva):** Evaluar si se confirma en el puesto. Criterios:
+- ¿Cumple con las funciones básicas sin supervisión? → Sí/No
+- ¿Se integró al equipo? → Sí/No
+- ¿Muestra proactividad y ganas de aprender? → Sí/No
+- ¿Volvería a contratarlo sabiendo lo que sé ahora? → Sí/No
+
+> Si 3 o 4 son "Sí": confirmar. Si 2 son "No": conversar seriamente. Si 3+ son "No": no renovar/desvincular en período de prueba.
+
+---
+
+## 12. Políticas de Trabajo Remoto/Híbrido para PYMEs LATAM
+
+### 12.1 Marco Legal por País
+
+| País | ¿Hay ley de teletrabajo? | Ley/norma | Obligaciones del empleador | Puntos clave |
+|------|--------------------------|-----------|---------------------------|--------------|
+| **Chile** | Sí | Ley 21.220 (2020) + Ley 21.561 (40 hrs) | Proveer equipos o compensar, respetar desconexión digital (12 hrs), registrar jornada | Acuerdo escrito obligatorio, se puede revertir con 30 días aviso |
+| **México** | Sí | Reforma LFT Art. 311-330 (2021) | Pagar proporción de internet y electricidad, proveer equipo, respetar desconexión, capacitar | Mínimo 40% del tiempo fuera del centro de trabajo para ser "teletrabajo" |
+| **Colombia** | Sí | Ley 2121 (2021) Trabajo remoto + Ley 1221 (Teletrabajo) | Auxilio de conectividad, no monitoreo invasivo, garantizar desconexión, ARL cubre accidentes en casa | Distingue "teletrabajo" (permanente) de "trabajo remoto" (flexible) |
+| **Perú** | Sí | Ley 31572 (2022) | Compensar gastos (internet, electricidad), respetar desconexión, proveer equipos o compensar | Trabajador puede revertir a presencial con 10 días aviso |
+| **Argentina** | Sí | Ley 27.555 (2021) | Proveer equipos, compensar gastos, respetar desconexión, tareas de cuidado | Reversibilidad: empleado puede pedir volver a presencial |
+| **Bolivia** | No específica | Se rigen por contratos individuales | Lo que se pacte en contrato | Recomendable incluir cláusula detallada en contrato |
+| **Ecuador** | Sí | Ley de Apoyo Humanitario + Acuerdo MDT-2020-181 | Proveer equipos, respetar jornada, registro de actividades | Se puede pactar teletrabajo parcial o total |
+
+### 12.2 Herramientas Esenciales para Trabajo Remoto en PYME
+
+| Categoría | Herramienta recomendada | Costo mensual (USD) | Para qué sirve |
+|-----------|------------------------|--------------------:|----------------|
+| Comunicación | WhatsApp Business | Gratis | Comunicación rápida (ya lo usan todos) |
+| Comunicación | Google Meet / Zoom Free | Gratis / $13.33 | Videollamadas, reuniones de equipo |
+| Gestión de tareas | Trello / Notion Free | Gratis | Asignar y seguir tareas |
+| Gestión de tareas | Asana Free | Gratis | Proyectos con hasta 10 personas |
+| Documentos | Google Workspace | $6/usuario | Docs, Sheets, Drive compartido |
+| Control de tiempo | Clockify | Gratis | Registro de horas trabajadas |
+| Control de tiempo | Toggl Track | Gratis hasta 5 | Tiempo por proyecto/tarea |
+| Firma electrónica | DocuSign / Firma.digital | $10-25 | Firmar contratos a distancia |
+| Contabilidad | Bsale / Alegra | $15-40 | Facturación y gestión remota |
+| Seguridad | 1Password Teams | $4/usuario | Contraseñas compartidas seguras |
+
+### 12.3 Seguimiento de Productividad (Sin Micromanagement)
+
+**Regla de oro:** Medir resultados, no horas conectado.
+
+| Método | Cómo funciona | Frecuencia | Herramienta |
+|--------|--------------|------------|-------------|
+| Daily standup | 15 min: ¿Qué hice ayer? ¿Qué haré hoy? ¿Algo me bloquea? | Diario | Meet/Zoom/WhatsApp grupo |
+| Reporte semanal | 5 bullet points: logros de la semana + plan semana siguiente | Semanal | Email / Google Doc |
+| Check-in 1:1 | 30 min con cada persona: avance, obstáculos, bienestar | Quincenal | Videollamada |
+| OKRs simples | 3 objetivos por trimestre con métricas medibles | Trimestral | Spreadsheet |
+| Dashboard de KPIs | Métricas automáticas del área (ventas, tickets, entregas) | Tiempo real | Depende del área |
+
+**Lo que NO hacer:**
+- Instalar software que tome capturas de pantalla → destruye confianza
+- Exigir cámara prendida todo el día → agotador e invasivo
+- Medir "tiempo conectado" en lugar de entregables → incentivo perverso
+- Hacer reuniones de más de 1 hora sin agenda → robo de productividad
+
+### 12.4 Mantener Cultura de Equipo a Distancia
+
+| Táctica | Frecuencia | Costo | Impacto |
+|---------|------------|-------|---------|
+| Café virtual (15 min de charla NO laboral) | 2x por semana | $0 | Conexión humana |
+| Almuerzo de equipo presencial | 1x al mes | $5-15/persona | Relación personal |
+| Celebrar cumpleaños y logros por video | Cuando ocurra | $0-20 (gift card) | Sentido de pertenencia |
+| Canal de WhatsApp "random" (memes, fotos, vida) | Continuo | $0 | Informalidad sana |
+| Retrospectiva mensual (¿qué mejorar como equipo remoto?) | Mensual | $0 | Mejora continua |
+| Encuentro presencial trimestral (si hay presupuesto) | Trimestral | $50-100/persona | Cohesión profunda |
+| Onboarding presencial (primera semana) | Por nuevo ingreso | Variable | Integración sólida |
+
+---
+
+## 13. Guiones de Resolución de Conflictos
+
+> Scripts palabra por palabra para las conversaciones más difíciles que tiene un dueño/gerente de PYME. Adaptados para la cultura LATAM donde la relación personal pesa mucho.
+
+### 13.1 Empleado que Llega Consistentemente Tarde
+
+**Contexto:** El empleado llega tarde 3+ veces por semana. Ya se lo mencionaste informalmente pero no cambió.
+
+**Preparación:** Tener registro de atrasos (fechas, minutos). Buscar un espacio privado. No hacerlo frente a otros.
+
+```
+GUIÓN — Conversación sobre puntualidad
+
+TÚ: "[Nombre], ¿tienes un minuto? Quiero conversar contigo en 
+privado sobre algo."
+
+[Ir a un espacio cerrado o apartado]
+
+TÚ: "Primero quiero que sepas que valoro tu trabajo aquí, 
+especialmente [mencionar algo específico positivo]. Pero necesito 
+hablar contigo directamente sobre algo que me preocupa."
+
+TÚ: "En las últimas [X semanas], has llegado tarde [X veces]. 
+Por ejemplo, el [fecha] llegaste [X minutos] tarde, y el [fecha] 
+también. No te lo digo como regaño, sino porque afecta al equipo: 
+[ejemplo concreto: "María tuvo que cubrir la caja sola" / "el 
+cliente de las 9 no fue atendido"]."
+
+TÚ: "¿Hay algo que te esté pasando que yo deba saber? ¿Algún 
+problema con el transporte, horarios, algo personal?"
+
+[ESCUCHAR. No interrumpir. Puede haber una razón legítima.]
+
+SI HAY RAZÓN LEGÍTIMA (problema de transporte, hijo enfermo, etc.):
+TÚ: "Entiendo. Veamos qué podemos hacer. ¿Te serviría entrar 
+30 minutos más tarde y salir 30 más tarde? / ¿Necesitas unos 
+días para resolver esto?"
+
+SI NO HAY RAZÓN CLARA:
+TÚ: "Ok, te entiendo. Lo que necesito es que a partir de [fecha], 
+llegues a tu hora, que es las [hora]. ¿Puedes comprometerte con 
+eso?"
+
+EMPLEADO: [Respuesta]
+
+TÚ: "Perfecto. Voy a dejar nota de esta conversación. Si en las 
+próximas 2 semanas veo que mejora, no pasa nada más. Si sigue 
+pasando, vamos a tener que tomar medidas más formales. ¿Estamos 
+claros?"
+
+TÚ: "¿Necesitas algo de mi parte para que esto funcione?"
+
+[CERRAR EN TONO POSITIVO]
+TÚ: "Confío en ti, [nombre]. Sé que puedes hacerlo. Gracias 
+por escucharme."
+```
+
+**Registro:** Documentar fecha de la conversación, lo que se acordó, y firmar ambos si es posible. Esto protege legalmente.
+
+### 13.2 Dos Empleados en Conflicto
+
+**Contexto:** Dos personas del equipo tienen un conflicto abierto que afecta el ambiente. Puede ser personal o laboral.
+
+```
+GUIÓN — Mediación de conflicto entre empleados
+
+PASO 1: HABLAR CON CADA UNO POR SEPARADO (15 min c/u)
+
+TÚ: "[Nombre], he notado que hay tensión entre tú y [otro nombre]. 
+Quiero entender qué está pasando desde tu perspectiva, sin juzgar 
+a nadie. ¿Me puedes contar qué pasó?"
+
+[ESCUCHAR sin tomar partido. Tomar notas. No decir "tiene razón" 
+ni "está equivocado/a".]
+
+TÚ: "¿Qué necesitarías para que esto se resolviera?"
+
+[Repetir con la otra persona]
+
+PASO 2: REUNIÓN CONJUNTA (solo si ambos están dispuestos)
+
+TÚ: "Los reuní porque quiero resolver esto. Las reglas son 
+simples: cada uno habla sin que el otro interrumpa. No se trata 
+de quién tiene razón, sino de cómo seguimos trabajando juntos."
+
+TÚ: "[Nombre 1], explícale a [Nombre 2] cómo te sentiste con 
+lo que pasó. Usa frases con 'yo': 'yo sentí que...', no 'tú 
+hiciste...'."
+
+[DEJAR HABLAR]
+
+TÚ: "[Nombre 2], ¿puedes repetir lo que entendiste de lo que 
+dijo [Nombre 1]?"
+
+[REPETIR AL REVÉS]
+
+TÚ: "Ahora, ¿qué necesita cada uno del otro para que esto no 
+vuelva a pasar?"
+
+[NEGOCIAR ACUERDO]
+
+TÚ: "Esto es lo que acordamos: [resumir]. Los dos se comprometen 
+a esto. Si vuelve a haber un problema, hablen conmigo antes de 
+que escale. ¿De acuerdo?"
+
+[APRETÓN DE MANOS / GESTO DE ACUERDO]
+```
+
+**Si el conflicto es grave (acoso, agresión, discriminación):** No mediar. Activar protocolo de acoso/denuncia. Separar a las personas inmediatamente. Consultar abogado laboral.
+
+### 13.3 Empleado Pide un Aumento que No Puedes Pagar
+
+**Contexto:** Un buen empleado pide aumento. Tienes razón en que se lo merece, pero la caja no da.
+
+```
+GUIÓN — Respuesta a solicitud de aumento
+
+TÚ: "Gracias por planteármelo directamente, [nombre]. Eso 
+demuestra confianza y lo valoro."
+
+TÚ: "Voy a ser honesto/a contigo porque creo que te lo mereces: 
+estoy de acuerdo en que tu trabajo ha sido [mencionar logros 
+específicos]. El problema no es que no lo merezcas, sino que 
+ahora mismo la empresa no tiene la capacidad de subir sueldos."
+
+TÚ: "Lo que sí puedo hacer es lo siguiente — y quiero que me 
+digas cuál te interesa más:"
+
+OPCIONES A OFRECER (elegir las que apliquen):
+
+□ "Darte un bono por resultados: si llegas a [meta], te pago 
+  $[monto] extra ese mes."
+□ "Darte [medio día libre / viernes corto] como beneficio 
+  adicional."
+□ "Financiarte un curso o capacitación que te interese."
+□ "Revisar tu sueldo en [3 meses] con un compromiso concreto: 
+  si la empresa llega a [meta de ventas], subo tu sueldo en 
+  [%]."
+□ "Darte un nuevo título/responsabilidad que te sirva para 
+  tu CV y futuro."
+□ "Flexibilizar tu horario [entrada/salida / día remoto]."
+
+TÚ: "¿Cuál de estas opciones te parece más valiosa? ¿O hay 
+algo más que te importa que podamos explorar?"
+
+[ESCUCHAR]
+
+TÚ: "Ok, entonces quedamos en [lo acordado]. Lo voy a dejar 
+por escrito y lo revisamos en [fecha]. ¿Te parece justo?"
+
+IMPORTANTE: Si el empleado es clave y hay riesgo de que se vaya, 
+hacer el cálculo: ¿cuánto me cuesta reemplazarlo vs el aumento? 
+Generalmente, el aumento es más barato.
+```
+
+### 13.4 Reducción de Horas o Salario
+
+**Contexto:** La empresa atraviesa un momento difícil y necesitas reducir costos de personal. Puede ser reducir jornada, sueldo, o ambos.
+
+**Importante legal:** En todos los países LATAM, reducir el salario requiere acuerdo mutuo del trabajador. No se puede imponer unilateralmente.
+
+```
+GUIÓN — Comunicar reducción de jornada/salario
+
+PREPARACIÓN:
+- Tener los números claros: cuánto necesitas ahorrar y por qué
+- Consultar con abogado laboral del país ANTES de esta conversación
+- Preparar el anexo de contrato para firma
+
+[REUNIÓN CON TODO EL EQUIPO si afecta a todos, o individual 
+si es específico]
+
+TÚ: "Equipo, los reuní porque quiero ser transparente sobre la 
+situación de la empresa. No son buenas noticias, pero prefiero 
+que lo sepan de mí directamente."
+
+TÚ: "La realidad es que [explicar sin dramatizar: 'las ventas 
+bajaron un X% los últimos Y meses' / 'perdimos al cliente Z 
+que representaba el X% de nuestros ingresos' / 'los costos 
+subieron y el margen ya no alcanza']."
+
+TÚ: "Tengo dos opciones: despedir a [número] personas, o pedirles 
+a todos una reducción temporal de [horas/sueldo] del [X%] por 
+[X meses]. Yo prefiero mantener al equipo completo."
+
+TÚ: "Concretamente, lo que propongo es: [detallar la propuesta 
+exacta con números]."
+
+TÚ: "Esto sería por [plazo definido], y si la situación mejora 
+antes, volvemos al esquema anterior. Yo también me bajo el 
+sueldo/lo que corresponda [si eres el dueño, dar el ejemplo]."
+
+TÚ: "Sé que es una noticia difícil. Quiero escuchar sus 
+preguntas y preocupaciones."
+
+[ESCUCHAR. Responder con honestidad. No prometer lo que no 
+puedes cumplir.]
+
+TÚ: "Necesito que cada uno me confirme por escrito si acepta 
+esta propuesta. No los voy a obligar — si alguien prefiere no 
+aceptar, hablamos en privado para ver las opciones."
+
+DESPUÉS: Firmar anexo de contrato con cada persona que acepte. 
+Documentar todo. Cumplir el plazo prometido.
+```
+
+### 13.5 Despido por Mal Desempeño (Legalmente Seguro)
+
+**Proceso previo al despido (OBLIGATORIO para protegerte legalmente):**
+
+| Paso | Qué hacer | Documento | Plazo |
+|------|-----------|-----------|-------|
+| 1 | Feedback verbal específico | Nota en carpeta del empleado | Día 0 |
+| 2 | Amonestación escrita #1 | Carta firmada por ambas partes | Semana 2 |
+| 3 | Amonestación escrita #2 con plan de mejora | Carta + plan con metas claras y plazo | Semana 4 |
+| 4 | Evaluación del plan de mejora | Documento con resultados objetivos | Semana 8 |
+| 5 | Si no mejoró: desvinculación | Carta de despido + finiquito | Semana 8-10 |
+
+> **Sin este proceso previo, el despido puede ser declarado injustificado y te costará indemnización adicional.**
+
+```
+GUIÓN — Conversación de despido
+
+PREPARACIÓN:
+- Tener finiquito calculado (idealmente revisado por abogado)
+- Tener carta de término lista
+- Elegir día martes o miércoles (NO viernes — el fin de semana 
+  solo amplifica la angustia)
+- Tener pañuelos, agua
+- Que esté presente un testigo (otro gerente, RRHH si hay)
+- Duración máxima: 15 minutos
+
+TÚ: "[Nombre], siéntate por favor. Lo que tengo que decirte no 
+es fácil, así que voy a ser directo."
+
+TÚ: "Hemos decidido terminar tu relación laboral con la empresa, 
+efectivo el día de hoy."
+
+[PAUSA. Dejar que procese. No llenar el silencio.]
+
+TÚ: "Como sabes, hemos conversado en [fechas] sobre [temas 
+específicos de desempeño]. Establecimos un plan de mejora el 
+[fecha] y lamentablemente los resultados no fueron los esperados. 
+[Dar 1-2 ejemplos concretos, no ataques personales.]"
+
+TÚ: "Esta es la carta de término con los detalles. Tu 
+indemnización/finiquito incluye: [detallar montos]. [Nombre 
+del abogado/contador] te puede explicar cada ítem si tienes 
+dudas."
+
+SI EL EMPLEADO REACCIONA CON ENOJO:
+TÚ: "Entiendo que estés molesto/a. Es una noticia difícil. 
+Tómate un momento."
+[No discutir. No justificar en exceso. No pedir perdón.]
+
+SI EL EMPLEADO LLORA:
+[Ofrecer agua/pañuelo. Esperar. No decir "no llores".]
+TÚ: "Tómate tu tiempo. No hay apuro."
+
+SI EL EMPLEADO PIDE OTRA OPORTUNIDAD:
+TÚ: "Entiendo, y lo pensé mucho antes de tomar esta decisión. 
+Lamentablemente, es definitiva."
+
+CIERRE:
+TÚ: "Hoy puedes recoger tus cosas personales. [Nombre] te va 
+a acompañar. El pago del finiquito se hará el [fecha], como 
+indica la ley."
+
+TÚ: "Te deseo lo mejor en lo que viene, [nombre]. De verdad."
+
+DESPUÉS:
+- Comunicar al equipo: "A partir de hoy, [nombre] ya no trabaja 
+  con nosotros. Les pido respeto por su privacidad. Las tareas 
+  de [nombre] se redistribuirán así: [explicar]."
+- No hablar mal de la persona que se fue. Nunca.
+- Revocar accesos (email, sistemas, llaves) el mismo día.
+```
+
+---
+
+## 14. Cultura de Equipo para Equipos Pequeños (3-15 personas)
+
+### 14.1 Tácticas de Cultura que Funcionan en LATAM
+
+| Táctica | Costo | Tiempo | Impacto | Detalle |
+|---------|-------|--------|---------|---------|
+| Celebrar cumpleaños | $5-15/persona | 30 min | Alto | Torta/queque + tarjeta firmada por todos. NO se salta ninguno. |
+| Almuerzo de equipo mensual | $8-20/persona | 1.5 hrs | Alto | Fuera de la oficina. Sin hablar de trabajo los primeros 30 min. |
+| "Pizarra de logros" | $0 | 5 min/semana | Medio | Pizarra física o grupo de WhatsApp donde se celebran ventas, metas, aprendizajes |
+| Día de jeans / casual | $0 | 0 | Bajo-Medio | Si normalmente usan uniforme, un viernes casual mensual |
+| Desayuno de equipo los lunes | $3-8/persona | 30 min | Alto | Empezar la semana juntos. Pan, café, fruta. |
+| Reconocimiento público | $0 | 2 min | Alto | "Quiero reconocer a [nombre] por [logro específico]" frente al equipo |
+| Encuesta de ánimo semanal | $0 | 2 min | Medio | 1 pregunta por WhatsApp: "Del 1-5, ¿cómo llegan esta semana?" |
+| Tradiciones propias | $0-20 | Variable | Muy alto | Crear rituales únicos: "los viernes de música", "el campeonato de X" |
+
+### 14.2 Cadencia de Comunicación Recomendada
+
+| Reunión | Frecuencia | Duración | Quién participa | Agenda |
+|---------|------------|----------|----------------|--------|
+| Huddle matutino | Diario | 10 min | Todo el equipo | ¿Qué hay que hacer hoy? ¿Algún problema? |
+| 1:1 con cada persona | Semanal o quincenal | 20-30 min | Jefe + empleado | Avance, obstáculos, cómo se siente |
+| Reunión de equipo | Semanal | 30-45 min | Todo el equipo | Resultados de la semana, prioridades de la siguiente, anuncios |
+| Revisión de resultados | Mensual | 1 hora | Equipo clave | Ventas, costos, satisfacción cliente, métricas |
+| Retrospectiva | Mensual | 45 min | Todo el equipo | ¿Qué salió bien? ¿Qué mejorar? ¿Qué necesitamos? |
+| Planificación trimestral | Trimestral | 2-3 horas | Dueño + líderes | Objetivos, presupuesto, contrataciones, proyectos |
+| Evaluación de desempeño | Semestral | 45 min | Jefe + empleado | Feedback formal, metas, plan de desarrollo |
+
+### 14.3 Niveles de Transparencia en PYMEs
+
+> En equipos pequeños, la información se filtra inevitablemente. Es mejor controlarla que dejar que se distorsione.
+
+| Información | ¿Compartir con el equipo? | Cómo comunicarlo |
+|-------------|--------------------------|-------------------|
+| Ventas del mes | Sí, siempre | Dashboard visible o en reunión semanal |
+| Estado general del negocio | Sí, con contexto | "Vamos bien/regular/apretados este mes" — sin números exactos si no quieres |
+| Sueldos individuales | NO | Mantener confidencial. Cada persona sabe lo suyo. |
+| Problemas con clientes | Sí, los que los afectan | "El cliente X tuvo un problema con Y, necesito que mejoremos Z" |
+| Planes de crecimiento | Sí | Genera motivación: "estamos evaluando abrir otra sede" |
+| Problemas financieros graves | Sí, cuando afecte | No esperar a que lo descubran. Comunicar con plan de acción. |
+| Decisiones de despido | No antes, brevemente después | "A partir de hoy [nombre] no está con nosotros" — sin detalles |
+| Tu sueldo como dueño | Criterio personal | Algunos dueños comparten, otros no. Ambos están bien si son coherentes |
+
+### 14.4 Manejo de Dinámicas Familiares en Empresas Familiares
+
+> El 90% de las PYMEs en LATAM tienen al menos un familiar en el equipo. Esto puede ser una fortaleza o un problema.
+
+**Reglas de oro para cuando hay familia en la empresa:**
+
+| Regla | Por qué importa | Cómo implementarla |
+|-------|-----------------|-------------------|
+| Mismo estándar para todos | Si el sobrino llega tarde y no pasa nada, el resto lo nota | Las reglas del reglamento interno aplican para TODOS, sin excepción |
+| No resolver conflictos familiares en el trabajo | Mezclar la cena de Navidad con la reunión de lunes es tóxico | "Este tema es familiar, lo hablamos en casa. Aquí hablamos del negocio" |
+| Roles claros por escrito | "Mi papá es el dueño pero mi hermano me manda" → caos | Organigramas y descripciones de puesto para familiares también |
+| Compensación justa (ni más ni menos) | Si el familiar gana más sin mérito, hay resentimiento. Si gana menos "porque es familia", hay explotación | Usar las bandas salariales del mercado para todos |
+| Separar propiedad de gestión | Ser dueño no es lo mismo que ser gerente. Se puede ser dueño y no operar. | Definir quién DECIDE qué: ¿el dueño o el gerente? Por escrito. |
+| Canal de queja anónimo | Los empleados no familiares necesitan poder decir "el hijo del dueño no trabaja" sin miedo | Buzón anónimo físico o encuesta digital trimestral |
+| Sucesión planificada | "Cuando me jubile, mi hijo se queda a cargo" — ¿y si no tiene capacidad? | Plan de sucesión con criterios objetivos (ver sección de Gerente General) |
+
+**Señales de alerta en empresa familiar:**
+
+- Los empleados no familiares rotan más que los familiares → hay un problema de doble estándar
+- El dueño no puede darle feedback negativo a un familiar → falta de profesionalismo
+- Las decisiones se toman en la mesa familiar, no en la oficina → los no familiares se sienten excluidos
+- Un familiar tiene un cargo que excede su capacidad → necesita mentoría o reubicación
+- "Aquí siempre se ha hecho así porque mi papá lo decidió" → resistencia al cambio

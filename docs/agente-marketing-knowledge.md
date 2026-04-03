@@ -1387,3 +1387,559 @@ MARCA
 | **Bounce rate** | Porcentaje de visitantes que entran a tu sitio y se van sin hacer nada |
 | **Copy** | El texto de un anuncio, post o pieza de comunicacion |
 | **Brief** | Documento con instrucciones para crear una pieza (anuncio, diseno, video) |
+
+---
+
+## 10. Costos de Marketing Digital LATAM 2025-2026
+
+### 10.1 Meta Ads (Facebook + Instagram) — Costos por Pais
+
+| Pais | CPM (por 1,000 impresiones) | CPC (costo por clic) | CPA (costo por lead/accion) | Presupuesto minimo diario recomendado |
+|------|---------------------------|---------------------|---------------------------|--------------------------------------|
+| **Chile** | $2.50-6.00 USD | $0.15-0.45 USD | $3.00-12.00 USD | $5-10 USD/dia |
+| **Mexico** | $1.50-4.50 USD | $0.08-0.30 USD | $2.00-8.00 USD | $3-8 USD/dia |
+| **Colombia** | $1.00-3.50 USD | $0.05-0.20 USD | $1.50-6.00 USD | $3-7 USD/dia |
+| **Peru** | $1.20-3.80 USD | $0.06-0.22 USD | $1.80-7.00 USD | $3-7 USD/dia |
+| **Argentina** | $0.80-3.00 USD | $0.04-0.18 USD | $1.00-5.00 USD | $2-6 USD/dia |
+| **Bolivia** | $0.60-2.50 USD | $0.03-0.15 USD | $1.00-4.50 USD | $2-5 USD/dia |
+| **Ecuador** | $1.00-3.20 USD | $0.05-0.18 USD | $1.50-5.50 USD | $3-6 USD/dia |
+
+**Notas:**
+- Los rangos dependen de la industria, objetivo y calidad del anuncio
+- CPA mas bajo: restaurantes, belleza, retail. CPA mas alto: servicios B2B, educacion, finanzas
+- Argentina tiene costos en USD muy bajos por el tipo de cambio, pero inestabilidad cambiaria complica la planificacion
+
+### 10.2 Google Ads — Costos por Pais
+
+| Pais | CPC Search promedio | CPC Display promedio | CPA Search promedio | Presupuesto minimo mensual recomendado |
+|------|-------------------|---------------------|-------------------|---------------------------------------|
+| **Chile** | $0.30-1.20 USD | $0.05-0.15 USD | $8-25 USD | $200-500 USD/mes |
+| **Mexico** | $0.20-0.90 USD | $0.03-0.12 USD | $5-20 USD | $150-400 USD/mes |
+| **Colombia** | $0.15-0.70 USD | $0.03-0.10 USD | $4-15 USD | $100-300 USD/mes |
+| **Peru** | $0.18-0.80 USD | $0.03-0.10 USD | $5-18 USD | $100-350 USD/mes |
+| **Argentina** | $0.10-0.60 USD | $0.02-0.08 USD | $3-12 USD | $80-250 USD/mes |
+
+**Industrias mas caras en Google (CPC alto):**
+- Abogados / servicios legales: $1.50-5.00 USD por clic
+- Seguros: $1.00-4.00 USD
+- Cirugia estetica / salud: $0.80-3.00 USD
+- Servicios financieros: $1.00-3.50 USD
+
+**Industrias mas baratas (CPC bajo):**
+- Restaurantes: $0.10-0.40 USD
+- Retail / moda: $0.08-0.30 USD
+- Entretenimiento: $0.05-0.25 USD
+
+### 10.3 TikTok Ads — Costos por Pais
+
+| Pais | CPM promedio | CPC promedio | CPA promedio | Presupuesto minimo campana |
+|------|-------------|-------------|-------------|--------------------------|
+| **Chile** | $2.00-5.00 USD | $0.10-0.35 USD | $3.00-10.00 USD | $50 USD/campana |
+| **Mexico** | $1.00-3.50 USD | $0.06-0.25 USD | $2.00-8.00 USD | $50 USD/campana |
+| **Colombia** | $0.80-3.00 USD | $0.05-0.20 USD | $1.50-6.00 USD | $50 USD/campana |
+| **Peru** | $1.00-3.20 USD | $0.06-0.22 USD | $2.00-7.00 USD | $50 USD/campana |
+| **Argentina** | $0.60-2.50 USD | $0.03-0.15 USD | $1.00-5.00 USD | $50 USD/campana |
+
+**Cuando usar TikTok Ads:**
+- Publico objetivo 18-35 anos
+- Producto visual o con potencial viral
+- Rubros: moda, belleza, food, fitness, entretenimiento, educacion informal
+- Formato: video corto (15-30 seg), nativo, que no parezca anuncio
+
+### 10.4 Comparativa Resumida: Donde Invertir Primer Presupuesto
+
+| Presupuesto mensual | Canal recomendado | Objetivo tipico | ROAS esperado |
+|---------------------|------------------|-----------------|---------------|
+| **$0** | Google My Business + organico redes | Visibilidad local | N/A (gratis) |
+| **$50-150 USD** | Meta Ads (Instagram/Facebook) | Leads por WhatsApp | 3-5x |
+| **$150-500 USD** | Meta Ads + Google Search | Leads + ventas directas | 3-6x |
+| **$500-1,500 USD** | Meta + Google + retargeting | Funnel completo | 4-8x |
+| **$1,500+ USD** | Meta + Google + TikTok + email | Escala multicanal | 4-10x |
+
+**Regla del 70/20/10 para PYMEs:**
+- 70% del presupuesto al canal que ya funciona (tipicamente Meta Ads)
+- 20% al segundo canal con potencial (tipicamente Google)
+- 10% a experimentar (TikTok, influencers, nuevos formatos)
+
+---
+
+## 11. Calendarios de Contenido por Industria
+
+### 11.1 Restaurante — Plan Mensual de Contenido
+
+| Semana | Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo |
+|--------|-------|--------|-----------|--------|---------|--------|---------|
+| **S1** | Plato estrella (foto profesional) | Historia del chef/equipo | Receta rapida (Reel 30s) | Testimonio cliente | Promo fin de semana | Behind the scenes cocina | Menu especial del dia |
+| **S2** | Ingrediente destacado | Dato curioso gastronomico | Tutorial "como se prepara X" (Reel) | Encuesta: "Que plato prefieren?" | Colaboracion con proveedor local | Reserva tu mesa (CTA) | Brunch/almuerzo especial |
+| **S3** | Antes/despues de montaje plato | Tips de maridaje | Reel tendencia adaptado | Repost de cliente (UGC) | Happy hour / promo | Ambiente del restaurante | Menu semanal nuevo |
+| **S4** | Historia del origen del restaurante | Comparacion "pedido vs realidad" | Reel: proceso de preparacion | Giveaway (sorteo) | Evento especial / musica | Fotos de clientes disfrutando | Resumen del mes |
+
+**Formatos recomendados:** 60% Reels/video corto, 25% fotos/carrusel, 15% stories
+**Hashtags restaurante LATAM:** #ComidaCasera #RestauranteName #GastronomiaLocal #FoodPorn #ComidaLatina #[Ciudad]Foodie #DondeComentEn[Ciudad] #MenuDelDia #ComidaReal #ChefLife
+**Frecuencia:** 4-5 publicaciones/semana + stories diarios
+**Mejor horario:** 11:30-13:00 (antes de almuerzo) y 18:00-20:00 (antes de cena)
+
+### 11.2 Tienda Retail (Ropa, Accesorios, Hogar) — Plan Mensual
+
+| Semana | Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo |
+|--------|-------|--------|-----------|--------|---------|--------|---------|
+| **S1** | Look de la semana | Tip de estilo/uso | Reel: unboxing o try-on | Detras de camaras (empaque) | Promo flash (48h) | Foto lifestyle producto | Encuesta/quiz stories |
+| **S2** | Nuevo ingreso/lanzamiento | Como combinar (carrusel) | Reel tendencia con producto | Testimonio/review cliente | Codigo descuento seguidores | Outfit del dia (colaboracion) | Inspiracion (moodboard) |
+| **S3** | Top 5 mas vendidos (carrusel) | Cuidado del producto (tips) | Reel empacando pedidos | Repost de clientes (UGC) | Bundle/pack especial | Lookbook mini (fotos) | Historia de la marca |
+| **S4** | Preview proxima coleccion | Dato de la industria/moda | Reel: antes/despues styling | Giveaway/sorteo | Liquidacion fin de mes | Mejores momentos del mes | Agradecimiento a clientes |
+
+**Hashtags tienda retail LATAM:** #ModaLatina #TiendaOnline #OutfitDelDia #CompraLocal #Tendencias2026 #Style #Moda[Ciudad] #NuevoIngreso #OfertasOnline #FashionLATAM
+**Frecuencia:** 5-7 publicaciones/semana
+**Mejor horario:** 12:00-14:00 y 19:00-21:00
+
+### 11.3 Servicios Profesionales (Contadores, Abogados, Consultores) — Plan Mensual
+
+| Semana | Lunes | Martes | Miercoles | Jueves | Viernes | Sabado |
+|--------|-------|--------|-----------|--------|---------|--------|
+| **S1** | Tip educativo (infografia) | Caso de exito (anonimizado) | Reel: "sabias que..." | Mito vs realidad (carrusel) | Pregunta frecuente respondida | Frase motivacional profesional |
+| **S2** | Noticia del sector comentada | Tutorial paso a paso (carrusel) | Reel: error comun y como evitarlo | Testimonio cliente | Herramienta/recurso gratuito | Detras de camaras oficina |
+| **S3** | Checklist descargable | Fecha limite/recordatorio fiscal | Reel: explicacion simple tema complejo | Encuesta: "Ya hiciste X?" | Colaboracion con otro profesional | Logro del equipo |
+| **S4** | Tendencia/cambio regulatorio | FAQ en carrusel | Reel: "un dia en la vida de..." | Webinar/live anuncio | CTA: agenda tu consulta | Resumen mensual |
+
+**Hashtags servicios profesionales:** #ConsejosFinancieros #PymesTips #NegociosLatam #Emprendedores #ConsultoriaEmpresarial #GestionFinanciera #AsesoriaProfesional #[Profesion][Ciudad] #TipsDeNegocios
+**Frecuencia:** 3-4 publicaciones/semana
+**Mejor horario:** 8:00-9:00 (profesionales revisando redes) y 18:00-19:00
+
+### 11.4 E-commerce — Plan Mensual
+
+| Semana | Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo |
+|--------|-------|--------|-----------|--------|---------|--------|---------|
+| **S1** | Producto destacado (foto + beneficios) | Review/testimonio (video) | Reel: producto en uso | Comparativa productos (carrusel) | Oferta exclusiva online | Envio gratis (promo) | Contenido lifestyle |
+| **S2** | FAQ producto (carrusel) | Proceso de envio/empaque | Reel: transformacion/resultado | UGC repost | Flash sale 24h | Combo/bundle especial | Tip de uso del producto |
+| **S3** | Nuevo producto/lanzamiento | Detras de camaras | Reel tendencia con producto | Social proof (numeros) | Codigo descuento limitado | Best sellers semana | Encuesta proxima coleccion |
+| **S4** | Comparativa "con vs sin nuestro producto" | Garantia/politica devolucion | Reel: unboxing | Giveaway | Liquidacion/outlet | Top 3 del mes | Agradecimiento + preview proximo mes |
+
+**Hashtags e-commerce LATAM:** #CompraOnline #TiendaVirtual #EnvioGratis #Ofertas #CompraDesdeElSofa #Ecommerce #ProductoDestacado #CompraSegura #Descuento #[Nicho]Online
+**Frecuencia:** 5-7 publicaciones/semana + 2-3 campanas email/mes
+**Mejor horario:** 10:00-12:00 y 20:00-22:00 (momento compra impulsiva)
+
+### 11.5 Estructura Universal de Post que Convierte
+
+```
+HOOK (primera linea): Pregunta, dato impactante o provocacion
+  → "Sabias que el 70% de las PYMEs no..."
+  → "Este error te esta costando clientes"
+  → "3 cosas que tu competencia hace y tu no"
+
+CUERPO (3-5 lineas): Valor, historia o demostracion
+  → Tip concreto, paso a paso, o caso real
+
+CTA (ultima linea): Accion especifica
+  → "Guarda este post para despues"
+  → "Comenta [palabra] y te envio la guia"
+  → "Link en bio para agendar"
+  → "Cual es tu favorito? Comenta abajo"
+```
+
+---
+
+## 12. Optimizacion de Google My Business (Google Business Profile)
+
+### 12.1 Por Que es el Canal #1 Gratis para PYMEs Locales
+
+| Dato | Cifra |
+|------|-------|
+| Busquedas con intencion local ("cerca de mi") | 46% de todas las busquedas en Google |
+| Usuarios que visitan un negocio despues de buscarlo en Google | 76% en las siguientes 24 horas |
+| Negocios con perfil completo vs incompleto | 70% mas probabilidad de recibir visitas |
+| Costo | 100% gratis |
+| Perfiles que reciben mas de 1,000 vistas/mes | La mayoria de PYMEs activas en LATAM |
+
+### 12.2 Configuracion Paso a Paso
+
+**Paso 1: Crear o reclamar perfil**
+1. Ir a business.google.com
+2. Buscar si tu negocio ya existe (Google a veces lo crea automaticamente)
+3. Si existe: "Reclamar este negocio" y verificar propiedad
+4. Si no existe: "Agregar tu negocio" y seguir el proceso
+5. Verificacion: por correo postal (2-3 semanas), telefono, email, o video (mas rapido)
+
+**Paso 2: Informacion basica (completar 100%)**
+
+| Campo | Que poner | Error comun |
+|-------|----------|-------------|
+| Nombre | Nombre exacto del negocio (NO agregar keywords) | "Panaderia La Rosa - Mejor Pan de Santiago" ← MAL |
+| Categoria principal | La mas especifica posible | "Restaurante" en vez de "Restaurante italiano" |
+| Categorias secundarias | 2-4 complementarias | No agregar ninguna |
+| Direccion | Exacta, con numero y referencia | Direccion incompleta o desactualizada |
+| Telefono | WhatsApp Business de preferencia | Numero que no contestan |
+| Horarios | Precisos, incluyendo feriados | Horarios incorrectos = resenas negativas |
+| Sitio web | URL con UTM para trackear | No poner sitio web |
+| Descripcion | 750 caracteres max. Incluir keywords naturales | Dejarlo vacio |
+| Atributos | Marcar todos los relevantes (WiFi, estacionamiento, accesibilidad) | No marcar ninguno |
+
+**Paso 3: Fotos (CRITICO)**
+
+| Tipo de foto | Cantidad minima | Frecuencia de actualizacion |
+|-------------|----------------|---------------------------|
+| Logo | 1 | Cuando cambie |
+| Foto de portada | 1 (la mejor foto del negocio) | Cada 3-6 meses |
+| Exterior | 3 (desde distintos angulos) | 1 vez al ano |
+| Interior | 5-10 (ambiente, decoracion) | Cada 3 meses |
+| Productos/servicios | 10-20 (lo que vendes) | Semanalmente |
+| Equipo | 3-5 (personal trabajando) | Cada 6 meses |
+| **Total minimo** | **25-40 fotos** | Agregar 2-3 nuevas por semana |
+
+**Especificaciones de fotos:** JPG o PNG, 720px minimo, relacion 4:3, <5MB, sin logos/textos sobreimpresos
+
+**Paso 4: Categorias por tipo de negocio LATAM**
+
+| Tipo de negocio | Categoria principal | Categorias secundarias sugeridas |
+|----------------|--------------------|---------------------------------|
+| Restaurante | Restaurante [tipo de cocina] | Servicio de comida a domicilio, Bar, Cafeteria |
+| Tienda de ropa | Tienda de ropa [genero] | Boutique, Tienda de accesorios |
+| Contador / Contabilidad | Contador publico | Asesor fiscal, Servicio de contabilidad |
+| Abogado | Abogado [especialidad] | Bufete de abogados, Asesor juridico |
+| Dentista | Dentista | Clinica dental, Ortodoncista |
+| Peluqueria | Salon de belleza | Barberia, Spa, Centro de estetica |
+| Ferreteria | Ferreteria | Tienda de materiales de construccion |
+| Panaderia | Panaderia | Pasteleria, Cafeteria |
+
+### 12.3 Estrategia de Publicaciones (Google Posts)
+
+| Tipo de publicacion | Frecuencia recomendada | Ejemplo |
+|--------------------|----------------------|---------|
+| **Novedades** | 2-3/semana | "Nuevo plato en nuestro menu: Lomo saltado premium con papas nativas" |
+| **Ofertas** | 1-2/semana | "20% de descuento en cortes de cabello - solo esta semana. Agenda por WhatsApp" |
+| **Eventos** | Segun ocurran | "Este sabado: degustacion de vinos chilenos. Cupos limitados. Reserva aqui" |
+| **Productos** | 2-3/semana | Foto + precio + descripcion corta + CTA |
+
+**Estructura del post perfecto:**
+```
+[Gancho en primera linea]
+[Descripcion breve con beneficio claro - 2-3 lineas max]
+[CTA: Llama ahora / Reserva tu cita / Escribe por WhatsApp]
+[Boton: Llamar / Mas info / Reservar]
+```
+
+### 12.4 Estrategia de Resenas (Reviews)
+
+| Accion | Detalle |
+|--------|---------|
+| **Meta** | Minimo 20 resenas para aparecer bien posicionado; 50+ para dominar la categoria local |
+| **Como pedir** | Enviar link directo de resena por WhatsApp despues de cada servicio exitoso |
+| **Cuando pedir** | 24-48 horas despues de la compra/servicio (momento de satisfaccion) |
+| **Mensaje template** | "Hola [Nombre], gracias por tu visita! Me ayudarias mucho si dejas tu opinion en Google. Toma 1 minuto: [link]. Gracias!" |
+| **Responder TODAS** | Positivas: agradecer personalizadamente. Negativas: disculparse, ofrecer solucion, invitar a hablar en privado |
+| **Tiempo de respuesta** | <24 horas idealmente |
+| **NUNCA** | Comprar resenas falsas (Google penaliza y puede suspender el perfil) |
+
+**Obtener el link directo de resenas:**
+1. Buscar tu negocio en Google
+2. Clic en "Escribir una resena"
+3. Copiar la URL de la pagina
+4. O usar: `https://search.google.com/local/writereview?placeid=[TU_PLACE_ID]`
+
+### 12.5 Metricas a Monitorear
+
+| Metrica | Donde verla | Benchmark PYME LATAM |
+|---------|------------|---------------------|
+| Vistas del perfil | Google Business dashboard | 500-3,000/mes |
+| Busquedas que te mostraron | Dashboard > Rendimiento | 300-2,000/mes |
+| Clics al sitio web | Dashboard > Rendimiento | 50-300/mes |
+| Llamadas | Dashboard > Rendimiento | 20-100/mes |
+| Solicitudes de direccion | Dashboard > Rendimiento | 30-150/mes |
+| Mensajes | Dashboard > Mensajes | 10-50/mes |
+| Resenas nuevas | Dashboard > Resenas | 4-10/mes (activo pidiendo) |
+
+---
+
+## 13. Estrategias de WhatsApp Business
+
+### 13.1 Configuracion Profesional
+
+**Elementos esenciales del perfil:**
+
+| Elemento | Que hacer | Ejemplo |
+|----------|----------|---------|
+| **Foto de perfil** | Logo de la empresa (no foto personal) | Logo cuadrado, legible en miniatura |
+| **Nombre** | Nombre del negocio (no personal) | "Panaderia La Rosa" no "Juan Lopez" |
+| **Descripcion** | 256 caracteres. Que haces + para quien + CTA | "Panaderia artesanal en Santiago. Pan de masa madre, pasteles y tortas a pedido. Pide por aqui" |
+| **Categoria** | Seleccionar la mas adecuada | "Restaurante", "Tienda de ropa", etc. |
+| **Horario** | Configurar horario de atencion real | L-V 9:00-18:00, S 9:00-13:00 |
+| **Direccion** | Si tienes local fisico, agregar | Direccion completa con referencia |
+| **Email** | Email de contacto profesional | contacto@tuempresa.com |
+| **Sitio web** | URL de tu pagina o redes | www.tuempresa.com |
+
+### 13.2 Catalogo de WhatsApp Business
+
+| Aspecto | Recomendacion |
+|---------|--------------|
+| **Productos a incluir** | Los 20-30 mas vendidos o consultados, no todo el inventario |
+| **Foto del producto** | Fondo blanco o limpio, buena iluminacion, cuadrada |
+| **Nombre** | Corto y claro: "Torta Chocolate 15 personas" |
+| **Precio** | SIEMPRE incluir precio. "Consultar" pierde clientes |
+| **Descripcion** | 2-3 lineas. Que incluye, tamano, material |
+| **Link** | A la pagina del producto si tienes e-commerce |
+| **Actualizacion** | Revisar precios y disponibilidad cada 2 semanas |
+
+### 13.3 Mensajes Automaticos — Templates en Espanol
+
+**Mensaje de bienvenida (nuevo contacto):**
+```
+Hola! Bienvenido/a a [Nombre del Negocio].
+
+Gracias por escribirnos. Estos son nuestros servicios principales:
+1. [Servicio/Producto 1]
+2. [Servicio/Producto 2]
+3. [Servicio/Producto 3]
+
+Responde con el numero del servicio que te interesa o cuentanos
+en que te podemos ayudar.
+
+Direccion: [Direccion]
+Horario: [horario]
+```
+
+**Mensaje fuera de horario:**
+```
+Hola! Gracias por tu mensaje.
+
+En este momento estamos fuera de horario de atencion.
+Nuestro horario es: [Lunes a Viernes 9:00-18:00, Sabado 9:00-13:00].
+
+Tu mensaje es importante para nosotros. Te responderemos a primera
+hora del proximo dia habil.
+
+Mientras tanto, puedes ver nuestro catalogo aqui:
+[Link al catalogo o redes sociales]
+```
+
+**Respuestas rapidas sugeridas:**
+
+| Atajo | Mensaje |
+|-------|---------|
+| /gracias | "Gracias por tu compra! Fue un placer atenderte. Si necesitas algo mas, aqui estamos. Nos ayudas con una resena en Google? [link]" |
+| /horario | "Nuestro horario de atencion es: [horario]. Te esperamos." |
+| /ubicacion | "Estamos en [direccion]. Aqui te dejo la ubicacion en Google Maps: [link]" |
+| /precio | "Con gusto te cotizo. Para darte un precio exacto necesito saber: 1) [pregunta 1] 2) [pregunta 2]. Me compartes esos datos?" |
+| /envio | "Hacemos envios a todo [ciudad/pais]. El costo de envio es [precio/gratis sobre $X]. El tiempo de entrega es [X] dias habiles." |
+| /pago | "Aceptamos: transferencia bancaria, tarjeta (Mercado Pago/Transbank), efectivo en tienda. Cual prefieres?" |
+| /demora | "Tu pedido esta en proceso. El tiempo estimado de entrega es [X dias/horas]. Te avisamos cuando salga. Gracias por tu paciencia!" |
+| /garantia | "Todos nuestros productos tienen garantia de [X dias/meses]. Si tienes algun problema, escribenos y lo resolvemos." |
+
+### 13.4 Listas de Difusion (Broadcast)
+
+| Aspecto | Recomendacion |
+|---------|--------------|
+| **Limite** | 256 contactos por lista. Solo reciben quienes te tienen guardado |
+| **Segmentacion** | Crear listas por: tipo de cliente, producto interes, ubicacion, frecuencia compra |
+| **Frecuencia** | Maximo 2-4 mensajes por semana. Mas = bloqueo |
+| **Contenido** | 80% valor (tips, contenido util) + 20% venta (ofertas, promos) |
+| **Mejor horario** | Martes a jueves, 10:00-12:00 o 17:00-19:00 |
+| **Formato** | Texto corto (4-6 lineas) + 1 imagen o 1 link. NO PDFs pesados |
+
+**Templates de broadcast:**
+
+**Promocion:**
+```
+[NOMBRE_NEGOCIO] — Oferta de la semana
+
+[Producto/Servicio] con [X]% de descuento.
+Solo hasta el [fecha].
+
+Antes: $[precio anterior]
+Ahora: $[precio nuevo]
+
+Para aprovechar, responde "QUIERO" a este mensaje.
+```
+
+**Contenido de valor:**
+```
+Tip de la semana de [NOMBRE_NEGOCIO]:
+
+[Tip util relacionado con tu industria en 3-4 lineas]
+
+Si te fue util, guardalo y compartelo.
+Quieres saber mas? Responde "SI" y te cuento.
+```
+
+**Novedades:**
+```
+Novedad en [NOMBRE_NEGOCIO]!
+
+Acabamos de lanzar [producto/servicio nuevo].
+
+- [Beneficio 1]
+- [Beneficio 2]
+- [Beneficio 3]
+
+Precio de lanzamiento: $[precio] (solo por [X] dias)
+
+Te interesa? Responde y te doy todos los detalles.
+```
+
+### 13.5 Metricas de WhatsApp Business
+
+| Metrica | Como medirla | Benchmark saludable |
+|---------|-------------|-------------------|
+| Tiempo de respuesta | WhatsApp Business > Estadisticas | <15 minutos en horario laboral |
+| Mensajes enviados vs leidos | Estadisticas de la app | 85-95% de apertura |
+| Tasa de respuesta | Mensajes recibidos / enviados | 30-50% |
+| Contactos nuevos por semana | Contar manualmente o CRM | 10-30 para PYME activa |
+| Conversion WhatsApp a venta | Ventas cerradas / conversaciones iniciadas | 15-25% |
+| Tasa de bloqueo | Si baja la entrega, te estan bloqueando | <2% (si es mayor, reduces frecuencia) |
+
+---
+
+## 14. SEO Local — Estrategias Avanzadas para Google My Business
+
+### 14.1 Los 3 Factores que Google Usa para Rankear Negocios Locales
+
+| Factor | Peso estimado | Que hacer |
+|--------|--------------|----------|
+| **Relevancia** | 35% | Categorias correctas, descripcion con keywords, publicaciones frecuentes |
+| **Distancia** | 30% | No puedes controlarla. Pero tener direccion precisa ayuda |
+| **Prominencia** | 35% | Resenas (cantidad y calidad), backlinks, menciones en directorios, antiguedad |
+
+**Acciones concretas para subir en resultados:**
+1. Completar perfil al 100% (Google confirma que esto impacta)
+2. Publicar 3-4 Google Posts por semana con keywords relevantes
+3. Conseguir resenas constantemente (meta: 5 nuevas por mes minimo)
+4. Responder TODAS las resenas (positivas y negativas)
+5. Agregar fotos nuevas cada semana (2-3 minimo)
+6. Registrarse en directorios locales (Paginas Amarillas, Yelp, TripAdvisor si aplica)
+7. Usar UTM en el link del sitio web para medir trafico
+8. Mantener NAP consistente (Name, Address, Phone) en todos los directorios
+
+---
+
+## 15. Marketing de Influencers para PYMEs LATAM
+
+### 15.1 Tipos de Influencers
+
+| Tipo | Seguidores | Engagement tipico | Costo aproximado LATAM | Ideal para |
+|------|-----------|-------------------|----------------------|-----------|
+| **Nano** | 1,000-10,000 | 5-10% | $0-50 USD (o canje) | Negocios locales, lanzamientos |
+| **Micro** | 10,000-50,000 | 3-7% | $50-300 USD | PYMEs con presupuesto limitado |
+| **Medio** | 50,000-200,000 | 2-5% | $300-1,500 USD | Marcas en crecimiento |
+| **Macro** | 200,000-1,000,000 | 1.5-3% | $1,500-8,000 USD | Lanzamientos grandes |
+| **Mega** | 1,000,000+ | 1-2% | $8,000-50,000+ USD | Marcas nacionales |
+
+**Recomendacion para PYMEs:** Trabajar con 3-5 nano/micro influencers es mas efectivo y barato que 1 macro.
+
+### 15.2 Costos por Pais (Micro-influencers 10K-50K seguidores)
+
+| Pais | Post en feed (foto) | Reel/TikTok | Historia (set de 3) | Pack mensual (4 posts + 8 stories) |
+|------|-------------------|-------------|---------------------|-----------------------------------|
+| **Chile** | $50-200 USD | $80-350 USD | $30-100 USD | $300-1,000 USD |
+| **Mexico** | $40-180 USD | $60-300 USD | $25-80 USD | $250-800 USD |
+| **Colombia** | $30-120 USD | $50-200 USD | $20-60 USD | $150-500 USD |
+| **Peru** | $30-130 USD | $50-220 USD | $20-70 USD | $150-550 USD |
+| **Argentina** | $20-100 USD | $40-180 USD | $15-50 USD | $100-400 USD |
+| **Bolivia** | $15-70 USD | $25-120 USD | $10-40 USD | $80-280 USD |
+| **Ecuador** | $25-100 USD | $40-170 USD | $15-50 USD | $120-400 USD |
+
+**Nota:** Muchos nano-influencers aceptan canje (producto gratis) en vez de pago monetario.
+
+### 15.3 Como Encontrar Influencers para tu PYME
+
+**Metodo 1: Busqueda manual en Instagram/TikTok**
+1. Buscar hashtags de tu ciudad + nicho (ej: #ModaSantiago, #FoodBogota, #FitnessCDMX)
+2. Revisar cuentas que aparecen en "Explorar" con contenido de tu nicho
+3. Buscar en la ubicacion de tu ciudad/zona
+4. Revisar los seguidores de tu competencia
+5. Filtrar: engagement real (no comprado), contenido alineado a tu marca, audiencia local
+
+**Metodo 2: Plataformas gratuitas/baratas**
+- **SocialPubli** (gratis buscar): plataforma LATAM, filtra por pais y nicho
+- **Heepsy** (gratis hasta 5 busquedas): filtros avanzados, detecta fake followers
+- **BrandMe** (LATAM): plataforma mexicana con presencia regional
+- **HypeAuditor** (version gratis limitada): analisis de audiencia y engagement real
+
+**Metodo 3: Los propios clientes**
+- Revisar quienes de tus clientes tienen presencia en redes
+- Clientes satisfechos con 1,000+ seguidores son los mejores nano-influencers
+- Ya conocen el producto y su recomendacion es genuina
+
+### 15.4 Metricas a Pedir y Evaluar
+
+| Metrica | Que pedir | Rango aceptable | Alerta roja |
+|---------|----------|-----------------|------------|
+| **Engagement rate** | Screenshot de estadisticas | >3% nano, >2% micro | <1% = seguidores comprados |
+| **Alcance promedio** | Estadisticas de ultimos 10 posts | 20-40% de sus seguidores | <10% = cuenta muerta |
+| **Audiencia por pais** | Pantallazo de audiencia | >60% del pais objetivo | <40% = audiencia dispersa |
+| **Rango edad audiencia** | Pantallazo de demografia | Que coincida con tu cliente ideal | Audiencia muy joven si vendes B2B |
+| **Contenido previo con marcas** | Revisar su feed | Natural, no exceso de publicidad | Cada post es un anuncio = fatiga |
+| **Fake followers** | Verificar en HypeAuditor (gratis) | <15% fake | >25% = no trabajar |
+
+### 15.5 Template de Acuerdo con Influencer
+
+```
+ACUERDO DE COLABORACION — [Nombre del Negocio] x [Nombre Influencer]
+
+Fecha: [DD/MM/AAAA]
+Vigencia: [fecha inicio] a [fecha fin]
+
+PARTES:
+- Marca: [Nombre legal], RUT/RFC/NIT [numero], representada por [nombre]
+- Creador/a: [Nombre legal], @[usuario], [cedula/RUT]
+
+ALCANCE DEL TRABAJO:
+- [X] publicaciones en feed de Instagram (foto/carrusel)
+- [X] Reels de [X] segundos minimo
+- [X] sets de Stories (3 historias cada set)
+- [X] publicaciones en TikTok
+- Periodo de publicacion: [fecha inicio] a [fecha fin]
+
+ENTREGABLES POR PUBLICACION:
+- Etiquetar a @[cuenta de la marca]
+- Incluir hashtag #[hashtag de campana]
+- Incluir ubicacion [si aplica]
+- Mencion clara del producto/servicio
+- Usar el link/codigo descuento: [codigo]
+
+COMPENSACION:
+- Monto total: $[monto] [moneda]
+- Forma de pago: [transferencia/PayPal/otro]
+- Calendario: [50% al firmar, 50% al publicar / otro]
+- Productos incluidos: [detallar si hay canje]
+
+DERECHOS DE USO:
+- La marca puede reusar el contenido en sus propias redes por [X meses]
+- El/la creador/a mantiene el contenido publicado por minimo [30 dias]
+
+EXCLUSIVIDAD:
+- Durante la vigencia, el/la creador/a no publicara contenido para
+  [competidores directos: listar nombres/categorias]
+
+APROBACION:
+- El contenido debe ser enviado para aprobacion [24-48h] antes de publicar
+- La marca puede pedir [1-2] rondas de ajustes
+
+CANCELACION:
+- Cualquier parte puede cancelar con [7 dias] de anticipacion
+- Si se cancela despues de entregar contenido, se paga proporcionalmente
+
+Firma Marca: ________________     Firma Creador/a: ________________
+Fecha: _______________             Fecha: _______________
+```
+
+### 15.6 Como Medir el ROI de Influencers
+
+| Metodo | Como implementar | Que mide |
+|--------|-----------------|----------|
+| **Codigo descuento unico** | Dar codigo "NOMBRE15" al influencer | Ventas directas atribuidas |
+| **Link UTM** | Crear link con UTM para cada influencer | Trafico y conversiones en web |
+| **Pregunta "como nos conociste"** | En WhatsApp o checkout | Atribucion directa |
+| **Comparar ventas antes/despues** | Medir ventas 7 dias antes vs 7 dias despues de la publicacion | Impacto en ventas |
+| **Nuevos seguidores** | Contar seguidores ganados en el periodo | Crecimiento de comunidad |
+
+**Formula ROI simple:**
+```
+ROI = (Ventas generadas - Costo del influencer) / Costo del influencer x 100
+
+Ejemplo: Pagaste $200 USD, genero $800 USD en ventas
+ROI = ($800 - $200) / $200 x 100 = 300%
+```
+
+**ROAS aceptable para influencer marketing en LATAM:** 3x-5x (por cada $1 invertido, recuperar $3-5)
+
+---
+
+> **Nota para el agente**: Las secciones 10-15 complementan la base original. Al responder consultas de marketing, combinar con las secciones 1-9 para dar respuestas completas, con datos de costos reales por pais, templates listos para usar y estrategias adaptadas a LATAM.

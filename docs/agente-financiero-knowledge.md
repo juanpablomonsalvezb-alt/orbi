@@ -1101,3 +1101,1378 @@ CRECIMIENTO
 ---
 
 > **Nota para el agente**: Este documento es una referencia viva. Los datos de tasas, topes tributarios y normativas deben validarse con fuentes oficiales vigentes, ya que cambian frecuentemente en la región. Siempre recomendar al usuario consultar con un contador certificado para decisiones tributarias específicas.
+
+---
+
+# SECCIÓN AMPLIADA — Regulaciones Fiscales, Benchmarks, Modelado Financiero, Financiamiento y Alertas
+
+---
+
+## 6. Regulaciones Fiscales por País (2025-2026)
+
+> **Advertencia**: Las tasas y umbrales se actualizan anualmente. Las cifras aquí son las vigentes a inicios de 2026. Siempre verificar en el portal oficial de cada autoridad tributaria.
+
+---
+
+### 6.1 Chile
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Servicio de Impuestos Internos (SII) — [sii.cl](https://www.sii.cl) |
+| **IVA** | 19% sobre ventas de bienes y servicios gravados |
+| **Exenciones IVA** | Servicios de salud, educación, transporte de pasajeros, seguros de vida, exportaciones (tasa 0%) |
+| **Facturación electrónica** | Obligatoria desde 2018 para todos los contribuyentes (DTE vía SII) |
+
+#### Impuesto a la renta — Regímenes para PYMEs
+
+| Régimen | Tope de ingresos | Tasa de primera categoría | Tributación del dueño | Ideal para |
+|---------|-------------------|---------------------------|----------------------|------------|
+| **Pro PYME General (14D N°3)** | ≤ 75.000 UF/año (~CLP 2.800M) | 25% | Retiros tributan en Global Complementario con crédito 100% | PYME con reinversión moderada |
+| **Pro PYME Transparente (14D N°8)** | ≤ 75.000 UF/año | 0% a nivel empresa | Toda la utilidad se asigna al dueño y tributa en Global Complementario (0%-40%) | Microempresas donde dueño retira todo |
+| **Régimen General Semi-Integrado (14A)** | Sin tope | 27% | Retiros tributan con crédito parcial (65%) | Empresas grandes o con muchos socios |
+
+#### Obligaciones mensuales y trimestrales
+
+| Obligación | Formulario | Plazo |
+|------------|------------|-------|
+| Declaración y pago IVA | F29 | Día 12 del mes siguiente (o 20 si es por internet) |
+| PPM (Pagos Provisionales Mensuales) | F29 (integrado) | Junto con el IVA |
+| Retenciones de honorarios (boletas) | F29 | Junto con el IVA |
+| DJ Renta Anual | F22 | Abril de cada año |
+| Declaraciones juradas informativas | Varias (DJ 1879, 1887, etc.) | Marzo de cada año |
+
+#### Cargas sociales y previsionales (costo empleador)
+
+| Concepto | Tasa (% sobre remuneración imponible) |
+|----------|---------------------------------------|
+| AFP (pensiones) — cargo trabajador | 10% + comisión AFP (~11,5% total) |
+| Salud (Fonasa/Isapre) — cargo trabajador | 7% |
+| Seguro de cesantía — cargo empleador | 2,4% (contrato indefinido) / 3% (plazo fijo) |
+| Seguro de cesantía — cargo trabajador | 0,6% (solo contrato indefinido) |
+| Seguro de accidentes (mutual) — cargo empleador | 0,93% base + tasa adicional según riesgo (0%-3,4%) |
+| SIS (Seguro de Invalidez y Sobrevivencia) — cargo empleador | 1,53% |
+| **Costo empleador total aproximado** | **~5-7% sobre la remuneración bruta** |
+
+#### Errores fiscales comunes de PYMEs en Chile
+
+1. **No emitir boletas por ventas menores** — el SII cruza información con pagos electrónicos (Transbank, Flow).
+2. **Mezclar gastos personales con gastos de empresa** — retiros no documentados generan "partidas del artículo 21" (tasa 40%).
+3. **No recuperar IVA crédito fiscal** — especialmente en compras de activos fijos e importaciones.
+4. **Elegir mal el régimen tributario** — una PYME que retira todo debería estar en Transparente, no en General.
+5. **Atrasar el pago de PPM** — genera intereses del 1,5% mensual + multas del 10-30%.
+6. **No registrar correctamente las notas de crédito electrónicas** — genera diferencias en la DJ de IVA.
+7. **Ignorar la depreciación acelerada/instantánea** — Pro PYME permite depreciación instantánea, ahorrando PPM.
+8. **No cotizar previsionales de socios que trabajan en la empresa** — obligatorio y fiscalizado.
+
+---
+
+### 6.2 México
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Servicio de Administración Tributaria (SAT) — [sat.gob.mx](https://www.sat.gob.mx) |
+| **IVA** | 16% general; 0% en alimentos básicos, medicinas, exportaciones |
+| **Exenciones IVA** | Servicios médicos, educación, venta de vivienda, libros, transporte público |
+| **Facturación electrónica** | Obligatoria (CFDI) desde 2014; CFDI 4.0 vigente desde 2023 |
+
+#### Impuesto sobre la renta — Regímenes para PYMEs
+
+| Régimen | Tope de ingresos | Tasa/Esquema | Ideal para |
+|---------|-------------------|--------------|------------|
+| **RESICO Personas Físicas** | ≤ MXN 3.500.000/año | 1% a 2,5% sobre ingresos facturados cobrados | Freelancers, profesionistas, tiendas pequeñas |
+| **Régimen General de Personas Físicas** | Sin tope | Tasa progresiva 1,92% a 35% sobre utilidad | Personas con ingresos altos o que no califican RESICO |
+| **Régimen General Personas Morales** | Sin tope | 30% sobre utilidad fiscal | Sociedades (SA, SAPI, S de RL) |
+| **RESICO Personas Morales** | ≤ MXN 35.000.000/año | 30% pero con facilidades contables | Sociedades pequeñas |
+
+#### Obligaciones mensuales y anuales
+
+| Obligación | Plazo |
+|------------|-------|
+| Declaración mensual ISR (pago provisional) | Día 17 del mes siguiente |
+| Declaración mensual IVA | Día 17 del mes siguiente |
+| Retenciones ISR a trabajadores | Día 17 del mes siguiente |
+| Declaración anual Personas Morales | 31 de marzo |
+| Declaración anual Personas Físicas | 30 de abril |
+| DIOT (Declaración Informativa de Operaciones con Terceros) | Día 17 del mes siguiente |
+| Envío de contabilidad electrónica al SAT | Mensual (día 25 del mes siguiente) |
+
+#### Cargas sociales y patronales
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| IMSS — Cuota fija por enfermedad y maternidad | ~20,4% de 1 UMA diaria |
+| IMSS — Excedente sobre 3 UMA | 1,10% |
+| IMSS — Prestaciones en dinero | 0,70% |
+| IMSS — Riesgos de trabajo | 0,50% a 7,59% (según giro) |
+| IMSS — Guarderías | 1,00% |
+| IMSS — Invalidez y vida | 1,75% |
+| IMSS — Retiro (SAR) | 2,00% |
+| IMSS — Cesantía y vejez | 3,15% (incrementando hasta 2030) |
+| Infonavit (vivienda) | 5,00% |
+| Impuesto sobre nómina (estatal) | 2% a 3% según estado |
+| **Total costo patronal aproximado** | **~25-35% sobre salario bruto** |
+
+#### Errores fiscales comunes de PYMEs en México
+
+1. **No timbrar CFDI en tiempo y forma** — la cancelación de CFDI tiene reglas estrictas desde 2022.
+2. **Deducir gastos sin CFDI válido** — el SAT rechaza deducciones sin comprobante fiscal digital.
+3. **Caer de RESICO a Régimen General por exceder tope** — el cambio es automático y retroactivo al 1° de enero.
+4. **No presentar DIOT** — muchas PYMEs la olvidan; genera multas de MXN 10.000-30.000.
+5. **Pagar en efectivo montos > MXN 2.000** — no son deducibles (Ley ISR Art. 27 Fracc. III).
+6. **No acumular ingresos por depósitos bancarios** — el SAT cruza depósitos vs CFDI emitidos.
+7. **Confundir régimen de flujo de efectivo con devengado** — RESICO PF tributa sobre cobros; PM sobre devengado.
+8. **Omitir la participación de utilidades (PTU)** — obligatoria, 10% de utilidad fiscal; tope de 3 meses de salario.
+
+---
+
+### 6.3 Colombia
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Dirección de Impuestos y Aduanas Nacionales (DIAN) — [dian.gov.co](https://www.dian.gov.co) |
+| **IVA** | 19% general; 5% tarifa reducida (algunos alimentos procesados, seguros) |
+| **Exenciones IVA** | Canasta familiar básica, salud, educación, transporte público, exportaciones (0%) |
+| **Facturación electrónica** | Obligatoria desde 2020 para todos los contribuyentes (resoluciones DIAN) |
+
+#### Impuesto de renta — Regímenes para PYMEs
+
+| Régimen | Requisitos | Tasa/Esquema | Ideal para |
+|---------|------------|--------------|------------|
+| **Régimen Simple de Tributación (RST)** | Ingresos ≤ 100.000 UVT/año (~COP 4.700M en 2026); persona natural o jurídica | 1,8% a 14,5% sobre ingresos brutos (según actividad e ingreso) | Comercios, restaurantes, profesionales independientes |
+| **Régimen Ordinario** | Sin tope | 35% sobre utilidad fiscal (personas jurídicas) | Empresas medianas y grandes |
+| **Persona natural Régimen Ordinario** | Sin tope | Progresivo 0% a 39% sobre renta líquida | Profesionales de altos ingresos |
+
+#### Tarifas del Régimen Simple 2025-2026 (resumen por grupo)
+
+| Grupo | Actividad | Ingresos hasta 6.000 UVT | 6.001-15.000 UVT | 15.001-30.000 UVT | 30.001-100.000 UVT |
+|-------|-----------|--------------------------|-------------------|--------------------|---------------------|
+| 1 | Tiendas, minimercados, peluquerías | 1,8% | 2,2% | 3,9% | 5,4% |
+| 2 | Actividades comerciales, industriales | 3,7% | 4,2% | 5,0% | 5,6% |
+| 3 | Servicios profesionales, consultoría | 5,6% | 7,3% | 10,0% | 14,0% |
+| 4 | Restaurantes, bares, alimentos | 3,4% | 3,8% | 4,5% | 5,0% |
+
+#### Obligaciones periódicas
+
+| Obligación | Frecuencia | Plazo |
+|------------|------------|-------|
+| Declaración de IVA | Bimestral (< 92.000 UVT) o cuatrimestral | Según último dígito NIT |
+| Retención en la fuente | Mensual | Según último dígito NIT |
+| Anticipo de renta (Régimen Simple) | Bimestral | Según calendario tributario |
+| Declaración de renta anual | Anual | Abril-mayo según NIT |
+| ICA (Impuesto de Industria y Comercio) | Bimestral o anual (según municipio) | Varía por municipio |
+| Información exógena | Anual | Según resolución DIAN |
+
+#### Cargas sociales y parafiscales (costo empleador)
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| Salud (EPS) | 8,5% (empleador paga 8,5%; trabajador 4%) |
+| Pensión (AFP) | 12% (empleador 12%; trabajador 4%) |
+| ARL (Riesgos laborales) | 0,522% a 6,96% según nivel de riesgo |
+| Caja de compensación | 4% |
+| ICBF | 3% (exento si salario < 10 SMMLV) |
+| SENA | 2% (exento si salario < 10 SMMLV) |
+| **Total costo empleador aproximado** | **~22-30% sobre salario** (con exoneración de salud, ICBF y SENA para salarios < 10 SMMLV: ~16-20%) |
+
+> **Nota**: Las empresas que pagan salarios < 10 SMMLV están exoneradas de aportes a salud (8,5%), ICBF (3%) y SENA (2%) según Ley 1607/2012. Esto aplica a la gran mayoría de PYMEs.
+
+#### Errores fiscales comunes de PYMEs en Colombia
+
+1. **No expedir factura electrónica** — multa del 1% del valor de las operaciones facturadas sin requisitos.
+2. **Omitir la retención en la fuente como agente retenedor** — genera sanción penal (peculado por apropiación).
+3. **No liquidar correctamente prestaciones sociales** — prima, cesantías, intereses de cesantías, vacaciones.
+4. **Desconocer la exoneración de aportes parafiscales** — muchas PYMEs siguen pagando ICBF/SENA innecesariamente.
+5. **No presentar información exógena** — multa por extemporaneidad que puede llegar a 1.300 UVT (~COP 61M).
+6. **Confundir IVA con ICA** — el ICA es municipal y tiene tarifas distintas; ambos coexisten.
+7. **No hacer ajuste por inflación en activos** — afecta la base gravable de renta.
+8. **Pasarse de SMMLV al dar auxilios sin soporte** — auxilios de transporte, alimentación, etc. tienen topes legales.
+
+---
+
+### 6.4 Perú
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Superintendencia Nacional de Aduanas y de Administración Tributaria (SUNAT) — [sunat.gob.pe](https://www.sunat.gob.pe) |
+| **IGV (equivalente al IVA)** | 18% (16% IGV + 2% IPM) |
+| **Exenciones IGV** | Productos agrícolas sin procesar, educación, algunos servicios de salud, exportaciones (0%) |
+| **Facturación electrónica** | Obligatoria para todos los contribuyentes desde 2021 (Sistema de Emisión Electrónica — SEE) |
+
+#### Impuesto a la renta — Regímenes para PYMEs
+
+| Régimen | Tope de ingresos | Tasa | Libros contables | Ideal para |
+|---------|-------------------|------|-------------------|------------|
+| **NRUS (Nuevo RUS)** | ≤ S/ 96.000/año (S/ 8.000/mes) | Cuota fija: S/ 20 (Cat. 1, hasta S/5.000/mes) o S/ 50 (Cat. 2, hasta S/8.000/mes) | Ninguno | Bodegas, ambulantes, microempresas muy pequeñas |
+| **RER (Régimen Especial)** | ≤ S/ 525.000/año | 1,5% sobre ingresos netos mensuales | Registro de ventas y compras | Comercio y manufactura pequeña |
+| **MYPE Tributario (RMT)** | ≤ 1.700 UIT/año (~S/ 8.670.000) | 1% mensual (hasta 300 UIT) o coeficiente; anual: 10% (primeras 15 UIT de renta) + 29,5% sobre exceso | Según ingresos | La mayoría de PYMEs |
+| **Régimen General** | Sin tope | 29,5% sobre renta neta anual | Contabilidad completa | Empresas medianas y grandes |
+
+#### Obligaciones mensuales y anuales
+
+| Obligación | Plazo |
+|------------|-------|
+| Declaración mensual IGV e IR (PDT 621 o Declara Fácil) | Según último dígito RUC (entre el 10 y 22 del mes siguiente) |
+| Pago a cuenta mensual del IR | Junto con la declaración mensual |
+| Declaración anual del IR | Marzo-abril |
+| Planilla electrónica (PLAME) | Mensual, según cronograma SUNAT |
+| Libros electrónicos (PLE/SLE) | Mensual (contribuyentes obligados) |
+
+#### Cargas sociales (costo empleador)
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| EsSalud (salud) | 9% |
+| SCTR (Seguro Complementario de Trabajo de Riesgo) | 0,5%-1,5% (solo actividades de riesgo) |
+| ONP (pensión estatal) — cargo trabajador | 13% |
+| AFP (pensión privada) — cargo trabajador | ~13% (aporte + comisión + seguro) |
+| CTS (Compensación por Tiempo de Servicios) — empleador | ~8,33% (1 sueldo/año, depositado en mayo y noviembre) |
+| Gratificaciones (julio y diciembre) — empleador | ~16,67% (2 sueldos/año) |
+| Vacaciones — empleador | ~8,33% (1 sueldo/año) |
+| **Costo empleador total aproximado (sobre sueldo bruto)** | **~42-50%** (incluyendo CTS, gratificaciones y vacaciones) |
+
+> **Nota**: El costo laboral peruano es engañosamente alto porque incluye gratificaciones y CTS obligatorias, que no son "impuestos" pero sí costos del empleador.
+
+#### Errores fiscales comunes de PYMEs en Perú
+
+1. **No emitir comprobantes por ventas menores** — SUNAT cruza con información de POS y bancos.
+2. **Elegir NRUS cuando se supera el tope** — genera multas y reclasificación automática al RER o RMT.
+3. **No depositar CTS a tiempo** — genera intereses y multas laborales ante SUNAFIL.
+4. **Usar facturas de "empresas fantasma"** — SUNAT publicó listas de proveedores no habidos; las facturas no dan derecho a crédito fiscal.
+5. **No llevar libros electrónicos** — desde 2023 es obligatorio para ingresos > 75 UIT.
+6. **Confundir el pago a cuenta con el impuesto definitivo** — el 1% mensual (RMT) es adelanto; la regularización anual puede salir más.
+7. **No bancarizar pagos > S/ 2.000** — la norma de bancarización exige usar medios de pago para deducir gastos y crédito fiscal.
+8. **Omitir la detracción/retención/percepción del IGV** — el sistema de detracciones es complejo y las multas son automáticas.
+
+---
+
+### 6.5 Argentina
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Administración Federal de Ingresos Públicos (AFIP) / Agencia de Recaudación y Control Aduanero (ARCA) — [afip.gob.ar](https://www.afip.gob.ar) |
+| **IVA** | 21% general; 10,5% reducida (construcción, ciertos alimentos, transporte); 27% para servicios a Responsables Inscriptos |
+| **Exenciones IVA** | Educación, salud, libros, exportaciones (0%), pan, leche, seguros de vida |
+| **Facturación electrónica** | Obligatoria para todos los contribuyentes desde 2019 (Comprobantes en Línea / WebServices AFIP) |
+
+#### Impuesto a las ganancias — Regímenes para PYMEs
+
+| Régimen | Tope de ingresos | Tasa | Ideal para |
+|---------|-------------------|------|------------|
+| **Monotributo** | Varía según categoría (max ~ARS 68M/año en 2025, se actualiza semestralmente) | Cuota fija mensual que incluye impuesto, jubilación y obra social | Trabajadores independientes y microempresas |
+| **Régimen General — Sociedades** | Sin tope | 25% (utilidad ≤ ARS 50M) / 30% (utilidad > ARS 50M) — *tramos actualizables* | SRL, SA, SAS |
+| **Régimen General — Personas humanas** | Sin tope | Progresivo 5% a 35% sobre ganancia neta sujeta a impuesto | Profesionales y empresas unipersonales |
+
+> **Nota**: Argentina actualiza topes y escalas frecuentemente por inflación. Los montos aquí son referenciales; siempre consultar la tabla vigente en AFIP/ARCA.
+
+#### Categorías del Monotributo (resumen simplificado — 2025)
+
+| Categoría | Ingresos brutos anuales máx. | Cuota mensual aprox. (impuesto + SIPA + obra social) |
+|-----------|------------------------------|-------------------------------------------------------|
+| A | Hasta ~ARS 7,8M | ~ARS 26.600 |
+| B | Hasta ~ARS 11,6M | ~ARS 30.300 |
+| C | Hasta ~ARS 16,3M | ~ARS 35.500 |
+| D | Hasta ~ARS 20,2M | ~ARS 45.000 |
+| E | Hasta ~ARS 23,8M | ~ARS 64.000 |
+| F | Hasta ~ARS 29,7M | ~ARS 80.000 |
+| G | Hasta ~ARS 35,6M | ~ARS 110.000 |
+| H | Hasta ~ARS 44,5M | ~ARS 210.000 |
+| I-K (solo servicios/venta bienes) | Hasta ~ARS 68M | ~ARS 250.000-500.000 |
+
+> **Importante**: Estos montos se actualizan semestralmente. La tabla vigente se consulta en el sitio de AFIP.
+
+#### Obligaciones periódicas
+
+| Obligación | Frecuencia | Plazo |
+|------------|------------|-------|
+| DDJJ IVA | Mensual | Según terminación CUIT |
+| Pago a cuenta de Ganancias (anticipos) | Mensual (5 anticipos en sociedades, 10 en personas humanas) | Según calendario AFIP |
+| Ingresos Brutos (IIBB, impuesto provincial) | Mensual | Según jurisdicción (SIRCREB para Convenio Multilateral) |
+| Monotributo — cuota mensual | Mensual | Día 20 de cada mes |
+| DDJJ anual Ganancias sociedades | Anual | Mayo (cierre diciembre) |
+| DDJJ anual Ganancias personas humanas | Anual | Junio |
+| SIPER / Régimen de información | Periódico | Según resolución |
+
+#### Cargas sociales (costo empleador)
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| Jubilación (SIPA) | 10,17% |
+| PAMI (INSSJP) | 1,50% |
+| Asignaciones familiares | 4,44% |
+| Fondo Nacional de Empleo | 0,89% |
+| Obra social | 6% |
+| ART (Aseguradora de Riesgos del Trabajo) | 2%-8% según actividad |
+| **Total contribuciones patronales** | **~23-31%** (PYMEs tienen reducción de contribuciones) |
+
+> Las PYMEs registradas en el Registro PYME acceden a reducción de contribuciones patronales y otros beneficios.
+
+#### Errores fiscales comunes de PYMEs en Argentina
+
+1. **Excluirse o ser excluido del Monotributo sin plan de transición** — el salto a Responsable Inscripto implica IVA + Ganancias + aumento de costos del 30-50%.
+2. **No recategorizarse en Monotributo cada semestre** — AFIP recategoriza de oficio y cobra diferencias con intereses.
+3. **Ignorar Ingresos Brutos (IIBB)** — es el impuesto que más PYMEs omiten; alícuotas varían de 1,5% a 5% según provincia y actividad.
+4. **No inscribirse en Convenio Multilateral cuando operan en varias provincias** — genera retenciones acumulativas en SIRCREB.
+5. **Mezclar cuentas bancarias personales y de la empresa** — AFIP cruza movimientos bancarios con facturación.
+6. **No aprovechar beneficios del Registro PYME** — reducción de contribuciones, IVA a 90 días, etc.
+7. **Emitir facturas tipo B cuando corresponde tipo A** — genera contingencias de IVA.
+8. **No ajustar por inflación los estados contables** — obligatorio desde 2019; omitirlo distorsiona la base imponible.
+
+---
+
+### 6.6 Bolivia
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Servicio de Impuestos Nacionales (SIN) — [impuestos.gob.bo](https://impuestos.gob.bo) |
+| **IVA** | 13% (Impuesto al Valor Agregado, contenido en el precio — efectivo ~14,94%) |
+| **Exenciones IVA** | Importaciones diplomáticas, donaciones, servicios financieros específicos |
+| **Facturación electrónica** | En implementación progresiva desde 2021 (Sistema de Facturación Electrónica — SFE); obligatoria para la mayoría de contribuyentes desde 2024 |
+
+#### Impuestos principales para PYMEs
+
+| Impuesto | Base | Tasa | Frecuencia |
+|----------|------|------|------------|
+| IVA (Impuesto al Valor Agregado) | Ventas de bienes y servicios | 13% (contenido en precio) | Mensual |
+| IT (Impuesto a las Transacciones) | Ingresos brutos | 3% | Mensual |
+| IUE (Impuesto sobre las Utilidades de las Empresas) | Utilidad neta | 25% | Anual |
+| RC-IVA (Régimen Complementario al IVA) | Ingresos de personas | 13% | Mensual (empleador retiene) |
+| **Régimen Simplificado** | Para artesanos, comerciantes minoristas, vivanderos | Cuota fija bimestral (BOB 47-2.400 según categoría) | Bimestral |
+| **Régimen Integrado (transporte)** | Transporte público | Cuota fija anual según valor del vehículo | Anual |
+
+#### Obligaciones periódicas
+
+| Obligación | Formulario | Plazo |
+|------------|------------|-------|
+| IVA mensual | Form. 200 | Según último dígito NIT (entre 13-22 del mes siguiente) |
+| IT mensual | Form. 400 | Mismo plazo que IVA |
+| Retenciones RC-IVA | Form. 608 | Mensual |
+| IUE anual | Form. 500 | 120 días después del cierre fiscal |
+| Planillas salariales | Varios | Trimestral ante Ministerio de Trabajo |
+
+#### Cargas sociales (costo empleador)
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| CNS (Caja Nacional de Salud) | 10% |
+| AFP (pensión — aporte patronal pro-vivienda) | 2% |
+| AFP (riesgo profesional) | 1,71% |
+| AFP (aporte solidario) — cargo empleador | 3% (sobre salarios > 13.000 BOB) |
+| Aguinaldo (un sueldo/año) | ~8,33% |
+| **Total costo empleador aproximado** | **~22-25%** (más aguinaldo y segundo aguinaldo si hay crecimiento del PIB) |
+
+> **Nota**: Si el PIB crece > 4,5%, el gobierno decreta "doble aguinaldo", que añade otro ~8,33%.
+
+#### Errores fiscales comunes de PYMEs en Bolivia
+
+1. **No emitir factura por ventas al detalle** — el SIN realiza operativos de control frecuentes.
+2. **No acreditar IT contra IUE** — el IT pagado se puede descontar del IUE; muchas PYMEs pierden este beneficio.
+3. **Incumplir el Sistema de Facturación Electrónica (SFE)** — la migración es obligatoria; usar dosificaciones vencidas genera clausura.
+4. **No registrar dependientes para RC-IVA** — los empleados no presentan facturas de descargo y el empleador retiene de más o de menos.
+5. **No pagar el segundo aguinaldo cuando corresponde** — genera multas laborales y acciones legales.
+6. **Omitir IT en actividades que no generan IVA** — el IT grava todas las transacciones, incluyendo las no gravadas por IVA.
+7. **No inscribir la empresa en el Registro de Comercio de Bolivia (FUNDEMPRESA)** — requisito para operar formalmente.
+
+---
+
+### 6.7 Ecuador
+
+| Dato | Detalle |
+|------|---------|
+| **Autoridad tributaria** | Servicio de Rentas Internas (SRI) — [sri.gob.ec](https://www.sri.gob.ec) |
+| **IVA** | 15% (incrementado desde 12% en abril 2024 por 2 años; puede retornar a 12% en 2026) |
+| **Exenciones IVA** | Canasta básica, salud, educación, exportaciones (0%), arriendos de vivienda |
+| **Facturación electrónica** | Obligatoria para todos los contribuyentes desde 2022 |
+
+#### Impuesto a la renta — Regímenes para PYMEs
+
+| Régimen | Requisitos | Tasa | Ideal para |
+|---------|------------|------|------------|
+| **RIMPE Emprendedores** | Ingresos ≤ USD 300.000/año | 1% a 2% sobre ingresos brutos (escala progresiva) | Negocios nuevos o pequeños |
+| **RIMPE Negocios Populares** | Ingresos ≤ USD 20.000/año | Cuota fija anual USD 60 (incluye IVA) | Tiendas de barrio, ambulantes |
+| **Régimen General Sociedades** | Sin tope | 25% sobre utilidad (22% si reinvierte + 3% si tiene accionistas en paraísos fiscales) | Empresas medianas y grandes |
+| **Régimen General Personas Naturales** | Sin tope | Progresivo 0% a 37% | Profesionales de altos ingresos |
+
+#### Escala del RIMPE Emprendedores
+
+| Tramo de ingresos (USD) | Tarifa |
+|--------------------------|--------|
+| 0 — 20.000 | 0% (si califica como negocio popular: cuota fija USD 60) |
+| 20.001 — 50.000 | 1,0% |
+| 50.001 — 75.000 | 1,25% |
+| 75.001 — 100.000 | 1,5% |
+| 100.001 — 200.000 | 1,75% |
+| 200.001 — 300.000 | 2,0% |
+
+#### Obligaciones periódicas
+
+| Obligación | Frecuencia | Plazo |
+|------------|------------|-------|
+| Declaración IVA | Mensual (si vende bienes/servicios gravados) o semestral (si solo vende con tarifa 0%) | Según noveno dígito RUC (mes siguiente) |
+| Retenciones en la fuente del IR | Mensual | Según noveno dígito RUC |
+| Declaración IR anual (personas naturales) | Anual | Marzo |
+| Declaración IR anual (sociedades) | Anual | Abril |
+| Anexo Transaccional Simplificado (ATS) | Mensual | Mes siguiente |
+| RIMPE — declaración | Semestral (emprendedores) o anual (negocios populares) | Según calendario SRI |
+
+#### Cargas sociales (costo empleador)
+
+| Concepto | Tasa empleador |
+|----------|----------------|
+| IESS (aporte patronal) | 11,15% |
+| IESS (aporte personal) — cargo trabajador | 9,45% |
+| IECE (Capacitación) + SECAP | 1,0% (incluido en patronal) |
+| Décimo tercer sueldo (aguinaldo) | ~8,33% |
+| Décimo cuarto sueldo (bono escolar) | 1 SBU/año (~USD 460) |
+| Fondos de reserva (a partir del 2° año) | 8,33% |
+| **Total costo empleador aproximado** | **~28-35%** sobre sueldo (incluyendo décimos y fondos de reserva) |
+
+#### Errores fiscales comunes de PYMEs en Ecuador
+
+1. **No emitir comprobantes electrónicos** — el SRI clausura establecimientos por reincidencia (hasta 7 días).
+2. **No retener en la fuente cuando corresponde** — las sociedades son agentes de retención obligatorios.
+3. **Confundir RIMPE con régimen general** — entrar y salir del RIMPE tiene implicaciones de IVA y contabilidad.
+4. **No declarar IVA cuando solo se tiene tarifa 0%** — la declaración semestral sigue siendo obligatoria.
+5. **Olvidar el Anexo Transaccional Simplificado (ATS)** — multas de USD 30-1.500 por omisión.
+6. **No pagar décimo tercer y cuarto sueldo en plazo** — genera intereses y demandas laborales.
+7. **Confundir dolarización con simplicidad fiscal** — Ecuador no tiene riesgo cambiario pero tiene complejidad tributaria similar a otros países.
+8. **No considerar el anticipo de IR** — calculado sobre patrimonio, costos, gastos e ingresos; no es optativo.
+
+---
+
+## 7. Benchmarks Financieros por Industria — LATAM
+
+> **Fuentes**: Combinación de datos de CEPAL, BID, cámaras de comercio, estudios sectoriales de Deloitte LATAM, KPMG, reportes de bancos centrales, y encuestas a PYMEs de la región. Los rangos reflejan medianas para PYMEs con 5-50 empleados.
+
+---
+
+### 7.1 Restaurantes / Food Service
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 60-70% | < 55% |
+| **Margen operativo (EBIT)** | 8-15% | < 5% |
+| **Margen neto** | 5-10% | < 3% |
+| **Costo de alimentos / Ingresos** | 28-35% | > 38% |
+| **Costo de personal / Ingresos** | 25-32% | > 35% |
+| **Arriendo / Ingresos** | 6-10% | > 12% |
+| **Días de inventario** | 5-10 días | > 14 días (riesgo de merma) |
+| **Días de cuentas por cobrar** | 0-5 días (mayoría venta al contado) | > 15 días |
+| **Días de cuentas por pagar** | 15-30 días | > 45 días (tensión con proveedores) |
+| **Ticket promedio** | Varía por concepto (USD 5-25 LATAM) | Decreciente por 3+ meses |
+| **Punto de equilibrio típico** | 60-70% de capacidad del local | Si necesita >85% para breakeven: modelo inviable |
+| **CAC (costo adquisición cliente)** | USD 2-8 (redes sociales/delivery) | > USD 15 |
+| **LTV (valor del cliente)** | USD 80-300/año (cliente frecuente) | Si LTV < 5× CAC |
+| **Rotación de mesas/día** | 2-4 turnos | < 1,5 turnos |
+
+**KPIs críticos del sector:**
+- **Food cost %** = Costo de materia prima / Ventas netas
+- **RevPASH** (Revenue per Available Seat Hour) = Ventas / (Asientos × Horas de operación)
+- **Merma (%)** = Desperdicio / Compras de materia prima → objetivo < 3%
+
+---
+
+### 7.2 Retail / Tiendas
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 35-50% (ropa/accesorios: 50-65%; abarrotes: 20-30%) | < 25% en abarrotes; < 40% en ropa |
+| **Margen operativo** | 5-12% | < 3% |
+| **Margen neto** | 3-8% | < 2% |
+| **Días de inventario** | 30-60 días (ropa: 60-90; abarrotes: 15-25) | > 90 días = inventario muerto |
+| **Días de cuentas por cobrar** | 0-7 días (mayoría contado/tarjeta) | > 15 días |
+| **Días de cuentas por pagar** | 30-60 días | > 90 días |
+| **Rotación de inventario anual** | 4-8 veces (ropa: 3-5; abarrotes: 15-25) | < 3 veces/año |
+| **Venta por m²/mes** | USD 100-400 según país y ubicación | Decreciente por 3+ meses |
+| **Punto de equilibrio** | 55-70% del inventario vendido al precio regular | Si necesita >80% de venta a precio completo |
+| **CAC** | USD 5-15 | > USD 25 |
+| **LTV** | USD 100-500/año | < 3× CAC |
+| **Shrinkage (merma/robo)** | 1-2% de ventas | > 3% |
+
+**KPIs críticos del sector:**
+- **GMROI** (Gross Margin Return on Inventory Investment) = Margen bruto / Inventario promedio al costo → objetivo > 2,0
+- **Sell-through rate** = Unidades vendidas / Unidades recibidas → objetivo > 70%
+- **Ticket promedio** y **artículos por ticket** — medir tendencia mensual
+
+---
+
+### 7.3 E-commerce
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 40-65% (depende si es marketplace o inventario propio) | < 30% |
+| **Margen operativo** | 5-15% (en etapa de crecimiento puede ser negativo) | < -20% por > 18 meses sin mejorar |
+| **Margen neto** | 3-10% | Negativo por > 24 meses |
+| **Días de inventario** | 20-45 días (si maneja inventario) | > 60 días |
+| **Días de cuentas por cobrar** | 3-15 días (pasarelas de pago retienen 3-7 días) | > 30 días |
+| **Días de cuentas por pagar** | 30-45 días | > 60 días |
+| **CAC** | USD 5-30 (varía enormemente por canal) | > USD 50 sin LTV que lo justifique |
+| **LTV** | USD 50-500 | < 3× CAC |
+| **Tasa de conversión** | 1-3% (LATAM) | < 0,5% |
+| **Tasa de abandono de carrito** | 65-80% | > 85% |
+| **Costo de envío / Ticket promedio** | 5-12% | > 20% |
+| **Tasa de devoluciones** | 3-10% (ropa: 15-25%) | > 15% (excepto moda) |
+| **Breakeven** | 12-24 meses desde lanzamiento | > 36 meses sin camino claro |
+
+**KPIs críticos del sector:**
+- **AOV** (Average Order Value) → medir tendencia mensual
+- **Repeat purchase rate** = Clientes recurrentes / Clientes totales → objetivo > 25%
+- **Contribución por pedido** = AOV − COGS − envío − comisión pasarela − CAC prorrateado → debe ser positiva
+- **Blended CAC** = Gasto total marketing / Nuevos clientes → separar por canal
+
+---
+
+### 7.4 Servicios Profesionales (Contabilidad, Legal, Consultoría)
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 60-80% | < 50% |
+| **Margen operativo** | 15-30% | < 10% |
+| **Margen neto** | 10-25% | < 7% |
+| **Días de cuentas por cobrar** | 30-60 días | > 90 días |
+| **Días de cuentas por pagar** | 15-30 días | > 45 días |
+| **Utilización (horas facturables / horas disponibles)** | 65-80% | < 55% |
+| **Ingreso por profesional/mes** | USD 2.000-8.000 según país y especialidad | Decreciente por 3+ meses |
+| **Costo de personal / Ingresos** | 45-60% | > 65% |
+| **Punto de equilibrio** | 3-6 meses de operación | > 12 meses |
+| **CAC** | USD 50-300 (B2B) | > USD 500 sin contratos recurrentes |
+| **LTV** | USD 2.000-20.000 | < 5× CAC |
+| **Churn mensual** | 2-5% | > 8% |
+
+**KPIs críticos del sector:**
+- **Revenue per employee** = Ingresos totales / N° empleados → benchmark LATAM: USD 3.000-7.000/mes
+- **Realization rate** = Ingresos cobrados / Ingresos facturados → objetivo > 90%
+- **Pipeline coverage** = Oportunidades en pipeline / Meta de ventas → objetivo > 3×
+
+---
+
+### 7.5 Manufactura Pequeña
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 30-45% | < 25% |
+| **Margen operativo** | 8-15% | < 5% |
+| **Margen neto** | 4-10% | < 3% |
+| **Días de inventario (materia prima)** | 15-30 días | > 45 días (capital inmovilizado) |
+| **Días de inventario (producto terminado)** | 10-25 días | > 40 días |
+| **Días de cuentas por cobrar** | 30-60 días | > 90 días |
+| **Días de cuentas por pagar** | 30-60 días | < 15 días (no aprovechan crédito de proveedores) |
+| **OEE (Overall Equipment Effectiveness)** | 60-75% (PYMEs) | < 50% |
+| **Defectos / Unidades producidas** | 1-3% | > 5% |
+| **Costo de mano de obra / Costo total** | 20-35% | > 40% |
+| **Punto de equilibrio** | 55-70% de capacidad instalada | > 85% |
+| **CAPEX / Ingresos anuales** | 5-10% | > 20% sin financiamiento estructurado |
+
+**KPIs críticos del sector:**
+- **Costo unitario de producción** → descomponer en MP, MOD y CIF
+- **Ciclo de conversión de efectivo** = Días inventario + Días CxC − Días CxP → objetivo < 45 días
+- **Scrap rate** = Material desperdiciado / Material ingresado → objetivo < 3%
+
+---
+
+### 7.6 Construcción
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 20-35% | < 15% |
+| **Margen operativo** | 5-12% | < 3% |
+| **Margen neto** | 3-8% | < 2% |
+| **Días de cuentas por cobrar** | 45-90 días | > 120 días |
+| **Días de cuentas por pagar** | 30-60 días | > 90 días |
+| **Retención de garantía (%)** | 5-10% del contrato (liberada en 6-12 meses) | > 15% |
+| **Sobrecosto vs presupuesto** | < 5% | > 10% |
+| **Plazo real vs plazo presupuestado** | < 110% | > 130% |
+| **Costo de materiales / Costo total del proyecto** | 40-55% | > 65% (posible desperdicio o robo) |
+| **Costo de mano de obra / Costo total** | 25-35% | > 40% |
+| **Punto de equilibrio** | 3-5 proyectos/año (PYME típica) | Depender de 1 solo proyecto |
+| **Backlog / Ingresos anuales** | 1-2× | < 0,5× (sin pipeline) |
+
+**KPIs críticos del sector:**
+- **Avance físico vs avance financiero** — si el avance financiero supera al físico: alerta de sobrecosto
+- **Costo real por m²** vs estimado → variación > 8% requiere análisis
+- **Cash flow del proyecto** — la construcción tiene ciclos de caja largos; modelar por hitos
+
+---
+
+### 7.7 Salud / Clínicas
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 55-70% | < 45% |
+| **Margen operativo** | 10-20% | < 7% |
+| **Margen neto** | 7-15% | < 4% |
+| **Días de cuentas por cobrar** | 15-45 días (particular: 0-7; aseguradoras: 30-90) | > 90 días (aseguradoras morosas) |
+| **Días de cuentas por pagar** | 30-45 días | > 60 días |
+| **Ocupación de agenda** | 70-85% | < 60% |
+| **Costo de personal médico / Ingresos** | 35-50% | > 55% |
+| **Costo de insumos médicos / Ingresos** | 10-20% | > 25% |
+| **Ingreso por consultorio/mes** | USD 3.000-10.000 según especialidad y país | Decreciente por 3+ meses |
+| **No-show rate** | 10-20% | > 30% |
+| **Punto de equilibrio** | 55-65% de ocupación | > 80% |
+| **CAC** | USD 20-60 | > USD 100 |
+| **LTV** | USD 200-2.000 | < 5× CAC |
+
+**KPIs críticos del sector:**
+- **Revenue per provider hour** = Ingresos / Horas clínicas disponibles
+- **Collection rate** = Cobros / Facturación → objetivo > 95%
+- **Proporción consultas nuevas vs control** → equilibrio ideal: 30% nuevas / 70% control
+
+---
+
+### 7.8 Educación / Capacitación
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 55-75% | < 45% |
+| **Margen operativo** | 10-25% | < 7% |
+| **Margen neto** | 7-18% | < 4% |
+| **Días de cuentas por cobrar** | 0-15 días (cobro anticipado o mensual) | > 30 días |
+| **Días de cuentas por pagar** | 15-30 días | > 45 días |
+| **Tasa de ocupación (alumnos inscritos / capacidad)** | 75-90% | < 60% |
+| **Costo de docentes / Ingresos** | 30-45% | > 50% |
+| **Deserción semestral** | 5-15% | > 20% |
+| **Costo de adquisición por alumno** | USD 20-100 (presencial) / USD 5-40 (online) | > USD 150 |
+| **LTV por alumno** | USD 200-3.000 | < 4× CAC |
+| **Punto de equilibrio** | 50-65% de matrícula | > 80% |
+| **NPS (Net Promoter Score)** | > 40 | < 20 |
+
+**KPIs críticos del sector:**
+- **Ingreso por alumno** = Ingresos / N° alumnos activos
+- **Costo por alumno** = Costos totales / N° alumnos → debe ser < 70% del ingreso por alumno
+- **Completion rate** (cursos online) = Alumnos que terminan / Alumnos inscritos → objetivo > 40%
+
+---
+
+### 7.9 Transporte / Logística
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 25-40% | < 20% |
+| **Margen operativo** | 6-12% | < 4% |
+| **Margen neto** | 3-8% | < 2% |
+| **Costo de combustible / Ingresos** | 25-35% | > 40% |
+| **Costo de mantenimiento / Ingresos** | 8-15% | > 20% |
+| **Días de cuentas por cobrar** | 30-60 días | > 90 días |
+| **Días de cuentas por pagar** | 15-30 días | > 45 días |
+| **Utilización de flota** | 75-85% del tiempo operativo | < 60% |
+| **Km vacíos / Km totales** | 15-25% | > 35% |
+| **Costo por km** | Varía por país (USD 0,80-1,50/km camión mediano) | Creciente sin ajuste de tarifas |
+| **Punto de equilibrio** | 65-75% de capacidad de carga | > 85% |
+| **Antigüedad promedio de flota** | 5-10 años | > 15 años (costos de mantenimiento crecen exponencialmente) |
+
+**KPIs críticos del sector:**
+- **Ingreso por km** vs **Costo por km** → margen por km debe ser positivo
+- **Entregas a tiempo (%)** = Entregas on-time / Total entregas → objetivo > 92%
+- **Costo por tonelada-km** → benchmark para fijar precios competitivos
+
+---
+
+### 7.10 Agricultura / Agroindustria
+
+| Indicador | Rango saludable | Alerta |
+|-----------|----------------|--------|
+| **Margen bruto** | 25-45% (alta variabilidad estacional) | < 20% |
+| **Margen operativo** | 8-18% | < 5% |
+| **Margen neto** | 4-12% | < 2% |
+| **Días de inventario** | 30-90 días (dependiendo del ciclo del cultivo/producto) | > 120 días (salvo productos no perecederos) |
+| **Días de cuentas por cobrar** | 30-60 días | > 90 días |
+| **Días de cuentas por pagar** | 30-45 días (insumos agrícolas) | > 60 días |
+| **Costo de insumos / Ingresos** | 30-45% | > 50% |
+| **Costo de mano de obra / Ingresos** | 15-30% | > 35% |
+| **Rendimiento por hectárea** | Varía por cultivo; comparar con promedio regional | < 70% del promedio regional |
+| **Costo por hectárea** | Varía; referencia USD 500-3.000/ha en LATAM según cultivo | Creciente sin mejora en rendimiento |
+| **Punto de equilibrio** | 50-65% de la producción esperada | > 80% (vulnerable a clima) |
+| **Ciclo de caja** | 90-180 días (siembra a cobro) | > 240 días sin financiamiento puente |
+
+**KPIs críticos del sector:**
+- **Ingreso por hectárea** vs **Costo por hectárea** → margen por hectárea
+- **Precio de venta real vs precio de mercado** → si < 85% del precio de mercado, problema de comercialización
+- **Porcentaje de merma post-cosecha** → LATAM promedio 20-30%; objetivo < 15% con buenas prácticas
+
+---
+
+### 7.11 Tabla resumen comparativa — Márgenes por industria (medianas LATAM)
+
+| Industria | Margen bruto | Margen operativo | Margen neto | CCC (días) |
+|-----------|-------------|-----------------|-------------|------------|
+| Restaurantes | 65% | 12% | 7% | -10 a 5 |
+| Retail | 40% | 8% | 5% | 15-40 |
+| E-commerce | 50% | 8% | 5% | 10-30 |
+| Servicios profesionales | 70% | 22% | 15% | 20-50 |
+| Manufactura pequeña | 35% | 10% | 6% | 30-60 |
+| Construcción | 25% | 8% | 4% | 50-120 |
+| Salud / Clínicas | 62% | 15% | 10% | 5-30 |
+| Educación | 65% | 18% | 12% | -15 a 10 |
+| Transporte / Logística | 30% | 8% | 5% | 20-50 |
+| Agricultura | 35% | 12% | 7% | 60-150 |
+
+> **CCC** = Ciclo de Conversión de Efectivo = Días inventario + Días CxC − Días CxP. Un CCC negativo significa que la empresa cobra antes de pagar (ideal).
+
+---
+
+## 8. Plantillas de Modelado Financiero
+
+---
+
+### 8.1 Cómo construir un Forecast de Flujo de Caja a 13 Semanas — Paso a Paso
+
+El forecast de 13 semanas (un trimestre) es la herramienta de supervivencia más importante para una PYME. Permite anticipar si la empresa podrá pagar sus obligaciones en las próximas semanas.
+
+#### Paso 1: Definir la estructura
+
+```
+| Concepto | Sem 1 | Sem 2 | Sem 3 | ... | Sem 13 | TOTAL |
+|----------|-------|-------|-------|-----|--------|-------|
+| SALDO INICIAL | X | | | | | |
+| (+) ENTRADAS DE EFECTIVO | | | | | | |
+|   Cobro de ventas al contado | | | | | | |
+|   Cobro de cuentas por cobrar | | | | | | |
+|   Otros ingresos | | | | | | |
+| = TOTAL ENTRADAS | | | | | | |
+| (-) SALIDAS DE EFECTIVO | | | | | | |
+|   Proveedores | | | | | | |
+|   Nómina y cargas sociales | | | | | | |
+|   Arriendo | | | | | | |
+|   Servicios (luz, agua, internet) | | | | | | |
+|   Cuotas de créditos | | | | | | |
+|   Impuestos (IVA, renta, etc.) | | | | | | |
+|   Otros gastos operativos | | | | | | |
+| = TOTAL SALIDAS | | | | | | |
+| FLUJO NETO SEMANAL | | | | | | |
+| SALDO FINAL (= Saldo inicial + Flujo neto) | | | | | | |
+```
+
+#### Paso 2: Completar las entradas de efectivo
+
+**Reglas para estimar cobros:**
+
+| Tipo de venta | Cómo proyectar |
+|---------------|----------------|
+| Ventas al contado/tarjeta débito | Se registran en la semana de la venta (o +1-2 días para POS) |
+| Ventas con tarjeta de crédito | +7-15 días según procesador de pagos |
+| Ventas a crédito 30 días | Aplicar tasa de cobro histórica: si históricamente cobras el 85% a 30 días, usar eso |
+| Ventas a crédito 60 días | Ídem con tasa histórica de cobro a 60 días |
+| Anticipos de clientes | Registrar cuando se espera recibir, no cuando se firma contrato |
+
+**Ejemplo práctico — Distribuidora con ventas mensuales de COP 120M:**
+- 30% ventas contado: COP 36M → COP 9M/semana
+- 50% ventas a 30 días: COP 60M → cobro en semanas 5-6
+- 20% ventas a 60 días: COP 24M → cobro en semanas 9-10
+- Tasa de incobrabilidad histórica: 3% → descontar del cobro proyectado
+
+#### Paso 3: Completar las salidas de efectivo
+
+**Clasificar por certeza:**
+
+| Categoría | Ejemplos | Cómo manejar |
+|-----------|----------|--------------|
+| **Fijas confirmadas** | Nómina, arriendo, cuotas crédito, seguros | Montos exactos en semanas exactas |
+| **Variables predecibles** | Proveedores (con OC emitida), servicios básicos | Estimar con base en historial ± 10% |
+| **Variables inciertas** | Reparaciones, gastos legales, emergencias | Buffer del 5-10% sobre total de salidas |
+| **Estacionales** | Impuestos (IVA mensual, renta anual), aguinaldos, bonificaciones | Ubicar en la semana exacta del vencimiento |
+
+#### Paso 4: Calcular y analizar
+
+1. **Flujo neto semanal** = Total entradas − Total salidas
+2. **Saldo final** = Saldo inicial + Flujo neto
+3. **Identificar semanas rojas** = Cualquier semana donde el saldo final sea < 0 o < colchón mínimo
+
+**Colchón mínimo recomendado:**
+- **Mínimo absoluto**: 2 semanas de gastos fijos
+- **Recomendado**: 4 semanas de gastos fijos
+- **Ideal**: 8 semanas de gastos fijos
+
+#### Paso 5: Acciones según escenario
+
+| Escenario | Acción inmediata |
+|-----------|------------------|
+| Saldo proyectado negativo en semana 1-2 | **EMERGENCIA**: Negociar extensión con proveedores, adelantar cobros, línea de crédito revolvente |
+| Saldo negativo en semana 3-6 | **URGENTE**: Activar cobranza agresiva, postergar gastos no esenciales, evaluar factoring |
+| Saldo negativo en semana 7-13 | **PLANIFICABLE**: Ajustar política de crédito, renegociar plazos de pago, buscar financiamiento a 90 días |
+| Saldo positivo todo el período pero < colchón | **PRECAUCIÓN**: Construir reserva gradualmente; no comprometer gastos nuevos |
+| Saldo holgado todo el período | **OPORTUNIDAD**: Evaluar inversiones, pagar deuda cara anticipadamente, negociar descuentos pronto pago |
+
+#### Paso 6: Actualizar semanalmente
+
+- Cada lunes: actualizar saldo real de apertura, ajustar proyecciones de cobros y pagos.
+- Comparar "proyectado semana pasada" vs "real" → medir precisión del forecast.
+- Si la variación real vs proyectado supera ±15% de forma consistente, revisar supuestos.
+
+---
+
+### 8.2 Cómo Calcular Unit Economics — Con Ejemplos Reales
+
+Los unit economics responden la pregunta fundamental: **¿Ganamos o perdemos dinero con cada unidad vendida / cliente atendido?**
+
+#### Framework general
+
+```
+INGRESO POR UNIDAD
+  (-) Costo variable por unidad (COGS directo)
+  (-) Costo de adquisición prorrateado (CAC / compras esperadas)
+  (-) Costo de servicio/entrega por unidad
+  ─────────────────────────────
+  = CONTRIBUCIÓN POR UNIDAD
+
+  Margen de contribución (%) = Contribución / Ingreso × 100
+```
+
+#### Ejemplo 1: Tienda de café en Bogotá
+
+| Componente | Valor (COP) |
+|------------|-------------|
+| Precio promedio de un café | 8.500 |
+| (-) Costo de insumos (café, leche, vaso, tapa) | 2.200 |
+| (-) Costo de mano de obra directa (barista, prorrateado por café) | 1.100 |
+| (-) Costo de delivery (si aplica, promedio) | 800 |
+| **= Contribución por café** | **4.400** |
+| **Margen de contribución** | **51,8%** |
+
+Costos fijos mensuales: COP 12.000.000 (arriendo, admin, servicios)
+Punto de equilibrio = 12.000.000 / 4.400 = **2.727 cafés/mes** = ~91 cafés/día
+
+Si vende 120 cafés/día: Utilidad mensual = (120 × 30 × 4.400) − 12.000.000 = **COP 3.840.000**
+
+#### Ejemplo 2: SaaS B2B en Chile
+
+| Componente | Valor (USD) |
+|------------|-------------|
+| Suscripción mensual promedio (ARPU) | 89 |
+| (-) Costo de hosting/infraestructura por cliente | 8 |
+| (-) Costo de soporte por cliente | 12 |
+| **= Contribución mensual por cliente** | **69** |
+| **Margen de contribución** | **77,5%** |
+
+| Métrica | Cálculo | Valor |
+|---------|---------|-------|
+| CAC (costo de adquisición) | Gasto marketing+ventas mensual / Nuevos clientes | USD 450 |
+| Churn mensual | 4% | |
+| Vida promedio del cliente | 1 / Churn = 1/0,04 | 25 meses |
+| LTV (Lifetime Value) | Contribución mensual × Vida promedio = 69 × 25 | USD 1.725 |
+| **Ratio LTV/CAC** | 1.725 / 450 | **3,8×** ✓ |
+| **Meses para recuperar CAC** | 450 / 69 | **6,5 meses** ✓ |
+
+**Reglas de oro para unit economics:**
+- **LTV/CAC > 3×** → modelo saludable
+- **LTV/CAC entre 1× y 3×** → viable pero ajustado; optimizar CAC o mejorar retención
+- **LTV/CAC < 1×** → el negocio pierde dinero con cada cliente; modelo insostenible
+- **Payback < 12 meses** → ideal para PYMEs sin mucho capital
+- **Payback > 18 meses** → necesita capital externo para financiar crecimiento
+
+#### Ejemplo 3: Empresa de manufactura — camisetas en Lima
+
+| Componente | Valor (PEN) |
+|------------|-------------|
+| Precio de venta (mayoreo) | 35 |
+| (-) Tela + insumos | 9 |
+| (-) Mano de obra directa por unidad | 5 |
+| (-) Estampado/acabado | 3 |
+| (-) Empaque + etiqueta | 1,50 |
+| **= Contribución por camiseta** | **16,50** |
+| **Margen de contribución** | **47,1%** |
+
+Costos fijos mensuales: PEN 28.000
+Punto de equilibrio = 28.000 / 16,50 = **1.697 camisetas/mes**
+
+---
+
+### 8.3 Análisis de Punto de Equilibrio — Servicio vs Producto
+
+#### Para un negocio de PRODUCTO
+
+```
+Punto de Equilibrio (unidades) = Costos Fijos Totales / (Precio − Costo Variable Unitario)
+Punto de Equilibrio ($) = Costos Fijos Totales / Margen de Contribución (%)
+```
+
+**Ejemplo — Panadería en Santiago:**
+
+| Dato | Valor (CLP) |
+|------|-------------|
+| Costos fijos mensuales (arriendo, sueldos fijos, servicios, admin) | 6.500.000 |
+| Precio promedio por kilo de pan | 3.200 |
+| Costo variable por kilo (harina, levadura, energía, empaque) | 1.600 |
+| Margen de contribución por kilo | 1.600 |
+| Margen de contribución (%) | 50% |
+| **Punto de equilibrio** | **4.063 kilos/mes = ~135 kilos/día** |
+| **Punto de equilibrio en CLP** | **CLP 13.000.000/mes** |
+
+#### Para un negocio de SERVICIO
+
+En servicios, la "unidad" es la **hora facturable** o el **proyecto/contrato**.
+
+```
+PE (horas) = Costos Fijos / (Tarifa por hora − Costo variable por hora)
+PE (proyectos) = Costos Fijos / (Precio promedio proyecto − Costo variable proyecto)
+```
+
+**Ejemplo — Agencia de marketing digital en CDMX (3 empleados):**
+
+| Dato | Valor (MXN) |
+|------|-------------|
+| Costos fijos mensuales (sueldos, oficina, software, servicios) | 180.000 |
+| Horas disponibles por mes (3 personas × 160 hrs) | 480 |
+| Horas facturables estimadas (utilización 70%) | 336 |
+| Tarifa promedio por hora | 850 |
+| Costo variable por hora (freelancers, herramientas adicionales, comisiones) | 150 |
+| Margen de contribución por hora | 700 |
+| **Punto de equilibrio** | **257 horas/mes** |
+| **Utilización mínima requerida** | **257 / 480 = 53,5%** |
+
+Si cobran por proyecto promedio MXN 35.000 con costo variable de MXN 8.000:
+PE = 180.000 / (35.000 − 8.000) = **6,7 proyectos/mes**
+
+**Diferencias clave entre ambos análisis:**
+
+| Aspecto | Producto | Servicio |
+|---------|----------|----------|
+| Unidad de medida | Unidad producida/vendida | Hora facturable o proyecto |
+| Variable limitante | Capacidad de producción / inventario | Tiempo disponible del equipo |
+| Escalabilidad | Más lineal (más unidades = más ingreso) | Limitada por horas humanas |
+| Riesgo principal | Inventario no vendido | Horas no facturadas |
+| Cómo mejorar PE | Reducir costo variable (negociar MP) o subir precio | Aumentar utilización o tarifa |
+
+---
+
+### 8.4 Análisis: ¿Arrendar o Comprar Equipo?
+
+**Framework de decisión en 5 pasos:**
+
+#### Paso 1: Estimar costos totales de cada opción
+
+**Opción A — Compra:**
+```
+Costo total de compra = Precio + Instalación + Mantenimiento anual × años + Seguro anual × años − Valor residual al final
+```
+
+**Opción B — Arriendo/Leasing:**
+```
+Costo total de arriendo = Cuota mensual × meses + Depósito de garantía (si no es reembolsable) + Cargos por uso excesivo (si aplica)
+```
+
+#### Paso 2: Calcular el Valor Presente Neto (VPN) de cada opción
+
+**Ejemplo — Máquina CNC para taller metalmecánico en Medellín:**
+
+| Concepto | Compra | Leasing operativo |
+|----------|--------|-------------------|
+| Precio/costo inicial | COP 85.000.000 | COP 0 |
+| Cuota mensual | N/A | COP 2.800.000 × 48 meses |
+| Mantenimiento anual | COP 4.500.000 | Incluido |
+| Seguro anual | COP 2.100.000 | Incluido |
+| Valor residual (año 4) | COP 25.000.000 | COP 0 |
+| **Costo nominal total (4 años)** | **COP 85M + 26,4M − 25M = COP 86,4M** | **COP 134,4M** |
+| Beneficio tributario (depreciación/deducción) | Depreciación lineal 10 años; en Pro PYME Chile o régimen acelerado: instantánea | Cuota 100% deducible como gasto |
+
+#### Paso 3: Evaluar factores cualitativos
+
+| Factor | Favorece compra | Favorece arriendo |
+|--------|----------------|-------------------|
+| La empresa tiene liquidez | ✓ | |
+| La tecnología cambia rápido | | ✓ |
+| Se necesita flexibilidad | | ✓ |
+| Uso > 5 años | ✓ | |
+| Valor residual alto | ✓ | |
+| La empresa necesita mejorar balance (menos deuda) | | ✓ (leasing operativo no entra en balance) |
+| Beneficio tributario inmediato es prioritario | | ✓ (cuota 100% gasto) |
+
+#### Paso 4: Regla rápida de decisión
+
+```
+Si costo total compra (VPN) < 80% del costo total arriendo (VPN) → COMPRAR
+Si costo total compra (VPN) > 95% del costo total arriendo (VPN) → ARRENDAR (por flexibilidad)
+Si está entre 80-95% → Decidir según factores cualitativos
+```
+
+#### Paso 5: Considerar el costo de oportunidad del capital
+
+Si la empresa tiene COP 85M para comprar la máquina, pero invertir ese capital en el negocio genera un retorno del 25% anual:
+- Costo de oportunidad de compra: 85M × 25% = COP 21,25M/año
+- En 4 años: ~COP 85M de retorno perdido
+- En ese caso, arrendar y destinar el capital al negocio puede ser superior
+
+---
+
+### 8.5 Cómo Calcular el Costo Real de un Crédito Bancario vs Crédito de Proveedor
+
+#### Crédito bancario — Costo Financiero Total (CFT)
+
+La tasa de interés anunciada NO es el costo real. Hay que calcular el **Costo Financiero Total (CFT)** o **Tasa Efectiva Anual (TEA)**.
+
+```
+CFT = Tasa de interés nominal + Comisión de apertura (prorrateada) + Seguro de desgravamen + Gastos notariales + ITF (si aplica) + Otros cargos
+```
+
+**Ejemplo — Crédito PYME en Perú:**
+
+| Concepto | Monto |
+|----------|-------|
+| Monto del crédito | S/ 100.000 |
+| Tasa de interés anual (TNA) | 18% |
+| Comisión de desembolso (cobrada al inicio) | 1,5% = S/ 1.500 |
+| Seguro de desgravamen anual | 0,5% sobre saldo |
+| ITF (Impuesto a las Transacciones Financieras) | 0,005% por operación |
+| Plazo | 24 meses |
+| Cuota mensual (solo capital + interés) | S/ 4.992 |
+| **Costo total en 24 meses** | S/ 119.808 + S/ 1.500 + seguros (~S/ 500) = **S/ 121.808** |
+| **Costo financiero real** | **~21,8% anual** (vs 18% anunciado) |
+
+**Monto neto recibido** = S/ 100.000 − S/ 1.500 (comisión) = S/ 98.500
+**TEA real** = Se calcula con TIR sobre flujos reales → **~22,5%**
+
+#### Crédito de proveedor — Costo implícito
+
+Cuando un proveedor ofrece "2/10 neto 30" significa: 2% de descuento si pagas en 10 días; si no, pagas el total a 30 días.
+
+```
+Costo anualizado del crédito de proveedor = (Descuento / (100% − Descuento)) × (365 / (Días crédito − Días descuento))
+```
+
+**Ejemplo — Proveedor con condiciones "2/10 neto 30":**
+
+```
+Costo anualizado = (2% / 98%) × (365 / 20) = 2,04% × 18,25 = 37,2% anual
+```
+
+**¡El crédito del proveedor a "30 días" cuesta implícitamente 37,2% anual!**
+
+#### Comparación directa
+
+| Fuente de financiamiento | Costo efectivo anual típico (LATAM) | Garantías | Plazo |
+|--------------------------|-------------------------------------|-----------|-------|
+| Crédito bancario PYME (con garantía) | 12-25% | Hipoteca, prenda, aval personal | 12-60 meses |
+| Crédito bancario PYME (sin garantía) | 20-45% | Firma, historial crediticio | 6-24 meses |
+| Línea revolvente / sobregiro | 25-50% | Según banco | Renovable |
+| Crédito de proveedor (30 días, con 2% dcto PP) | ~37% implícito | Relación comercial | 30 días |
+| Crédito de proveedor (60 días, sin descuento) | 0% (costo de oportunidad solamente) | Relación comercial | 60 días |
+| Factoring | 18-36% (tasa de descuento sobre facturas) | Facturas por cobrar | 30-120 días |
+| Microcrédito | 30-60% | Grupal o personal | 6-18 meses |
+| Tarjeta de crédito empresarial | 35-65% | Sin garantía real | Revolvente |
+| Prestamista informal / "gota a gota" | 100-300%+ | N/A | Días-semanas |
+
+**Regla práctica para PYMEs:**
+1. **Primero** usar crédito de proveedor sin costo (si ofrecen 60 días sin descuento).
+2. **Segundo** usar línea de crédito bancaria pre-aprobada.
+3. **Tercero** evaluar factoring si el problema es cobranza lenta.
+4. **Nunca** usar tarjeta de crédito o prestamistas informales para capital de trabajo.
+
+**Fórmula para comparar cualquier financiamiento:**
+```
+Costo Efectivo Anual (CEA) = ((Monto total pagado / Monto neto recibido) ^ (365/días)) − 1
+```
+
+---
+
+## 9. Opciones de Financiamiento para PYMEs en LATAM
+
+---
+
+### 9.1 Chile
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **Corfo** (vía bancos intermediarios) | Crédito PYME Corfo | Hasta UF 100.000 (~CLP 3.700M) | UF + 4-8% anual | 3-10 años | Ventas ≤ UF 100.000/año; sin deudas morosas |
+| **Corfo** | Fogape (Fondo de Garantía para Pequeños Empresarios) | Garantía estatal 60-80% del crédito | La del banco intermediario | Variable | Ventas ≤ UF 25.000/año para micro/pequeña |
+| **Sercotec** | Capital Semilla / Capital Abeja | CLP 3M-6M (subsidio no reembolsable) | 0% (subsidio) | N/A | Microempresas, mujeres emprendedoras |
+| **BancoEstado** | Crédito PYME BancoEstado | Hasta CLP 200M | 0,8-1,5% mensual | 12-60 meses | Antigüedad > 1 año, ventas formales |
+
+#### Factoring y financiamiento alternativo
+
+| Opción | Costo típico | Plazo | Requisitos |
+|--------|-------------|-------|------------|
+| Factoring bancario (BCI, Santander, etc.) | 0,8-2% mensual sobre factura | 30-120 días | Facturas DTE válidas, deudor solvente |
+| Factoring no bancario (Progreso, AccesoFinanciero) | 1,5-3,5% mensual | 30-90 días | Facturas electrónicas |
+| Confirming (pago a proveedores) | 0,7-1,5% mensual | 30-90 días | Relación con empresa ancla |
+| Bolsa de Productos (facturas en bolsa) | Tasa de descuento en subasta | 30-180 días | Facturas > CLP 1M |
+
+#### ¿Qué buscan los bancos chilenos para prestar a PYMEs?
+
+1. **Ventas formales** — al menos 12 meses de facturación electrónica (DTE).
+2. **Sin protestos ni morosidad** — Dicom/Equifax limpio del dueño y la empresa.
+3. **Flujo de caja demostrable** — que los ingresos cubran la cuota con holgura (ratio cobertura > 1,3×).
+4. **Garantías** — hipoteca, prenda sobre maquinaria, aval personal del socio.
+5. **Antigüedad mínima** — generalmente 2 años (1 año en BancoEstado para productos PYME).
+6. **Declaraciones tributarias al día** — F22, F29 sin observaciones.
+
+---
+
+### 9.2 México
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **Nacional Financiera (Nafin)** | Crédito PYME (vía intermediarios) | Hasta MXN 50M | TIIE + 4-10% (aprox. 15-22% anual) | 12-60 meses | RFC activo, sin adeudos fiscales, 2+ años operación |
+| **Nafin** | Cadenas Productivas (factoraje electrónico) | Según factura | TIIE + 2-5% | 30-120 días | Ser proveedor de una empresa grande registrada en Nafin |
+| **Nafin** | Crédito Joven (emprendedores) | Hasta MXN 2,5M | Preferencial | 12-36 meses | Emprendedores 18-35 años |
+| **Fondo PYME / INADEM** | Subsidios y apoyos | Variable (hasta MXN 3M) | 0% (subsidio) | N/A | Según convocatoria vigente |
+| **Financiera para el Bienestar** | Microcréditos | Hasta MXN 300.000 | 10-15% anual | 6-36 meses | Microempresas rurales/semirurales |
+
+#### Factoring y alternativas
+
+| Opción | Costo típico | Plazo | Requisitos |
+|--------|-------------|-------|------------|
+| Cadenas Productivas Nafin | TIIE + 2-5% (anualizado ~14-18%) | 30-120 días | CFDI timbrados, deudor en cadena |
+| Factoring privado (Konfío, Credijusto) | 2-4% mensual | 30-90 días | CFDI, historial de ventas |
+| Fintech lending (Credijusto, Konfío, Fairplay) | 18-36% anual | 6-24 meses | Conexión a SAT (CFDI), estados bancarios |
+| Arrendamiento financiero (Unifin, etc.) | 12-20% anual | 12-48 meses | Para equipo y maquinaria |
+
+#### ¿Qué buscan los bancos mexicanos?
+
+1. **Historial en Buró de Crédito** — score > 600 del dueño y de la empresa.
+2. **Declaraciones fiscales al SAT** — mínimo 2 años completos.
+3. **CFDI de ingresos** — demostrar ventas reales.
+4. **Estados de cuenta bancarios** — mínimo 12 meses, con flujo consistente.
+5. **Plan de negocio** — para montos > MXN 5M.
+6. **Garantías** — inmueble, equipo, aval personal, depósito en garantía.
+
+---
+
+### 9.3 Colombia
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **Bancóldex** (banca de segundo piso, opera vía intermediarios) | Crédito PYME | Hasta COP 5.000M | DTF/IBR + 4-8% (aprox. 16-22% EA) | 12-84 meses | Empresa registrada, estados financieros |
+| **Fondo Nacional de Garantías (FNG)** | Garantía parcial (50-80%) | Según crédito bancario | Comisión 1,5-3,5% anual sobre garantía | Variable | Sin embargo, no es crédito directo; respalda crédito de banco comercial |
+| **iNNpulsa Colombia** | Capital semilla, cofinanciación | COP 50M-500M | 0% (subsidio/convocatoria) | N/A | Emprendimientos innovadores |
+| **Finagro** | Crédito agropecuario | Hasta COP 2.000M | DTF + 1-6% (tasas subsidiadas) | 12-120 meses | Actividad agropecuaria certificada |
+
+#### Factoring y alternativas
+
+| Opción | Costo típico | Plazo | Requisitos |
+|--------|-------------|-------|------------|
+| Factoring bancario (Bancolombia, Davivienda) | 1-2,5% mensual | 30-90 días | Facturas electrónicas, deudor solvente |
+| Factoring fintech (Mesfix, Exponencial Confirming) | 1,5-3% mensual | 30-120 días | Facturas electrónicas DIAN |
+| Microcrédito (Bancamía, Mundo Mujer, Contactar) | 30-50% EA | 6-24 meses | Visita al negocio, sin historial mínimo |
+| Crowdlending (A2censo de BVC) | 12-20% EA | 6-36 meses | Empresa formalizada, curaduría de plataforma |
+
+#### ¿Qué buscan los bancos colombianos?
+
+1. **Centrales de riesgo limpias** — DataCrédito/TransUnion sin reportes negativos vigentes.
+2. **Antigüedad mínima** — 2 años de operación (1 año para microcrédito).
+3. **Declaraciones de renta y IVA al día** — mínimo 2 años.
+4. **Registro en Cámara de Comercio** — vigente y renovado.
+5. **Estados financieros** — mínimo 2 años, idealmente auditados para montos > COP 500M.
+6. **Garantías** — FNG para quienes no tienen bienes; finca raíz o maquinaria para créditos grandes.
+
+---
+
+### 9.4 Perú
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **Cofide** (banca de segundo piso) | Crédito PYME (vía intermediarios) | Hasta S/ 10M | Según banco intermediario (generalmente < tasa de mercado) | 12-84 meses | Empresa con RUC activo, sin deuda tributaria |
+| **FOGAPI** | Garantía para PYMES (cartas fianza) | Garantía hasta 80% | Comisión sobre garantía | Variable | MYPE registrada en REMYPE |
+| **Programa PAME (PRODUCE)** | Subsidios y asistencia técnica | Variable | 0% (subsidio) | N/A | Según convocatoria |
+| **AgroBanco** | Crédito agrícola | Hasta S/ 300.000 | 15-20% anual | 12-60 meses | Actividad agropecuaria |
+
+#### Factoring y alternativas
+
+| Opción | Costo típico | Plazo | Requisitos |
+|--------|-------------|-------|------------|
+| Factoring bancario (BCP, BBVA, Interbank) | 1-2% mensual | 30-90 días | Facturas electrónicas SUNAT |
+| Factoring Cavali (electrónico) | 0,8-1,8% mensual | 30-120 días | Inscripción en Cavali, facturas negociables |
+| Fintech (Facturedo, Prestamype) | 2-4% mensual | 30-90 días | RUC activo, facturación electrónica |
+| Microcrédito (Mibanco, Caja Arequipa, CrediScotia) | 30-55% TEA | 6-24 meses | Negocio operando > 6 meses |
+| Cajas municipales / rurales | 25-45% TEA | 6-36 meses | Visita al negocio, evaluación simplificada |
+
+#### ¿Qué buscan las entidades financieras peruanas?
+
+1. **RUC activo y habido** — SUNAT verifica que la empresa esté activa y con domicilio fiscal verificado.
+2. **Central de riesgos SBS limpia** — sin clasificación deficiente, dudoso o pérdida.
+3. **Facturación electrónica** — como prueba de ingresos reales.
+4. **Antigüedad del negocio** — mínimo 6 meses (microcrédito) a 2 años (crédito bancario).
+5. **Garantías** — inmueble registrado en SUNARP; para montos menores, aval personal.
+6. **Flujo de caja positivo** — las entidades de microfinanzas evalúan in situ con visita al negocio.
+
+---
+
+### 9.5 Argentina
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **BICE (Banco de Inversión y Comercio Exterior)** | Crédito inversión productiva | Varía (hasta ARS 500M+) | Tasa subsidiada (menor a la comercial) | 12-84 meses | Registro PYME, proyecto de inversión |
+| **FONDEP / Ministerio de Desarrollo Productivo** | Créditos a tasa subsidiada | Variable | Tasa fija subsidiada | 12-48 meses | Inscripción en Registro PYME |
+| **SGR (Sociedades de Garantía Recíproca)** | Garantía para acceder a crédito bancario | Según avales disponibles | Comisión ~2-4% anual | Variable | Ser PYME socia partícipe de una SGR |
+| **Banco Nación / Banco Provincia** | Líneas PYME | Hasta ARS 200M+ | Tasa regulada por BCRA | 12-60 meses | Cuenta en el banco, Registro PYME |
+
+#### Instrumentos del mercado de capitales
+
+| Instrumento | Tasa referencial | Plazo | Requisitos |
+|------------|------------------|-------|------------|
+| Cheques de pago diferido (CPD) en bolsa | Variable (descuento) | 30-360 días | Tener cheques de clientes solventes |
+| Pagarés bursátiles | Variable | 30-360 días | Cotización en bolsa vía ALyC |
+| Obligaciones negociables PYME (ON) | Variable | 12-36 meses | Calificación, balance auditado, inscripción CNV |
+| Factoring (Facturar.com, QuePago) | 3-6% mensual | 30-90 días | Facturas electrónicas válidas |
+
+#### ¿Qué buscan los bancos argentinos?
+
+1. **Inscripción en Registro PYME** (MiPyME) — obligatorio para acceder a beneficios.
+2. **Central de deudores BCRA limpia** — sin situación 3, 4 o 5.
+3. **3 últimos balances** — firmados por contador público.
+4. **Declaraciones juradas de Ganancias e IVA** — al día.
+5. **Flujo de fondos proyectado** — que demuestre capacidad de repago.
+6. **Garantías** — SGR es la opción más usada por PYMEs sin activos propios.
+
+> **Nota**: En Argentina, la inflación hace que las tasas nominales sean engañosamente altas. Lo relevante es la **tasa real** (tasa nominal − inflación). Un crédito al 80% anual nominal con inflación del 70% tiene tasa real de ~6%.
+
+---
+
+### 9.6 Bolivia
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **BDP (Banco de Desarrollo Productivo)** | Crédito productivo | Hasta USD 1M | 6-11,5% anual (tasas reguladas para sector productivo) | 12-96 meses | Actividad productiva, manufactura, agro |
+| **BDP** | Juana Azurduy (crédito para mujeres) | Hasta BOB 150.000 | 6% anual | 12-60 meses | Mujer emprendedora, actividad productiva |
+| **Pro Bolivia / PAR** | Subsidios productivos | Variable | 0% (subsidio) | N/A | Según convocatoria |
+
+#### Banca comercial y microfinanzas
+
+| Opción | Tasa típica | Plazo | Requisitos |
+|--------|------------|-------|------------|
+| Bancos comerciales (BNB, Mercantil, Bisa) — crédito PYME | 6-13% (tasas reguladas por ASFI) | 12-60 meses | NIT, estados financieros, garantía |
+| Microfinanzas (BancoSol, Fassil, Ecofuturo, Prodem) | 10-18% | 6-36 meses | Visita al negocio, garantía personal/grupal |
+| Cooperativas de ahorro y crédito | 8-15% | 6-48 meses | Ser socio, ahorro previo |
+
+> **Nota**: Bolivia tiene regulación de tasas de interés máximas. La ASFI establece topes de tasas para créditos productivos y de vivienda social, lo que hace que las tasas sean más bajas que en otros países de la región.
+
+#### ¿Qué buscan los bancos bolivianos?
+
+1. **NIT activo** y matrícula de FUNDEMPRESA vigente.
+2. **Sin deudas morosas** en la Central de Información Crediticia (CIC) de ASFI.
+3. **Flujo de caja demostrable** — estados financieros o registros contables.
+4. **Garantías** — hipotecaria, prendaria o fondo de garantía.
+5. **Plan de inversión** — especialmente para créditos del BDP.
+6. **Antigüedad mínima** — generalmente 1 año.
+
+---
+
+### 9.7 Ecuador
+
+#### Financiamiento público / estatal
+
+| Institución | Producto | Monto máximo | Tasa referencial | Plazo | Requisitos clave |
+|-------------|----------|-------------|-------------------|-------|------------------|
+| **CFN (Corporación Financiera Nacional)** | Crédito PYME | Hasta USD 500.000 | 8-11% anual | 12-120 meses | RUC activo, declaraciones SRI al día, garantía |
+| **BanEcuador** | Microcrédito productivo | Hasta USD 150.000 | 9-15% | 6-60 meses | Actividad productiva, comercial o de servicios |
+| **BanEcuador** | Crédito para emprendimiento | Hasta USD 50.000 | 9,75% | 12-60 meses | Plan de negocio |
+| **CONAFIPS (Corporación Nacional de Finanzas Populares)** | A través de cooperativas | Variable | 12-18% | 6-48 meses | Ser socio de cooperativa acreditada |
+
+#### Factoring y alternativas
+
+| Opción | Costo típico | Plazo | Requisitos |
+|--------|-------------|-------|------------|
+| Factoring bancario (Pichincha, Produbanco, Pacífico) | 1-2% mensual | 30-90 días | Facturas electrónicas SRI |
+| Cooperativas de ahorro y crédito (JEP, Policía Nacional, Alianza del Valle) | 12-18% anual | 6-36 meses | Ser socio, ahorros previos |
+| Fintech (Equinoccial, emergentes) | 15-25% anual | 6-24 meses | RUC, facturación electrónica |
+
+#### ¿Qué buscan los bancos ecuatorianos?
+
+1. **Buró de crédito limpio** — Equifax Ecuador, sin calificaciones C, D o E.
+2. **RUC activo y al día con SRI** — sin deudas tributarias.
+3. **Declaraciones de IVA e IR** — mínimo 2 años.
+4. **Antigüedad del negocio** — mínimo 1-2 años.
+5. **Garantías** — inmueble registrado en Registro de la Propiedad; o garante personal.
+6. **Flujo de caja** — que la cuota no supere el 30-35% del flujo neto mensual.
+
+> **Nota**: Ecuador, al ser dolarizado, tiene tasas de interés más estables que otros países de la región. Las tasas máximas están reguladas por el Banco Central del Ecuador (BCE) por segmento de crédito.
+
+---
+
+## 10. Checklist de Alertas Financieras — 20 Red Flags por Severidad
+
+> **Cómo usar esta lista**: El agente financiero debe monitorear estos indicadores y alertar al usuario según la severidad. Los umbrales son para PYMEs de 5-50 empleados en LATAM.
+
+---
+
+### 10.1 CRÍTICOS (Requieren acción inmediata — riesgo de cierre en 30-90 días)
+
+| # | Red Flag | Umbral específico | Acción recomendada |
+|---|---------|-------------------|-------------------|
+| 1 | **Saldo de caja negativo o en cero** | Caja + bancos < 1 semana de gastos fijos | Suspender todo gasto no esencial; activar línea de crédito; cobrar facturas vencidas hoy mismo |
+| 2 | **Incapacidad de pagar nómina** | No hay fondos para nómina del mes en curso a 5 días del vencimiento | Priorizar nómina sobre cualquier otro pago (excepto impuestos con sanción penal); buscar financiamiento de emergencia |
+| 3 | **Ingresos cayendo > 20% MoM por 2+ meses consecutivos** | Caída acumulada > 35% en 2 meses | Investigar causa raíz (pérdida de cliente clave, problema de producto, competencia); activar plan de contingencia |
+| 4 | **Deuda vencida > 90 días con entidades financieras** | Cualquier monto en mora > 90 días en central de riesgos | Contactar al banco para reestructurar antes de que clasifiquen en cartera castigada; el costo de reputación crediticia es enorme |
+| 5 | **Ratio corriente < 0,5** | Activo corriente / Pasivo corriente < 0,5 | La empresa no puede cubrir ni la mitad de sus deudas de corto plazo; reestructuración urgente |
+| 6 | **Impuestos no pagados > 2 períodos** | IVA/ICA/retenciones de 2+ meses sin declarar ni pagar | Riesgo de sanción penal en varios países (Colombia: peculado; México: defraudación); pagar antes que cualquier deuda comercial |
+| 7 | **Pérdida neta > 15% de ingresos por 3+ meses consecutivos** | Utilidad neta / Ingresos < -15% durante un trimestre | Evaluar viabilidad del modelo de negocio; si no hay camino a rentabilidad en 6 meses, considerar cierre ordenado |
+
+---
+
+### 10.2 DE ADVERTENCIA (Requieren plan de acción en 30 días — deterioro progresivo)
+
+| # | Red Flag | Umbral específico | Acción recomendada |
+|---|---------|-------------------|-------------------|
+| 8 | **Ingresos cayendo > 10% MoM por 3+ meses consecutivos** | Tendencia negativa sostenida | Revisar estrategia comercial; analizar si es estacionalidad o problema estructural; diversificar canales |
+| 9 | **Margen bruto deteriorándose > 5 puntos porcentuales en 3 meses** | Ej: de 45% a 39% en un trimestre | Auditar costos de insumos y proveedores; revisar política de precios; verificar mermas y desperdicios |
+| 10 | **Días de cuentas por cobrar creciendo > 15 días en un trimestre** | Ej: de 35 a 52 días | Endurecer política de crédito; activar cobranza; evaluar factoring para facturas más viejas |
+| 11 | **Concentración de ingresos > 40% en un solo cliente** | Un cliente representa > 40% de la facturación | Diversificar cartera de clientes activamente; el riesgo de perder ese cliente es existencial |
+| 12 | **Gastos fijos creciendo más rápido que ingresos por 3+ meses** | Crecimiento gastos fijos > crecimiento ingresos en % por un trimestre | Revisar cada línea de gasto fijo; congelar contrataciones; renegociar contratos |
+| 13 | **Ciclo de conversión de efectivo aumentando > 20 días en un trimestre** | CCC sube de 40 a 62 días, por ejemplo | Atacar el componente que más creció: inventario, CxC o CxP; el capital de trabajo se está comiendo la caja |
+| 14 | **Deuda financiera / EBITDA > 3,5×** | Tomaría más de 3,5 años de EBITDA pagar toda la deuda | No tomar más deuda; destinar flujo libre a reducir pasivos; renegociar plazos |
+| 15 | **Cobertura de intereses < 1,5×** | EBITDA / Gastos financieros < 1,5 | El negocio apenas genera para pagar intereses; en < 1×, no alcanza — reestructurar deuda es urgente |
+
+---
+
+### 10.3 INFORMATIVOS (Monitorear — pueden convertirse en advertencia si persisten)
+
+| # | Red Flag | Umbral específico | Acción recomendada |
+|---|---------|-------------------|-------------------|
+| 16 | **Margen neto < promedio de la industria por 2+ trimestres** | Consultar benchmarks de la sección 7 | Benchmarkear cada línea del P&L contra la industria; identificar dónde está la desviación |
+| 17 | **Rotación de personal > 30% anual** | Más de 30 de cada 100 empleados se van en un año | Costo oculto alto (reclutamiento + capacitación = 3-6 meses de sueldo por posición); revisar clima laboral y compensaciones |
+| 18 | **Inventario de lento movimiento > 20% del inventario total** | Productos sin rotación en 90+ días representan > 20% del valor | Liquidar con descuentos antes de que pierda más valor; ajustar política de compras |
+| 19 | **Crecimiento de ventas < inflación del país por 2+ trimestres** | Las ventas nominales crecen pero en términos reales están cayendo | El negocio se está encogiendo en términos reales aunque los números nominales parezcan estables |
+| 20 | **Gastos financieros > 5% de los ingresos** | Intereses + comisiones bancarias / Ventas > 5% | La empresa está sobreendeudada o tiene deuda cara; evaluar refinanciamiento a mejor tasa |
+
+---
+
+### 10.4 Matriz de escalamiento
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    MATRIZ DE ESCALAMIENTO                       │
+├─────────────┬───────────────────────────────────────────────────┤
+│ SEVERIDAD   │ ACCIÓN                                           │
+├─────────────┼───────────────────────────────────────────────────┤
+│ CRÍTICO     │ • Notificar al dueño/gerente HOY                 │
+│ (Red flags  │ • Convocar reunión de emergencia en 24-48 hrs    │
+│  1-7)       │ • Implementar plan de contingencia inmediato      │
+│             │ • Contactar contador/abogado si hay riesgo legal  │
+│             │ • Revisar diariamente hasta que se resuelva       │
+├─────────────┼───────────────────────────────────────────────────┤
+│ ADVERTENCIA │ • Incluir en reporte semanal al dueño/gerente    │
+│ (Red flags  │ • Definir plan de acción con responsable y fecha │
+│  8-15)      │ • Monitorear semanalmente                        │
+│             │ • Escalar a CRÍTICO si empeora en 30 días        │
+├─────────────┼───────────────────────────────────────────────────┤
+│ INFORMATIVO │ • Incluir en reporte mensual                     │
+│ (Red flags  │ • Analizar tendencia trimestral                  │
+│  16-20)     │ • Escalar a ADVERTENCIA si persiste 2+ trimestres│
+│             │ • Usar como input para planificación estratégica  │
+└─────────────┴───────────────────────────────────────────────────┘
+```
+
+---
+
+### 10.5 Protocolo de respuesta según combinación de alertas
+
+| Combinación | Diagnóstico probable | Respuesta |
+|-------------|---------------------|-----------|
+| #1 + #3 + #11 | Crisis de liquidez por pérdida de cliente clave | Cobrar todo lo posible; negociar con proveedores; buscar nuevos clientes de forma urgente; línea de crédito puente |
+| #9 + #12 + #14 | Erosión de rentabilidad + sobreendeudamiento | Recortar gastos fijos; renegociar condiciones de deuda; revisar precios; no tomar más deuda |
+| #2 + #6 | Insolvencia inminente | Priorizar: 1° nómina, 2° impuestos con riesgo penal, 3° deuda con garantía real; consultar abogado para evaluar opciones legales |
+| #10 + #13 + #18 | Problema de capital de trabajo y gestión de activos | Limpiar inventario; cobrar agresivamente; alargar plazo con proveedores; factoring |
+| #8 + #16 + #19 | Pérdida de competitividad | Análisis estratégico profundo: producto, precio, plaza, promoción; benchmarking con competidores; posible pivoteo |
+
+---
+
+> **Nota para el agente**: Las secciones 6-10 complementan las secciones 1-5 originales. Al analizar la situación financiera de una PYME, cruzar siempre: (1) los estados financieros con los benchmarks de la sección 7, (2) las obligaciones tributarias del país correspondiente en la sección 6, (3) las alertas de la sección 10 para identificar riesgos, y (4) las opciones de financiamiento de la sección 9 cuando se requiera capital. Siempre recomendar consultar con un contador certificado del país para decisiones tributarias y legales específicas.
