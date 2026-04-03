@@ -682,12 +682,12 @@ function NovedadesSection() {
 // ═══════════════════════════════════════════════════════════════════
 
 function FinalCTA() {
-  const [form, setForm] = useState({ nombre: '', email: '', mensaje: '' })
+  const [form, setForm] = useState({ nombre: '', email: '', pais: '', mensaje: '' })
   const [estado, setEstado] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.nombre || !form.email || !form.mensaje) return
+    if (!form.nombre || !form.email || !form.pais || !form.mensaje) return
     setEstado('sending')
     try {
       const res = await fetch('/api/contacto', {
@@ -697,7 +697,7 @@ function FinalCTA() {
       })
       if (res.ok) {
         setEstado('sent')
-        setForm({ nombre: '', email: '', mensaje: '' })
+        setForm({ nombre: '', email: '', pais: '', mensaje: '' })
       } else {
         setEstado('error')
       }
@@ -756,6 +756,24 @@ function FinalCTA() {
                         className="w-full border border-ink/[0.08] rounded-lg px-4 py-2.5 text-sm text-ink bg-ivory placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors"
                       />
                     </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium uppercase tracking-[0.1em] text-muted block mb-1.5">País</label>
+                    <select
+                      required value={form.pais}
+                      onChange={(e) => setForm({ ...form, pais: e.target.value })}
+                      className="w-full border border-ink/[0.08] rounded-lg px-4 py-2.5 text-sm text-ink bg-ivory focus:outline-none focus:border-ink/25 transition-colors"
+                    >
+                      <option value="">Selecciona tu país</option>
+                      <option value="Chile">Chile</option>
+                      <option value="México">México</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Perú">Perú</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Ecuador">Ecuador</option>
+                      <option value="Otro">Otro</option>
+                    </select>
                   </div>
                   <div>
                     <label className="text-xs font-medium uppercase tracking-[0.1em] text-muted block mb-1.5">Mensaje</label>

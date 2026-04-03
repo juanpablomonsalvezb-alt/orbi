@@ -9,9 +9,9 @@ function getResend(): Resend {
 
 export async function POST(request: NextRequest) {
   try {
-    const { nombre, email, mensaje } = await request.json()
+    const { nombre, email, pais, mensaje } = await request.json()
 
-    if (!nombre || !email || !mensaje) {
+    if (!nombre || !email || !pais || !mensaje) {
       return NextResponse.json({ error: 'Todos los campos son requeridos' }, { status: 400 })
     }
 
@@ -33,6 +33,10 @@ export async function POST(request: NextRequest) {
             <tr>
               <td style="padding: 8px 0; color: #87867f; font-size: 14px;">Email</td>
               <td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${email}" style="color: #c6613f;">${email}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #87867f; font-size: 14px;">País</td>
+              <td style="padding: 8px 0; font-size: 14px; font-weight: 500;">${pais}</td>
             </tr>
           </table>
           <div style="background: #f7f6f3; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
