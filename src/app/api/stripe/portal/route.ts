@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@/lib/stripe'
+import { verifyAuth } from '@/lib/api-auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,6 +8,12 @@ export async function POST(request: NextRequest) {
 
     if (!customer_id) {
       return NextResponse.json({ error: 'customer_id requerido' }, { status: 400 })
+    }
+
+    // Verify user is authenticated (portal access requires login)
+    const userId = await verifyAuth(request)
+    if (!userId) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     const session = await getStripe().billingPortal.sessions.create({

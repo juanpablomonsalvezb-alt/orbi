@@ -23,7 +23,16 @@ function timeAgo(dateStr: string): string {
   return `hace ${Math.floor(diffDays / 30)} meses`
 }
 
+/** Simple time-based cache to avoid hitting DB on every request */
+const taskCache = new Map<string, { data: string; timestamp: number }>()
+const TASK_CACHE_TTL = 60000 // 1 minute
+
 export async function buildTaskContext(empresaId: string): Promise<string> {
+  const cached = taskCache.get(empresaId)
+  if (cached && Date.now() - cached.timestamp < TASK_CACHE_TTL) {
+    return cached.data
+  }
+
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -39,6 +48,7 @@ export async function buildTaskContext(empresaId: string): Promise<string> {
     .limit(5)
 
   if (error || !tareas || tareas.length === 0) {
+    taskCache.set(empresaId, { data: '', timestamp: Date.now() })
     return ''
   }
 
@@ -56,11 +66,14 @@ export async function buildTaskContext(empresaId: string): Promise<string> {
     return `• [${prio}] ${t.titulo} (recomendada por ${agente}, ${ago}${estado})`
   })
 
-  return `
+  const result = `
 TAREAS PENDIENTES DEL NEGOCIO:
 ${lines.join('\n')}
 
 Cuando el usuario mencione un tema relacionado con una tarea pendiente, pregunta si ya la completó.
 Si dice que sí, felicítalo y sugiere marcarla como completada.
 `.trim()
+
+  taskCache.set(empresaId, { data: result, timestamp: Date.now() })
+  return result
 }

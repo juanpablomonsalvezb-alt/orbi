@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -13,6 +14,12 @@ export async function GET(request: NextRequest) {
 
   if (!empresaId) {
     return NextResponse.json({ error: 'empresa_id requerido' }, { status: 400 })
+  }
+
+  // Verify the authenticated user owns this empresa
+  const hasAccess = await verifyEmpresaAccess(request, empresaId)
+  if (!hasAccess) {
+    return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
   }
 
   const supabase = getSupabase()
@@ -36,7 +43,7 @@ export async function GET(request: NextRequest) {
     ])
 
     if (!empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     // Fetch messages for all conversations

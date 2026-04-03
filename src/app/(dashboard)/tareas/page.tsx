@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase-client'
+import { authFetch } from '@/lib/auth-fetch'
 import { Tarea } from '@/types/database'
 import type { TipoAgente } from '@/lib/prompts'
 import { AGENTES } from '@/lib/prompts'
@@ -76,7 +77,7 @@ export default function TareasPage() {
   }, [cargarTareas])
 
   const actualizarEstado = async (tareaId: string, nuevoEstado: string) => {
-    await fetch(`/api/tareas/${tareaId}`, {
+    await authFetch(`/api/tareas/${tareaId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ estado: nuevoEstado }),
@@ -96,7 +97,7 @@ export default function TareasPage() {
   }
 
   const eliminarTarea = async (tareaId: string) => {
-    await fetch(`/api/tareas/${tareaId}`, { method: 'DELETE' })
+    await authFetch(`/api/tareas/${tareaId}`, { method: 'DELETE' })
     setTareas(prev => prev.filter(t => t.id !== tareaId))
   }
 

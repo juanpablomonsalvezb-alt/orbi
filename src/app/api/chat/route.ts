@@ -8,6 +8,7 @@ import { readGoogleSheet, parseSheetUrl } from '@/lib/google-sheets'
 import { looksLikeBankStatement, parseBankStatement } from '@/lib/bank-parser'
 import { scrapeCompetitor } from '@/lib/scraper'
 import { getInstagramProfile, cleanInstagramUsername } from '@/lib/instagram'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -103,11 +104,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     // Rate limit: 20 messages per minute per empresa
     const { allowed } = rateLimit(`chat:${empresa_id}`, 20, 60000)
     if (!allowed) {
       return NextResponse.json(
-        { error: 'Demasiados mensajes. Espera un momento antes de enviar otro.' },
+        { error: 'Estás enviando mensajes muy rápido. Espera unos segundos.' },
         { status: 429 }
       )
     }
@@ -130,7 +137,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (errorEmpresa || !empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     // Check trial/plan
@@ -355,9 +362,13 @@ export async function POST(request: NextRequest) {
           // Fire-and-forget: extract memories from the assistant response
           try {
             const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ? request.url.split('/api/')[0] : ''
+            const authToken = request.headers.get('authorization') || ''
             fetch(`${baseUrl}/api/memory`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authToken,
+              },
               body: JSON.stringify({
                 message: fullResponse,
                 userMessage: mensaje,
@@ -375,7 +386,7 @@ export async function POST(request: NextRequest) {
           controller.close()
         } catch (error) {
           console.error('Stream error:', error)
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Error generando respuesta' })}\n\n`))
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' })}\n\n`))
           controller.close()
         }
       }
@@ -390,7 +401,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error en /api/chat:', error)
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
   }
 }
 

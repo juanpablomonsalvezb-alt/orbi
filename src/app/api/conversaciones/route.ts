@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -14,6 +15,11 @@ export async function GET(request: NextRequest) {
 
   if (!empresaId) {
     return NextResponse.json({ error: 'empresa_id requerido' }, { status: 400 })
+  }
+
+  const hasAccess = await verifyEmpresaAccess(request, empresaId)
+  if (!hasAccess) {
+    return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
   }
 
   const supabase = getSupabase()
@@ -37,6 +43,11 @@ export async function POST(request: NextRequest) {
 
   if (!empresa_id) {
     return NextResponse.json({ error: 'empresa_id requerido' }, { status: 400 })
+  }
+
+  const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+  if (!hasAccess) {
+    return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
   }
 
   const supabase = getSupabase()

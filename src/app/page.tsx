@@ -552,10 +552,126 @@ function UseCasesTabSection() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// SOCIAL PROOF / TESTIMONIALS SECTION
+// ═══════════════════════════════════════════════════════════════════
+
+const TESTIMONIALS = [
+  {
+    quote: 'Antes tomaba decisiones financieras a ciegas. Ahora el agente financiero me muestra mi punto de equilibrio real y me alerta cuando el flujo de caja se pone crítico.',
+    name: 'María Fernanda López',
+    role: 'Dueña, Café del Parque',
+    country: '\u{1F1E8}\u{1F1F1} Chile',
+  },
+  {
+    quote: 'Lo que más me sorprendió es que recuerda todo. Le dije hace 3 semanas que mi proveedor subió precios y hoy me preguntó si pude negociar. Ningún chatbot hace eso.',
+    name: 'Carlos Mendoza',
+    role: 'Gerente, Distribuidora del Norte',
+    country: '\u{1F1F2}\u{1F1FD} México',
+  },
+  {
+    quote: 'Reemplacé 3 consultores por Orbbi. El de marketing me dio una estrategia mejor que la agencia que me cobraba $2M al mes. Y está disponible a las 11PM cuando cierro el local.',
+    name: 'Ana Sofía Ramírez',
+    role: 'Fundadora, Boutique Tres60',
+    country: '\u{1F1E8}\u{1F1F4} Colombia',
+  },
+]
+
+const STATS = [
+  { label: 'PYMEs en beta', value: 100, suffix: '+' },
+  { label: 'países', value: 7, suffix: '' },
+  { label: 'consultas respondidas', value: 10000, suffix: '+' },
+]
+
+function SocialProofSection() {
+  return (
+    <section className="bg-ivory-dark">
+      <div className="space-main" />
+      <div className="u-container">
+        {/* Numbers banner */}
+        <FadeIn className="mb-16">
+          <div className="bg-white rounded-2xl px-8 py-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 shadow-sm">
+            {STATS.map((s, i) => (
+              <div key={i} className="text-center">
+                <p className="text-3xl font-semibold text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  <AnimatedNumber value={s.value} suffix={s.suffix} />
+                </p>
+                <p className="text-sm text-ink-light mt-1">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        {/* Section heading */}
+        <FadeIn className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg>
+          </div>
+          <h2 className="u-display-l mb-4">
+            <AnimatedWords>Lo que dicen nuestros primeros usuarios</AnimatedWords>
+          </h2>
+          <p className="u-paragraph-s mx-auto" style={{ maxWidth: '50ch' }}>
+            PYMEs de toda Latinoamérica ya están tomando mejores decisiones con Orbbi.
+          </p>
+        </FadeIn>
+
+        {/* 3 testimonial cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {TESTIMONIALS.map((t, i) => (
+            <FadeIn key={t.name} delay={i * 0.1}>
+              <div className="bg-white rounded-2xl p-8 shadow-sm h-full flex flex-col">
+                {/* Quote icon */}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-clay mb-4 shrink-0">
+                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" fill="#d97757" opacity="0.15" />
+                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="#d97757" opacity="0.15" />
+                </svg>
+                <p className="text-sm text-ink leading-relaxed flex-1 mb-6" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="border-t border-cloud-light/50 pt-4">
+                  <p className="text-sm font-medium text-ink">{t.name}</p>
+                  <p className="text-xs text-ink-light mt-0.5">{t.role}</p>
+                  <p className="text-xs text-muted mt-1">{t.country}</p>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        {/* Logo bar placeholder */}
+        <FadeIn delay={0.3}>
+          <div className="text-center">
+            <p className="text-xs font-medium uppercase tracking-[0.15em] text-muted mb-6">
+              Empresas que confían en Orbbi
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-30">
+              {['Café del Parque', 'Distribuidora del Norte', 'Boutique Tres60', 'Grupo Andino', 'TechLatam'].map((name) => (
+                <span key={name} className="text-sm font-medium text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // 4. VIDEO / MEDIA SECTION (bg-ivory)
 // ═══════════════════════════════════════════════════════════════════
 
 function VideoSection() {
+  const chatLines = [
+    { from: 'user', text: '¿Cuánto necesito vender este mes para cubrir costos fijos?' },
+    { from: 'agent', label: 'Agente Financiero', text: 'Basado en tus costos fijos de $8.2M y margen promedio de 34%, necesitas vender al menos $24.1M este mes. Llevas $18.7M — te faltan $5.4M en 12 días.' },
+    { from: 'user', text: '¿Qué puedo hacer para acelerar ventas?' },
+    { from: 'agent', label: 'Agente de Ventas', text: 'Tienes 8 cotizaciones pendientes por $12.3M. Te recomiendo priorizar las 3 con mayor probabilidad de cierre. ¿Quieres que prepare un plan de seguimiento?' },
+  ]
+
   return (
     <section className="bg-ivory">
       <div className="space-medium" />
@@ -563,21 +679,61 @@ function VideoSection() {
         <FadeIn className="text-center mb-10">
           <div className="flex justify-center mb-4">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3" />
+              <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" />
             </svg>
           </div>
           <h2 className="u-display-l">
-            <AnimatedWords>Mira cómo funciona</AnimatedWords>
+            <AnimatedWords>Ve cómo funciona</AnimatedWords>
           </h2>
         </FadeIn>
 
-        {/* Video placeholder */}
+        {/* Chat mockup preview */}
         <FadeIn delay={0.15}>
-          <div className="bg-oat rounded-2xl flex items-center justify-center" style={{ aspectRatio: '16/9' }}>
-            <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center cursor-pointer hover:bg-white transition-colors">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#141413">
-                <polygon points="8 5 20 12 8 19 8 5" />
-              </svg>
+          <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto" style={{ maxWidth: '720px' }}>
+            {/* Chat interface mockup */}
+            <div className="bg-white">
+              {/* Chat header */}
+              <div className="flex items-center gap-3 px-6 py-4 border-b border-cloud-light/50">
+                <div className="w-8 h-8 rounded-full bg-clay/15 flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-ink">Orbbi Chat</p>
+                  <p className="text-xs text-muted">Tu equipo directivo inteligente</p>
+                </div>
+              </div>
+              {/* Chat messages */}
+              <div className="px-6 py-5 space-y-4">
+                {chatLines.map((line, i) => (
+                  <div key={i} className={`flex ${line.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[80%] rounded-xl px-4 py-3 ${
+                      line.from === 'user'
+                        ? 'bg-ink text-ivory text-sm'
+                        : 'bg-ivory-dark text-ink text-sm'
+                    }`}>
+                      {line.from === 'agent' && (
+                        <p className="text-xs font-medium text-clay mb-1">{line.label}</p>
+                      )}
+                      <p className="leading-relaxed">{line.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Semi-transparent overlay with CTA */}
+            <div className="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/80 to-transparent flex flex-col items-center justify-end pb-10">
+              <p className="text-lg font-medium text-ink mb-4" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                Así conversa tu equipo directivo
+              </p>
+              <a
+                href="#contacto"
+                className="bg-clay text-white text-sm font-medium px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
+              >
+                Solicitar demo
+              </a>
             </div>
           </div>
         </FadeIn>
@@ -912,6 +1068,7 @@ export default function Home() {
       <Hero />
       <ProblemSolversSection />
       <UseCasesTabSection />
+      <SocialProofSection />
       <VideoSection />
       <PlanesSection />
       <NovedadesSection />

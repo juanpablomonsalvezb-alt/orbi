@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase-client'
+import { authFetch } from '@/lib/auth-fetch'
 
 interface Miembro {
   id: string
@@ -21,7 +22,7 @@ export default function EquipoPage() {
 
   const cargarMiembros = async () => {
     try {
-      const res = await fetch('/api/equipo')
+      const res = await authFetch('/api/equipo')
       if (!res.ok) throw new Error('Error cargando equipo')
       const data = await res.json()
       setMiembros(data.miembros || [])
@@ -43,7 +44,7 @@ export default function EquipoPage() {
     setEnviando(true)
 
     try {
-      const res = await fetch('/api/equipo', {
+      const res = await authFetch('/api/equipo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, rol }),
@@ -69,7 +70,7 @@ export default function EquipoPage() {
     setError(null)
 
     try {
-      const res = await fetch(`/api/equipo/${id}`, { method: 'DELETE' })
+      const res = await authFetch(`/api/equipo/${id}`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Error eliminando miembro')
       cargarMiembros()
     } catch {

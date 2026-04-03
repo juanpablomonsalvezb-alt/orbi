@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { getAuthEmpresa } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -13,6 +14,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   try {
     const { id } = await params
     const body = await request.json()
+
+    // Verify auth: user must own the empresa that owns this task
+    const auth = await getAuthEmpresa(request)
+    if (!auth) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
 
     const allowedFields = ['estado', 'titulo', 'descripcion', 'prioridad', 'fecha_limite']
     const updates: Record<string, unknown> = {}
@@ -29,10 +36,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
     const supabase = getSupabase()
 
+    // Only update if the task belongs to the user's empresa
     const { data, error } = await supabase
       .from('tareas')
       .update(updates)
       .eq('id', id)
+      .eq('empresa_id', auth.empresaId)
       .select()
       .single()
 
@@ -44,15 +53,24 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 }
 
 // DELETE: delete a task
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
+
+    // Verify auth: user must own the empresa that owns this task
+    const auth = await getAuthEmpresa(request)
+    if (!auth) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     const supabase = getSupabase()
 
+    // Only delete if the task belongs to the user's empresa
     const { error } = await supabase
       .from('tareas')
       .delete()
       .eq('id', id)
+      .eq('empresa_id', auth.empresaId)
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ deleted: true })

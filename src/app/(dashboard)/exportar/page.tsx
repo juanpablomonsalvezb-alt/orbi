@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase-client'
+import { authFetch } from '@/lib/auth-fetch'
 
 export default function ExportarPage() {
   const [empresaId, setEmpresaId] = useState<string | null>(null)
@@ -30,7 +31,7 @@ export default function ExportarPage() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/export?empresa_id=${empresaId}`)
+      const response = await authFetch(`/api/export?empresa_id=${empresaId}`)
       if (!response.ok) throw new Error('Error al exportar')
 
       const blob = await response.blob()

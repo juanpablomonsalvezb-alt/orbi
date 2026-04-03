@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { sendGroq } from '@/lib/groq'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -29,6 +30,12 @@ export async function POST(request: NextRequest) {
 
     if (!message || !empresa_id || !agente_tipo) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 })
+    }
+
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     const prompt = `${EXTRACTION_PROMPT}
@@ -90,7 +97,7 @@ ${userMessage || ''}`
     return NextResponse.json({ extracted: memories.length })
   } catch (error) {
     console.error('Error en /api/memory POST:', error)
-    return NextResponse.json({ error: 'Error interno' }, { status: 500 })
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
   }
 }
 
@@ -104,6 +111,11 @@ export async function GET(request: NextRequest) {
 
     if (!empresaId) {
       return NextResponse.json({ error: 'empresa_id requerido' }, { status: 400 })
+    }
+
+    const hasAccess = await verifyEmpresaAccess(request, empresaId)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     const supabase = getSupabase()
@@ -124,6 +136,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ memorias: data })
   } catch (error) {
     console.error('Error en /api/memory GET:', error)
-    return NextResponse.json({ error: 'Error interno' }, { status: 500 })
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
   }
 }

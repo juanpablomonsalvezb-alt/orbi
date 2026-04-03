@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
 import { streamGroq } from '@/lib/groq'
 import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -24,6 +25,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Faltan campos' }, { status: 400 })
     }
 
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     const supabase = getSupabase()
 
     // Get empresa + onboarding context
@@ -34,7 +41,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (!empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     const { data: contexto } = await supabase
@@ -109,6 +116,6 @@ Así de corto.`
     })
   } catch (error) {
     console.error('Error generating first message:', error)
-    return NextResponse.json({ error: 'Error generando mensaje inicial' }, { status: 500 })
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
   }
 }

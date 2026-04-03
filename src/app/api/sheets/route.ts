@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readGoogleSheet } from '@/lib/google-sheets'
 import { createClient } from '@supabase/supabase-js'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -18,6 +19,12 @@ export async function POST(request: NextRequest) {
 
     if (!url || !empresa_id) {
       return NextResponse.json({ error: 'URL y empresa_id requeridos' }, { status: 400 })
+    }
+
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     // Read the sheet

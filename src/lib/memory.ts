@@ -25,11 +25,21 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 const CATEGORY_ORDER = ['dato', 'decision', 'meta', 'alerta', 'tarea']
 
+/** Simple time-based cache to avoid hitting DB on every request */
+const memoryCache = new Map<string, { data: string; timestamp: number }>()
+const MEMORY_CACHE_TTL = 60000 // 1 minute
+
 /**
  * Builds a memory context string from stored memories for injection into prompts.
  * Groups by category and caps at 800 chars total.
+ * Results are cached for 1 minute per empresa.
  */
 export async function buildMemoryContext(empresaId: string): Promise<string> {
+  const cached = memoryCache.get(empresaId)
+  if (cached && Date.now() - cached.timestamp < MEMORY_CACHE_TTL) {
+    return cached.data
+  }
+
   const supabase = getSupabase()
 
   const { data: memorias, error } = await supabase
@@ -41,6 +51,7 @@ export async function buildMemoryContext(empresaId: string): Promise<string> {
     .limit(50)
 
   if (error || !memorias || memorias.length === 0) {
+    memoryCache.set(empresaId, { data: '', timestamp: Date.now() })
     return ''
   }
 
@@ -71,5 +82,6 @@ export async function buildMemoryContext(empresaId: string): Promise<string> {
     result = result.substring(0, 1997) + '...'
   }
 
+  memoryCache.set(empresaId, { data: result, timestamp: Date.now() })
   return result
 }

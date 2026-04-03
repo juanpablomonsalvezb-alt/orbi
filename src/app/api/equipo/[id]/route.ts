@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { getAuthEmpresa } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -9,15 +10,24 @@ function getSupabase() {
 }
 
 // DELETE: remove a team member
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
+
+    // Verify auth: user must own the empresa
+    const auth = await getAuthEmpresa(request)
+    if (!auth) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     const supabase = getSupabase()
 
+    // Only delete if the member belongs to the user's empresa
     const { error } = await supabase
       .from('empresa_usuarios')
       .delete()
       .eq('id', id)
+      .eq('empresa_id', auth.empresaId)
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 })

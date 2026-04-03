@@ -1,5 +1,8 @@
 'use client'
 
+import { useEffect } from 'react'
+import { trackError } from '@/lib/error-tracking'
+
 export default function DashboardError({
   error,
   reset,
@@ -7,6 +10,10 @@ export default function DashboardError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  useEffect(() => {
+    trackError(error, { boundary: 'dashboard', digest: error.digest })
+  }, [error])
+
   return (
     <div className="flex h-screen items-center justify-center bg-ivory-mid">
       <div className="max-w-md mx-auto text-center px-6">

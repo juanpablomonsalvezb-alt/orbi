@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { ArchivoAdjunto } from './FileAttachment'
+import { authFetch } from '@/lib/auth-fetch'
 
 export interface ArchivoInfo {
   id: string
@@ -33,7 +34,7 @@ export default function ChatInput({ onEnviar, deshabilitado, empresaId }: ChatIn
     const formData = new FormData()
     formData.append('archivo', file)
     formData.append('empresa_id', empresaId)
-    const response = await fetch('/api/upload', { method: 'POST', body: formData })
+    const response = await authFetch('/api/upload', { method: 'POST', body: formData })
     if (!response.ok) throw new Error('Error al subir archivo')
     const data = await response.json()
     return { id: data.id, nombre: data.nombre, tipo: data.tipo }
@@ -66,7 +67,7 @@ export default function ChatInput({ onEnviar, deshabilitado, empresaId }: ChatIn
 
   return (
     <div className="bg-white border-t border-[#e9e9e7]">
-      <div className="max-w-[900px] mx-auto px-8 py-4">
+      <div className="max-w-[900px] w-full mx-auto px-4 md:px-8 py-4">
         {/* File preview */}
         {archivo && (
           <div className="flex items-center gap-2 mb-3 px-3 py-2 bg-[#f7f6f3] border border-[#e9e9e7] rounded-md text-[13px] max-w-xs">

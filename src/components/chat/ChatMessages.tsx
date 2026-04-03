@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { ChatMessage } from '@/types/chat'
 import { TipoAgente } from '@/lib/prompts'
 import { CrossReferral } from '@/lib/cross-referral'
@@ -28,82 +28,16 @@ const SUGERENCIAS: Record<TipoAgente, string[]> = {
   legal: ['¿Qué obligaciones fiscales tengo?', '¿Necesito contrato para este servicio?', '¿Cumplo con la ley laboral?'],
 }
 
-/**
- * Typewriter hook — accumulates streaming text in a buffer
- * and releases it character by character at a fixed interval.
- * This ensures smooth typing regardless of API speed.
- */
-function useTypewriter(source: string, speed: number = 20) {
-  const [display, setDisplay] = useState('')
-  const bufferRef = useRef('')
-  const posRef = useRef(0)
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  // When source changes, update the buffer
-  useEffect(() => {
-    bufferRef.current = source
-  }, [source])
-
-  // When source starts, begin the interval
-  useEffect(() => {
-    if (source && !timerRef.current) {
-      posRef.current = 0
-      setDisplay('')
-
-      timerRef.current = setInterval(() => {
-        const buf = bufferRef.current
-        const pos = posRef.current
-
-        if (pos < buf.length) {
-          // Release 1-2 chars per tick
-          const step = buf[pos] === ' ' ? 2 : 1
-          const nextPos = Math.min(pos + step, buf.length)
-          posRef.current = nextPos
-          setDisplay(buf.slice(0, nextPos))
-        }
-        // Don't clear interval — keep checking for new buffer content
-      }, speed)
-    }
-
-    // Cleanup when streaming stops
-    if (!source && timerRef.current) {
-      clearInterval(timerRef.current)
-      timerRef.current = null
-      setDisplay('')
-      posRef.current = 0
-    }
-
-    return () => {
-      if (!source && timerRef.current) {
-        clearInterval(timerRef.current)
-        timerRef.current = null
-      }
-    }
-  }, [source, speed])
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [])
-
-  const isTyping = source.length > 0 && posRef.current < bufferRef.current.length
-
-  return { display, isTyping }
-}
-
 export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', empresaId, onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
-  const { display, isTyping } = useTypewriter(streamingText, 18)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [mensajes, display])
+  }, [mensajes, streamingText])
 
   return (
     <div className="flex-1 overflow-y-auto bg-white">
-      <div className="max-w-[900px] mx-auto px-10 py-10">
+      <div className="max-w-[900px] w-full mx-auto px-4 md:px-10 py-10">
 
         {/* Empty state */}
         {mensajes.length === 0 && !cargando && !streamingText && (
@@ -153,14 +87,14 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
           </div>
         ))}
 
-        {/* Streaming with real typewriter */}
-        {(display || (cargando && !streamingText)) && (
+        {/* Streaming with typewriter (controlled by chat page) */}
+        {(streamingText || (cargando && !streamingText)) && (
           <div className="mb-8 py-4 border-l-2 border-[#e9e9e7] pl-6">
-            {display ? (
+            {streamingText ? (
               <div className="text-[15px] leading-[1.85] text-[#37352f] whitespace-pre-wrap"
                    style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                {display.split('\n').filter(l => !l.trim().startsWith('>>>')).join('\n')}
-                {isTyping && <span className="inline-block w-[2px] h-[1.1em] bg-clay ml-0.5 animate-pulse rounded-sm align-text-bottom" />}
+                {streamingText.split('\n').filter(l => !l.trim().startsWith('>>>')).join('\n')}
+                <span className="inline-block w-[2px] h-[1.1em] bg-clay ml-0.5 animate-pulse rounded-sm align-text-bottom" />
               </div>
             ) : (
               <div className="flex items-center gap-2">

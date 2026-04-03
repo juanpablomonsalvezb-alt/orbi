@@ -13,6 +13,7 @@ import OnboardingTour from '@/components/chat/OnboardingTour'
 import PushNotifications from '@/components/PushNotifications'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 import { detectCrossReferral, type CrossReferral } from '@/lib/cross-referral'
+import { authFetch } from '@/lib/auth-fetch'
 
 export default function ChatPage() {
   const params = useParams()
@@ -31,6 +32,29 @@ export default function ChatPage() {
   const [crossReferrals, setCrossReferrals] = useState<Record<string, CrossReferral>>({})
   const [mostrarTour, setMostrarTour] = useState(false)
   const abortRef = useRef<AbortController | null>(null)
+
+  // Typewriter buffer system — controls display speed independently of stream speed
+  const streamBuffer = useRef('')
+  const displayedLength = useRef(0)
+  const streamInterval = useRef<ReturnType<typeof setInterval> | null>(null)
+  const streamComplete = useRef(false)
+  const finalMessage = useRef<ChatMessage | null>(null)
+  const agenteTipoRef = useRef(agenteTipo)
+
+  // Keep agenteTipoRef in sync
+  useEffect(() => {
+    agenteTipoRef.current = agenteTipo
+  }, [agenteTipo])
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (streamInterval.current) {
+        clearInterval(streamInterval.current)
+        streamInterval.current = null
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -114,7 +138,7 @@ export default function ChatPage() {
 
       // Use streaming API
       abortRef.current = new AbortController()
-      const response = await fetch('/api/chat', {
+      const response = await authFetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -133,7 +157,48 @@ export default function ChatPage() {
 
       const reader = response.body?.getReader()
       const decoder = new TextDecoder()
-      let fullText = ''
+
+      // Reset typewriter buffer state
+      streamBuffer.current = ''
+      displayedLength.current = 0
+      streamComplete.current = false
+      finalMessage.current = null
+
+      // Start the typewriter interval — releases chars at a steady pace
+      if (streamInterval.current) {
+        clearInterval(streamInterval.current)
+      }
+      streamInterval.current = setInterval(() => {
+        if (displayedLength.current < streamBuffer.current.length) {
+          // Release 2 chars per tick (or 3 for spaces for smoother feel)
+          const nextChar = streamBuffer.current[displayedLength.current]
+          const step = nextChar === ' ' ? 3 : 2
+          displayedLength.current = Math.min(displayedLength.current + step, streamBuffer.current.length)
+          setStreamingText(streamBuffer.current.slice(0, displayedLength.current))
+        } else if (streamComplete.current && displayedLength.current >= streamBuffer.current.length) {
+          // Stream is done AND we've displayed everything — show final message
+          clearInterval(streamInterval.current!)
+          streamInterval.current = null
+          setStreamingText('')
+
+          const finalMsg = finalMessage.current
+          if (finalMsg) {
+            setMensajes((prev) => [...prev, finalMsg])
+            // Check for cross-referral
+            if (finalMsg.rol === 'assistant' && finalMsg.contenido) {
+              const referral = detectCrossReferral(agenteTipoRef.current, finalMsg.contenido)
+              if (referral) {
+                setCrossReferrals(prev => ({ ...prev, [finalMsg.id]: referral }))
+              }
+            }
+          }
+
+          displayedLength.current = 0
+          streamBuffer.current = ''
+          streamComplete.current = false
+          finalMessage.current = null
+        }
+      }, 15) // ~130 chars/sec
 
       if (reader) {
         while (true) {
@@ -148,29 +213,11 @@ export default function ChatPage() {
               try {
                 const data = JSON.parse(line.slice(6))
                 if (data.text) {
-                  fullText += data.text
-                  setStreamingText(fullText)
+                  streamBuffer.current += data.text
                 }
                 if (data.done && data.mensaje) {
-                  // Wait for typewriter to finish before showing final message
-                  const finalMsg = data.mensaje
-                  const waitForTypewriter = () => {
-                    // Check if typewriter has caught up (give it time to render)
-                    setTimeout(() => {
-                      setStreamingText('')
-                      setMensajes((prev) => [...prev, finalMsg])
-                      // Check for cross-referral
-                      if (finalMsg.rol === 'assistant' && finalMsg.contenido) {
-                        const referral = detectCrossReferral(agenteTipo, finalMsg.contenido)
-                        if (referral) {
-                          setCrossReferrals(prev => ({ ...prev, [finalMsg.id]: referral }))
-                        }
-                      }
-                    }, Math.min(fullText.length * 18, 8000)) // Wait proportional to text length, max 8s
-                  }
-                  waitForTypewriter()
-                  if (false) { // Keep original cross-referral block for TypeScript
-                  }
+                  finalMessage.current = data.mensaje
+                  streamComplete.current = true
                 }
                 if (data.error) {
                   throw new Error(data.error)
@@ -202,6 +249,15 @@ export default function ChatPage() {
       if (err instanceof Error && err.name === 'AbortError') return
       console.error('Error enviando mensaje:', err)
       const errorMsg = err instanceof Error ? err.message : 'Error al procesar tu mensaje'
+      // Clean up typewriter interval on error
+      if (streamInterval.current) {
+        clearInterval(streamInterval.current)
+        streamInterval.current = null
+      }
+      streamBuffer.current = ''
+      displayedLength.current = 0
+      streamComplete.current = false
+      finalMessage.current = null
       setStreamingText('')
       setError(errorMsg)
       setMensajes((prev) => [
@@ -237,7 +293,7 @@ export default function ChatPage() {
   }
 
   const renombrarConversacion = async (id: string, nuevoTitulo: string) => {
-    await fetch(`/api/conversaciones/${id}`, {
+    await authFetch(`/api/conversaciones/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ titulo: nuevoTitulo }),
@@ -248,7 +304,7 @@ export default function ChatPage() {
   }
 
   const eliminarConversacion = async (id: string) => {
-    await fetch(`/api/conversaciones/${id}`, { method: 'DELETE' })
+    await authFetch(`/api/conversaciones/${id}`, { method: 'DELETE' })
     setConversaciones((prev) => prev.filter((c) => c.id !== id))
     if (id === conversacionId) {
       window.location.href = '/chat'

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -38,10 +39,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresaId)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     // Validate file size
     if (file.size > MAX_SIZE) {
       return NextResponse.json(
-        { error: 'El archivo excede el tamaño máximo de 10MB' },
+        { error: 'El archivo es demasiado grande. Máximo 10MB.' },
         { status: 400 }
       )
     }
@@ -50,7 +57,7 @@ export async function POST(request: NextRequest) {
     const extension = file.name.split('.').pop()?.toLowerCase() || ''
     if (!EXTENSIONES_PERMITIDAS.includes(extension)) {
       return NextResponse.json(
-        { error: `Tipo de archivo no permitido. Formatos aceptados: ${EXTENSIONES_PERMITIDAS.join(', ')}` },
+        { error: 'Tipo de archivo no soportado. Usa PDF, Excel, CSV, Word o imágenes.' },
         { status: 400 }
       )
     }
@@ -58,7 +65,7 @@ export async function POST(request: NextRequest) {
     // Validate MIME type (allow empty MIME for csv sometimes)
     if (file.type && !TIPOS_PERMITIDOS.includes(file.type) && extension !== 'csv') {
       return NextResponse.json(
-        { error: 'Tipo MIME de archivo no permitido' },
+        { error: 'Tipo de archivo no soportado. Usa PDF, Excel, CSV, Word o imágenes.' },
         { status: 400 }
       )
     }
@@ -136,7 +143,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error en /api/upload:', error)
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' },
       { status: 500 }
     )
   }

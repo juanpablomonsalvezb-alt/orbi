@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { enviarEmailInvitacion } from '@/lib/resend'
+import { getAuthEmpresa } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -12,45 +13,30 @@ function getSupabase() {
 // GET: list team members for the authenticated user's empresa
 export async function GET(request: NextRequest) {
   try {
+    // Verify auth using the Authorization header token
+    const auth = await getAuthEmpresa(request)
+    if (!auth) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     const supabase = getSupabase()
 
-    // Get auth token from cookie
-    const authHeader = request.headers.get('cookie')
-    const token = authHeader?.match(/sb-[^=]+-auth-token=([^;]+)/)?.[1]
-
-    const { data: { user }, error: authError } = await supabase.auth.getUser(
-      token ? decodeURIComponent(token) : undefined
-    )
-
-    if (authError || !user) {
-      // Fallback: try without token
-      const { data: { user: user2 } } = await supabase.auth.getUser()
-      if (!user2) {
-        return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
-      }
-    }
-
-    const userId = user?.id
-    if (!userId) {
-      return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
-    }
-
-    // Get empresa
+    // Get empresa name
     const { data: empresa, error: empresaError } = await supabase
       .from('empresas')
       .select('id, nombre')
-      .eq('user_id', userId)
+      .eq('id', auth.empresaId)
       .single()
 
     if (empresaError || !empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     // Get team members
     const { data: miembros, error: miembrosError } = await supabase
       .from('empresa_usuarios')
       .select('id, email, rol, created_at')
-      .eq('empresa_id', empresa.id)
+      .eq('empresa_id', auth.empresaId)
       .order('created_at', { ascending: true })
 
     if (miembrosError) {
@@ -66,7 +52,6 @@ export async function GET(request: NextRequest) {
 // POST: invite a new team member
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabase()
     const { email, rol } = await request.json()
 
     if (!email || typeof email !== 'string') {
@@ -77,20 +62,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Rol inválido' }, { status: 400 })
     }
 
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) {
-      return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
+    // Verify auth using the Authorization header token
+    const auth = await getAuthEmpresa(request)
+    if (!auth) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
+
+    const supabase = getSupabase()
 
     // Get empresa
     const { data: empresa, error: empresaError } = await supabase
       .from('empresas')
       .select('id, nombre, email')
-      .eq('user_id', user.id)
+      .eq('id', auth.empresaId)
       .single()
 
     if (empresaError || !empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     // Check if already invited
@@ -121,7 +109,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Send invitation email
-    await enviarEmailInvitacion(email.toLowerCase(), empresa.nombre, empresa.email || user.email || '')
+    await enviarEmailInvitacion(email.toLowerCase(), empresa.nombre, empresa.email || '')
 
     return NextResponse.json({ miembro })
   } catch {

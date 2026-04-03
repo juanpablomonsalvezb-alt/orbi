@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe, PLANS, PlanId } from '@/lib/stripe'
 import { createClient } from '@supabase/supabase-js'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,6 +9,12 @@ export async function POST(request: NextRequest) {
 
     if (!plan_id || !billing || !empresa_id || !email) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 })
+    }
+
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     const plan = PLANS[plan_id as PlanId]

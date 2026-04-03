@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { generateDocument, DocType } from '@/lib/document-generator'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
   return createClient(
@@ -30,6 +31,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
+    }
+
     const supabase = getSupabase()
 
     // Obtener nombre de la empresa
@@ -40,7 +47,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (errorEmpresa || !empresa) {
-      return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+      return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })
     }
 
     const fecha = new Date().toLocaleDateString('es-CL', {
@@ -78,6 +85,6 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error en /api/documents:', error)
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
   }
 }

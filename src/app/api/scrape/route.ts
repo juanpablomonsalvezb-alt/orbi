@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { scrapeCompetitor } from '@/lib/scraper'
+import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,6 +11,12 @@ export async function POST(request: NextRequest) {
         { error: 'Faltan campos requeridos: url, empresa_id' },
         { status: 400 }
       )
+    }
+
+    // Verify the authenticated user owns this empresa
+    const hasAccess = await verifyEmpresaAccess(request, empresa_id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: 'Tu sesión expiró. Recarga la página.' }, { status: 401 })
     }
 
     // Validar que es una URL válida

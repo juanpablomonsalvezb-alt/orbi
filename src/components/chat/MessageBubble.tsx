@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ChatMessage } from '@/types/chat'
 import { parseRichContent, CalloutBox, DataTable } from './RichContent'
 import DocumentButton, { hasDocumentKeywords } from '@/components/chat/DocumentButton'
+import { authFetch } from '@/lib/auth-fetch'
 
 type FeedbackTipo = 'positivo' | 'negativo' | null
 
@@ -87,7 +88,7 @@ export default function MessageBubble({ mensaje, empresaId, agente }: MessageBub
     setFeedback(nuevoTipo)
     if (nuevoTipo) {
       try {
-        await fetch('/api/feedback', {
+        await authFetch('/api/feedback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ mensaje_id: mensaje.id, empresa_id: empresaId, tipo: nuevoTipo }),
@@ -103,7 +104,7 @@ export default function MessageBubble({ mensaje, empresaId, agente }: MessageBub
       {esUsuario ? (
         /* User — right-aligned, subtle bg, Notion-style */
         <div className="flex justify-end">
-          <div className="bg-[#2f3437] text-white rounded-[20px] rounded-br-[6px] px-5 py-3 max-w-[75%]">
+          <div className="bg-[#2f3437] text-white rounded-[20px] rounded-br-[6px] px-5 py-3 max-w-[90%] md:max-w-[75%]">
             <p className="text-[14px] leading-[1.6] whitespace-pre-wrap"
                style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
               {mensaje.contenido}

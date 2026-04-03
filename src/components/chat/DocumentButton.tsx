@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { DocType } from '@/lib/document-generator'
+import { authFetch } from '@/lib/auth-fetch'
 
 interface DocumentButtonProps {
   contenido: string
@@ -66,7 +67,7 @@ export default function DocumentButton({ contenido, empresaId, agente }: Documen
       const docType = detectDocType(contenido)
       const title = extractTitle(contenido, docType)
 
-      const response = await fetch('/api/documents', {
+      const response = await authFetch('/api/documents', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
