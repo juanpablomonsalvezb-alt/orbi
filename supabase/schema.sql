@@ -16,6 +16,11 @@ CREATE TABLE empresas (
   nombre TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
   onboarding_completado BOOLEAN NOT NULL DEFAULT FALSE,
+  plan TEXT NOT NULL DEFAULT 'free' CHECK (plan IN ('free', 'solo', 'equipo', 'empresa')),
+  trial_ends_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '48 hours'),
+  stripe_customer_id TEXT,
+  stripe_subscription_id TEXT,
+  subscription_status TEXT DEFAULT 'trialing',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -31,7 +36,7 @@ CREATE TABLE contexto (
   pregunta TEXT NOT NULL,
   respuesta TEXT NOT NULL,
   bloque INTEGER NOT NULL CHECK (bloque BETWEEN 1 AND 4),
-  orden INTEGER NOT NULL CHECK (orden BETWEEN 1 AND 14),
+  orden INTEGER NOT NULL CHECK (orden BETWEEN 1 AND 7),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE(empresa_id, orden)

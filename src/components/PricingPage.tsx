@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Link from 'next/link'
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94]
 
@@ -18,39 +19,39 @@ function FadeIn({ children, className = '' }: { children: React.ReactNode; class
 
 const PLANES = [
   {
+    id: 'solo',
     nombre: 'Solo', desc: 'Para microempresas y emprendedores',
     mensual: 29, anual: 295.80,
     features: [
       { t: '1 agente (Gerente General)', ok: true },
       { t: 'Onboarding guiado', ok: true },
       { t: 'Chat ilimitado', ok: true },
-      { t: 'Resumen semanal', ok: true },
+      { t: 'Historial de conversaciones', ok: true },
       { t: 'Agentes adicionales', ok: false },
-      { t: 'Soporte prioritario', ok: false },
     ],
   },
   {
+    id: 'equipo',
     nombre: 'Equipo', desc: 'Para negocios con operación activa',
     mensual: 79, anual: 805.80, destacado: true,
     features: [
       { t: '3 agentes a elegir', ok: true },
       { t: 'Onboarding guiado', ok: true },
       { t: 'Chat ilimitado', ok: true },
-      { t: 'Resumen semanal', ok: true },
-      { t: 'Agentes adicionales', ok: true },
-      { t: 'Soporte prioritario', ok: true },
+      { t: 'Historial de conversaciones', ok: true },
+      { t: 'Agentes adicionales (+$19/mes c/u)', ok: true },
     ],
   },
   {
+    id: 'empresa',
     nombre: 'Empresa', desc: 'Para medianas empresas',
     mensual: 249, anual: 2539.80,
     features: [
-      { t: 'Los 7 agentes', ok: true },
-      { t: 'Onboarding con consultor', ok: true },
+      { t: 'Los 7 agentes incluidos', ok: true },
+      { t: 'Onboarding guiado', ok: true },
       { t: 'Chat ilimitado', ok: true },
-      { t: 'Reportes semanales y mensuales', ok: true },
-      { t: 'Agentes adicionales', ok: true },
-      { t: 'Soporte 24/7', ok: true },
+      { t: 'Historial de conversaciones', ok: true },
+      { t: 'Soporte prioritario', ok: true },
     ],
   },
 ]
@@ -67,8 +68,9 @@ const AGENTES = [
 
 const FAQS = [
   { q: '¿Puedo cancelar cuando quiera?', a: 'Sí. Mensual cancelas sin penalidad. Anual tienes acceso hasta el fin del período.' },
-  { q: '¿Qué pasa después de los 14 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra.' },
+  { q: '¿Qué pasa después de las 48 horas?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
   { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
+  { q: '¿Qué diferencia hay entre Orbbi y ChatGPT?', a: 'Orbbi conoce tu negocio en profundidad. Cada agente tiene frameworks especializados y contexto de tu empresa. No necesitas prompt engineering.' },
 ]
 
 export default function PricingPage() {
@@ -86,7 +88,7 @@ export default function PricingPage() {
               Un agente para cada área de tu negocio
             </h1>
             <p className="text-sm text-ink-light mt-3 max-w-md mx-auto" style={{ fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.6 }}>
-              Todos los planes incluyen 14 días gratis.
+              Todos los planes incluyen 48 horas gratis. Sin tarjeta.
             </p>
           </div>
         </FadeIn>
@@ -165,11 +167,12 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <button className={`w-full rounded-md py-2.5 text-sm font-medium transition-colors ${
-                  plan.destacado ? 'bg-ivory text-ink hover:bg-ivory-mid' : 'bg-ink text-ivory hover:bg-ink-mid'
-                }`}>
-                  Empezar gratis 14 días
-                </button>
+                <Link href="/registro"
+                  className={`block w-full text-center rounded-md py-2.5 text-sm font-medium transition-colors ${
+                    plan.destacado ? 'bg-ivory text-ink hover:bg-ivory-mid' : 'bg-ink text-ivory hover:bg-ink-mid'
+                  }`}>
+                  Probar gratis 48h
+                </Link>
               </motion.div>
             )
           })}

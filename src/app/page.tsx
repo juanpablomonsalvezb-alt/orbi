@@ -623,11 +623,11 @@ function PlanesSection() {
 
 function NovedadesSection() {
   const items = [
-    { title: 'Agente Financiero mejorado con análisis predictivo', tag: 'Producto' },
-    { title: 'Reportes semanales automáticos por email', tag: 'Funcionalidad' },
-    { title: 'Integración con WhatsApp Business', tag: 'Integración' },
-    { title: 'Base de conocimiento ampliada: 10,000+ líneas', tag: 'Metodología' },
-    { title: 'Dashboard ejecutivo en tiempo real', tag: 'Funcionalidad' },
+    { title: '7 agentes especializados con frameworks de negocio LATAM', tag: 'Producto' },
+    { title: 'Onboarding de 7 preguntas para contextualizar tu empresa', tag: 'Funcionalidad' },
+    { title: 'Chat ilimitado con historial de conversaciones', tag: 'Funcionalidad' },
+    { title: 'Análisis financiero con benchmarks por industria', tag: 'Metodología' },
+    { title: 'Frameworks de gestión: Cynefin, Fayol, OODA, Eisenhower', tag: 'Metodología' },
   ]
 
   return (

@@ -21,8 +21,19 @@ export default function RegistroPage() {
       const { data, error: err } = await supabase.auth.signUp({ email, password })
       if (err) { setError(err.message === 'User already registered' ? 'Este email ya está registrado' : err.message); return }
       if (!data.user) { setError('Error al crear la cuenta'); return }
-      const { error: empErr } = await supabase.from('empresas').insert({ user_id: data.user.id, nombre: empresa, email, onboarding_completado: false })
+      const trialEndsAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
+      const { error: empErr } = await supabase.from('empresas').insert({
+        user_id: data.user.id, nombre: empresa, email,
+        onboarding_completado: false, plan: 'free',
+        trial_ends_at: trialEndsAt, subscription_status: 'trialing'
+      })
       if (empErr) { setError('Error al registrar la empresa'); return }
+      // Send welcome email
+      fetch('/api/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'welcome', email, nombre: empresa }),
+      }).catch(() => {})
       router.push('/onboarding')
     } catch { setError('Error al registrarse') } finally { setLoading(false) }
   }
@@ -32,7 +43,7 @@ export default function RegistroPage() {
       <h2 className="text-ink mb-1" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '24px', fontWeight: 400, letterSpacing: '-0.3px' }}>
         Crea tu cuenta
       </h2>
-      <p className="text-sm text-muted mb-7">14 días gratis. Sin tarjeta.</p>
+      <p className="text-sm text-muted mb-7">48 horas gratis. Sin tarjeta.</p>
 
       {error && <div className="bg-accent-bg border border-accent/15 rounded-md px-3 py-2.5 mb-5"><p className="text-sm text-accent">{error}</p></div>}
 

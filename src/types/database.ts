@@ -8,6 +8,11 @@ export interface Empresa {
   nombre: string
   email: string
   onboarding_completado: boolean
+  plan: 'free' | 'solo' | 'equipo' | 'empresa'
+  trial_ends_at: string | null
+  stripe_customer_id: string | null
+  stripe_subscription_id: string | null
+  subscription_status: string | null
   created_at: string
   updated_at: string
 }

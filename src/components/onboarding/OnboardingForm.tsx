@@ -18,7 +18,7 @@ export default function OnboardingForm() {
   const preguntasBloque = PREGUNTAS_ONBOARDING.filter((p) => p.bloque === bloqueActual)
 
   const bloques = [
-    { num: 1, nombre: 'El negocio' },
+    { num: 1, nombre: 'Tu negocio' },
     { num: 2, nombre: 'Finanzas' },
     { num: 3, nombre: 'Clientes' },
     { num: 4, nombre: 'Metas' },
@@ -126,9 +126,9 @@ export default function OnboardingForm() {
       </h2>
       <p className="text-sm text-muted mb-8">
         {bloqueActual === 1 && 'Cuéntanos sobre tu empresa para que orbbi la conozca.'}
-        {bloqueActual === 2 && 'Información financiera básica para entender tu negocio.'}
-        {bloqueActual === 3 && 'Sobre tus clientes y el mercado donde compites.'}
-        {bloqueActual === 4 && 'Tus metas y las decisiones que más te importan.'}
+        {bloqueActual === 2 && 'Números básicos para entender tu operación.'}
+        {bloqueActual === 3 && 'Sobre quién te compra y cómo los consigues.'}
+        {bloqueActual === 4 && 'Lo que quieres lograr y lo que te preocupa.'}
       </p>
 
       {error && (
