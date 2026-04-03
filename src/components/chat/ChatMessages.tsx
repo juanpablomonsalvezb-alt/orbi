@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ChatMessage } from '@/types/chat'
 import { TipoAgente } from '@/lib/prompts'
 import { CrossReferral } from '@/lib/cross-referral'
@@ -28,76 +28,77 @@ const SUGERENCIAS: Record<TipoAgente, string[]> = {
 }
 
 /**
- * Hook that buffers incoming streaming text and releases it character by character
- * at a controlled rate, creating a smooth typewriter effect regardless of API speed.
+ * Typewriter hook — accumulates streaming text in a buffer
+ * and releases it character by character at a fixed interval.
+ * This ensures smooth typing regardless of API speed.
  */
-function useTypewriter(incomingText: string, charsPerSecond: number = 40) {
-  const [displayText, setDisplayText] = useState('')
+function useTypewriter(source: string, speed: number = 20) {
+  const [display, setDisplay] = useState('')
   const bufferRef = useRef('')
-  const displayRef = useRef('')
-  const rafRef = useRef<number | null>(null)
-  const lastTimeRef = useRef(0)
+  const posRef = useRef(0)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Update buffer when new text arrives
+  // When source changes, update the buffer
   useEffect(() => {
-    bufferRef.current = incomingText
-  }, [incomingText])
+    bufferRef.current = source
+  }, [source])
 
-  // Reset when streaming stops
+  // When source starts, begin the interval
   useEffect(() => {
-    if (!incomingText) {
-      setDisplayText('')
-      displayRef.current = ''
-      bufferRef.current = ''
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [incomingText])
+    if (source && !timerRef.current) {
+      posRef.current = 0
+      setDisplay('')
 
-  // Animation loop — releases chars at controlled rate
-  const animate = useCallback((timestamp: number) => {
-    if (!bufferRef.current) {
-      rafRef.current = requestAnimationFrame(animate)
-      return
-    }
+      timerRef.current = setInterval(() => {
+        const buf = bufferRef.current
+        const pos = posRef.current
 
-    const elapsed = timestamp - lastTimeRef.current
-    const msPerChar = 1000 / charsPerSecond
-
-    if (elapsed >= msPerChar && displayRef.current.length < bufferRef.current.length) {
-      // Release multiple chars if we're behind
-      const charsToAdd = Math.min(
-        Math.floor(elapsed / msPerChar),
-        bufferRef.current.length - displayRef.current.length,
-        3 // max 3 chars at a time for smoothness
-      )
-      displayRef.current = bufferRef.current.slice(0, displayRef.current.length + charsToAdd)
-      setDisplayText(displayRef.current)
-      lastTimeRef.current = timestamp
+        if (pos < buf.length) {
+          // Release 1-2 chars per tick
+          const step = buf[pos] === ' ' ? 2 : 1
+          const nextPos = Math.min(pos + step, buf.length)
+          posRef.current = nextPos
+          setDisplay(buf.slice(0, nextPos))
+        }
+        // Don't clear interval — keep checking for new buffer content
+      }, speed)
     }
 
-    rafRef.current = requestAnimationFrame(animate)
-  }, [charsPerSecond])
+    // Cleanup when streaming stops
+    if (!source && timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+      setDisplay('')
+      posRef.current = 0
+    }
 
+    return () => {
+      if (!source && timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
+    }
+  }, [source, speed])
+
+  // Cleanup on unmount
   useEffect(() => {
-    if (incomingText) {
-      lastTimeRef.current = performance.now()
-      rafRef.current = requestAnimationFrame(animate)
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
     }
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
-  }, [incomingText, animate])
+  }, [])
 
-  const isTyping = displayText.length < (incomingText?.length || 0)
+  const isTyping = source.length > 0 && posRef.current < bufferRef.current.length
 
-  return { displayText, isTyping }
+  return { display, isTyping }
 }
 
 export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
-  const { displayText, isTyping } = useTypewriter(streamingText, 50)
+  const { display, isTyping } = useTypewriter(streamingText, 18)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [mensajes, displayText])
+  }, [mensajes, display])
 
   return (
     <div className="flex-1 overflow-y-auto bg-white">
@@ -139,13 +140,13 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
           </div>
         ))}
 
-        {/* Streaming with typewriter */}
-        {(displayText || (cargando && !streamingText)) && (
+        {/* Streaming with real typewriter */}
+        {(display || (cargando && !streamingText)) && (
           <div className="mb-8 py-4 border-l-2 border-[#e9e9e7] pl-6">
-            {displayText ? (
+            {display ? (
               <div className="text-[15px] leading-[1.85] text-[#37352f] whitespace-pre-wrap"
                    style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                {displayText}
+                {display}
                 {isTyping && <span className="inline-block w-[2px] h-[1.1em] bg-clay ml-0.5 animate-pulse rounded-sm align-text-bottom" />}
               </div>
             ) : (

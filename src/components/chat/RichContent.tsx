@@ -185,44 +185,67 @@ export function StatusBadge({ status, label }: { status: 'good' | 'warning' | 'c
 }
 
 // ============================================
-// INLINE BAR CHART — Auto-generated from table data
+// CHART COMPONENT — Uses Recharts for professional charts
 // ============================================
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+
+const CHART_COLORS = ['#d97757', '#e8a87c', '#c6613f', '#f0c9a8', '#a34e30', '#d4a574', '#8b3a20']
+
 export function InlineBarChart({ data }: { data: { label: string; value: number; max: number }[] }) {
+  const chartData = data.map(d => ({ name: d.label, value: d.value }))
+
   return (
-    <div className="my-4 space-y-2.5">
-      {data.map((item, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <span className="text-[12px] text-[#37352f] w-[100px] truncate text-right">{item.label}</span>
-          <div className="flex-1 h-[22px] bg-[#f7f6f3] rounded-md overflow-hidden relative">
-            <div
-              className="h-full bg-gradient-to-r from-clay/80 to-clay rounded-md transition-all duration-700"
-              style={{ width: `${Math.min(100, (item.value / item.max) * 100)}%` }}
+    <div className="my-5">
+      {/* Vertical bar chart */}
+      <div className="bg-[#fafaf9] border border-[#e9e9e7] rounded-xl p-5">
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
+            <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#9b9a97' }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fontSize: 11, fill: '#9b9a97' }} axisLine={false} tickLine={false} width={70}
+              tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+            <Tooltip
+              contentStyle={{ background: '#fff', border: '1px solid #e9e9e7', borderRadius: 8, fontSize: 13, fontFamily: "'Source Serif 4', Georgia, serif" }}
+              formatter={(value: unknown) => [`$${Number(value).toLocaleString()}`, 'Valor']}
             />
-          </div>
-          <span className="text-[12px] text-[#37352f] font-medium w-[60px] tabular-nums">{item.value.toLocaleString()}</span>
+            <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={50}>
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Donut chart if 3+ items */}
+      {data.length >= 3 && (
+        <div className="bg-[#fafaf9] border border-[#e9e9e7] rounded-xl p-5 mt-3">
+          <ResponsiveContainer width="100%" height={200}>
+            <PieChart>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={50}
+                outerRadius={80}
+                paddingAngle={3}
+                dataKey="value"
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                label={({ name, percent }: any) => `${name} ${(percent * 100).toFixed(0)}%`}
+                labelLine={false}
+              >
+                {chartData.map((_, i) => (
+                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip
+                contentStyle={{ background: '#fff', border: '1px solid #e9e9e7', borderRadius: 8, fontSize: 13 }}
+                formatter={(value: unknown) => [`$${Number(value).toLocaleString()}`, 'Valor']}
+              />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
-      ))}
+      )}
     </div>
-  )
-}
-
-// ============================================
-// SPARKLINE — Mini inline chart
-// ============================================
-export function Sparkline({ values, color = '#d97757' }: { values: number[]; color?: string }) {
-  if (values.length < 2) return null
-  const h = 32
-  const w = 120
-  const min = Math.min(...values)
-  const max = Math.max(...values)
-  const range = max - min || 1
-  const points = values.map((v, i) => `${(i / (values.length - 1)) * w},${h - ((v - min) / range) * (h - 4) - 2}`).join(' ')
-
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="inline-block align-middle ml-2" width={w} height={h}>
-      <polyline points={points} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={w} cy={parseFloat(points.split(' ').pop()?.split(',')[1] || '0')} r={2.5} fill={color} />
-    </svg>
   )
 }
 
@@ -230,8 +253,15 @@ export function Sparkline({ values, color = '#d97757' }: { values: number[]; col
 // RICH TEXT PARSER — Detects patterns in agent text and renders rich components
 // ============================================
 export function parseRichContent(text: string): { type: 'text' | 'metric' | 'callout' | 'table'; content: string; data?: Record<string, unknown> }[] {
+  // First, strip ASCII art blocks (code blocks with charts drawn in text)
+  let cleaned = text
+    .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+    .replace(/Gráfico de (?:barras|sectores|líneas?)[\s\S]*?(?=\n\n|\n[A-Z]|\n\*\*|$)/gi, '') // Remove ASCII chart sections
+    .replace(/\+[-=]+\+[\s\S]*?\+[-=]+\+/g, '') // Remove box drawings
+    .replace(/\n{3,}/g, '\n\n') // Clean extra blank lines
+
   const blocks: { type: 'text' | 'metric' | 'callout' | 'table'; content: string; data?: Record<string, unknown> }[] = []
-  const lines = text.split('\n')
+  const lines = cleaned.split('\n')
   let currentText: string[] = []
   let inTable = false
   let tableHeaders: string[] = []
@@ -240,26 +270,32 @@ export function parseRichContent(text: string): { type: 'text' | 'metric' | 'cal
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
 
-    // Detect tables: lines with | separators
-    if (line.includes('|') && line.trim().startsWith('|') && line.trim().endsWith('|')) {
+    // Detect tables: lines with | separators (flexible — doesn't require starting/ending with |)
+    const pipeCount = (line.match(/\|/g) || []).length
+    const isTableLine = pipeCount >= 2 && !line.includes('```')
+
+    if (isTableLine) {
+      // Skip separator lines (---|---|---)
+      if (line.replace(/[\s|:-]/g, '').length === 0) continue
+
+      const cells = line.split('|').map(c => c.trim()).filter(c => c.length > 0 && !c.match(/^[-:]+$/))
+      if (cells.length < 2) continue
+
       if (!inTable) {
-        // Flush current text
         if (currentText.length > 0) {
           blocks.push({ type: 'text', content: currentText.join('\n') })
           currentText = []
         }
         inTable = true
-        tableHeaders = line.split('|').filter(c => c.trim()).map(c => c.trim())
-      } else if (line.includes('---') || line.includes('–––')) {
-        // Separator line, skip
-        continue
+        tableHeaders = cells
       } else {
-        tableRows.push(line.split('|').filter(c => c.trim()).map(c => c.trim()))
+        tableRows.push(cells)
       }
       continue
     } else if (inTable) {
-      // End of table
-      blocks.push({ type: 'table', content: '', data: { headers: tableHeaders, rows: tableRows } })
+      if (tableRows.length > 0) {
+        blocks.push({ type: 'table', content: '', data: { headers: tableHeaders, rows: tableRows } })
+      }
       inTable = false
       tableHeaders = []
       tableRows = []
@@ -271,7 +307,6 @@ export function parseRichContent(text: string): { type: 'text' | 'metric' | 'cal
         blocks.push({ type: 'text', content: currentText.join('\n') })
         currentText = []
       }
-      // Collect callout lines until empty line
       const calloutLines = [line]
       let j = i + 1
       while (j < lines.length && lines[j].trim() !== '') {
@@ -284,15 +319,18 @@ export function parseRichContent(text: string): { type: 'text' | 'metric' | 'cal
       continue
     }
 
+    // Skip lines that look like ASCII art
+    if (line.match(/^[\s|+\-*=>{}<\[\]]+$/) && line.length > 5) continue
+
     currentText.push(line)
   }
 
-  // Flush remaining
-  if (inTable) {
+  if (inTable && tableRows.length > 0) {
     blocks.push({ type: 'table', content: '', data: { headers: tableHeaders, rows: tableRows } })
   }
   if (currentText.length > 0) {
-    blocks.push({ type: 'text', content: currentText.join('\n') })
+    const finalText = currentText.join('\n').trim()
+    if (finalText) blocks.push({ type: 'text', content: finalText })
   }
 
   return blocks

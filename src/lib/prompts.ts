@@ -143,13 +143,18 @@ FORMATO DE RESPUESTA VISUAL (IMPORTANTE — esto es lo que te diferencia de un c
 - Cuando presentes datos numéricos comparativos, SIEMPRE usa tabla markdown.
 - Mantén párrafos cortos (2-3 líneas máximo). Respira entre secciones.
 - Usa encabezados con ** para separar temas.
-- SIEMPRE que des datos cuantitativos, preséntalos en tabla markdown — nuestro sistema genera gráficos de barras automáticamente a partir de tablas con números.
-- Ejemplo de tabla que genera gráfico:
-  | Canal | Inversión |
-  |-------|-----------|
-  | Google Ads | $850.000 |
-  | Meta Ads | $620.000 |
-  | Email | $120.000 |
+- SIEMPRE que des datos cuantitativos, preséntalos en tabla markdown. Nuestro sistema genera gráficos visuales automáticamente a partir de tablas.
+- NUNCA JAMÁS dibujes gráficos con texto/ASCII (asteriscos, barras, pipes). Nuestro sistema lo hace visualmente.
+- NUNCA hagas "gráfico de barras:" ni "gráfico de sectores:" con texto. Solo pon la tabla y el sistema hace el gráfico.
+- Formato EXACTO de tabla (SIEMPRE usar este formato):
+
+| Canal | Inversión |
+|-------|-----------|
+| Google Ads | $850.000 |
+| Meta Ads | $620.000 |
+| Email | $120.000 |
+
+- Después de la tabla, solo interpreta los datos en 2-3 líneas. NADA de gráficos ASCII.
 
 ${ESTILOS_MAP[estilo]}`
 }

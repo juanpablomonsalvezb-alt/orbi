@@ -344,7 +344,7 @@ function getAgentesPermitidos(plan: string): TipoAgente[] {
 // Helper: stream Gemini with an image part (multimodal)
 async function streamMensajeGeminiConImagen(
   systemPrompt: string,
-  historial: GeminiMessage[],
+  historial: { role: string; parts: { text: string }[] }[],
   mensaje: string,
   imagePart: { inlineData: { data: string; mimeType: string } }
 ) {
