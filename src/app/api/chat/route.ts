@@ -5,6 +5,9 @@ import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 import { streamGroq, GroqMessage } from '@/lib/groq'
 import { rateLimit } from '@/lib/rate-limit'
 import { readGoogleSheet, parseSheetUrl } from '@/lib/google-sheets'
+import { looksLikeBankStatement, parseBankStatement } from '@/lib/bank-parser'
+import { scrapeCompetitor } from '@/lib/scraper'
+import { getInstagramProfile, cleanInstagramUsername } from '@/lib/instagram'
 
 function getSupabase() {
   return createClient(
@@ -194,6 +197,43 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // 6.6. Detect Instagram URLs or @username mentions
+    const instagramUrlMatch = mensaje.match(/https?:\/\/(?:www\.)?instagram\.com\/([a-zA-Z0-9_.]+)/i)
+    const instagramAtMatch = !instagramUrlMatch ? mensaje.match(/(?:mi\s+instagram\s+es|mi\s+ig\s+es|instagram[:\s]+|ig[:\s]+)\s*@([a-zA-Z0-9_.]+)/i) : null
+    const instagramUser = instagramUrlMatch?.[1] || instagramAtMatch?.[1]
+
+    if (instagramUser && !sheetsMatch) {
+      try {
+        const igData = await getInstagramProfile(instagramUser)
+        mensajeConArchivo = `${mensajeConArchivo}\n\n[DATOS DE INSTAGRAM - LEÍDOS EN TIEMPO REAL]\n${igData}`
+        console.log('Instagram profile read:', instagramUser)
+      } catch (err) {
+        console.error('Error reading Instagram profile:', err)
+      }
+    }
+
+    // 6.7. Detect competitor URLs (any URL that is NOT Google Sheets and NOT Instagram)
+    const urlMatch = mensaje.match(/https?:\/\/[^\s]+/g)
+    if (urlMatch && !sheetsMatch && !instagramUrlMatch) {
+      // Filter out known non-scrapeable URLs
+      const scrapableUrl = urlMatch.find(u =>
+        !u.includes('docs.google.com') &&
+        !u.includes('instagram.com') &&
+        !u.includes('facebook.com/messages') &&
+        !u.includes('wa.me')
+      )
+      if (scrapableUrl) {
+        try {
+          const scrapedData = await scrapeCompetitor(scrapableUrl)
+          mensajeConArchivo = `${mensajeConArchivo}\n\n[DATOS DE SITIO WEB - LEÍDOS EN TIEMPO REAL]\n${scrapedData}`
+          console.log('URL scraped successfully:', scrapableUrl)
+        } catch (err) {
+          console.error('Error scraping URL:', err)
+          // No agregar nada al mensaje si falla — el scraping es best-effort
+        }
+      }
+    }
+
     // 7. Process file attachment if present
     let imagePart: { inlineData: { data: string; mimeType: string } } | null = null
 
@@ -229,13 +269,22 @@ export async function POST(request: NextRequest) {
               mensajeConArchivo = `${mensaje}\n\n[El usuario adjuntó una imagen: ${archivo.nombre}. Analízala y responde en contexto.]`
             } else if (archivo.tipo === 'hoja_calculo') {
               const ext = archivo.nombre.split('.').pop()?.toLowerCase() || ''
-              let textoExtraido: string
               if (ext === 'csv') {
-                textoExtraido = extraerTextoCSV(buffer)
+                const csvText = extraerTextoCSV(buffer)
+                // Check if it looks like a bank statement — use specialized parser
+                if (looksLikeBankStatement(csvText)) {
+                  // Re-decode full text (up to 50k chars) for complete analysis
+                  const fullCsvText = new TextDecoder('utf-8').decode(buffer)
+                  const bankCsv = fullCsvText.length > 50000 ? fullCsvText.substring(0, 50000) : fullCsvText
+                  const bankAnalysis = parseBankStatement(bankCsv)
+                  mensajeConArchivo = `${mensaje}\n\n[CARTOLA BANCARIA DETECTADA - ${archivo.nombre}]\n${bankAnalysis}`
+                } else {
+                  mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo: ${archivo.nombre}.\nContenido extraído:\n${csvText}`
+                }
               } else {
-                textoExtraido = extraerTextoExcel(buffer)
+                const textoExtraido = extraerTextoExcel(buffer)
+                mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
               }
-              mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
             } else if (archivo.tipo === 'pdf') {
               const textoExtraido = extraerTextoPDF(buffer)
               mensajeConArchivo = `${mensaje}\n\nEl usuario adjuntó un archivo PDF: ${archivo.nombre}.\nContenido extraído:\n${textoExtraido}`
