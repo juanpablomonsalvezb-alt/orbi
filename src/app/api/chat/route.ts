@@ -261,7 +261,8 @@ export async function POST(request: NextRequest) {
               if (line.startsWith('data: ') && line !== 'data: [DONE]') {
                 try {
                   const data = JSON.parse(line.slice(6))
-                  const text = data.choices?.[0]?.delta?.content || ''
+                  const delta = data.choices?.[0]?.delta
+                  const text = delta?.content || ''
                   if (text) {
                     fullResponse += text
                     controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))

@@ -55,6 +55,8 @@ export async function streamGroq(
           temperature: 0.7,
           max_tokens: 400,
           stream: true,
+          // Disable reasoning/thinking to get faster responses
+          ...(provider.url.includes('openrouter') ? { reasoning: { effort: 'none' } } : {}),
         }),
       })
 
