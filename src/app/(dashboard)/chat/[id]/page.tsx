@@ -65,6 +65,31 @@ export default function ChatPage() {
           .order('created_at', { ascending: true })
 
         if (msgs) setMensajes(msgs)
+
+        // If conversation is empty, generate proactive first message
+        if ((!msgs || msgs.length === 0) && empresa && convActual) {
+          setCargando(true)
+          try {
+            const res = await fetch('/api/first-message', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                conversacion_id: conversacionId,
+                empresa_id: empresa.id,
+                agente_tipo: convActual.agente_tipo,
+                estilo: convActual.estilo,
+              }),
+            })
+            if (res.ok) {
+              const data = await res.json()
+              if (data.mensaje) setMensajes([data.mensaje])
+            }
+          } catch (e) {
+            console.error('Error generating first message:', e)
+          } finally {
+            setCargando(false)
+          }
+        }
       } catch (err) {
         console.error('Error cargando datos:', err)
         setError('Error cargando la conversación. Recarga la página.')
@@ -254,17 +279,17 @@ export default function ChatPage() {
 
   if (cargandoInicial) {
     return (
-      <div className="flex h-screen items-center justify-center bg-obsidian">
-        <div className="animate-spin rounded-full h-6 w-6 border-b border-ceniza" />
+      <div className="flex h-screen items-center justify-center bg-ivory-mid">
+        <div className="animate-spin rounded-full h-6 w-6 border-b border-accent" />
       </div>
     )
   }
 
   return (
-    <div className="flex h-screen bg-obsidian">
+    <div className="flex h-screen bg-ivory-mid">
       {/* Mobile overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 bg-ink/30 z-30 md:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
@@ -284,42 +309,28 @@ export default function ChatPage() {
       {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-14 border-b border-white/[0.06] bg-grafito/50 px-4 md:px-6 flex items-center justify-between shrink-0">
-          <div className="flex items-center space-x-3">
-            {/* Mobile hamburger */}
-            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden text-ceniza/60 hover:text-white">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              </svg>
+        <header className="h-[52px] border-b border-ink/[0.04] bg-ivory px-4 md:px-6 flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden text-muted hover:text-ink">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 12h18M3 6h18M3 18h18" /></svg>
             </button>
-            <OrbiLogo size={20} showText={false} color="light" />
-            <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-[14px] font-normal text-white">{agenteActual.nombre}</h1>
-                <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-señal/15 text-señal">
-                  {agenteActual.rol}
-                </span>
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-white/[0.06] text-ceniza/60">
-                  {ESTILOS.find(e => e.id === estilo)?.nombre || 'Directo'}
-                </span>
-              </div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-[14px] text-ink" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>{agenteActual.nombre}</h1>
+              <span className="text-[9px] font-medium tracking-wide uppercase px-2 py-0.5 rounded-full bg-clay/8 text-clay border border-clay/10">
+                {ESTILOS.find(e => e.id === estilo)?.nombre || 'Directo'}
+              </span>
             </div>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-4">
             {mensajes.length > 0 && (
-              <button onClick={exportarConversacion} className="text-[11px] text-ceniza/40 hover:text-white transition-colors" title="Exportar conversación">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              <button onClick={exportarConversacion} className="text-cloud hover:text-ink transition-colors" title="Exportar">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
               </button>
             )}
-            <button
-              onClick={async () => {
-                await supabase.auth.signOut()
-                window.location.href = '/login'
-              }}
-              className="text-[12px] text-ceniza/40 hover:text-white transition-colors"
-            >
+            <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/login' }}
+              className="text-[12px] text-cloud hover:text-ink transition-colors">
               Salir
             </button>
           </div>

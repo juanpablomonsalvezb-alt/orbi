@@ -56,8 +56,8 @@ export default function ChatIndexPage() {
   }, [router])
 
   return (
-    <div className="flex h-screen items-center justify-center bg-obsidian">
-      <div className="animate-spin rounded-full h-6 w-6 border-b border-ceniza" />
+    <div className="flex h-screen items-center justify-center bg-ivory-mid">
+      <div className="animate-spin rounded-full h-6 w-6 border-b border-accent" />
     </div>
   )
 }

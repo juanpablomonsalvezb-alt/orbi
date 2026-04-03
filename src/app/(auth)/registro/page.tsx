@@ -17,25 +17,59 @@ export default function RegistroPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
+
     try {
+      // 1. Create auth user
+      console.log('Registrando usuario...')
       const { data, error: err } = await supabase.auth.signUp({ email, password })
-      if (err) { setError(err.message === 'User already registered' ? 'Este email ya está registrado' : err.message); return }
-      if (!data.user) { setError('Error al crear la cuenta'); return }
-      const trialEndsAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
-      const { error: empErr } = await supabase.from('empresas').insert({
-        user_id: data.user.id, nombre: empresa, email,
-        onboarding_completado: false, plan: 'free',
-        trial_ends_at: trialEndsAt, subscription_status: 'trialing'
+
+      if (err) {
+        console.error('Error auth:', err)
+        setError(err.message === 'User already registered' ? 'Este email ya está registrado' : err.message)
+        setLoading(false)
+        return
+      }
+
+      if (!data.user) {
+        setError('Error al crear la cuenta')
+        setLoading(false)
+        return
+      }
+
+      console.log('Usuario creado:', data.user.id)
+
+      // 2. Create empresa via server API (bypasses RLS)
+      console.log('Registrando empresa...')
+      const regRes = await fetch('/api/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: data.user.id, nombre: empresa, email }),
       })
-      if (empErr) { setError('Error al registrar la empresa'); return }
-      // Send welcome email
+
+      if (!regRes.ok) {
+        const regData = await regRes.json()
+        console.error('Error empresa:', regData)
+        setError(regData.error || 'Error al registrar la empresa')
+        setLoading(false)
+        return
+      }
+
+      console.log('Empresa registrada. Redirigiendo...')
+
+      // 3. Send welcome email (fire and forget)
       fetch('/api/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'welcome', email, nombre: empresa }),
       }).catch(() => {})
+
+      // 4. Redirect to onboarding
       router.push('/onboarding')
-    } catch { setError('Error al registrarse') } finally { setLoading(false) }
+    } catch (err) {
+      console.error('Error general:', err)
+      setError('Error al registrarse. Intenta de nuevo.')
+      setLoading(false)
+    }
   }
 
   return (

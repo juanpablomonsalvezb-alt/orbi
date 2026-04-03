@@ -13,6 +13,13 @@
   --color-cloud-light: #d1cfc5;
   --color-clay: #d97757;
   --color-accent: #c6613f;
+
+  /* Dark theme (chat, dashboard) */
+  --color-obsidian: #1a1a19;
+  --color-grafito: #2a2a28;
+  --color-humo: #3d3d3a;
+  --color-ceniza: #87867f;
+  --color-señal: #d97757;
 }
 
 /* ── Reset ── */

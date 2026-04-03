@@ -2,14 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
 import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
-import { GeminiMessage } from '@/lib/gemini'
-import { streamMensajeGemini } from '@/lib/gemini-stream'
+import { streamGroq, GroqMessage } from '@/lib/groq'
 import { rateLimit } from '@/lib/rate-limit'
 
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 }
 
@@ -171,9 +170,9 @@ export async function POST(request: NextRequest) {
       .order('created_at', { ascending: true })
       .limit(20)
 
-    const historial: GeminiMessage[] = (historialDB || []).map((msg) => ({
-      role: msg.rol === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.contenido }]
+    const historial: GroqMessage[] = (historialDB || []).map((msg) => ({
+      role: msg.rol === 'user' ? 'user' as const : 'assistant' as const,
+      content: msg.contenido
     }))
 
     // 6. Construir system prompt con RAG (knowledge base relevante al mensaje)
@@ -241,25 +240,35 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // 8. Stream response from Gemini
-    let result
-    if (imagePart) {
-      // For images, use multimodal: send message with image inline data
-      result = await streamMensajeGeminiConImagen(systemPrompt, historial, mensajeConArchivo, imagePart)
-    } else {
-      result = await streamMensajeGemini(systemPrompt, historial, mensajeConArchivo)
-    }
+    // 8. Stream response from Groq (primary)
+    const groqStream = await streamGroq(systemPrompt, historial, mensajeConArchivo)
 
     let fullResponse = ''
 
     const encoder = new TextEncoder()
+    const decoder = new TextDecoder()
     const readableStream = new ReadableStream({
       async start(controller) {
         try {
-          for await (const chunk of result.stream) {
-            const text = chunk.text()
-            fullResponse += text
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+          const reader = groqStream.getReader()
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+
+            const chunk = decoder.decode(value, { stream: true })
+            const lines = chunk.split('\n')
+            for (const line of lines) {
+              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+                try {
+                  const data = JSON.parse(line.slice(6))
+                  const text = data.choices?.[0]?.delta?.content || ''
+                  if (text) {
+                    fullResponse += text
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+                  }
+                } catch { /* skip malformed chunks */ }
+              }
+            }
           }
 
           // Save complete response to DB
