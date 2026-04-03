@@ -9,11 +9,11 @@ import OrbiLogo from '@/components/ui/OrbiLogo'
 interface ChatMessagesProps {
   mensajes: ChatMessage[]
   cargando: boolean
+  streamingText?: string
   agenteTipo?: TipoAgente
   onSugerencia?: (texto: string) => void
 }
 
-// Sugerencias iniciales por tipo de agente
 const SUGERENCIAS: Record<TipoAgente, string[]> = {
   general: [
     '¿Cómo está la salud general de mi negocio?',
@@ -52,18 +52,18 @@ const SUGERENCIAS: Record<TipoAgente, string[]> = {
   ],
 }
 
-export default function ChatMessages({ mensajes, cargando, agenteTipo = 'general', onSugerencia }: ChatMessagesProps) {
+export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [mensajes])
+  }, [mensajes, streamingText])
 
   const sugerencias = SUGERENCIAS[agenteTipo]
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-obsidian">
-      {/* Estado vacío con sugerencias */}
+    <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-obsidian">
+      {/* Empty state */}
       {mensajes.length === 0 && !cargando && (
         <div className="flex flex-col items-center justify-center h-full">
           <OrbiLogo size={36} showText={false} color="light" className="opacity-20 mb-6" />
@@ -76,13 +76,10 @@ export default function ChatMessages({ mensajes, cargando, agenteTipo = 'general
 
           <div className="flex flex-col space-y-2 w-full max-w-md">
             {sugerencias.map((s, i) => (
-              <button
-                key={i}
-                onClick={() => onSugerencia?.(s)}
+              <button key={i} onClick={() => onSugerencia?.(s)}
                 className="text-left px-4 py-3 rounded-[10px] border border-white/[0.06] bg-white/[0.02]
                            text-[13px] text-white/60 hover:text-white/90 hover:border-white/[0.12]
-                           hover:bg-white/[0.04] transition-all duration-200"
-              >
+                           hover:bg-white/[0.04] transition-all duration-200">
                 {s}
               </button>
             ))}
@@ -90,13 +87,25 @@ export default function ChatMessages({ mensajes, cargando, agenteTipo = 'general
         </div>
       )}
 
-      {/* Mensajes */}
+      {/* Messages */}
       {mensajes.map((msg) => (
         <MessageBubble key={msg.id} mensaje={msg} />
       ))}
 
-      {/* Indicador de escritura */}
-      {cargando && (
+      {/* Streaming text */}
+      {streamingText && (
+        <div className="flex justify-start">
+          <div className="max-w-[80%] px-5 py-3.5 bg-white/[0.03] border border-white/[0.04] rounded-[14px] rounded-bl-[4px]">
+            <div className="text-[13px] leading-[1.7] font-normal text-white/90 whitespace-pre-wrap">
+              {streamingText}
+              <span className="inline-block w-1.5 h-4 bg-señal/60 ml-0.5 animate-pulse" />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading indicator (only when not streaming) */}
+      {cargando && !streamingText && (
         <div className="flex justify-start">
           <div className="bg-white/[0.03] border border-white/[0.04] rounded-[14px] rounded-bl-[4px] px-5 py-3.5">
             <div className="flex space-x-1.5">

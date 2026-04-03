@@ -6,12 +6,33 @@ import { supabase } from '@/lib/supabase-client'
 import { PREGUNTAS_ONBOARDING } from '@/lib/constants'
 import QuestionBlock from './QuestionBlock'
 
+const STORAGE_KEY = 'orbbi_onboarding_progress'
+
+function loadProgress(): { respuestas: string[]; bloque: number } | null {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved) return JSON.parse(saved)
+  } catch {}
+  return null
+}
+
+function saveProgress(respuestas: string[], bloque: number) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ respuestas, bloque }))
+  } catch {}
+}
+
+function clearProgress() {
+  try { localStorage.removeItem(STORAGE_KEY) } catch {}
+}
+
 export default function OnboardingForm() {
   const router = useRouter()
+  const saved = typeof window !== 'undefined' ? loadProgress() : null
   const [respuestas, setRespuestas] = useState<string[]>(
-    new Array(PREGUNTAS_ONBOARDING.length).fill('')
+    saved?.respuestas || new Array(PREGUNTAS_ONBOARDING.length).fill('')
   )
-  const [bloqueActual, setBloqueActual] = useState(1)
+  const [bloqueActual, setBloqueActual] = useState(saved?.bloque || 1)
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
 
@@ -28,6 +49,7 @@ export default function OnboardingForm() {
     setRespuestas((prev) => {
       const copia = [...prev]
       copia[orden - 1] = valor
+      saveProgress(copia, bloqueActual)
       return copia
     })
   }
@@ -35,7 +57,11 @@ export default function OnboardingForm() {
   const bloqueCompleto = preguntasBloque.every((p) => respuestas[p.orden - 1].trim() !== '')
 
   const siguienteBloque = () => {
-    if (bloqueActual < 4) setBloqueActual(bloqueActual + 1)
+    if (bloqueActual < 4) {
+      const next = bloqueActual + 1
+      setBloqueActual(next)
+      saveProgress(respuestas, next)
+    }
   }
 
   const bloqueAnterior = () => {
@@ -87,6 +113,7 @@ export default function OnboardingForm() {
         .select()
         .single()
 
+      clearProgress()
       if (conv) {
         router.push(`/chat/${conv.id}`)
       } else {

@@ -729,7 +729,12 @@ function Footer() {
     { title: 'Productos', links: ['Gerente General', 'Agente Financiero', 'Agente de Ventas', 'Agente de Marketing', 'RRHH', 'Inventario', 'Legal'] },
     { title: 'Soluciones', links: ['Para emprendedores', 'Para PYMEs', 'Para empresas', 'Por industria'] },
     { title: 'Recursos', links: ['Documentación', 'Blog', 'Casos de uso', 'Tutoriales', 'API'] },
-    { title: 'Empresa', links: ['Sobre nosotros', 'Contacto', 'Términos de servicio', 'Privacidad'] },
+    { title: 'Empresa', links: [
+      { text: 'Sobre nosotros', href: '#' },
+      { text: 'Contacto', href: 'mailto:hola@orbbi.com' },
+      { text: 'Términos de servicio', href: '/terminos' },
+      { text: 'Política de privacidad', href: '/privacidad' },
+    ] },
   ]
 
   return (
@@ -769,13 +774,17 @@ function Footer() {
             <div key={col.title}>
               <h3 className="text-sm font-medium text-ivory-mid mb-4">{col.title}</h3>
               <ul className="space-y-2">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <Link href="#" className="text-sm text-cloud hover:text-ivory-mid transition-colors">
-                      {l}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((l) => {
+                  const text = typeof l === 'string' ? l : l.text
+                  const href = typeof l === 'string' ? '#' : l.href
+                  return (
+                    <li key={text}>
+                      <Link href={href} className="text-sm text-cloud hover:text-ivory-mid transition-colors">
+                        {text}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           ))}

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { buildSystemPrompt, TipoAgente } from '@/lib/prompts'
-import { enviarMensajeGemini, GeminiMessage } from '@/lib/gemini'
+import { GeminiMessage } from '@/lib/gemini'
+import { streamMensajeGemini } from '@/lib/gemini-stream'
+import { rateLimit } from '@/lib/rate-limit'
 
 function getSupabase() {
   return createClient(
@@ -21,17 +23,41 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Rate limit: 20 messages per minute per empresa
+    const { allowed } = rateLimit(`chat:${empresa_id}`, 20, 60000)
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Demasiados mensajes. Espera un momento antes de enviar otro.' },
+        { status: 429 }
+      )
+    }
+
+    // Input validation
+    if (typeof mensaje !== 'string' || mensaje.length > 5000) {
+      return NextResponse.json(
+        { error: 'Mensaje inválido (máximo 5000 caracteres)' },
+        { status: 400 }
+      )
+    }
+
     const supabase = getSupabase()
 
-    // 1. Obtener datos de la empresa
+    // 1. Obtener datos de la empresa + verificar plan/trial
     const { data: empresa, error: errorEmpresa } = await supabase
       .from('empresas')
-      .select('nombre')
+      .select('nombre, plan, trial_ends_at, subscription_status')
       .eq('id', empresa_id)
       .single()
 
     if (errorEmpresa || !empresa) {
       return NextResponse.json({ error: 'Empresa no encontrada' }, { status: 404 })
+    }
+
+    // Check trial/plan
+    const hasActivePlan = empresa.plan !== 'free' && empresa.subscription_status === 'active'
+    const trialEndsAt = empresa.trial_ends_at ? new Date(empresa.trial_ends_at) : null
+    if (!hasActivePlan && trialEndsAt && new Date() > trialEndsAt) {
+      return NextResponse.json({ error: 'Tu prueba gratuita ha expirado. Elige un plan para continuar.' }, { status: 403 })
     }
 
     // 2. Obtener tipo de agente de la conversación
@@ -43,17 +69,26 @@ export async function POST(request: NextRequest) {
 
     const agenteTipo = (conversacion?.agente_tipo || 'general') as TipoAgente
 
-    // 3. Obtener contexto del onboarding
+    // 3. Check agent access based on plan
+    const agentesPermitidos = getAgentesPermitidos(empresa.plan)
+    if (!agentesPermitidos.includes(agenteTipo)) {
+      return NextResponse.json(
+        { error: `Tu plan no incluye el agente ${agenteTipo}. Actualiza tu plan para acceder.` },
+        { status: 403 }
+      )
+    }
+
+    // 4. Obtener contexto del onboarding
     const { data: contexto } = await supabase
       .from('contexto')
       .select('*')
       .eq('empresa_id', empresa_id)
       .order('orden', { ascending: true })
 
-    // 4. Construir system prompt con contexto del negocio + tipo de agente
+    // 5. Construir system prompt
     const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo)
 
-    // 5. Obtener historial (últimos 20 mensajes)
+    // 6. Obtener historial (últimos 20 mensajes)
     const { data: historialDB } = await supabase
       .from('mensajes')
       .select('rol, contenido')
@@ -66,41 +101,69 @@ export async function POST(request: NextRequest) {
       parts: [{ text: msg.contenido }]
     }))
 
-    // 6. Enviar a Gemini
-    const respuestaTexto = await enviarMensajeGemini(systemPrompt, historial, mensaje)
+    // 7. Stream response from Gemini
+    const result = await streamMensajeGemini(systemPrompt, historial, mensaje)
 
-    // 7. Guardar respuesta
-    const { data: mensajeGuardado, error: errorGuardar } = await supabase
-      .from('mensajes')
-      .insert({
-        conversacion_id,
-        rol: 'assistant',
-        contenido: respuestaTexto
-      })
-      .select()
-      .single()
+    let fullResponse = ''
 
-    if (errorGuardar) {
-      console.error('Error guardando respuesta:', errorGuardar)
-      return NextResponse.json({ error: 'Error guardando la respuesta' }, { status: 500 })
-    }
+    const encoder = new TextEncoder()
+    const readableStream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.stream) {
+            const text = chunk.text()
+            fullResponse += text
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`))
+          }
 
-    // 8. Actualizar timestamp
-    await supabase
-      .from('conversaciones')
-      .update({ updated_at: new Date().toISOString() })
-      .eq('id', conversacion_id)
+          // Save complete response to DB
+          const { data: mensajeGuardado } = await supabase
+            .from('mensajes')
+            .insert({
+              conversacion_id,
+              rol: 'assistant',
+              contenido: fullResponse
+            })
+            .select()
+            .single()
 
-    return NextResponse.json({
-      mensaje: {
-        id: mensajeGuardado.id,
-        rol: mensajeGuardado.rol,
-        contenido: mensajeGuardado.contenido,
-        created_at: mensajeGuardado.created_at
+          // Update conversation timestamp
+          await supabase
+            .from('conversaciones')
+            .update({ updated_at: new Date().toISOString() })
+            .eq('id', conversacion_id)
+
+          // Send final message with saved ID
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true, mensaje: mensajeGuardado })}\n\n`))
+          controller.close()
+        } catch (error) {
+          console.error('Stream error:', error)
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: 'Error generando respuesta' })}\n\n`))
+          controller.close()
+        }
       }
+    })
+
+    return new Response(readableStream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
     })
   } catch (error) {
     console.error('Error en /api/chat:', error)
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 })
+  }
+}
+
+function getAgentesPermitidos(plan: string): TipoAgente[] {
+  // During trial, all agents are available
+  switch (plan) {
+    case 'empresa': return ['general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal']
+    case 'equipo': return ['general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal'] // They pick 3 but we allow all during setup
+    case 'solo': return ['general']
+    case 'free': return ['general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal'] // Trial gets all
+    default: return ['general']
   }
 }

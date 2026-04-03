@@ -69,7 +69,7 @@ export default function RegistroPage() {
         </button>
       </form>
 
-      <p className="text-[11px] text-muted/40 text-center mt-3">Al registrarte aceptas los términos de servicio.</p>
+      <p className="text-[11px] text-muted/40 text-center mt-3">Al registrarte aceptas los <a href="/terminos" className="underline hover:text-muted">términos de servicio</a> y la <a href="/privacidad" className="underline hover:text-muted">política de privacidad</a>.</p>
 
       <div className="mt-7 pt-5 border-t border-ink/[0.06]">
         <p className="text-sm text-muted text-center">
