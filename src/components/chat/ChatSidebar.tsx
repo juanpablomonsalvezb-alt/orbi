@@ -133,6 +133,7 @@ export default function ChatSidebar({
           { href: '/dashboard', label: 'Panel', icon: '📊' },
           { href: '/tareas', label: 'Tareas', icon: '✓' },
           { href: '/equipo', label: 'Equipo', icon: '👥' },
+          { href: '/exportar', label: 'Exportar datos', icon: '📁' },
         ].map(item => (
           <a key={item.href} href={item.href}
             className="flex items-center gap-2 text-[12px] text-[#9b9a97] hover:text-[#37352f] hover:bg-[#efefef] transition-colors px-3 py-1.5 rounded-md">

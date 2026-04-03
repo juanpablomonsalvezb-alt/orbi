@@ -5,6 +5,8 @@ import { ChatMessage } from '@/types/chat'
 import { parseRichContent, CalloutBox, DataTable } from './RichContent'
 import DocumentButton, { hasDocumentKeywords } from '@/components/chat/DocumentButton'
 
+type FeedbackTipo = 'positivo' | 'negativo' | null
+
 interface MessageBubbleProps {
   mensaje: ChatMessage
   empresaId?: string
@@ -77,6 +79,24 @@ function RichResponse({ texto }: { texto: string }) {
 export default function MessageBubble({ mensaje, empresaId, agente }: MessageBubbleProps) {
   const esUsuario = mensaje.rol === 'user'
   const [copiado, setCopiado] = useState(false)
+  const [feedback, setFeedback] = useState<FeedbackTipo>(null)
+
+  const enviarFeedback = async (tipo: 'positivo' | 'negativo') => {
+    if (!empresaId) return
+    const nuevoTipo = feedback === tipo ? null : tipo
+    setFeedback(nuevoTipo)
+    if (nuevoTipo) {
+      try {
+        await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mensaje_id: mensaje.id, empresa_id: empresaId, tipo: nuevoTipo }),
+        })
+      } catch (err) {
+        console.error('Error enviando feedback:', err)
+      }
+    }
+  }
 
   return (
     <div className={`mb-6 ${esUsuario ? '' : 'group'}`}>
@@ -116,9 +136,39 @@ export default function MessageBubble({ mensaje, empresaId, agente }: MessageBub
             </div>
           )}
 
-          <p className="text-[11px] text-[#c4c4c0] mt-2">
-            {new Date(mensaje.created_at).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })}
-          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <p className="text-[11px] text-[#c4c4c0]">
+              {new Date(mensaje.created_at).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })}
+            </p>
+
+            {/* Thumbs up/down feedback */}
+            {empresaId && (
+              <div className={`flex items-center gap-1 transition-opacity ${feedback ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                <button
+                  onClick={() => enviarFeedback('positivo')}
+                  className={`p-1 rounded-md transition-colors ${feedback === 'positivo' ? 'text-green-600' : 'text-[#c4c4c0] hover:text-green-600 hover:bg-green-50'}`}
+                  title="Buena respuesta"
+                >
+                  {feedback === 'positivo' ? (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1"><path d="M7 22V11l-5 1v9a1 1 0 001 1h4zm2-11l4-9a2 2 0 012-2h.5a1.5 1.5 0 011.5 1.5V7h4.5a2 2 0 012 2.1l-1.5 10A2 2 0 0119.5 21H9V11z"/></svg>
+                  ) : (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 22V11l-5 1v9a1 1 0 001 1h4zm2-11l4-9a2 2 0 012-2h.5a1.5 1.5 0 011.5 1.5V7h4.5a2 2 0 012 2.1l-1.5 10A2 2 0 0119.5 21H9V11z"/></svg>
+                  )}
+                </button>
+                <button
+                  onClick={() => enviarFeedback('negativo')}
+                  className={`p-1 rounded-md transition-colors ${feedback === 'negativo' ? 'text-red-500' : 'text-[#c4c4c0] hover:text-red-500 hover:bg-red-50'}`}
+                  title="Mala respuesta"
+                >
+                  {feedback === 'negativo' ? (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1"><path d="M17 2v11l5-1V3a1 1 0 00-1-1h-4zm-2 11l-4 9a2 2 0 01-2 2h-.5A1.5 1.5 0 017 22.5V17H2.5a2 2 0 01-2-2.1l1.5-10A2 2 0 014.5 3H15v10z"/></svg>
+                  ) : (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 2v11l5-1V3a1 1 0 00-1-1h-4zm-2 11l-4 9a2 2 0 01-2 2h-.5A1.5 1.5 0 017 22.5V17H2.5a2 2 0 01-2-2.1l1.5-10A2 2 0 014.5 3H15v10z"/></svg>
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

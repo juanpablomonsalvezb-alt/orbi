@@ -12,6 +12,7 @@ interface ChatMessagesProps {
   cargando: boolean
   streamingText?: string
   agenteTipo?: TipoAgente
+  empresaId?: string
   onSugerencia?: (texto: string) => void
   crossReferrals?: Record<string, CrossReferral>
   onCrossReferral?: (tipo: TipoAgente) => void
@@ -92,7 +93,7 @@ function useTypewriter(source: string, speed: number = 20) {
   return { display, isTyping }
 }
 
-export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
+export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', empresaId, onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
   const { display, isTyping } = useTypewriter(streamingText, 18)
 
@@ -141,7 +142,7 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
         {/* Messages */}
         {mensajes.map((msg) => (
           <div key={msg.id}>
-            <MessageBubble mensaje={msg} />
+            <MessageBubble mensaje={msg} empresaId={empresaId} />
             {msg.rol === 'assistant' && crossReferrals[msg.id] && onCrossReferral && (
               <CrossReferralBanner
                 agenteRecomendado={crossReferrals[msg.id].agenteRecomendado}

@@ -9,6 +9,8 @@ import { AGENTES, TipoAgente, ESTILOS, EstiloComunicacion } from '@/lib/prompts'
 import ChatMessages from '@/components/chat/ChatMessages'
 import ChatInput, { ArchivoInfo } from '@/components/chat/ChatInput'
 import ChatSidebar from '@/components/chat/ChatSidebar'
+import OnboardingTour from '@/components/chat/OnboardingTour'
+import PushNotifications from '@/components/PushNotifications'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 import { detectCrossReferral, type CrossReferral } from '@/lib/cross-referral'
 
@@ -27,6 +29,7 @@ export default function ChatPage() {
   const [streamingText, setStreamingText] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [crossReferrals, setCrossReferrals] = useState<Record<string, CrossReferral>>({})
+  const [mostrarTour, setMostrarTour] = useState(false)
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
@@ -67,6 +70,11 @@ export default function ChatPage() {
         if (msgs) setMensajes(msgs)
 
         // Empty conversation — show suggestions immediately (no auto-first-message)
+
+        // Show onboarding tour if first time
+        if (typeof window !== 'undefined' && !localStorage.getItem('orbbi_tour_completed')) {
+          setMostrarTour(true)
+        }
       } catch (err) {
         console.error('Error cargando datos:', err)
         setError('Error cargando la conversación. Recarga la página.')
@@ -335,6 +343,7 @@ export default function ChatPage() {
           cargando={cargando}
           streamingText={streamingText}
           agenteTipo={agenteTipo}
+          empresaId={empresaId}
           onSugerencia={(texto: string) => enviarMensaje(texto)}
           crossReferrals={crossReferrals}
           onCrossReferral={(tipo) => crearConversacion(tipo)}
@@ -343,6 +352,17 @@ export default function ChatPage() {
         {/* Input */}
         <ChatInput onEnviar={enviarMensaje} deshabilitado={cargando} empresaId={empresaId} />
       </div>
+
+      {/* Onboarding tour */}
+      {mostrarTour && (
+        <OnboardingTour onComplete={() => {
+          localStorage.setItem('orbbi_tour_completed', 'true')
+          setMostrarTour(false)
+        }} />
+      )}
+
+      {/* Push notifications prompt */}
+      {empresaId && <PushNotifications empresaId={empresaId} />}
     </div>
   )
 }

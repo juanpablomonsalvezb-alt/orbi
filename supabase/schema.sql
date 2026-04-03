@@ -266,3 +266,32 @@ ALTER TABLE tareas ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "tareas_select" ON tareas FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
 CREATE POLICY "tareas_insert" ON tareas FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
 CREATE POLICY "tareas_update" ON tareas FOR UPDATE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+
+-- ============================================
+-- TABLA: feedback
+-- Thumbs up/down en respuestas de agentes
+-- ============================================
+CREATE TABLE feedback (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  mensaje_id UUID REFERENCES mensajes(id) ON DELETE CASCADE,
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  tipo TEXT NOT NULL CHECK (tipo IN ('positivo', 'negativo')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE(mensaje_id, empresa_id)
+);
+CREATE INDEX idx_feedback_empresa ON feedback(empresa_id);
+ALTER TABLE feedback ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "feedback_all" ON feedback FOR ALL USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+
+-- ============================================
+-- TABLA: push_subscriptions
+-- Suscripciones de notificaciones push
+-- ============================================
+CREATE TABLE push_subscriptions (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  subscription JSONB NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "push_all" ON push_subscriptions FOR ALL USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
