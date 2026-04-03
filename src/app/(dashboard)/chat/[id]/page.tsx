@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
 import { ChatMessage } from '@/types/chat'
 import { Conversacion } from '@/types/database'
-import { AGENTES, TipoAgente } from '@/lib/prompts'
+import { AGENTES, TipoAgente, ESTILOS, EstiloComunicacion } from '@/lib/prompts'
 import ChatMessages from '@/components/chat/ChatMessages'
 import ChatInput, { ArchivoInfo } from '@/components/chat/ChatInput'
 import ChatSidebar from '@/components/chat/ChatSidebar'
@@ -19,6 +19,7 @@ export default function ChatPage() {
   const [conversaciones, setConversaciones] = useState<Conversacion[]>([])
   const [empresaId, setEmpresaId] = useState<string>('')
   const [agenteTipo, setAgenteTipo] = useState<TipoAgente>('general')
+  const [estilo, setEstilo] = useState<EstiloComunicacion>('directo')
   const [cargando, setCargando] = useState(false)
   const [cargandoInicial, setCargandoInicial] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -50,7 +51,10 @@ export default function ChatPage() {
         if (convs) setConversaciones(convs)
 
         const convActual = convs?.find(c => c.id === conversacionId)
-        if (convActual) setAgenteTipo(convActual.agente_tipo || 'general')
+        if (convActual) {
+          setAgenteTipo(convActual.agente_tipo || 'general')
+          setEstilo((convActual.estilo as EstiloComunicacion) || 'directo')
+        }
 
         const { data: msgs } = await supabase
           .from('mensajes')
@@ -185,14 +189,15 @@ export default function ChatPage() {
     }
   }, [empresaId, cargando, conversacionId, mensajes.length])
 
-  const crearConversacion = async (tipo: TipoAgente) => {
+  const crearConversacion = async (tipo: TipoAgente, estiloNuevo: EstiloComunicacion = 'directo') => {
     if (!empresaId) return
     const agente = AGENTES.find(a => a.tipo === tipo)
-    const titulo = agente ? `Chat con ${agente.nombre}` : 'Nueva conversación'
+    const estiloInfo = ESTILOS.find(e => e.id === estiloNuevo)
+    const titulo = agente ? `Chat con ${agente.nombre} (${estiloInfo?.nombre || 'Directo'})` : 'Nueva conversación'
 
     const { data } = await supabase
       .from('conversaciones')
-      .insert({ empresa_id: empresaId, titulo, agente_tipo: tipo })
+      .insert({ empresa_id: empresaId, titulo, agente_tipo: tipo, estilo: estiloNuevo })
       .select()
       .single()
 
@@ -284,6 +289,9 @@ export default function ChatPage() {
                 <h1 className="text-[14px] font-normal text-white">{agenteActual.nombre}</h1>
                 <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-señal/15 text-señal">
                   {agenteActual.rol}
+                </span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-white/[0.06] text-ceniza/60">
+                  {ESTILOS.find(e => e.id === estilo)?.nombre || 'Directo'}
                 </span>
               </div>
             </div>

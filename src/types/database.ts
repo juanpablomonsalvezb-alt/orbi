@@ -34,6 +34,7 @@ export interface Conversacion {
   empresa_id: string
   titulo: string
   agente_tipo: TipoAgente
+  estilo: 'directo' | 'didactico' | 'estrategico'
   created_at: string
   updated_at: string
 }

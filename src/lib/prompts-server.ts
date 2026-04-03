@@ -1,6 +1,6 @@
 import 'server-only'
 import { Contexto } from '@/types/database'
-import { buildSystemPrompt, TipoAgente } from './prompts'
+import { buildSystemPrompt, TipoAgente, EstiloComunicacion } from './prompts'
 import { retrieveKnowledge, getKBOverview } from './knowledge-base'
 
 /**
@@ -13,9 +13,10 @@ export async function buildSystemPromptWithRAG(
   contexto: Contexto[],
   tipoAgente: TipoAgente,
   userMessage: string,
-  conversationHistory: string = ''
+  conversationHistory: string = '',
+  estilo: EstiloComunicacion = 'directo'
 ): Promise<string> {
-  let prompt = buildSystemPrompt(nombreEmpresa, contexto, tipoAgente, userMessage, conversationHistory)
+  let prompt = buildSystemPrompt(nombreEmpresa, contexto, tipoAgente, userMessage, conversationHistory, estilo)
 
   try {
     const overview = getKBOverview(tipoAgente)

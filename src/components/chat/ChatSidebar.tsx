@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { Conversacion } from '@/types/database'
-import { AGENTES, TipoAgente } from '@/lib/prompts'
+import { AGENTES, TipoAgente, ESTILOS, EstiloComunicacion } from '@/lib/prompts'
 import { useRouter } from 'next/navigation'
 
 interface ChatSidebarProps {
   conversaciones: Conversacion[]
   conversacionActiva?: string
-  onNuevaConversacion: (agenteTipo: TipoAgente) => void
+  onNuevaConversacion: (agenteTipo: TipoAgente, estilo?: EstiloComunicacion) => void
   onRenombrar?: (id: string, titulo: string) => void
   onEliminar?: (id: string) => void
 }
@@ -23,6 +23,7 @@ export default function ChatSidebar({
 }: ChatSidebarProps) {
   const router = useRouter()
   const [mostrarAgentes, setMostrarAgentes] = useState(false)
+  const [agenteSeleccionado, setAgenteSeleccionado] = useState<TipoAgente | null>(null)
   const [menuAbierto, setMenuAbierto] = useState<string | null>(null)
   const [editando, setEditando] = useState<string | null>(null)
   const [tituloEdit, setTituloEdit] = useState('')
@@ -56,11 +57,11 @@ export default function ChatSidebar({
           </svg>
         </button>
 
-        {mostrarAgentes && (
+        {mostrarAgentes && !agenteSeleccionado && (
           <div className="mt-2 space-y-1">
             {AGENTES.map((a) => (
               <button key={a.tipo}
-                onClick={() => { onNuevaConversacion(a.tipo); setMostrarAgentes(false) }}
+                onClick={() => setAgenteSeleccionado(a.tipo)}
                 className="w-full text-left px-3 py-2 rounded-[6px] hover:bg-white/[0.06] transition-colors group">
                 <div className="flex items-center justify-between">
                   <p className="text-[13px] text-white/80 group-hover:text-white">{a.nombre}</p>
@@ -69,6 +70,31 @@ export default function ChatSidebar({
                 <p className="text-[11px] text-ceniza/60 mt-0.5">{a.rol}</p>
               </button>
             ))}
+          </div>
+        )}
+
+        {/* Estilo selector — appears after agent selection */}
+        {mostrarAgentes && agenteSeleccionado && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-2 px-1">
+              <p className="text-[11px] text-ceniza/60">Elige un estilo</p>
+              <button onClick={() => setAgenteSeleccionado(null)} className="text-[10px] text-ceniza/40 hover:text-white">← Volver</button>
+            </div>
+            <div className="space-y-1">
+              {ESTILOS.map((e) => (
+                <button key={e.id}
+                  onClick={() => {
+                    onNuevaConversacion(agenteSeleccionado, e.id)
+                    setMostrarAgentes(false)
+                    setAgenteSeleccionado(null)
+                  }}
+                  className="w-full text-left px-3 py-2.5 rounded-[6px] hover:bg-white/[0.06] transition-colors group">
+                  <p className="text-[13px] text-white/80 group-hover:text-white font-medium">{e.nombre}</p>
+                  <p className="text-[11px] text-ceniza/60 mt-0.5">{e.descripcion}</p>
+                  <p className="text-[10px] text-ceniza/40 mt-0.5">{e.paraQuien}</p>
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>

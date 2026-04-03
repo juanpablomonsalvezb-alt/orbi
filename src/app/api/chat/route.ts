@@ -140,11 +140,12 @@ export async function POST(request: NextRequest) {
     // 2. Obtener tipo de agente de la conversación
     const { data: conversacion } = await supabase
       .from('conversaciones')
-      .select('agente_tipo')
+      .select('agente_tipo, estilo')
       .eq('id', conversacion_id)
       .single()
 
     const agenteTipo = (conversacion?.agente_tipo || 'general') as TipoAgente
+    const estilo = (conversacion?.estilo || 'directo') as import('@/lib/prompts').EstiloComunicacion
 
     // 3. Check agent access based on plan
     const agentesPermitidos = getAgentesPermitidos(empresa.plan)
@@ -177,7 +178,7 @@ export async function POST(request: NextRequest) {
 
     // 6. Construir system prompt con RAG (knowledge base relevante al mensaje)
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
-    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto)
+    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
 
     // 7. Process file attachment if present
     let mensajeConArchivo = mensaje
