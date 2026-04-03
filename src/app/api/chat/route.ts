@@ -178,7 +178,7 @@ export async function POST(request: NextRequest) {
 
     // 6. Construir system prompt con RAG (knowledge base relevante al mensaje)
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
-    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
+    const systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo, empresa_id)
 
     // 7. Process file attachment if present
     let mensajeConArchivo = mensaje
@@ -278,6 +278,24 @@ export async function POST(request: NextRequest) {
             .from('conversaciones')
             .update({ updated_at: new Date().toISOString() })
             .eq('id', conversacion_id)
+
+          // Fire-and-forget: extract memories from the assistant response
+          try {
+            const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ? request.url.split('/api/')[0] : ''
+            fetch(`${baseUrl}/api/memory`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                message: fullResponse,
+                userMessage: mensaje,
+                empresa_id,
+                agente_tipo: agenteTipo,
+                conversacion_id,
+              }),
+            }).catch((err) => console.error('Memory extraction failed:', err))
+          } catch (memErr) {
+            console.error('Memory extraction error:', memErr)
+          }
 
           // Send final message with saved ID
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ done: true, mensaje: mensajeGuardado })}\n\n`))

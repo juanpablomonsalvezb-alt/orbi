@@ -46,3 +46,17 @@ export interface Mensaje {
   contenido: string
   created_at: string
 }
+
+export interface Tarea {
+  id: string
+  empresa_id: string
+  agente_tipo: string
+  titulo: string
+  descripcion: string | null
+  estado: 'pendiente' | 'en_progreso' | 'completada' | 'descartada'
+  prioridad: 'alta' | 'media' | 'baja'
+  fecha_limite: string | null
+  fuente_conversacion_id: string | null
+  created_at: string
+  updated_at: string
+}

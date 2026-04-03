@@ -3,7 +3,9 @@
 import { useEffect, useRef } from 'react'
 import { ChatMessage } from '@/types/chat'
 import { TipoAgente } from '@/lib/prompts'
+import { CrossReferral } from '@/lib/cross-referral'
 import MessageBubble from './MessageBubble'
+import CrossReferralBanner from './CrossReferralBanner'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 
 interface ChatMessagesProps {
@@ -12,6 +14,8 @@ interface ChatMessagesProps {
   streamingText?: string
   agenteTipo?: TipoAgente
   onSugerencia?: (texto: string) => void
+  crossReferrals?: Record<string, CrossReferral>
+  onCrossReferral?: (tipo: TipoAgente) => void
 }
 
 const SUGERENCIAS: Record<TipoAgente, string[]> = {
@@ -52,7 +56,7 @@ const SUGERENCIAS: Record<TipoAgente, string[]> = {
   ],
 }
 
-export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia }: ChatMessagesProps) {
+export default function ChatMessages({ mensajes, cargando, streamingText = '', agenteTipo = 'general', onSugerencia, crossReferrals = {}, onCrossReferral }: ChatMessagesProps) {
   const endRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -89,7 +93,16 @@ export default function ChatMessages({ mensajes, cargando, streamingText = '', a
 
       {/* Messages */}
       {mensajes.map((msg) => (
-        <MessageBubble key={msg.id} mensaje={msg} />
+        <div key={msg.id}>
+          <MessageBubble mensaje={msg} />
+          {msg.rol === 'assistant' && crossReferrals[msg.id] && onCrossReferral && (
+            <CrossReferralBanner
+              agenteRecomendado={crossReferrals[msg.id].agenteRecomendado}
+              razon={crossReferrals[msg.id].razon}
+              onAbrir={onCrossReferral}
+            />
+          )}
+        </div>
       ))}
 
       {/* Streaming text */}

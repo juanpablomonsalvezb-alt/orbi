@@ -188,6 +188,16 @@ export default function ChatSidebar({
           Panel de control
         </a>
         <a
+          href="/tareas"
+          className="flex items-center justify-center gap-1.5 text-[11px] text-white/50 hover:text-white/80 transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+          Tareas
+        </a>
+        <a
           href="/equipo"
           className="flex items-center justify-center gap-1.5 text-[11px] text-white/50 hover:text-white/80 transition-colors"
         >

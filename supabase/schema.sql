@@ -223,3 +223,46 @@ CREATE POLICY "empresa_usuarios_delete" ON empresa_usuarios FOR DELETE USING (em
 -- ============================================
 ALTER TABLE empresas ADD COLUMN IF NOT EXISTS telefono TEXT;
 CREATE INDEX IF NOT EXISTS idx_empresas_telefono ON empresas(telefono);
+
+-- ============================================
+-- TABLA: memorias
+-- Insights extraídos de conversaciones por los agentes
+-- ============================================
+CREATE TABLE memorias (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  agente_tipo TEXT NOT NULL,
+  categoria TEXT NOT NULL CHECK (categoria IN ('dato', 'decision', 'tarea', 'alerta', 'meta')),
+  contenido TEXT NOT NULL,
+  fuente_conversacion_id UUID REFERENCES conversaciones(id) ON DELETE SET NULL,
+  activa BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_memorias_empresa ON memorias(empresa_id);
+ALTER TABLE memorias ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "memorias_select" ON memorias FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "memorias_insert" ON memorias FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "memorias_update" ON memorias FOR UPDATE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+
+-- ============================================
+-- TABLA: tareas
+-- Acciones recomendadas por agentes con seguimiento
+-- ============================================
+CREATE TABLE tareas (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
+  agente_tipo TEXT NOT NULL,
+  titulo TEXT NOT NULL,
+  descripcion TEXT,
+  estado TEXT NOT NULL DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'en_progreso', 'completada', 'descartada')),
+  prioridad TEXT NOT NULL DEFAULT 'media' CHECK (prioridad IN ('alta', 'media', 'baja')),
+  fecha_limite DATE,
+  fuente_conversacion_id UUID REFERENCES conversaciones(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX idx_tareas_empresa ON tareas(empresa_id);
+ALTER TABLE tareas ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "tareas_select" ON tareas FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "tareas_insert" ON tareas FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+CREATE POLICY "tareas_update" ON tareas FOR UPDATE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));

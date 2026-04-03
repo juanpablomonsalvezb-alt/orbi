@@ -10,6 +10,7 @@ import ChatMessages from '@/components/chat/ChatMessages'
 import ChatInput, { ArchivoInfo } from '@/components/chat/ChatInput'
 import ChatSidebar from '@/components/chat/ChatSidebar'
 import OrbiLogo from '@/components/ui/OrbiLogo'
+import { detectCrossReferral, type CrossReferral } from '@/lib/cross-referral'
 
 export default function ChatPage() {
   const params = useParams()
@@ -25,6 +26,7 @@ export default function ChatPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [streamingText, setStreamingText] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [crossReferrals, setCrossReferrals] = useState<Record<string, CrossReferral>>({})
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
@@ -142,6 +144,13 @@ export default function ChatPage() {
                 if (data.done && data.mensaje) {
                   setMensajes((prev) => [...prev, data.mensaje])
                   setStreamingText('')
+                  // Check for cross-referral
+                  if (data.mensaje.rol === 'assistant' && data.mensaje.contenido) {
+                    const referral = detectCrossReferral(agenteTipo, data.mensaje.contenido)
+                    if (referral) {
+                      setCrossReferrals(prev => ({ ...prev, [data.mensaje.id]: referral }))
+                    }
+                  }
                 }
                 if (data.error) {
                   throw new Error(data.error)
@@ -331,6 +340,8 @@ export default function ChatPage() {
           streamingText={streamingText}
           agenteTipo={agenteTipo}
           onSugerencia={(texto: string) => enviarMensaje(texto)}
+          crossReferrals={crossReferrals}
+          onCrossReferral={(tipo) => crearConversacion(tipo)}
         />
 
         {/* Input */}

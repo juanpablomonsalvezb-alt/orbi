@@ -2,6 +2,8 @@ import 'server-only'
 import { Contexto } from '@/types/database'
 import { buildSystemPrompt, TipoAgente, EstiloComunicacion } from './prompts'
 import { retrieveKnowledge, getKBOverview } from './knowledge-base'
+import { buildMemoryContext } from './memory'
+import { buildTaskContext } from './task-context'
 
 /**
  * Enhanced prompt builder with RAG. Server-only (uses fs for knowledge base).
@@ -14,9 +16,28 @@ export async function buildSystemPromptWithRAG(
   tipoAgente: TipoAgente,
   userMessage: string,
   conversationHistory: string = '',
-  estilo: EstiloComunicacion = 'directo'
+  estilo: EstiloComunicacion = 'directo',
+  empresaId?: string
 ): Promise<string> {
   let prompt = buildSystemPrompt(nombreEmpresa, contexto, tipoAgente, userMessage, conversationHistory, estilo)
+
+  // Inject memory context BEFORE knowledge base sections
+  if (empresaId) {
+    try {
+      const memoryContext = await buildMemoryContext(empresaId)
+      if (memoryContext) {
+        prompt += '\n' + memoryContext
+        prompt += '\n\nUsa tu MEMORIA DEL NEGOCIO para dar respuestas contextualizadas. Si recuerdas un dato relevante, menciónalo proactivamente.'
+      }
+
+      const taskContext = await buildTaskContext(empresaId)
+      if (taskContext) {
+        prompt += '\n' + taskContext
+      }
+    } catch (err) {
+      console.error('Error loading memory/task context:', err)
+    }
+  }
 
   try {
     const overview = getKBOverview(tipoAgente)
