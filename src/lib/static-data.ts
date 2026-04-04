@@ -89,6 +89,115 @@ export const COTIZACIONES_PREVISIONALES = {
     caja_compensacion: '4%',
     nota: 'Empresas <10 trabajadores exentas de algunos parafiscales',
   },
+  peru: {
+    essalud_empleador: '9%',
+    pension_trabajador: '13% (ONP) o AFP (~13.5%)',
+    cts: '~8.33% (2 depositos al año)',
+    gratificaciones: '~16.67% (2 gratificaciones al año)',
+    sctr: '0.53-1.55% segun riesgo',
+    costo_total_empleador: '~45-50% sobre remuneracion bruta',
+  },
+  argentina: {
+    jubilacion_empleador: '10.77%',
+    insjjp_empleador: '1.62%',
+    asignaciones_familiares: '5.56%',
+    fondo_empleo: '0.89%',
+    obra_social_empleador: '6%',
+    costo_total_empleador: '~24-27% sobre remuneracion bruta',
+    nota: 'Varia por convenio colectivo',
+  },
+  bolivia: {
+    afp_empleador: '14.71% (2% riesgo profesional + 1.71% comision + 10% + 1% solidario)',
+    cns_empleador: '10%',
+    vivienda_empleador: '2%',
+    costo_total_empleador: '~26-28% sobre remuneracion bruta',
+  },
+  ecuador: {
+    iess_empleador: '11.15%',
+    iess_trabajador: '9.45%',
+    fondos_reserva: '8.33% (despues del primer año)',
+    decimo_tercero: '1/12 de remuneracion',
+    decimo_cuarto: '1 salario basico unificado/12',
+    costo_total_empleador: '~30-35% sobre remuneracion bruta',
+  },
+}
+
+// --- Precios de combustible por pais (referencia aproximada) ---
+export const PRECIOS_COMBUSTIBLE: Record<string, Record<string, unknown>> = {
+  chile: { gasolina_93: 1250, gasolina_97: 1450, diesel: 1100, moneda: 'CLP/litro', vigencia: 'Abril 2026 aprox.' },
+  mexico: { regular: 24.5, premium: 27.0, diesel: 26.5, moneda: 'MXN/litro', vigencia: 'Abril 2026 aprox.' },
+  colombia: { corriente: 14500, extra: 17000, diesel: 10500, moneda: 'COP/galon', vigencia: 'Abril 2026 aprox.' },
+  peru: { regular_90: 16.5, premium_95: 19.0, diesel: 15.5, moneda: 'PEN/galon', vigencia: 'Abril 2026 aprox.' },
+  argentina: { super: 1200, premium: 1500, diesel: 1100, moneda: 'ARS/litro', vigencia: 'Abril 2026 aprox.', nota: 'Varia por provincia' },
+  bolivia: { gasolina: 3.74, diesel: 3.72, moneda: 'BOB/litro', vigencia: '2026', nota: 'Precio regulado por gobierno' },
+  ecuador: { extra: 2.72, super: 3.89, diesel: 1.75, moneda: 'USD/galon', vigencia: '2026' },
+}
+
+// --- Calendario comercial por pais ---
+export const CALENDARIO_COMERCIAL: Record<string, Array<{ mes: string; evento: string; impacto: string }>> = {
+  chile: [
+    { mes: 'Enero-Febrero', evento: 'Temporada baja, vacaciones', impacto: 'bajo' },
+    { mes: 'Marzo', evento: 'Vuelta a clases', impacto: 'medio' },
+    { mes: 'Mayo', evento: 'Dia de la Madre', impacto: 'alto' },
+    { mes: 'Junio', evento: 'CyberDay', impacto: 'alto' },
+    { mes: 'Septiembre', evento: 'Fiestas Patrias', impacto: 'muy alto' },
+    { mes: 'Noviembre', evento: 'Black Friday / CyberMonday', impacto: 'alto' },
+    { mes: 'Diciembre', evento: 'Navidad', impacto: 'muy alto' },
+  ],
+  mexico: [
+    { mes: 'Febrero', evento: 'San Valentin + Dia de la Bandera', impacto: 'medio' },
+    { mes: 'Mayo', evento: 'Dia de la Madre (10 mayo - mayor venta del año)', impacto: 'muy alto' },
+    { mes: 'Junio', evento: 'Dia del Padre + Hot Sale', impacto: 'alto' },
+    { mes: 'Septiembre', evento: 'Independencia (15-16 sep)', impacto: 'alto' },
+    { mes: 'Noviembre', evento: 'Buen Fin + Black Friday', impacto: 'muy alto' },
+    { mes: 'Diciembre', evento: 'Navidad + Aguinaldos', impacto: 'muy alto' },
+  ],
+  colombia: [
+    { mes: 'Marzo-Abril', evento: 'Semana Santa', impacto: 'medio' },
+    { mes: 'Mayo', evento: 'Dia de la Madre', impacto: 'alto' },
+    { mes: 'Junio', evento: 'Dia sin IVA #1', impacto: 'muy alto' },
+    { mes: 'Julio', evento: 'Dia sin IVA #2 + independencia (20 jul)', impacto: 'alto' },
+    { mes: 'Noviembre', evento: 'Black Friday + Dia sin IVA #3', impacto: 'alto' },
+    { mes: 'Diciembre', evento: 'Navidad + primas', impacto: 'muy alto' },
+  ],
+  peru: [
+    { mes: 'Mayo', evento: 'Dia de la Madre', impacto: 'alto' },
+    { mes: 'Junio', evento: 'Dia del Padre', impacto: 'medio' },
+    { mes: 'Julio', evento: 'Fiestas Patrias (28-29 jul) + gratificacion', impacto: 'muy alto' },
+    { mes: 'Noviembre', evento: 'Cyber Wow + Black Friday', impacto: 'alto' },
+    { mes: 'Diciembre', evento: 'Navidad + gratificacion', impacto: 'muy alto' },
+  ],
+  argentina: [
+    { mes: 'Marzo', evento: 'Vuelta a clases', impacto: 'medio' },
+    { mes: 'Mayo', evento: 'Dia de la Madre (3er domingo oct en AR)', impacto: 'alto' },
+    { mes: 'Junio', evento: 'Dia del Padre + Hot Sale', impacto: 'alto' },
+    { mes: 'Noviembre', evento: 'CyberMonday AR + Black Friday', impacto: 'alto' },
+    { mes: 'Diciembre', evento: 'Navidad + aguinaldo', impacto: 'muy alto' },
+  ],
+  bolivia: [
+    { mes: 'Febrero', evento: 'Carnaval de Oruro', impacto: 'alto (turismo)' },
+    { mes: 'Mayo', evento: 'Dia de la Madre (27 mayo)', impacto: 'alto' },
+    { mes: 'Agosto', evento: 'Independencia (6 ago)', impacto: 'medio' },
+    { mes: 'Diciembre', evento: 'Navidad + aguinaldo', impacto: 'alto' },
+  ],
+  ecuador: [
+    { mes: 'Febrero', evento: 'Carnaval', impacto: 'medio' },
+    { mes: 'Mayo', evento: 'Dia de la Madre', impacto: 'alto' },
+    { mes: 'Agosto', evento: 'Independencia (10 ago)', impacto: 'medio' },
+    { mes: 'Noviembre', evento: 'Black Friday', impacto: 'alto' },
+    { mes: 'Diciembre', evento: 'Navidad + decimo tercero', impacto: 'muy alto' },
+  ],
+}
+
+// --- Costos publicitarios referencia por pais ---
+export const COSTOS_PUBLICIDAD: Record<string, Record<string, string>> = {
+  chile: { meta_cpc: '$150-400 CLP', meta_cpm: '$3,000-8,000 CLP', google_cpc: '$200-800 CLP' },
+  mexico: { meta_cpc: '$3-8 MXN', meta_cpm: '$50-150 MXN', google_cpc: '$5-15 MXN' },
+  colombia: { meta_cpc: '$500-2,000 COP', meta_cpm: '$8,000-25,000 COP', google_cpc: '$1,000-4,000 COP' },
+  peru: { meta_cpc: '$0.50-1.50 PEN', meta_cpm: '$8-20 PEN', google_cpc: '$1-4 PEN' },
+  argentina: { meta_cpc: '$50-200 ARS', meta_cpm: '$800-3,000 ARS', google_cpc: '$100-500 ARS', nota: 'Muy volatil por inflacion' },
+  bolivia: { meta_cpc: '$0.30-0.80 BOB', meta_cpm: '$5-15 BOB', google_cpc: '$0.50-2 BOB' },
+  ecuador: { meta_cpc: '$0.15-0.50 USD', meta_cpm: '$3-10 USD', google_cpc: '$0.30-1.50 USD' },
 }
 
 // Helper para obtener datos por pais
@@ -108,4 +217,58 @@ export function getCotizaciones(country: string): string {
   const cot = COTIZACIONES_PREVISIONALES[country as keyof typeof COTIZACIONES_PREVISIONALES]
   if (!cot) return ''
   return Object.entries(cot).map(([k, v]) => `* ${k.replace(/_/g, ' ')}: ${v}`).join('\n')
+}
+
+export function getPreciosCombustible(country: string): string {
+  const data = PRECIOS_COMBUSTIBLE[country]
+  if (!data) return ''
+  const moneda = data.moneda as string
+  const vigencia = data.vigencia as string
+  const nota = data.nota ? ` (${data.nota})` : ''
+  const items = Object.entries(data)
+    .filter(([k]) => !['moneda', 'vigencia', 'nota'].includes(k))
+    .map(([k, v]) => `${k.replace(/_/g, ' ')}: ${v} ${moneda}`)
+  return `PRECIOS COMBUSTIBLE (${country}, ${vigencia})${nota}:\n ${items.join(' | ')}`
+}
+
+const MONTH_ORDER: Record<string, number> = {
+  'Enero': 1, 'Febrero': 2, 'Marzo': 3, 'Abril': 4, 'Mayo': 5, 'Junio': 6,
+  'Julio': 7, 'Agosto': 8, 'Septiembre': 9, 'Octubre': 10, 'Noviembre': 11, 'Diciembre': 12,
+}
+
+function parseEventMonth(mes: string): number {
+  // Extrae el primer mes mencionado: "Marzo-Abril" -> 3, "Enero-Febrero" -> 1
+  for (const [name, num] of Object.entries(MONTH_ORDER)) {
+    if (mes.toLowerCase().includes(name.toLowerCase())) return num
+  }
+  return 13 // fallback al final
+}
+
+export function getProximoEventoComercial(country: string): string {
+  const eventos = CALENDARIO_COMERCIAL[country]
+  if (!eventos) return ''
+  const currentMonth = new Date().getMonth() + 1 // 1-12
+  // Filtrar eventos cuyo mes principal es >= mes actual
+  const proximos = eventos
+    .filter(e => parseEventMonth(e.mes) >= currentMonth)
+    .slice(0, 2)
+  // Si no hay suficientes, agregar desde el inicio del año siguiente
+  if (proximos.length < 2) {
+    const faltan = 2 - proximos.length
+    const desdeInicio = eventos.slice(0, faltan)
+    proximos.push(...desdeInicio)
+  }
+  if (proximos.length === 0) return ''
+  const items = proximos.map(e => `${e.mes} - ${e.evento} (impacto ${e.impacto})`)
+  return `PROXIMOS EVENTOS COMERCIALES (${country}): ${items.join(' | ')}`
+}
+
+export function getCostosPublicidad(country: string): string {
+  const data = COSTOS_PUBLICIDAD[country]
+  if (!data) return ''
+  const nota = data.nota ? ` (${data.nota})` : ''
+  const items = Object.entries(data)
+    .filter(([k]) => k !== 'nota')
+    .map(([k, v]) => `${k.replace(/_/g, ' ')}: ${v}`)
+  return `COSTOS PUBLICIDAD REFERENCIA (${country})${nota}:\n ${items.join(' | ')}`
 }

@@ -4,7 +4,10 @@
  * All output in Spanish for LATAM business context.
  */
 
-import { getSalarioMinimo, getCalendarioTributario, getCotizaciones } from './static-data'
+import {
+  getSalarioMinimo, getCalendarioTributario, getCotizaciones,
+  getPreciosCombustible, getProximoEventoComercial, getCostosPublicidad,
+} from './static-data'
 
 // --- In-memory cache with TTL ---
 const cache = new Map<string, { data: unknown; expires: number }>()
@@ -234,6 +237,82 @@ export async function getShippingCostColombia(
   }
 }
 
+// --- API 8: BCRA Argentina — Indicadores economicos ---
+export async function getArgentinaIndicators(): Promise<string> {
+  return cached('argentina-indicators', SIX_HOURS, async () => {
+    const variables = [
+      { id: 4, label: 'Tipo de cambio minorista (USD/ARS)' },
+      { id: 6, label: 'Tasa BADLAR' },
+      { id: 27, label: 'Tasa de politica monetaria' },
+      { id: 29, label: 'Reservas internacionales (USD mill.)' },
+    ]
+    const results: string[] = []
+    await Promise.allSettled(
+      variables.map(async (v) => {
+        try {
+          const res = await fetch(
+            `https://api.bcra.gob.ar/estadisticas/v2.0/DatosVariable/${v.id}/Ultimos/1`,
+            { signal: AbortSignal.timeout(10000), headers: { Accept: 'application/json' } }
+          )
+          if (!res.ok) return
+          const json = await res.json()
+          const dato = json?.results?.[0]
+          if (dato?.valor != null) {
+            results.push(`${v.label}: ${Number(dato.valor).toLocaleString('es-AR')}`)
+          }
+        } catch {
+          // skip silently
+        }
+      })
+    )
+    if (results.length === 0) return ''
+    return `INDICADORES BCRA (Argentina, tiempo real):\n ${results.join(' | ')}`
+  })
+}
+
+// --- API 9: BCRP Peru — Indicadores economicos ---
+export async function getPeruIndicators(): Promise<string> {
+  return cached('peru-indicators', SIX_HOURS, async () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const prevMonth = now.getMonth() === 0 ? '12' : String(now.getMonth()).padStart(2, '0')
+    const prevYear = now.getMonth() === 0 ? year - 1 : year
+    const desde = `${prevYear}-${prevMonth}`
+    const hasta = `${year}-${month}`
+
+    const series = [
+      { id: 'PD04637PD', label: 'Tipo de cambio venta (USD/PEN)' },
+      { id: 'PD04648PD', label: 'Tasa de referencia BCRP' },
+    ]
+    const results: string[] = []
+    await Promise.allSettled(
+      series.map(async (s) => {
+        try {
+          const res = await fetch(
+            `https://estadisticas.bcrp.gob.pe/estadisticas/series/api/${s.id}/json/${desde}/${hasta}`,
+            { signal: AbortSignal.timeout(10000) }
+          )
+          if (!res.ok) return
+          const json = await res.json()
+          const periodos = json?.periods
+          if (Array.isArray(periodos) && periodos.length > 0) {
+            const ultimo = periodos[periodos.length - 1]
+            const valor = ultimo?.values?.[0]
+            if (valor && valor !== 'n.d.') {
+              results.push(`${s.label}: ${valor}`)
+            }
+          }
+        } catch {
+          // skip silently
+        }
+      })
+    )
+    if (results.length === 0) return ''
+    return `INDICADORES BCRP (Peru, tiempo real):\n ${results.join(' | ')}`
+  })
+}
+
 // --- Precios de commodities (pendiente API key) ---
 export async function getCommodityPrices(): Promise<string> {
   // Por ahora retorna vacio — se activara cuando se obtenga API key (API Ninjas u otra fuente)
@@ -253,7 +332,7 @@ export function detectCountry(contexto: Array<{ pregunta?: string; respuesta?: s
   return 'chile' // default
 }
 
-// --- API 7: Compiled real-time context for agents ---
+// --- Compiled real-time context for agents ---
 export async function getRealTimeContext(country: string): Promise<string> {
   const cc = COUNTRY_TO_CODE[country] || 'CL'
   const wbCode = COUNTRY_TO_WB_CODE[country] || 'CHL'
@@ -265,9 +344,15 @@ export async function getRealTimeContext(country: string): Promise<string> {
     getWeather(country),
   ]
 
-  // Add Chilean indicators if country is Chile
+  // Indicadores especificos por pais
   if (country === 'chile') {
     promises.push(getChileanIndicators())
+  }
+  if (country === 'argentina') {
+    promises.push(getArgentinaIndicators())
+  }
+  if (country === 'peru') {
+    promises.push(getPeruIndicators())
   }
 
   const results = await Promise.allSettled(promises)
@@ -288,6 +373,18 @@ export async function getRealTimeContext(country: string): Promise<string> {
 
   const cotizaciones = getCotizaciones(country)
   if (cotizaciones) parts.push('COTIZACIONES PREVISIONALES:\n' + cotizaciones)
+
+  // Precios de combustible (util para inventario/logistica)
+  const combustible = getPreciosCombustible(country)
+  if (combustible) parts.push(combustible)
+
+  // Proximos eventos comerciales (util para ventas/marketing)
+  const eventosComerciales = getProximoEventoComercial(country)
+  if (eventosComerciales) parts.push(eventosComerciales)
+
+  // Costos publicidad referencia (util para marketing)
+  const costosPub = getCostosPublicidad(country)
+  if (costosPub) parts.push(costosPub)
 
   if (parts.length === 0) return ''
 
