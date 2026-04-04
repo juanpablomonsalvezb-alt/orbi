@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = getSupabase()
-    const trialEndsAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
+    const trialEndsAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
 
     const { data, error } = await supabase.from('empresas').insert({
       user_id,
