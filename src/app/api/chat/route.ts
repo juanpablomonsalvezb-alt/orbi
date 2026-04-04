@@ -224,6 +224,46 @@ export async function POST(request: NextRequest) {
     } catch (err) {
       console.log('Price search skipped:', err)
     }
+
+    // 6.3. Detect course/training queries ("curso de", "capacitacion en", "aprender")
+    try {
+      const courseMatch = mensaje.match(/curso\s+de|capacitaci[oó]n\s+en|quiero\s+aprender|cursos?\s+sobre|formaci[oó]n\s+en/i)
+      if (courseMatch) {
+        const { getBusinessCourses } = await import('@/lib/real-time-data')
+        const topic = mensaje.replace(/.*(?:curso\s+de|capacitaci[oó]n\s+en|quiero\s+aprender|cursos?\s+sobre|formaci[oó]n\s+en)\s*/i, '').replace(/\?.*$/, '').trim()
+        if (topic && topic.length > 1) {
+          const courses = await getBusinessCourses(topic)
+          if (courses) {
+            mensajeConArchivo += '\n\n' + courses
+            console.log('Course search added for:', topic)
+          }
+        }
+      }
+    } catch (err) {
+      console.log('Course search skipped:', err)
+    }
+
+    // 6.4. Detect business search queries for Mexico DENUE ("buscar negocio", "negocios de", "directorio")
+    try {
+      const denueMatch = mensaje.match(/buscar\s+negocio|negocios?\s+de|directorio\s+de|empresas?\s+de|establecimientos?\s+de/i)
+      if (denueMatch) {
+        const { searchDENUE, detectCountry } = await import('@/lib/real-time-data')
+        const country = detectCountry(contexto || [])
+        if (country === 'mexico') {
+          const query = mensaje.replace(/.*(?:buscar\s+negocio|negocios?\s+de|directorio\s+de|empresas?\s+de|establecimientos?\s+de)\s*/i, '').replace(/\?.*$/, '').trim()
+          if (query && query.length > 1) {
+            const results = await searchDENUE(query, '00')
+            if (results) {
+              mensajeConArchivo += '\n\n' + results
+              console.log('DENUE search added for:', query)
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.log('DENUE search skipped:', err)
+    }
+
     const sheetsMatch = mensaje.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+[^\s]*/g)
     if (sheetsMatch && sheetsMatch[0]) {
       try {

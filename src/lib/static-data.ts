@@ -269,6 +269,177 @@ export const INTEGRACIONES_DISPONIBLES = {
     como_conectar: 'Agrega BANXICO_TOKEN en las variables de entorno. Obtenlo gratis en https://www.banxico.org.mx/SieAPIRest/service/v1/token',
     estado: 'requiere_token' as const,
   },
+  inegi: {
+    nombre: 'INEGI (Mexico)',
+    descripcion: 'Indicadores economicos y Directorio de negocios DENUE. Se activa con token gratuito.',
+    como_conectar: 'Agrega INEGI_TOKEN en las variables de entorno. Obtenlo gratis en https://www.inegi.org.mx/app/api/denue/v1/tokenVerify.aspx',
+    estado: 'requiere_token' as const,
+  },
+}
+
+// --- Tarifas energia referencia por pais ---
+export const TARIFAS_ENERGIA: Record<string, Record<string, string>> = {
+  chile: {
+    residencial: '$130-180 CLP/kWh',
+    comercial: '$100-150 CLP/kWh',
+    fuente: 'CNE — Comision Nacional de Energia',
+    vigencia: '2026 aprox.',
+  },
+  mexico: {
+    residencial_basica: '$0.99 MXN/kWh (primeros 75 kWh)',
+    residencial_intermedia: '$1.30-2.80 MXN/kWh',
+    comercial: '$3.50-5.50 MXN/kWh',
+    fuente: 'CFE — Comision Federal de Electricidad',
+    vigencia: '2026 aprox.',
+  },
+  colombia: {
+    residencial_estrato3: '$650-900 COP/kWh',
+    comercial: '$500-750 COP/kWh',
+    fuente: 'CREG / XM',
+    vigencia: '2026 aprox.',
+    nota: 'Varia por estrato y ciudad',
+  },
+  peru: {
+    residencial: 'S/0.60-0.80 PEN/kWh',
+    comercial: 'S/0.40-0.60 PEN/kWh',
+    fuente: 'OSINERGMIN',
+    vigencia: '2026 aprox.',
+  },
+  argentina: {
+    residencial: '$60-120 ARS/kWh',
+    comercial: '$80-150 ARS/kWh',
+    fuente: 'ENRE',
+    vigencia: '2026 aprox.',
+    nota: 'Muy variable por subsidios y zona',
+  },
+  bolivia: {
+    residencial: 'Bs 0.50-0.80 BOB/kWh',
+    comercial: 'Bs 0.70-1.20 BOB/kWh',
+    fuente: 'Autoridad de Fiscalizacion de Electricidad',
+    vigencia: '2026 aprox.',
+  },
+  ecuador: {
+    residencial: '$0.08-0.10 USD/kWh',
+    comercial: '$0.09-0.12 USD/kWh',
+    fuente: 'ARCONEL',
+    vigencia: '2026 aprox.',
+  },
+}
+
+// --- Costos logistica/envio referencia por pais ---
+export const COSTOS_ENVIO: Record<string, Record<string, string>> = {
+  chile: {
+    correos_chile: 'Desde $2,500 CLP (hasta 1kg, nacional)',
+    chilexpress: 'Desde $3,500 CLP (hasta 3kg, nacional)',
+    starken: 'Desde $3,000 CLP (hasta 3kg, nacional)',
+    nota: 'Precios varian por origen/destino y peso',
+  },
+  mexico: {
+    estafeta: 'Desde $120 MXN (hasta 1kg, local)',
+    fedex_mx: 'Desde $180 MXN (hasta 1kg, nacional)',
+    noventa_y_nueve_minutos: 'Desde $80 MXN (same-day CDMX)',
+    nota: 'Varia por zona y servicio',
+  },
+  colombia: {
+    servientrega: 'Desde $8,000 COP (hasta 1kg, nacional)',
+    interrapidisimo: 'Desde $7,000 COP (hasta 1kg, nacional)',
+    coordinadora: 'Desde $9,000 COP (hasta 1kg, nacional)',
+    nota: 'Cotizacion exacta via API Servientrega disponible',
+  },
+  peru: {
+    olva_courier: 'Desde S/8 PEN (hasta 1kg, Lima)',
+    serpost: 'Desde S/6 PEN (hasta 500g, nacional)',
+    nota: 'Lima vs provincias tiene diferencia significativa',
+  },
+  argentina: {
+    correo_argentino: 'Desde $2,500 ARS (hasta 1kg, nacional)',
+    andreani: 'Desde $3,000 ARS (hasta 1kg, nacional)',
+    oca: 'Desde $2,800 ARS (hasta 1kg, nacional)',
+    nota: 'Precios muy variables por inflacion',
+  },
+  bolivia: {
+    ems_bolivia: 'Desde Bs 25 BOB (hasta 500g, nacional)',
+    nota: 'Opciones limitadas; courier privado mas caro',
+  },
+  ecuador: {
+    servientrega_ec: 'Desde $3.50 USD (hasta 1kg, nacional)',
+    tramaco: 'Desde $4.00 USD (hasta 1kg, nacional)',
+    nota: 'Precios en USD',
+  },
+}
+
+// --- Tasas de interes referencia (creditos PYME) por pais ---
+export const TASAS_CREDITO_PYME: Record<string, Record<string, string>> = {
+  chile: {
+    credito_pyme_bancos: '8-15% anual (UF+spread)',
+    fogape: 'Tasa preferencial via garantia estatal FOGAPE',
+    microCredito: '15-30% anual',
+    fuente: 'CMF / bancos comerciales',
+  },
+  mexico: {
+    credito_pyme: '12-25% anual',
+    nafin: 'Tasa preferencial via Nacional Financiera',
+    microCredito: '25-50% anual',
+    fuente: 'CNBV / bancos comerciales',
+  },
+  colombia: {
+    credito_pyme: '15-25% anual (EA)',
+    bancoldex: 'Tasa preferencial via Bancoldex',
+    microCredito: '30-50% anual',
+    fuente: 'Superfinanciera / bancos comerciales',
+  },
+  peru: {
+    credito_pyme: '15-30% anual (TEA)',
+    cofide: 'Tasa preferencial via COFIDE',
+    microCredito: '30-60% anual',
+    fuente: 'SBS / bancos comerciales',
+  },
+  argentina: {
+    credito_pyme: '40-80% anual (TNA)',
+    foga: 'Tasa preferencial via FOGAR',
+    nota: 'Tasas altisimas por inflacion; creditos a tasa subsidiada disponibles',
+    fuente: 'BCRA / bancos comerciales',
+  },
+  bolivia: {
+    credito_pyme: '6-11.5% anual (tasa regulada)',
+    nota: 'Tasas reguladas por gobierno para sector productivo',
+    fuente: 'ASFI',
+  },
+  ecuador: {
+    credito_pyme: '9.5-11.5% anual (tasa referencial)',
+    cfn: 'Tasa preferencial via CFN (Corporacion Financiera Nacional)',
+    fuente: 'Superintendencia de Bancos',
+  },
+}
+
+export function getTarifasEnergia(country: string): string {
+  const data = TARIFAS_ENERGIA[country]
+  if (!data) return ''
+  const items = Object.entries(data)
+    .filter(([k]) => !['fuente', 'vigencia', 'nota'].includes(k))
+    .map(([k, v]) => `${k.replace(/_/g, ' ')}: ${v}`)
+  const nota = data.nota ? ` (${data.nota})` : ''
+  return `TARIFAS ENERGIA (${country}, ${data.vigencia || '2026'})${nota}:\n ${items.join(' | ')}\n Fuente: ${data.fuente || 'N/D'}`
+}
+
+export function getCostosEnvio(country: string): string {
+  const data = COSTOS_ENVIO[country]
+  if (!data) return ''
+  const items = Object.entries(data)
+    .filter(([k]) => k !== 'nota')
+    .map(([k, v]) => `${k.replace(/_/g, ' ')}: ${v}`)
+  const nota = data.nota ? ` (${data.nota})` : ''
+  return `COSTOS ENVIO REFERENCIA (${country})${nota}:\n ${items.join(' | ')}`
+}
+
+export function getTasasCreditoPyme(country: string): string {
+  const data = TASAS_CREDITO_PYME[country]
+  if (!data) return ''
+  const items = Object.entries(data)
+    .filter(([k]) => !['fuente', 'nota'].includes(k))
+    .map(([k, v]) => `${k.replace(/_/g, ' ')}: ${v}`)
+  const nota = data.nota ? ` (${data.nota})` : ''
+  return `TASAS CREDITO PYME (${country})${nota}:\n ${items.join(' | ')}\n Fuente: ${data.fuente || 'N/D'}`
 }
 
 // Helper para obtener datos por pais

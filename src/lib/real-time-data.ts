@@ -7,7 +7,7 @@
 import {
   getSalarioMinimo, getCalendarioTributario, getCotizaciones,
   getPreciosCombustible, getProximoEventoComercial, getCostosPublicidad,
-  getUnidadesReferencia,
+  getUnidadesReferencia, getTarifasEnergia, getCostosEnvio, getTasasCreditoPyme,
 } from './static-data'
 
 // --- In-memory cache with TTL ---
@@ -337,9 +337,282 @@ export async function getPeruIndicators(): Promise<string> {
   })
 }
 
-// --- Precios de commodities (referencial estático — APIs gratuitas de commodities no disponibles sin key) ---
+// --- API: Commodity & Precious Metal Prices via fawazahmed0 currency-api (free, no key, CDN) ---
 export async function getCommodityPrices(): Promise<string> {
-  return 'COMMODITIES (referencial): Petroleo WTI ~$70-80 USD/barril | Cobre ~$4.0-4.5 USD/lb | Soja ~$10-12 USD/bushel'
+  return cached('commodity-prices', SIX_HOURS, async () => {
+    try {
+      const res = await fetch(
+        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) throw new Error(`currency-api ${res.status}`)
+      const data = await res.json()
+      const usd = data?.usd as Record<string, number> | undefined
+      if (!usd) throw new Error('no usd rates')
+
+      const parts: string[] = []
+      const fecha = data.date || new Date().toISOString().slice(0, 10)
+
+      // Precious metals (rates are USD per 1 unit, so we invert: 1/rate = price in USD per oz)
+      if (usd.xau) {
+        const goldPrice = Math.round(1 / usd.xau)
+        parts.push(`Oro: $${fmt(goldPrice)} USD/oz`)
+      }
+      if (usd.xag) {
+        const silverPrice = Number((1 / usd.xag).toFixed(2))
+        parts.push(`Plata: $${fmt(silverPrice, 2)} USD/oz`)
+      }
+      if (usd.xpt) {
+        const platinumPrice = Math.round(1 / usd.xpt)
+        parts.push(`Platino: $${fmt(platinumPrice)} USD/oz`)
+      }
+      if (usd.xpd) {
+        const palladiumPrice = Math.round(1 / usd.xpd)
+        parts.push(`Paladio: $${fmt(palladiumPrice)} USD/oz`)
+      }
+
+      if (parts.length === 0) {
+        return 'COMMODITIES (referencial): Petroleo WTI ~$70-80 USD/barril | Cobre ~$4.0-4.5 USD/lb'
+      }
+      return `METALES PRECIOSOS (${fecha}): ${parts.join(' | ')}`
+    } catch {
+      return 'COMMODITIES (referencial): Petroleo WTI ~$70-80 USD/barril | Cobre ~$4.0-4.5 USD/lb'
+    }
+  })
+}
+
+// --- API: REST Countries — Country demographics (free, no key) ---
+export async function getCountryInfo(country: string): Promise<string> {
+  const codeMap: Record<string, string> = {
+    chile: 'cl', mexico: 'mx', colombia: 'co', peru: 'pe',
+    argentina: 'ar', bolivia: 'bo', ecuador: 'ec',
+  }
+  const code = codeMap[country]
+  if (!code) return ''
+  return cached(`restcountries-${code}`, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://restcountries.com/v3.1/alpha/${code}?fields=name,capital,population,area,gini,timezones`,
+        { signal: AbortSignal.timeout(8000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      const parts: string[] = []
+      const nombre = data.name?.common || country
+      if (data.capital?.[0]) parts.push(`Capital: ${data.capital[0]}`)
+      if (data.population) parts.push(`Poblacion: ${fmt(data.population)}`)
+      if (data.area) parts.push(`Area: ${fmt(data.area)} km2`)
+      if (data.gini) {
+        const giniYear = Object.keys(data.gini).sort().pop()
+        if (giniYear) parts.push(`Gini: ${data.gini[giniYear]} (${giniYear})`)
+      }
+      if (parts.length === 0) return ''
+      return `DATOS PAIS (${nombre}): ${parts.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: INEGI Indicadores (Mexico — requires free token) ---
+export async function getINEGIIndicators(): Promise<string> {
+  const token = process.env.INEGI_TOKEN
+  if (!token) return ''
+  return cached('inegi-indicators', TWENTY_FOUR_HOURS, async () => {
+    try {
+      // Indicadores clave: INPC (inflacion), PIB trimestral, Tasa desocupacion
+      const indicators = [
+        { id: '628194', label: 'INPC (Indice de Precios al Consumidor)' },
+        { id: '493911', label: 'Tasa de desocupacion' },
+      ]
+      const results: string[] = []
+      await Promise.allSettled(
+        indicators.map(async (ind) => {
+          try {
+            const res = await fetch(
+              `https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/${ind.id}/es/0700/false/BISE/2.0/${token}?type=json`,
+              { signal: AbortSignal.timeout(12000) }
+            )
+            if (!res.ok) return
+            const json = await res.json()
+            const series = json?.Series
+            if (Array.isArray(series) && series.length > 0) {
+              const obs = series[0]?.OBSERVATIONS
+              if (Array.isArray(obs) && obs.length > 0) {
+                const ultimo = obs[obs.length - 1]
+                const valor = ultimo?.OBS_VALUE
+                const periodo = ultimo?.TIME_PERIOD
+                if (valor) {
+                  results.push(`${ind.label}: ${valor}${periodo ? ` (${periodo})` : ''}`)
+                }
+              }
+            }
+          } catch { /* skip */ }
+        })
+      )
+      if (results.length === 0) return ''
+      return `INDICADORES INEGI (Mexico):\n ${results.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: INEGI DENUE — Directorio de negocios Mexico (requires free token) ---
+export async function searchDENUE(query: string, estado: string): Promise<string> {
+  const token = process.env.INEGI_TOKEN
+  if (!token) return ''
+  const cacheKey = `denue-${query.toLowerCase().trim().replace(/\s+/g, '-')}-${estado}`
+  return cached(cacheKey, TWENTY_FOUR_HOURS, async () => {
+    try {
+      // estado: 00 = todo Mexico, 01-32 = por estado
+      const cveEnt = estado || '00'
+      const res = await fetch(
+        `https://www.inegi.org.mx/app/api/denue/v1/consulta/nombre/${encodeURIComponent(query)}/${cveEnt}/1/10/${token}`,
+        { signal: AbortSignal.timeout(12000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data) || data.length === 0) return ''
+      const items = data.slice(0, 5).map((e: Record<string, string>) => {
+        const nombre = e.Nombre || e.nombre || 'N/D'
+        const actividad = e.Actividad || e.actividad || ''
+        const ubicacion = e.Ubicacion || e.ubicacion || e.Calle || ''
+        return `  * ${nombre}${actividad ? ` — ${actividad}` : ''}${ubicacion ? ` (${ubicacion})` : ''}`
+      })
+      return `NEGOCIOS EN MEXICO (DENUE, "${query}"):\n${items.join('\n')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: datos.gov.co Socrata — Indicadores economicos Colombia (free, no key) ---
+export async function getColombiaEconomicIndicators(): Promise<string> {
+  return cached('colombia-economic-indicators', TWENTY_FOUR_HOURS, async () => {
+    try {
+      // Indicadores de coyuntura economica local
+      const res = await fetch(
+        'https://www.datos.gov.co/resource/m5ti-ecrw.json?$limit=10&$order=a_o%20DESC,mes_no%20DESC',
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data) || data.length === 0) return ''
+      // Group by indicator, take latest of each
+      const seen = new Map<string, string>()
+      for (const row of data) {
+        const ind = row.indicador as string
+        if (!seen.has(ind) && row.valor_original) {
+          seen.set(ind, `${ind}: ${row.valor_original} (${row.mes} ${row.a_o})`)
+        }
+      }
+      const items = Array.from(seen.values()).slice(0, 5)
+      if (items.length === 0) return ''
+      return `INDICADORES ECONOMICOS COLOMBIA (datos.gov.co):\n ${items.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: datos.gov.co — IPC Colombia (Socrata, free, no key) ---
+export async function getColombiaIPC(): Promise<string> {
+  return cached('colombia-ipc', TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(
+        'https://www.datos.gov.co/resource/y4cg-3jbp.json?$limit=6&$order=a_o%20DESC,mes_no%20DESC',
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data) || data.length === 0) return ''
+      const items = data.slice(0, 6).map((row: Record<string, string>) => {
+        return `${row.mes || ''} ${row.a_o || ''}: ${row.ipc_total || row.valor || 'N/D'}`
+      }).filter((s: string) => !s.includes('N/D'))
+      if (items.length === 0) return ''
+      return `IPC COLOMBIA (ultimos meses): ${items.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: ip-api.com — Auto-detect country from server IP (free, no key) ---
+export async function detectCountryFromIP(): Promise<string> {
+  return cached('ip-country-detect', TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch('http://ip-api.com/json/?fields=country,countryCode,city,timezone,currency', {
+        signal: AbortSignal.timeout(5000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      return data.countryCode?.toLowerCase() || ''
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Coursera Catalog — Cursos gratuitos de negocios (free, no key) ---
+export async function getBusinessCourses(topic: string): Promise<string> {
+  const cacheKey = `coursera-${topic.toLowerCase().trim().replace(/\s+/g, '-')}`
+  return cached(cacheKey, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://api.coursera.org/api/courses.v1?limit=5&fields=name,slug,workload&q=search&query=${encodeURIComponent(topic + ' business')}`,
+        { signal: AbortSignal.timeout(10000) }
+      )
+      // If search finder not implemented, try simple list
+      if (!res.ok) return ''
+      const data = await res.json()
+      const elements = data.elements as Array<{ name: string; slug: string; workload?: string }> | undefined
+      if (!elements || elements.length === 0) return ''
+      const items = elements.slice(0, 5).map((c) => {
+        const duracion = c.workload ? ` (${c.workload})` : ''
+        return `  * ${c.name}${duracion} — coursera.org/learn/${c.slug}`
+      })
+      return `CURSOS RECOMENDADOS (Coursera, "${topic}"):\n${items.join('\n')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: fawazahmed0 currency-api — Backup exchange rates (free, no key, CDN) ---
+export async function getBackupExchangeRates(): Promise<string> {
+  return cached('backup-exchange-rates', SIX_HOURS, async () => {
+    try {
+      const res = await fetch(
+        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json',
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      const usd = data?.usd as Record<string, number> | undefined
+      if (!usd) return ''
+      const fecha = data.date || ''
+      const currencies: Array<{ code: string; label: string; decimals: number }> = [
+        { code: 'clp', label: 'CLP', decimals: 0 },
+        { code: 'mxn', label: 'MXN', decimals: 2 },
+        { code: 'cop', label: 'COP', decimals: 0 },
+        { code: 'pen', label: 'PEN', decimals: 2 },
+        { code: 'ars', label: 'ARS', decimals: 0 },
+        { code: 'bob', label: 'BOB', decimals: 2 },
+      ]
+      const parts: string[] = []
+      for (const c of currencies) {
+        if (usd[c.code]) {
+          const sym = CURRENCY_SYMBOLS[c.label] || '$'
+          parts.push(`1 USD = ${sym}${fmt(usd[c.code], c.decimals)} ${c.label}`)
+        }
+      }
+      if (parts.length === 0) return ''
+      return `TIPOS DE CAMBIO RESPALDO (${fecha}): ${parts.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
 }
 
 // --- MercadoLibre Site IDs ---
@@ -819,6 +1092,8 @@ export async function getRealTimeContext(country: string): Promise<string> {
     getInflationHistory(wbCode),
     getCommodityPrices(),
     getBusinessNews(country),
+    // --- New universal APIs ---
+    getCountryInfo(country),
   ]
 
   // Indicadores especificos por pais
@@ -837,9 +1112,12 @@ export async function getRealTimeContext(country: string): Promise<string> {
   }
   if (country === 'mexico') {
     promises.push(getMexicoIndicators())
+    promises.push(getINEGIIndicators())
   }
   if (country === 'colombia') {
     promises.push(getTRMColombia())
+    promises.push(getColombiaEconomicIndicators())
+    promises.push(getColombiaIPC())
   }
 
   // Tendencias MercadoLibre (util para ventas/inventario/marketing)
@@ -883,6 +1161,18 @@ export async function getRealTimeContext(country: string): Promise<string> {
   // Unidades de referencia (UIT, UMA, UVT, etc.)
   const unidades = getUnidadesReferencia(country)
   if (unidades) parts.push(unidades)
+
+  // Tarifas de energia (util para inventario/operaciones)
+  const energia = getTarifasEnergia(country)
+  if (energia) parts.push(energia)
+
+  // Costos de envio referencia (util para inventario/ventas/logistica)
+  const envio = getCostosEnvio(country)
+  if (envio) parts.push(envio)
+
+  // Tasas de credito PYME (util para financiero)
+  const tasas = getTasasCreditoPyme(country)
+  if (tasas) parts.push(tasas)
 
   if (parts.length === 0) return ''
 
