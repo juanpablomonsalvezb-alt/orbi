@@ -188,17 +188,10 @@ export async function POST(request: NextRequest) {
       content: msg.contenido
     }))
 
-    // 6. Construir system prompt con RAG (knowledge base relevante al mensaje)
+    // 6. Construir system prompt (basic — RAG disabled for serverless compatibility)
+    const { buildSystemPrompt } = await import('@/lib/prompts')
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
-    let systemPrompt: string
-    try {
-      const { buildSystemPromptWithRAG } = await import('@/lib/prompts-server')
-      systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo, empresa_id)
-    } catch (ragError) {
-      console.error('RAG failed, using basic prompt:', ragError)
-      const { buildSystemPrompt } = await import('@/lib/prompts')
-      systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
-    }
+    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
 
     // 6.5. Detect Google Sheets URL in message and auto-read
     let mensajeConArchivo = mensaje
