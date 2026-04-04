@@ -1,5 +1,5 @@
 // Preguntas del onboarding organizadas por bloque
-// Reducido a 7 preguntas esenciales para maximizar conversión
+// Reducido a 3 preguntas esenciales para maximizar conversión
 
 export interface PreguntaOnboarding {
   orden: number

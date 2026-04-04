@@ -28,7 +28,15 @@ const MAX_SIZE = 10 * 1024 * 1024 // 10MB
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData()
+    let formData: FormData
+    try {
+      formData = await request.formData()
+    } catch {
+      return NextResponse.json(
+        { error: 'Faltan campos requeridos: archivo, empresa_id' },
+        { status: 400 }
+      )
+    }
     const file = formData.get('archivo') as File | null
     const empresaId = formData.get('empresa_id') as string | null
 

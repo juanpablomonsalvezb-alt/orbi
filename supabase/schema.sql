@@ -17,7 +17,7 @@ CREATE TABLE empresas (
   email TEXT NOT NULL UNIQUE,
   onboarding_completado BOOLEAN NOT NULL DEFAULT FALSE,
   plan TEXT NOT NULL DEFAULT 'free' CHECK (plan IN ('free', 'solo', 'equipo', 'empresa')),
-  trial_ends_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '48 hours'),
+  trial_ends_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '7 days'),
   stripe_customer_id TEXT,
   stripe_subscription_id TEXT,
   subscription_status TEXT DEFAULT 'trialing',
@@ -27,7 +27,7 @@ CREATE TABLE empresas (
 
 -- ============================================
 -- TABLA: contexto
--- Respuestas del onboarding (14 preguntas)
+-- Respuestas del onboarding (3 preguntas)
 -- Cada fila = una pregunta respondida
 -- ============================================
 CREATE TABLE contexto (

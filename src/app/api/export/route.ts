@@ -32,15 +32,16 @@ export async function GET(request: NextRequest) {
       { data: conversaciones },
       { data: memorias },
       { data: tareas },
-      { data: feedback },
     ] = await Promise.all([
       supabase.from('empresas').select('*').eq('id', empresaId).single(),
       supabase.from('contexto').select('*').eq('empresa_id', empresaId).order('orden'),
       supabase.from('conversaciones').select('*').eq('empresa_id', empresaId).order('created_at', { ascending: false }),
       supabase.from('memorias').select('*').eq('empresa_id', empresaId).order('created_at', { ascending: false }),
       supabase.from('tareas').select('*').eq('empresa_id', empresaId).order('created_at', { ascending: false }),
-      supabase.from('feedback').select('*').eq('empresa_id', empresaId).order('created_at', { ascending: false }),
     ])
+
+    // Feedback table may not exist yet — query separately to avoid breaking the export
+    const { data: feedback } = await supabase.from('feedback').select('*').eq('empresa_id', empresaId).order('created_at', { ascending: false })
 
     if (!empresa) {
       return NextResponse.json({ error: 'No encontramos tu empresa. Intenta cerrar sesión y volver a entrar.' }, { status: 404 })

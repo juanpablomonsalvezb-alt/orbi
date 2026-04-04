@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
-// Dynamic import to avoid server-only/fs issues in some runtimes
-// import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
+import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 import { streamGroq, GroqMessage } from '@/lib/groq'
 import { rateLimit } from '@/lib/rate-limit'
 import { readGoogleSheet, parseSheetUrl } from '@/lib/google-sheets'
@@ -188,10 +187,9 @@ export async function POST(request: NextRequest) {
       content: msg.contenido
     }))
 
-    // 6. Construir system prompt (basic — RAG disabled for serverless compatibility)
-    const { buildSystemPrompt } = await import('@/lib/prompts')
+    // 6. Construir system prompt with RAG (knowledge base loaded from pre-built JSON)
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
-    let systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
+    let systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo, empresa_id)
 
     // 6.1. Append real-time data (exchange rates, holidays, weather, macro indicators)
     try {

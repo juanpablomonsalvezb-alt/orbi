@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'El directorio que solo las grandes empresas podían pagar. 7 agentes de IA especializados para tu negocio. Prueba gratis 7 días.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Orbbi — Agentes de IA para tu negocio',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Orbbi — El agente que orbita tu negocio 24/7',
     description: 'Agentes de IA especializados para PYMEs en Latinoamérica. Prueba gratis 7 días.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,

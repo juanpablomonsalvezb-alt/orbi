@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase-client'
 import { posthog } from '@/lib/posthog'
 
 // Layout protegido: redirige a login si no hay sesión
-// Verifica trial de 48 horas
+// Verifica trial de 7 días
 export default function DashboardLayout({
   children,
 }: {
@@ -80,7 +80,7 @@ export default function DashboardLayout({
             Tu prueba gratuita ha terminado
           </h1>
           <p className="text-sm text-muted mb-6 leading-relaxed">
-            Tus 48 horas de prueba han expirado. Elige un plan para seguir
+            Tu prueba gratuita de 7 días ha expirado. Elige un plan para seguir
             usando tus agentes de Orbbi sin interrupción.
           </p>
           <div className="space-y-3">
@@ -105,7 +105,7 @@ export default function DashboardLayout({
   return (
     <>
       {/* Trial warning banner */}
-      {trialHoursLeft !== null && trialHoursLeft <= 12 && (
+      {trialHoursLeft !== null && trialHoursLeft <= 24 && (
         <div className="bg-accent/10 border-b border-accent/20 px-4 py-2 text-center">
           <p className="text-xs text-accent font-medium">
             Te quedan {trialHoursLeft} horas de prueba gratuita.{' '}

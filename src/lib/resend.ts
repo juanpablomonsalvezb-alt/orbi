@@ -26,11 +26,11 @@ export async function enviarEmailBienvenida(email: string, nombre: string) {
             Hola ${nombre},
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 16px;">
-            Tu cuenta de Orbbi ya está activa. Tienes <strong>48 horas gratis</strong> para explorar
+            Tu cuenta de Orbbi ya está activa. Tienes <strong>7 días gratis</strong> para explorar
             todos los agentes y descubrir cómo pueden ayudar a tu negocio.
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 24px;">
-            El siguiente paso es completar el onboarding — son 7 preguntas rápidas para que
+            El siguiente paso es completar el onboarding — son 3 preguntas rápidas para que
             nuestros agentes conozcan tu empresa en profundidad.
           </p>
           <a href="${process.env.NEXT_PUBLIC_APP_URL}/onboarding"
@@ -191,7 +191,7 @@ export async function enviarEmailOnboardingIncompleto(email: string, nombre: str
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 16px;">
             Notamos que aún no completaste el onboarding de Orbbi.
-            Son solo <strong>7 preguntas rápidas</strong> (menos de 2 minutos) para que
+            Son solo <strong>3 preguntas rápidas</strong> (menos de 2 minutos) para que
             nuestros agentes conozcan tu empresa y puedan ayudarte mejor.
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 24px;">
