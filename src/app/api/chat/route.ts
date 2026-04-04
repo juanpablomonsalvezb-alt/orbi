@@ -251,6 +251,20 @@ export async function POST(request: NextRequest) {
           console.error('Error scraping URL:', err)
           // No agregar nada al mensaje si falla — el scraping es best-effort
         }
+
+        // Si es agente de marketing, tambien analizar rendimiento del sitio con PageSpeed
+        if (agenteTipo === 'marketing') {
+          try {
+            const { analyzeWebsite } = await import('@/lib/real-time-data')
+            const analysis = await analyzeWebsite(scrapableUrl)
+            if (analysis) {
+              mensajeConArchivo += '\n\n' + analysis
+              console.log('PageSpeed analysis added for:', scrapableUrl)
+            }
+          } catch {
+            // PageSpeed es best-effort — no bloquear el chat
+          }
+        }
       }
     }
 

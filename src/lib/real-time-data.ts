@@ -319,6 +319,137 @@ export async function getCommodityPrices(): Promise<string> {
   return ''
 }
 
+// --- MercadoLibre Site IDs ---
+const COUNTRY_TO_ML_SITE: Record<string, string> = {
+  chile: 'MLC', mexico: 'MLM', colombia: 'MCO', peru: 'MPE',
+  argentina: 'MLA', bolivia: 'MBO', ecuador: 'MEC',
+}
+
+// --- API: MercadoLibre Trends (public endpoint, no auth) ---
+export async function getMercadoLibreTrends(country: string): Promise<string> {
+  const site = COUNTRY_TO_ML_SITE[country]
+  if (!site) return ''
+  return cached(`ml-trends-${site}`, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(`https://api.mercadolibre.com/trends/${site}`, {
+        signal: AbortSignal.timeout(8000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data) || data.length === 0) return ''
+      const keywords = data.slice(0, 10).map((t: { keyword: string }) => t.keyword)
+      const countryName = COUNTRY_NAMES[country] || country
+      return `TENDENCIAS MERCADOLIBRE (${countryName}): ${keywords.join(', ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: MercadoLibre Search (public endpoint, may require auth) ---
+export async function searchMercadoLibre(query: string, country: string): Promise<string> {
+  const site = COUNTRY_TO_ML_SITE[country]
+  if (!site) return ''
+  const cacheKey = `ml-search-${site}-${query.toLowerCase().trim().replace(/\s+/g, '-')}`
+  return cached(cacheKey, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://api.mercadolibre.com/sites/${site}/search?q=${encodeURIComponent(query)}&limit=5`,
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) {
+        // Si falla (403, etc.), intentar con las tendencias como fallback
+        return ''
+      }
+      const data = await res.json()
+      const results = data.results as Array<{ title: string; price: number; currency_id: string; permalink: string; sold_quantity?: number }> | undefined
+      if (!results || results.length === 0) return ''
+      const countryName = COUNTRY_NAMES[country] || country
+      const items = results.map((r) => {
+        const sym = CURRENCY_SYMBOLS[r.currency_id] || ''
+        const vendidos = r.sold_quantity ? ` (${r.sold_quantity} vendidos)` : ''
+        return `  * ${r.title} — ${sym}${fmt(r.price)} ${r.currency_id}${vendidos}`
+      })
+      return `RESULTADOS MERCADOLIBRE (${countryName}, "${query}"):\n${items.join('\n')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Google PageSpeed Insights (free, no key required) ---
+export async function analyzeWebsite(url: string): Promise<string> {
+  const cacheKey = `pagespeed-${url}`
+  return cached(cacheKey, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=accessibility&category=seo`
+      const res = await fetch(apiUrl, { signal: AbortSignal.timeout(30000) })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const categories = data.lighthouseResult?.categories
+      if (!categories) return ''
+
+      const performance = categories.performance?.score != null ? Math.round(categories.performance.score * 100) : null
+      const accessibility = categories.accessibility?.score != null ? Math.round(categories.accessibility.score * 100) : null
+      const seo = categories.seo?.score != null ? Math.round(categories.seo.score * 100) : null
+
+      const audits = data.lighthouseResult?.audits
+      const fcp = audits?.['first-contentful-paint']?.displayValue || 'N/D'
+      const lcp = audits?.['largest-contentful-paint']?.displayValue || 'N/D'
+      const si = audits?.['speed-index']?.displayValue || 'N/D'
+      const cls = audits?.['cumulative-layout-shift']?.displayValue || 'N/D'
+
+      const scores: string[] = []
+      if (performance != null) scores.push(`Performance: ${performance}/100`)
+      if (accessibility != null) scores.push(`Accesibilidad: ${accessibility}/100`)
+      if (seo != null) scores.push(`SEO: ${seo}/100`)
+
+      if (scores.length === 0) return ''
+
+      return `ANALISIS WEB (${url}):\n ${scores.join(' | ')}\n First Contentful Paint: ${fcp} | Largest Contentful Paint: ${lcp} | Speed Index: ${si} | CLS: ${cls}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Banxico SIE (Mexico central bank — requires free token) ---
+export async function getMexicoIndicators(): Promise<string> {
+  const token = process.env.BANXICO_TOKEN
+  if (!token) return '' // Se activa cuando se configure BANXICO_TOKEN
+  return cached('banxico-indicators', SIX_HOURS, async () => {
+    try {
+      const series = [
+        { id: 'SF43718', label: 'Tipo de cambio FIX (USD/MXN)' },
+        { id: 'SF61745', label: 'TIIE 28 dias' },
+      ]
+      const results: string[] = []
+      await Promise.allSettled(
+        series.map(async (s) => {
+          try {
+            const res = await fetch(
+              `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${s.id}/datos/oportuno?token=${token}`,
+              { signal: AbortSignal.timeout(10000), headers: { Accept: 'application/json' } }
+            )
+            if (!res.ok) return
+            const json = await res.json()
+            const dato = json?.bmx?.series?.[0]?.datos?.[0]
+            if (dato?.dato) {
+              results.push(`${s.label}: ${dato.dato}`)
+            }
+          } catch {
+            // skip silently
+          }
+        })
+      )
+      if (results.length === 0) return ''
+      return `INDICADORES BANXICO (Mexico, tiempo real):\n ${results.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
 // --- Country detection from onboarding context ---
 export function detectCountry(contexto: Array<{ pregunta?: string; respuesta?: string }>): string {
   const allText = contexto.map(c => c.respuesta || '').join(' ').toLowerCase()
@@ -353,6 +484,16 @@ export async function getRealTimeContext(country: string): Promise<string> {
   }
   if (country === 'peru') {
     promises.push(getPeruIndicators())
+  }
+  if (country === 'mexico') {
+    promises.push(getMexicoIndicators())
+  }
+
+  // Tendencias MercadoLibre (util para ventas/inventario/marketing)
+  try {
+    promises.push(getMercadoLibreTrends(country))
+  } catch {
+    // skip silently
   }
 
   const results = await Promise.allSettled(promises)

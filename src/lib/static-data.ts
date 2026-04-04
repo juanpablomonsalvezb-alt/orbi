@@ -200,6 +200,40 @@ export const COSTOS_PUBLICIDAD: Record<string, Record<string, string>> = {
   ecuador: { meta_cpc: '$0.15-0.50 USD', meta_cpm: '$3-10 USD', google_cpc: '$0.30-1.50 USD' },
 }
 
+// --- Integraciones disponibles (OAuth / API key del usuario) ---
+export const INTEGRACIONES_DISPONIBLES = {
+  google_analytics: {
+    nombre: 'Google Analytics',
+    descripcion: 'Conecta tu Google Analytics para que el agente de Marketing vea tu trafico real.',
+    como_conectar: 'Proximamente — podras vincular tu cuenta de Google Analytics directamente desde el chat.',
+    estado: 'proximamente' as const,
+  },
+  google_search_console: {
+    nombre: 'Google Search Console',
+    descripcion: 'Conecta tu Search Console para que el agente de Marketing vea tus keywords y posiciones.',
+    como_conectar: 'Proximamente — podras vincular tu cuenta directamente desde el chat.',
+    estado: 'proximamente' as const,
+  },
+  meta_business: {
+    nombre: 'Meta Business Suite',
+    descripcion: 'Conecta tu cuenta de Facebook/Instagram Business para metricas reales de campanas.',
+    como_conectar: 'Proximamente — podras vincular tu cuenta directamente desde el chat.',
+    estado: 'proximamente' as const,
+  },
+  mercadolibre: {
+    nombre: 'MercadoLibre',
+    descripcion: 'Conecta tu cuenta de vendedor para que los agentes vean tus ventas y metricas reales.',
+    como_conectar: 'Proximamente — podras vincular tu cuenta directamente desde el chat.',
+    estado: 'proximamente' as const,
+  },
+  banxico: {
+    nombre: 'Banxico SIE',
+    descripcion: 'Indicadores del Banco de Mexico (tipo de cambio FIX, TIIE). Se activa con token gratuito.',
+    como_conectar: 'Agrega BANXICO_TOKEN en las variables de entorno. Obtenlo gratis en https://www.banxico.org.mx/SieAPIRest/service/v1/token',
+    estado: 'requiere_token' as const,
+  },
+}
+
 // Helper para obtener datos por pais
 export function getSalarioMinimo(country: string): string {
   const data = SALARIOS_MINIMOS[country as keyof typeof SALARIOS_MINIMOS]
