@@ -112,7 +112,8 @@ export async function POST(request: NextRequest) {
 
     // Rate limit: 20 messages per minute per empresa
     const { allowed } = rateLimit(`chat:${empresa_id}`, 20, 60000)
-    if (!allowed) {
+    const { allowed: dailyAllowed } = rateLimit(`daily:${empresa_id}`, 100, 86400000)
+    if (!allowed || !dailyAllowed) {
       return NextResponse.json(
         { error: 'Estás enviando mensajes muy rápido. Espera unos segundos.' },
         { status: 429 }

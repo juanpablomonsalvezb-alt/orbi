@@ -4,71 +4,18 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
 import { PREGUNTAS_ONBOARDING } from '@/lib/constants'
-import QuestionBlock from './QuestionBlock'
-
-const STORAGE_KEY = 'orbbi_onboarding_progress'
-
-function loadProgress(): { respuestas: string[]; bloque: number } | null {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) return JSON.parse(saved)
-  } catch {}
-  return null
-}
-
-function saveProgress(respuestas: string[], bloque: number) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ respuestas, bloque }))
-  } catch {}
-}
-
-function clearProgress() {
-  try { localStorage.removeItem(STORAGE_KEY) } catch {}
-}
 
 export default function OnboardingForm() {
   const router = useRouter()
-  const saved = typeof window !== 'undefined' ? loadProgress() : null
   const [respuestas, setRespuestas] = useState<string[]>(
-    saved?.respuestas || new Array(PREGUNTAS_ONBOARDING.length).fill('')
+    new Array(PREGUNTAS_ONBOARDING.length).fill('')
   )
-  const [bloqueActual, setBloqueActual] = useState(saved?.bloque || 1)
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
 
-  const preguntasBloque = PREGUNTAS_ONBOARDING.filter((p) => p.bloque === bloqueActual)
+  const completo = respuestas.every(r => r.trim() !== '')
 
-  const bloques = [
-    { num: 1, nombre: 'Tu negocio' },
-    { num: 2, nombre: 'Finanzas' },
-    { num: 3, nombre: 'Clientes' },
-    { num: 4, nombre: 'Metas' },
-  ]
-
-  const actualizarRespuesta = (orden: number, valor: string) => {
-    setRespuestas((prev) => {
-      const copia = [...prev]
-      copia[orden - 1] = valor
-      saveProgress(copia, bloqueActual)
-      return copia
-    })
-  }
-
-  const bloqueCompleto = preguntasBloque.every((p) => respuestas[p.orden - 1].trim() !== '')
-
-  const siguienteBloque = () => {
-    if (bloqueActual < 4) {
-      const next = bloqueActual + 1
-      setBloqueActual(next)
-      saveProgress(respuestas, next)
-    }
-  }
-
-  const bloqueAnterior = () => {
-    if (bloqueActual > 1) setBloqueActual(bloqueActual - 1)
-  }
-
-  const guardarOnboarding = async () => {
+  const guardar = async () => {
     setError('')
     setCargando(true)
 
@@ -113,7 +60,6 @@ export default function OnboardingForm() {
         .select()
         .single()
 
-      clearProgress()
       if (conv) {
         router.push(`/chat/${conv.id}`)
       } else {
@@ -129,33 +75,8 @@ export default function OnboardingForm() {
 
   return (
     <div className="max-w-lg mx-auto">
-      {/* Progress bar */}
-      <div className="flex items-center space-x-2 mb-10">
-        {bloques.map((b) => (
-          <div key={b.num} className="flex-1">
-            <div
-              className={`h-[2px] transition-colors ${
-                b.num <= bloqueActual ? 'bg-ink' : 'bg-border-light'
-              }`}
-            />
-            <p className={`text-[11px] mt-2 ${
-              b.num === bloqueActual ? 'text-ink font-medium' : 'text-muted'
-            }`}>
-              {b.nombre}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Título del bloque */}
-      <h2 className="text-lg font-medium text-ink mb-1">
-        {bloques[bloqueActual - 1].nombre}
-      </h2>
       <p className="text-sm text-muted mb-8">
-        {bloqueActual === 1 && 'Cuéntanos sobre tu empresa para que orbbi la conozca.'}
-        {bloqueActual === 2 && 'Números básicos para entender tu operación.'}
-        {bloqueActual === 3 && 'Sobre quién te compra y cómo los consigues.'}
-        {bloqueActual === 4 && 'Lo que quieres lograr y lo que te preocupa.'}
+        3 preguntas rápidas para que tu equipo conozca tu negocio.
       </p>
 
       {error && (
@@ -164,49 +85,40 @@ export default function OnboardingForm() {
         </div>
       )}
 
-      {/* Preguntas */}
-      <div className="space-y-5">
-        {preguntasBloque.map((pregunta) => (
-          <QuestionBlock
-            key={pregunta.orden}
-            pregunta={pregunta}
-            valor={respuestas[pregunta.orden - 1]}
-            onChange={(valor) => actualizarRespuesta(pregunta.orden, valor)}
-          />
+      <div className="space-y-6">
+        {PREGUNTAS_ONBOARDING.map((pregunta, index) => (
+          <div key={pregunta.orden}>
+            <label className="text-sm text-ink font-medium block mb-2">
+              {index + 1}. {pregunta.pregunta}
+            </label>
+            <textarea
+              value={respuestas[index]}
+              onChange={(e) => {
+                const copia = [...respuestas]
+                copia[index] = e.target.value
+                setRespuestas(copia)
+              }}
+              placeholder={pregunta.placeholder}
+              rows={2}
+              className="w-full border border-ink/[0.08] rounded-lg px-4 py-3 text-sm text-ink bg-ivory
+                         placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors resize-none"
+            />
+          </div>
         ))}
       </div>
 
-      {/* Navegación */}
-      <div className="flex justify-between mt-10">
-        <button
-          onClick={bloqueAnterior}
-          disabled={bloqueActual === 1}
-          className="rounded-md border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink
-                     hover:bg-ivory-mid transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          Anterior
-        </button>
+      <button
+        onClick={guardar}
+        disabled={!completo || cargando}
+        className="w-full mt-8 rounded-lg bg-ink px-5 py-3 text-white text-sm font-medium
+                   hover:bg-ink-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+      >
+        {cargando ? 'Preparando tu equipo...' : 'Activar mis 7 gerentes'}
+      </button>
 
-        {bloqueActual < 4 ? (
-          <button
-            onClick={siguienteBloque}
-            disabled={!bloqueCompleto}
-            className="rounded-md bg-ink px-5 py-2.5 text-white text-sm font-medium
-                       hover:bg-ink-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Siguiente
-          </button>
-        ) : (
-          <button
-            onClick={guardarOnboarding}
-            disabled={!bloqueCompleto || cargando}
-            className="rounded-md bg-ink px-5 py-2.5 text-white text-sm font-medium
-                       hover:bg-ink-mid transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {cargando ? 'Guardando...' : 'Comenzar con orbbi'}
-          </button>
-        )}
-      </div>
+      <p className="text-[11px] text-muted/40 text-center mt-3">
+        Tus agentes usarán esta información para darte respuestas específicas.
+      </p>
     </div>
   )
 }

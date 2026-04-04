@@ -35,8 +35,8 @@ CREATE TABLE contexto (
   empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
   pregunta TEXT NOT NULL,
   respuesta TEXT NOT NULL,
-  bloque INTEGER NOT NULL CHECK (bloque BETWEEN 1 AND 4),
-  orden INTEGER NOT NULL CHECK (orden BETWEEN 1 AND 7),
+  bloque INTEGER NOT NULL CHECK (bloque BETWEEN 1 AND 1),
+  orden INTEGER NOT NULL CHECK (orden BETWEEN 1 AND 3),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE(empresa_id, orden)

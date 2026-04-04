@@ -77,7 +77,7 @@ export default function RegistroPage() {
       <h2 className="text-ink mb-1" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '24px', fontWeight: 400, letterSpacing: '-0.3px' }}>
         Crea tu cuenta
       </h2>
-      <p className="text-sm text-muted mb-7">48 horas gratis. Sin tarjeta.</p>
+      <p className="text-sm text-muted mb-7">7 días gratis. Sin tarjeta.</p>
 
       {error && <div className="bg-accent-bg border border-accent/15 rounded-md px-3 py-2.5 mb-5"><p className="text-sm text-accent">{error}</p></div>}
 

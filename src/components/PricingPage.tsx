@@ -68,7 +68,7 @@ const AGENTES = [
 
 const FAQS = [
   { q: '¿Puedo cancelar cuando quiera?', a: 'Sí. Mensual cancelas sin penalidad. Anual tienes acceso hasta el fin del período.' },
-  { q: '¿Qué pasa después de las 48 horas?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
+  { q: '¿Qué pasa después de las 7 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
   { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
   { q: '¿Qué diferencia hay entre Orbbi y ChatGPT?', a: 'Orbbi conoce tu negocio en profundidad. Cada agente tiene frameworks especializados y contexto de tu empresa. No necesitas prompt engineering.' },
 ]
@@ -88,7 +88,7 @@ export default function PricingPage() {
               Un agente para cada área de tu negocio
             </h1>
             <p className="text-sm text-ink-light mt-3 max-w-md mx-auto" style={{ fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.6 }}>
-              Todos los planes incluyen 48 horas gratis. Sin tarjeta.
+              Todos los planes incluyen 7 días gratis. Sin tarjeta.
             </p>
           </div>
         </FadeIn>
@@ -171,7 +171,7 @@ export default function PricingPage() {
                   className={`block w-full text-center rounded-md py-2.5 text-sm font-medium transition-colors ${
                     plan.destacado ? 'bg-ivory text-ink hover:bg-ivory-mid' : 'bg-ink text-ivory hover:bg-ink-mid'
                   }`}>
-                  Probar gratis 48h
+                  Probar gratis 7 días
                 </Link>
               </motion.div>
             )

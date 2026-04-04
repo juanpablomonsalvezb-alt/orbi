@@ -368,7 +368,7 @@ function ProblemSolversSection() {
         <FadeIn delay={0.15} className="mb-16">
           <div className="bg-white rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
             <p className="u-paragraph-s text-ink" style={{ color: '#141413' }}>
-              7 preguntas sobre tu negocio. 2 minutos. Y tu equipo directivo empieza a trabajar.
+              3 preguntas sobre tu negocio. 1 minuto. Y tu equipo directivo empieza a trabajar.
             </p>
             <Link href="/registro" className="bg-clay text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shrink-0">
               Comenzar gratis
