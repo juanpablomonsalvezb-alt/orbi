@@ -1,4 +1,4 @@
-import 'server-only'
+// server-only removed for Vercel serverless compatibility
 import { Contexto } from '@/types/database'
 import { buildSystemPrompt, TipoAgente, EstiloComunicacion } from './prompts'
 import { retrieveKnowledge, getKBOverview } from './knowledge-base'
