@@ -74,78 +74,127 @@ function Nav() {
 // 1. HERO (full width, bg-ivory-dark)
 // ═══════════════════════════════════════════════════════════════════
 
-// ── Hero animated network — 6 agents, large circles, floating motion ──
+// ── Hero animated network — 7 agents, bigger circles, rich animations ──
 function HeroNetwork() {
   const nodes = [
-    { x: 250, y: 175, label: 'General', r: 58 },
-    { x: 100, y: 70, label: 'Finanzas', r: 42 },
-    { x: 400, y: 70, label: 'Ventas', r: 42 },
-    { x: 60, y: 280, label: 'RRHH', r: 38 },
-    { x: 440, y: 280, label: 'Marketing', r: 38 },
-    { x: 250, y: 355, label: 'Inventario', r: 36 },
+    { x: 260, y: 200, label: 'General', r: 70 },
+    { x: 110, y: 75, label: 'Finanzas', r: 50 },
+    { x: 410, y: 75, label: 'Ventas', r: 50 },
+    { x: 50, y: 260, label: 'RRHH', r: 46 },
+    { x: 470, y: 260, label: 'Marketing', r: 46 },
+    { x: 150, y: 380, label: 'Inventario', r: 44 },
+    { x: 370, y: 380, label: 'Legal', r: 44 },
   ]
-  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[1,3],[2,4],[3,5],[4,5]]
+  const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,3],[2,4],[3,5],[4,6],[5,6],[1,2]]
 
-  // Each node floats gently in a unique pattern
   const floats = [
-    { x: [0, 0, 0], y: [0, -6, 0] },         // General — gentle up/down
-    { x: [0, -5, 0], y: [0, -4, 0] },         // Finanzas
-    { x: [0, 5, 0], y: [0, -4, 0] },          // Ventas
-    { x: [0, -6, 0], y: [0, 4, 0] },          // RRHH
-    { x: [0, 6, 0], y: [0, 4, 0] },           // Marketing
-    { x: [0, 0, 0], y: [0, 5, 0] },           // Inventario
+    { x: [0, 0, 0], y: [0, -8, 0] },
+    { x: [0, -6, 0], y: [0, -5, 0] },
+    { x: [0, 6, 0], y: [0, -5, 0] },
+    { x: [0, -7, 0], y: [0, 5, 0] },
+    { x: [0, 7, 0], y: [0, 5, 0] },
+    { x: [0, -4, 0], y: [0, 6, 0] },
+    { x: [0, 4, 0], y: [0, 6, 0] },
   ]
+
+  // Colors for satellite nodes
+  const colors = ['', '#e8c4b0', '#e8c4b0', '#ddd5c8', '#ddd5c8', '#d6cfc3', '#d6cfc3']
 
   return (
-    <svg viewBox="0 0 500 400" className="w-full mx-auto" style={{ maxWidth: 480 }}>
-      {/* Edges */}
+    <svg viewBox="0 0 520 460" className="w-full mx-auto" style={{ maxWidth: 520 }}>
+      <defs>
+        <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#d97757" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#d97757" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Background glow */}
+      <circle cx={260} cy={200} r={160} fill="url(#centerGlow)" />
+
+      {/* Animated orbit rings */}
+      <motion.circle cx={260} cy={200} r={120} fill="none" stroke="#d1cfc5" strokeWidth={0.5} strokeDasharray="4 6"
+        animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        style={{ transformOrigin: '260px 200px' }}
+      />
+      <motion.circle cx={260} cy={200} r={180} fill="none" stroke="#d1cfc5" strokeWidth={0.3} strokeDasharray="3 8"
+        animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+        style={{ transformOrigin: '260px 200px' }}
+      />
+
+      {/* Edges with gradient */}
       {edges.map(([a,b],i) => (
         <motion.line key={i}
           x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
-          stroke="#d1cfc5" strokeWidth={1.5}
+          stroke="#d1cfc5" strokeWidth={1.2}
           initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.35 }}
-          transition={{ duration: 0.9, delay: 0.5 + i * 0.07, ease: [0.25,0.46,0.45,0.94] }}
+          animate={{ pathLength: 1, opacity: 0.25 }}
+          transition={{ duration: 1, delay: 0.5 + i * 0.06, ease: [0.25,0.46,0.45,0.94] }}
         />
       ))}
-      {/* Nodes — each floats independently */}
+
+      {/* Data flow dots on edges */}
+      {[0,1,2,3,4,5].map(i => {
+        const [a,b] = edges[i]
+        return (
+          <motion.circle key={`flow${i}`} r={2.5} fill="#d97757"
+            animate={{
+              cx: [nodes[a].x, nodes[b].x],
+              cy: [nodes[a].y, nodes[b].y],
+              opacity: [0, 0.6, 0],
+            }}
+            transition={{ duration: 2 + i * 0.3, delay: 1.5 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )
+      })}
+
+      {/* Nodes */}
       {nodes.map((n,i) => (
         <motion.g key={i}
           animate={{ x: floats[i].x, y: floats[i].y }}
-          transition={{ duration: 4 + i * 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut', delay: i * 0.3 }}
+          transition={{ duration: 4 + i * 0.4, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut', delay: i * 0.2 }}
         >
+          {/* Shadow */}
+          {i === 0 && <circle cx={n.x} cy={n.y + 4} r={n.r + 2} fill="#d97757" opacity={0.1} />}
+
           {/* Circle */}
           <motion.circle cx={n.x} cy={n.y} r={n.r}
-            fill={i===0 ? '#d97757' : '#f0eee6'} stroke={i===0 ? '#c6613f' : '#d1cfc5'} strokeWidth={2}
+            fill={i===0 ? '#d97757' : colors[i] || '#f0eee6'}
+            stroke={i===0 ? '#c6613f' : '#c8c3b8'}
+            strokeWidth={i===0 ? 2.5 : 1.5}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 + i * 0.1, ease: [0.16,1,0.3,1] }}
+            transition={{ duration: 0.7, delay: 0.2 + i * 0.08, ease: [0.16,1,0.3,1] }}
           />
+
           {/* Label */}
-          <motion.text x={n.x} y={n.y + (i===0 ? 6 : 5)} textAnchor="middle"
+          <motion.text x={n.x} y={n.y + (i===0 ? 7 : 5)} textAnchor="middle"
             fill={i===0 ? '#fff' : '#5e5d59'}
-            fontSize={i===0 ? 20 : 15} fontFamily="'Source Serif 4', Georgia, serif" fontWeight={i===0 ? 500 : 400}
+            fontSize={i===0 ? 22 : 16} fontFamily="'Source Serif 4', Georgia, serif" fontWeight={i===0 ? 500 : 400}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }}
+            transition={{ duration: 0.4, delay: 0.6 + i * 0.08 }}
           >{n.label}</motion.text>
         </motion.g>
       ))}
-      {/* Pulse rings on center */}
-      <motion.circle cx={250} cy={175} r={58} fill="none" stroke="#d97757" strokeWidth={1.5}
-        animate={{ r: [58, 85, 58], opacity: [0.35, 0, 0.35] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.circle cx={250} cy={175} r={58} fill="none" stroke="#d97757" strokeWidth={0.8}
-        animate={{ r: [58, 100, 58], opacity: [0.2, 0, 0.2] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-      />
+
+      {/* Center pulse rings */}
+      {[0, 1, 2].map(i => (
+        <motion.circle key={`pulse${i}`} cx={260} cy={200} fill="none" stroke="#d97757" strokeWidth={1.2 - i * 0.3}
+          animate={{ r: [70, 100 + i * 20, 70], opacity: [0.3 - i * 0.08, 0, 0.3 - i * 0.08] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
+        />
+      ))}
+
       {/* Floating particles */}
-      {[...Array(8)].map((_,i) => (
+      {[...Array(12)].map((_,i) => (
         <motion.circle key={`p${i}`}
-          cx={50 + Math.random() * 400} cy={30 + Math.random() * 340} r={2}
-          fill={`rgba(217,119,87,${0.1 + Math.random() * 0.15})`}
-          animate={{ opacity: [0, 0.5, 0], cy: [30 + Math.random()*340, Math.random()*170, -10] }}
-          transition={{ duration: 3 + Math.random()*2, delay: Math.random()*2, repeat: Infinity, ease: 'easeInOut' }}
+          cx={30 + Math.random() * 460} cy={20 + Math.random() * 420} r={1.5 + Math.random()}
+          fill="#d97757"
+          animate={{
+            opacity: [0, 0.3 + Math.random() * 0.2, 0],
+            y: [0, -30 - Math.random() * 40, 0],
+          }}
+          transition={{ duration: 3 + Math.random()*3, delay: Math.random()*3, repeat: Infinity, ease: 'easeInOut' }}
         />
       ))}
     </svg>

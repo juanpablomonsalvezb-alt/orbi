@@ -96,20 +96,15 @@ export default function PricingPage() {
         {/* Toggle — FIXED */}
         <FadeIn className="mb-10">
           <div className="flex items-center justify-center gap-3">
-            <span className={`text-sm cursor-pointer ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}
-              onClick={() => setBilling('monthly')}>Mensual</span>
-            <button onClick={() => setBilling(billing === 'monthly' ? 'annual' : 'monthly')}
-              className="relative w-12 h-6 rounded-full bg-cloud-light transition-colors"
-              style={{ backgroundColor: billing === 'annual' ? '#c6613f' : '#d1cfc5' }}>
-              <motion.span className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm"
-                animate={{ x: billing === 'annual' ? 28 : 4 }}
-                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }} />
+            <button onClick={() => setBilling('monthly')}
+              className={`text-sm px-4 py-1.5 rounded-full transition-colors ${billing === 'monthly' ? 'bg-ink text-ivory' : 'text-muted hover:text-ink'}`}>
+              Mensual
             </button>
-            <span className={`text-sm cursor-pointer ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}
-              onClick={() => setBilling('annual')}>Anual</span>
-            {billing === 'annual' && (
-              <span className="text-[11px] font-medium text-white bg-accent px-2 py-0.5 rounded-full">-15%</span>
-            )}
+            <button onClick={() => setBilling('annual')}
+              className={`text-sm px-4 py-1.5 rounded-full transition-colors ${billing === 'annual' ? 'bg-ink text-ivory' : 'text-muted hover:text-ink'}`}>
+              Anual
+              {billing === 'annual' && <span className="ml-1.5 text-[10px] text-clay">-15%</span>}
+            </button>
           </div>
         </FadeIn>
 
