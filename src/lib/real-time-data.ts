@@ -4,6 +4,8 @@
  * All output in Spanish for LATAM business context.
  */
 
+import { getSalarioMinimo, getCalendarioTributario, getCotizaciones } from './static-data'
+
 // --- In-memory cache with TTL ---
 const cache = new Map<string, { data: unknown; expires: number }>()
 
@@ -70,20 +72,43 @@ function formatDate(d: Date): string {
   return `${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
 }
 
-// --- API 1: Frankfurter — Exchange rates ---
+// --- API 1: Frankfurter + mindicador — Exchange rates ---
 export async function getExchangeRates(): Promise<string> {
   return cached('exchange-rates', SIX_HOURS, async () => {
-    const res = await fetch('https://api.frankfurter.dev/latest?from=USD&to=CLP,MXN,COP,PEN,ARS,BOB', {
-      signal: AbortSignal.timeout(8000),
-    })
-    if (!res.ok) throw new Error(`Frankfurter ${res.status}`)
-    const data = await res.json()
-    const rates = data.rates as Record<string, number>
-    const fecha = data.date || new Date().toISOString().slice(0, 10)
-    const parts = Object.entries(rates).map(([cur, val]) => {
-      const sym = CURRENCY_SYMBOLS[cur] || ''
-      return `1 USD = ${sym}${fmt(val, cur === 'PEN' || cur === 'BOB' ? 2 : 0)} ${cur}`
-    })
+    // Frankfurter solo soporta MXN de LATAM; CLP lo obtenemos de mindicador
+    const [frankRes, minRes] = await Promise.allSettled([
+      fetch('https://api.frankfurter.dev/v1/latest?from=USD&to=MXN,EUR', {
+        signal: AbortSignal.timeout(8000),
+      }),
+      fetch('https://mindicador.cl/api/dolar', {
+        signal: AbortSignal.timeout(8000),
+      }),
+    ])
+
+    const parts: string[] = []
+    let fecha = new Date().toISOString().slice(0, 10)
+
+    // Frankfurter: MXN y EUR
+    if (frankRes.status === 'fulfilled' && frankRes.value.ok) {
+      const data = await frankRes.value.json()
+      const rates = data.rates as Record<string, number>
+      fecha = data.date || fecha
+      for (const [cur, val] of Object.entries(rates)) {
+        const sym = CURRENCY_SYMBOLS[cur] || ''
+        parts.push(`1 USD = ${sym}${fmt(val, cur === 'EUR' ? 2 : 0)} ${cur}`)
+      }
+    }
+
+    // mindicador: CLP (dolar observado)
+    if (minRes.status === 'fulfilled' && minRes.value.ok) {
+      const data = await minRes.value.json()
+      const valor = data.serie?.[0]?.valor
+      if (valor) {
+        parts.push(`1 USD = $${fmt(valor)} CLP`)
+      }
+    }
+
+    if (parts.length === 0) return ''
     return `TIPOS DE CAMBIO (actualizado ${fecha}):\n ${parts.join(' | ')}`
   })
 }
@@ -186,6 +211,35 @@ export async function getWeather(country: string): Promise<string> {
   })
 }
 
+// --- API 7: Servientrega Colombia — Cotizacion de envios ---
+export async function getShippingCostColombia(
+  ciudadOrigen: string, ciudadDestino: string,
+  peso: number, largo: number, alto: number, ancho: number,
+  valorDeclarado: number
+): Promise<string> {
+  try {
+    const url = `https://mobile.servientrega.com/ApiIngresoCLientes/api/Cotizador/Tarifas/${encodeURIComponent(ciudadOrigen)}/${encodeURIComponent(ciudadDestino)}/${largo}/${alto}/${ancho}/${peso}/${valorDeclarado}/2/es`
+    const res = await fetch(url, { signal: AbortSignal.timeout(10000) })
+    if (!res.ok) return `Error al consultar Servientrega: HTTP ${res.status}`
+    const data = await res.json()
+    if (Array.isArray(data) && data.length > 0) {
+      const opcion = data[0]
+      const costo = opcion.ValorTotal ?? opcion.valorTotal ?? opcion.Valor ?? 'N/D'
+      const dias = opcion.TiempoEntrega ?? opcion.tiempoEntrega ?? opcion.Dias ?? 'N/D'
+      return `Envio Servientrega (${ciudadOrigen} -> ${ciudadDestino}): $${Number(costo).toLocaleString('es-CO')} COP, ${dias} dias habiles`
+    }
+    return `Servientrega: sin tarifas disponibles para la ruta ${ciudadOrigen} -> ${ciudadDestino}`
+  } catch (err) {
+    return `Error al consultar Servientrega: ${err instanceof Error ? err.message : 'desconocido'}`
+  }
+}
+
+// --- Precios de commodities (pendiente API key) ---
+export async function getCommodityPrices(): Promise<string> {
+  // Por ahora retorna vacio — se activara cuando se obtenga API key (API Ninjas u otra fuente)
+  return ''
+}
+
 // --- Country detection from onboarding context ---
 export function detectCountry(contexto: Array<{ pregunta?: string; respuesta?: string }>): string {
   const allText = contexto.map(c => c.respuesta || '').join(' ').toLowerCase()
@@ -224,6 +278,16 @@ export async function getRealTimeContext(country: string): Promise<string> {
       parts.push(r.value)
     }
   }
+
+  // Agregar datos estaticos de referencia
+  const salario = getSalarioMinimo(country)
+  if (salario) parts.push(salario)
+
+  const calendario = getCalendarioTributario(country)
+  if (calendario) parts.push('CALENDARIO TRIBUTARIO:\n' + calendario)
+
+  const cotizaciones = getCotizaciones(country)
+  if (cotizaciones) parts.push('COTIZACIONES PREVISIONALES:\n' + cotizaciones)
 
   if (parts.length === 0) return ''
 
