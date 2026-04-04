@@ -191,7 +191,17 @@ export async function POST(request: NextRequest) {
     // 6. Construir system prompt (basic — RAG disabled for serverless compatibility)
     const { buildSystemPrompt } = await import('@/lib/prompts')
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
-    const systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
+    let systemPrompt = buildSystemPrompt(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo)
+
+    // 6.1. Append real-time data (exchange rates, holidays, weather, macro indicators)
+    try {
+      const { getRealTimeContext, detectCountry } = await import('@/lib/real-time-data')
+      const country = detectCountry(contexto || [])
+      const realTimeData = await getRealTimeContext(country)
+      systemPrompt += realTimeData
+    } catch (err) {
+      console.log('Real-time data skipped:', err)
+    }
 
     // 6.5. Detect Google Sheets URL in message and auto-read
     let mensajeConArchivo = mensaje
