@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
-import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
+// Dynamic import to avoid server-only/fs issues in some runtimes
+// import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
 import { streamGroq, GroqMessage } from '@/lib/groq'
 import { rateLimit } from '@/lib/rate-limit'
 import { readGoogleSheet, parseSheetUrl } from '@/lib/google-sheets'
@@ -191,6 +192,7 @@ export async function POST(request: NextRequest) {
     const historialTexto = (historialDB || []).map(m => m.contenido).join(' ').slice(-1000)
     let systemPrompt: string
     try {
+      const { buildSystemPromptWithRAG } = await import('@/lib/prompts-server')
       systemPrompt = await buildSystemPromptWithRAG(empresa.nombre, contexto || [], agenteTipo, mensaje, historialTexto, estilo, empresa_id)
     } catch (ragError) {
       console.error('RAG failed, using basic prompt:', ragError)

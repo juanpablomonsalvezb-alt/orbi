@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { TipoAgente } from '@/lib/prompts'
 import { streamGroq } from '@/lib/groq'
-import { buildSystemPromptWithRAG } from '@/lib/prompts-server'
+// Dynamic import for serverless compat
 import { verifyEmpresaAccess } from '@/lib/api-auth'
 
 function getSupabase() {
@@ -51,10 +51,20 @@ export async function POST(request: NextRequest) {
       .order('orden', { ascending: true })
 
     const tipo = (agente_tipo || 'general') as TipoAgente
-    const systemPrompt = await buildSystemPromptWithRAG(
-      empresa.nombre, contexto || [], tipo,
-      'saludo inicial', '', estilo || 'directo', empresa_id
-    )
+    let systemPrompt: string
+    try {
+      const mod = await import('@/lib/prompts-server')
+      systemPrompt = await mod.buildSystemPromptWithRAG(
+        empresa.nombre, contexto || [], tipo,
+        'saludo inicial', '', estilo || 'directo', empresa_id
+      )
+    } catch {
+      const { buildSystemPrompt } = await import('@/lib/prompts')
+      systemPrompt = buildSystemPrompt(
+        empresa.nombre, contexto || [], tipo,
+        'saludo inicial', '', estilo || 'directo'
+      )
+    }
 
     // Special prompt — VERY short, like a consultant's opening line
     const firstMessagePrompt = `Primera interacción con ${empresa.nombre}. Saluda en MÁXIMO 2-3 oraciones cortas:
