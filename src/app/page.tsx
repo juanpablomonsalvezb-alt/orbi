@@ -778,55 +778,43 @@ function PlanesSection() {
 // 6. NOVEDADES SECTION
 // ═══════════════════════════════════════════════════════════════════
 
-function NovedadesSection() {
-  const items = [
-    { title: '7 agentes especializados con frameworks de negocio LATAM', tag: 'Producto' },
-    { title: 'Onboarding de 7 preguntas para contextualizar tu empresa', tag: 'Funcionalidad' },
-    { title: 'Chat ilimitado con historial de conversaciones', tag: 'Funcionalidad' },
-    { title: 'Análisis financiero con benchmarks por industria', tag: 'Metodología' },
-    { title: 'Frameworks de gestión: Cynefin, Fayol, OODA, Eisenhower', tag: 'Metodología' },
+function ComoEmpezarSection() {
+  const pasos = [
+    { num: '01', titulo: 'Regístrate en 30 segundos', desc: 'Solo necesitas email y contraseña. Sin tarjeta de crédito. 7 días gratis con acceso a todos los agentes.' },
+    { num: '02', titulo: '3 preguntas sobre tu negocio', desc: 'Cuéntanos a qué te dedicas, tus ventas y tu mayor desafío. En 1 minuto tu equipo te conoce.' },
+    { num: '03', titulo: 'Habla con tu primer agente', desc: 'El Gerente General analiza tu situación y te propone las primeras acciones. Después, activa los agentes que necesites.' },
   ]
 
   return (
-    <section className="bg-ivory-mid">
-      <div className="border-t border-cloud-light/50" />
+    <section className="bg-ivory">
       <div className="space-medium" />
       <div className="u-container">
-        <div className="grid-12">
-          {/* Left: heading */}
-          <div style={{ gridColumn: 'span 4' }} className="max-md:col-span-full">
-            <FadeIn>
-              <div className="mb-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
-                </svg>
+        <FadeIn className="text-center mb-12">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-accent mb-3">Empieza hoy</p>
+          <h2 className="u-display-l">
+            <AnimatedWords>3 pasos y tu equipo está listo</AnimatedWords>
+          </h2>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {pasos.map((paso, i) => (
+            <FadeIn key={paso.num} delay={i * 0.1}>
+              <div className="text-center">
+                <span className="text-4xl font-light text-clay/30 block mb-4" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>{paso.num}</span>
+                <h3 className="text-ink font-medium mb-2" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '18px' }}>
+                  {paso.titulo}
+                </h3>
+                <p className="text-sm text-ink-light leading-relaxed">{paso.desc}</p>
               </div>
-              <h2 className="u-display-s" style={{ maxWidth: '16ch' }}>
-                Explora las últimas novedades
-              </h2>
             </FadeIn>
-          </div>
-          {/* Right: stacked cards */}
-          <div style={{ gridColumn: 'span 8' }} className="max-md:col-span-full">
-            {items.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.06}>
-                <div className="group cursor-pointer py-6 border-b border-cloud-light/40 hover:opacity-70 transition-opacity">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="u-paragraph-s" style={{ color: '#141413', fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                      {item.title}
-                    </h3>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-xs text-muted">{item.tag}</span>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0aea5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          ))}
         </div>
+
+        <FadeIn delay={0.3} className="text-center mt-10">
+          <Link href="/registro" className="bg-ink text-ivory text-sm font-medium px-8 py-3 rounded-lg hover:bg-ink-mid transition-colors inline-block">
+            Comenzar gratis
+          </Link>
+        </FadeIn>
       </div>
       <div className="space-medium" />
     </section>
@@ -999,15 +987,22 @@ function Footer() {
                 </svg>
               </button>
             </div>
-            {/* Pill buttons */}
-            <div className="flex gap-2 mb-6">
-              {['Escribir', 'Aprender', 'Analizar'].map((label) => (
-                <span key={label} className="text-[11px] text-muted border border-ink-mid rounded-full px-3 py-1">
-                  {label}
-                </span>
-              ))}
+            {/* Key numbers */}
+            <div className="flex gap-4 mb-6">
+              <div>
+                <p className="text-sm font-medium text-ivory-mid">7</p>
+                <p className="text-[10px] text-muted">agentes</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-ivory-mid">7</p>
+                <p className="text-[10px] text-muted">países</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-ivory-mid">24/7</p>
+                <p className="text-[10px] text-muted">disponible</p>
+              </div>
             </div>
-            <p className="text-xs text-muted">By Orbbi</p>
+            <p className="text-xs text-muted">Orbbi — Tu equipo directivo virtual</p>
             <p className="text-xs text-muted mt-1">&copy; 2026 Orbbi. Todos los derechos reservados.</p>
           </div>
 
@@ -1071,7 +1066,7 @@ export default function Home() {
       <SocialProofSection />
       <VideoSection />
       <PlanesSection />
-      <NovedadesSection />
+      <ComoEmpezarSection />
       <FinalCTA />
       <Footer />
     </main>

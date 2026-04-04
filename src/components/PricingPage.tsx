@@ -24,7 +24,7 @@ const PLANES = [
     mensual: 29, anual: 295.80,
     features: [
       { t: '1 agente (Gerente General)', ok: true },
-      { t: 'Onboarding guiado', ok: true },
+      { t: 'Onboarding en 1 minuto', ok: true },
       { t: 'Chat ilimitado', ok: true },
       { t: 'Historial de conversaciones', ok: true },
       { t: 'Agentes adicionales', ok: false },
@@ -36,7 +36,7 @@ const PLANES = [
     mensual: 79, anual: 805.80, destacado: true,
     features: [
       { t: '3 agentes a elegir', ok: true },
-      { t: 'Onboarding guiado', ok: true },
+      { t: 'Onboarding en 1 minuto', ok: true },
       { t: 'Chat ilimitado', ok: true },
       { t: 'Historial de conversaciones', ok: true },
       { t: 'Agentes adicionales (+$19/mes c/u)', ok: true },
@@ -48,9 +48,9 @@ const PLANES = [
     mensual: 249, anual: 2539.80,
     features: [
       { t: 'Los 7 agentes incluidos', ok: true },
-      { t: 'Onboarding guiado', ok: true },
+      { t: 'Onboarding en 1 minuto', ok: true },
       { t: 'Chat ilimitado', ok: true },
-      { t: 'Historial de conversaciones', ok: true },
+      { t: 'Historial + memoria', ok: true },
       { t: 'Soporte prioritario', ok: true },
     ],
   },
@@ -68,7 +68,7 @@ const AGENTES = [
 
 const FAQS = [
   { q: '¿Puedo cancelar cuando quiera?', a: 'Sí. Mensual cancelas sin penalidad. Anual tienes acceso hasta el fin del período.' },
-  { q: '¿Qué pasa después de las 7 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
+  { q: '¿Qué pasa después de los 7 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
   { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
   { q: '¿Qué diferencia hay entre Orbbi y ChatGPT?', a: 'Orbbi conoce tu negocio en profundidad. Cada agente tiene frameworks especializados y contexto de tu empresa. No necesitas prompt engineering.' },
 ]
@@ -93,19 +93,22 @@ export default function PricingPage() {
           </div>
         </FadeIn>
 
-        {/* Toggle */}
+        {/* Toggle — FIXED */}
         <FadeIn className="mb-10">
           <div className="flex items-center justify-center gap-3">
-            <span className={`text-sm ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}>Mensual</span>
+            <span className={`text-sm cursor-pointer ${billing === 'monthly' ? 'text-ink font-medium' : 'text-muted'}`}
+              onClick={() => setBilling('monthly')}>Mensual</span>
             <button onClick={() => setBilling(billing === 'monthly' ? 'annual' : 'monthly')}
-              className="relative w-11 h-[22px] rounded-full bg-border-light">
-              <motion.span className="absolute top-[3px] w-4 h-4 rounded-full"
-                animate={{ x: billing === 'annual' ? 24 : 3, backgroundColor: billing === 'annual' ? '#c6613f' : '#87867f' }}
-                transition={{ duration: 0.2 }} />
+              className="relative w-12 h-6 rounded-full bg-cloud-light transition-colors"
+              style={{ backgroundColor: billing === 'annual' ? '#c6613f' : '#d1cfc5' }}>
+              <motion.span className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm"
+                animate={{ x: billing === 'annual' ? 28 : 4 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }} />
             </button>
-            <span className={`text-sm ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}>Anual</span>
+            <span className={`text-sm cursor-pointer ${billing === 'annual' ? 'text-ink font-medium' : 'text-muted'}`}
+              onClick={() => setBilling('annual')}>Anual</span>
             {billing === 'annual' && (
-              <span className="text-[11px] font-medium text-accent bg-accent-bg px-2 py-0.5 rounded">-15%</span>
+              <span className="text-[11px] font-medium text-white bg-accent px-2 py-0.5 rounded-full">-15%</span>
             )}
           </div>
         </FadeIn>
@@ -128,24 +131,24 @@ export default function PricingPage() {
                 )}
 
                 <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '20px' }}>{plan.nombre}</p>
-                <p className={`text-xs mt-1 ${plan.destacado ? 'text-border' : 'text-muted'}`}>{plan.desc}</p>
+                <p className={`text-xs mt-1 ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>{plan.desc}</p>
 
                 <div className="mt-5 mb-6">
                   {anual ? (
                     <>
-                      <span className={`text-xs line-through ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>${plan.mensual}/mes</span>
+                      <span className={`text-xs line-through ${plan.destacado ? 'text-ivory/30' : 'text-muted/50'}`}>${plan.mensual}/mes</span>
                       <div className="flex items-baseline gap-1 mt-0.5">
                         <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>
                           ${plan.anual.toLocaleString('es-CL')}
                         </span>
-                        <span className={`text-xs ${plan.destacado ? 'text-border' : 'text-muted'}`}>/año</span>
+                        <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>/año</span>
                       </div>
-                      <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-border/50' : 'text-muted/50'}`}>~${equiv}/mes</p>
+                      <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-ivory/30' : 'text-muted/50'}`}>~${equiv}/mes</p>
                     </>
                   ) : (
                     <div className="flex items-baseline gap-1">
                       <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>${plan.mensual}</span>
-                      <span className={`text-xs ${plan.destacado ? 'text-border' : 'text-muted'}`}>/mes</span>
+                      <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>/mes</span>
                     </div>
                   )}
                 </div>
@@ -181,7 +184,7 @@ export default function PricingPage() {
         {/* Separator */}
         <div className="h-px bg-ink/[0.06] mb-16" />
 
-        {/* Agentes à la carte */}
+        {/* Agentes */}
         <FadeIn className="mb-20">
           <div className="md:flex md:justify-between md:items-end mb-6">
             <div>
