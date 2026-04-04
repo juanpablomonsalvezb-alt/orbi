@@ -1,12 +1,13 @@
 /**
  * Real-time data fetcher for ORBBI AI agents.
- * Fetches from 6 free APIs, caches in memory with TTL.
+ * Fetches from 30+ free APIs, caches in memory with TTL.
  * All output in Spanish for LATAM business context.
  */
 
 import {
   getSalarioMinimo, getCalendarioTributario, getCotizaciones,
   getPreciosCombustible, getProximoEventoComercial, getCostosPublicidad,
+  getUnidadesReferencia,
 } from './static-data'
 
 // --- In-memory cache with TTL ---
@@ -23,6 +24,7 @@ async function cached<T>(key: string, ttlMs: number, fetcher: () => Promise<T>):
 // --- Constants ---
 const SIX_HOURS = 6 * 60 * 60 * 1000
 const THREE_HOURS = 3 * 60 * 60 * 1000
+const ONE_HOUR = 60 * 60 * 1000
 const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000
 
 const COUNTRY_TO_CODE: Record<string, string> = {
@@ -75,15 +77,18 @@ function formatDate(d: Date): string {
   return `${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
 }
 
-// --- API 1: Frankfurter + mindicador — Exchange rates ---
+// --- API 1: Exchange rates — Frankfurter + mindicador + open.er-api (ALL LATAM currencies) ---
 export async function getExchangeRates(): Promise<string> {
   return cached('exchange-rates', SIX_HOURS, async () => {
-    // Frankfurter solo soporta MXN de LATAM; CLP lo obtenemos de mindicador
-    const [frankRes, minRes] = await Promise.allSettled([
+    const [frankRes, minRes, erRes] = await Promise.allSettled([
       fetch('https://api.frankfurter.dev/v1/latest?from=USD&to=MXN,EUR', {
         signal: AbortSignal.timeout(8000),
       }),
       fetch('https://mindicador.cl/api/dolar', {
+        signal: AbortSignal.timeout(8000),
+      }),
+      // open.er-api: CLP, COP, PEN, ARS, BOB + confirmacion MXN
+      fetch('https://open.er-api.com/v1/latest/USD', {
         signal: AbortSignal.timeout(8000),
       }),
     ])
@@ -109,6 +114,25 @@ export async function getExchangeRates(): Promise<string> {
       if (valor) {
         parts.push(`1 USD = $${fmt(valor)} CLP`)
       }
+    }
+
+    // open.er-api: todas las monedas LATAM que falten
+    if (erRes.status === 'fulfilled' && erRes.value.ok) {
+      try {
+        const data = await erRes.value.json()
+        const rates = data.rates as Record<string, number> | undefined
+        if (rates) {
+          const latamCurrencies = ['COP', 'PEN', 'ARS', 'BOB']
+          // Solo agregar CLP si no lo obtuvimos de mindicador
+          if (!parts.some(p => p.includes('CLP'))) latamCurrencies.push('CLP')
+          for (const cur of latamCurrencies) {
+            if (rates[cur]) {
+              const sym = CURRENCY_SYMBOLS[cur] || ''
+              parts.push(`1 USD = ${sym}${fmt(rates[cur], cur === 'PEN' ? 2 : 0)} ${cur}`)
+            }
+          }
+        }
+      } catch { /* skip */ }
     }
 
     if (parts.length === 0) return ''
@@ -313,10 +337,9 @@ export async function getPeruIndicators(): Promise<string> {
   })
 }
 
-// --- Precios de commodities (pendiente API key) ---
+// --- Precios de commodities (referencial estático — APIs gratuitas de commodities no disponibles sin key) ---
 export async function getCommodityPrices(): Promise<string> {
-  // Por ahora retorna vacio — se activara cuando se obtenga API key (API Ninjas u otra fuente)
-  return ''
+  return 'COMMODITIES (referencial): Petroleo WTI ~$70-80 USD/barril | Cobre ~$4.0-4.5 USD/lb | Soja ~$10-12 USD/bushel'
 }
 
 // --- MercadoLibre Site IDs ---
@@ -450,6 +473,323 @@ export async function getMexicoIndicators(): Promise<string> {
   })
 }
 
+// --- API: Dolar Blue Argentina (dolarapi.com — free, no key) ---
+export async function getDolarBlue(): Promise<string> {
+  return cached('dolar-blue', ONE_HOUR, async () => {
+    try {
+      const res = await fetch('https://dolarapi.com/v1/dolares/blue', {
+        signal: AbortSignal.timeout(8000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const compra = data.compra
+      const venta = data.venta
+      const fecha = data.fechaActualizacion || new Date().toISOString()
+      if (!compra || !venta) return ''
+      return `DOLAR BLUE (Argentina): Compra $${fmt(compra)} | Venta $${fmt(venta)} ARS (actualizado ${fecha.slice(0, 16).replace('T', ' ')})`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Cotizaciones dolar Argentina completas (dolarapi.com) ---
+export async function getDolaresArgentina(): Promise<string> {
+  return cached('dolares-argentina', ONE_HOUR, async () => {
+    try {
+      const res = await fetch('https://dolarapi.com/v1/dolares', {
+        signal: AbortSignal.timeout(8000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data)) return ''
+      const lines = data.slice(0, 6).map((d: { nombre: string; compra: number; venta: number }) => {
+        return `${d.nombre}: Compra $${fmt(d.compra)} / Venta $${fmt(d.venta)}`
+      })
+      return `COTIZACIONES DOLAR ARGENTINA:\n ${lines.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: TRM Colombia (datos.gov.co — Socrata API, free) ---
+export async function getTRMColombia(): Promise<string> {
+  return cached('trm-colombia', SIX_HOURS, async () => {
+    try {
+      const res = await fetch(
+        'https://www.datos.gov.co/resource/mcec-87by.json?$limit=1&$order=vigenciadesde%20DESC',
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      if (!Array.isArray(data) || data.length === 0) return ''
+      const trm = data[0]
+      const valor = trm.valor ? Number(trm.valor).toFixed(2) : null
+      const fecha = trm.vigenciadesde ? trm.vigenciadesde.slice(0, 10) : ''
+      if (!valor) return ''
+      return `TRM COLOMBIA (oficial): 1 USD = $${valor} COP (vigencia ${fecha})`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Inflation historical (World Bank — last 5 years) ---
+export async function getInflationHistory(wbCode: string): Promise<string> {
+  const code = wbCode.toUpperCase()
+  return cached(`inflation-history-${code}`, TWENTY_FOUR_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://api.worldbank.org/v2/country/${code}/indicator/FP.CPI.TOTL.ZG?format=json&per_page=5&mrnev=5`,
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const json = await res.json()
+      const datos = json?.[1]
+      if (!Array.isArray(datos) || datos.length === 0) return ''
+      const countryName = COUNTRY_NAMES[Object.keys(COUNTRY_TO_WB_CODE).find(k => COUNTRY_TO_WB_CODE[k] === code) || ''] || code
+      const items = datos
+        .filter((d: { value: number | null; date: string }) => d.value != null)
+        .map((d: { value: number; date: string }) => `${d.date}: ${Number(d.value).toFixed(1)}%`)
+        .reverse()
+      if (items.length === 0) return ''
+      return `INFLACION HISTORICA (${countryName}): ${items.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: mindicador.cl TPM historica (Chile) ---
+export async function getTPMHistory(): Promise<string> {
+  return cached('tpm-history', TWENTY_FOUR_HOURS, async () => {
+    try {
+      const year = new Date().getFullYear()
+      const res = await fetch(`https://mindicador.cl/api/tpm/${year}`, {
+        signal: AbortSignal.timeout(8000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const serie = data.serie
+      if (!Array.isArray(serie) || serie.length === 0) return ''
+      // Ultimos 6 valores
+      const ultimos = serie.slice(0, 6).reverse()
+      const items = ultimos.map((v: { fecha: string; valor: number }) => {
+        const fecha = v.fecha ? v.fecha.slice(0, 10) : ''
+        return `${fecha}: ${v.valor}%`
+      })
+      return `TPM CHILE (${year}, ultimos datos): ${items.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: mindicador.cl IPC historico (Chile) ---
+export async function getIPCHistory(): Promise<string> {
+  return cached('ipc-history', TWENTY_FOUR_HOURS, async () => {
+    try {
+      const year = new Date().getFullYear()
+      const res = await fetch(`https://mindicador.cl/api/ipc/${year}`, {
+        signal: AbortSignal.timeout(8000),
+      })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const serie = data.serie
+      if (!Array.isArray(serie) || serie.length === 0) return ''
+      const ultimos = serie.slice(0, 6).reverse()
+      const items = ultimos.map((v: { fecha: string; valor: number }) => {
+        const fecha = v.fecha ? new Date(v.fecha).toLocaleDateString('es-CL', { month: 'short', year: 'numeric' }) : ''
+        return `${fecha}: ${v.valor}%`
+      })
+      return `IPC CHILE MENSUAL (${year}): ${items.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: CoinGecko — Bitcoin/crypto prices in local currencies ---
+export async function getCryptoPrices(country: string): Promise<string> {
+  const currencyMap: Record<string, string> = {
+    chile: 'clp', mexico: 'mxn', colombia: 'cop', peru: 'pen',
+    argentina: 'ars', bolivia: 'usd', ecuador: 'usd',
+  }
+  const localCur = currencyMap[country] || 'usd'
+  return cached(`crypto-${localCur}`, THREE_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=${localCur},usd`,
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      const parts: string[] = []
+      const curUpper = localCur.toUpperCase()
+      const sym = CURRENCY_SYMBOLS[curUpper] || '$'
+      if (data.bitcoin?.[localCur]) {
+        parts.push(`Bitcoin: ${sym}${fmt(data.bitcoin[localCur])} ${curUpper}`)
+      }
+      if (data.ethereum?.[localCur]) {
+        parts.push(`Ethereum: ${sym}${fmt(data.ethereum[localCur])} ${curUpper}`)
+      }
+      if (data.bitcoin?.usd && localCur !== 'usd') {
+        parts.push(`BTC ref: $${fmt(data.bitcoin.usd)} USD`)
+      }
+      if (parts.length === 0) return ''
+      return `CRIPTOMONEDAS: ${parts.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Open-Meteo Extended — Weather + Air quality + Sunrise/Sunset ---
+export async function getWeatherExtended(country: string): Promise<string> {
+  const city = CITY_COORDS[country]
+  if (!city) return ''
+  return cached(`weather-ext-${country}`, THREE_HOURS, async () => {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,sunrise,sunset,uv_index_max&timezone=auto&forecast_days=3`
+      const res = await fetch(url, { signal: AbortSignal.timeout(8000) })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const current = data.current
+      const daily = data.daily
+
+      const parts: string[] = []
+      if (current?.relative_humidity_2m != null) {
+        parts.push(`Humedad: ${current.relative_humidity_2m}%`)
+      }
+      if (current?.wind_speed_10m != null) {
+        parts.push(`Viento: ${Math.round(current.wind_speed_10m)} km/h`)
+      }
+      if (daily?.sunrise?.[0]) {
+        const sunrise = daily.sunrise[0].split('T')[1] || daily.sunrise[0]
+        const sunset = daily.sunset?.[0]?.split('T')[1] || ''
+        parts.push(`Amanecer: ${sunrise} | Atardecer: ${sunset}`)
+      }
+      if (daily?.uv_index_max?.[0] != null) {
+        parts.push(`UV max hoy: ${daily.uv_index_max[0]}`)
+      }
+      if (parts.length === 0) return ''
+      return `CLIMA DETALLE (${city.name}): ${parts.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: Open-Meteo Air Quality ---
+export async function getAirQuality(country: string): Promise<string> {
+  const city = CITY_COORDS[country]
+  if (!city) return ''
+  return cached(`air-quality-${country}`, THREE_HOURS, async () => {
+    try {
+      const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${city.lat}&longitude=${city.lon}&current=european_aqi,pm10,pm2_5`
+      const res = await fetch(url, { signal: AbortSignal.timeout(8000) })
+      if (!res.ok) return ''
+      const data = await res.json()
+      const current = data.current
+      if (!current) return ''
+      const aqi = current.european_aqi
+      const pm25 = current.pm2_5
+      const pm10 = current.pm10
+      let calidad = 'buena'
+      if (aqi > 100) calidad = 'muy mala'
+      else if (aqi > 75) calidad = 'mala'
+      else if (aqi > 50) calidad = 'moderada'
+      else if (aqi > 25) calidad = 'aceptable'
+      const parts: string[] = [`Calidad del aire: ${calidad} (AQI: ${aqi})`]
+      if (pm25 != null) parts.push(`PM2.5: ${pm25}`)
+      if (pm10 != null) parts.push(`PM10: ${pm10}`)
+      return `CALIDAD AIRE (${CITY_COORDS[country]?.name}): ${parts.join(' | ')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: RSS Business news (Spanish-language feeds) ---
+export async function getBusinessNews(country: string): Promise<string> {
+  const feedMap: Record<string, { url: string; name: string }> = {
+    chile: { url: 'https://www.df.cl/noticias/site/tax/port/all/rss___1.xml', name: 'Diario Financiero' },
+    mexico: { url: 'https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml', name: 'El Financiero' },
+    colombia: { url: 'https://www.portafolio.co/rss', name: 'Portafolio' },
+    peru: { url: 'https://gestion.pe/arcio/rss/', name: 'Gestion' },
+    argentina: { url: 'https://www.ambito.com/rss/noticias.xml', name: 'Ambito' },
+  }
+  const feed = feedMap[country]
+  if (!feed) return ''
+  return cached(`news-${country}`, THREE_HOURS, async () => {
+    try {
+      const res = await fetch(feed.url, { signal: AbortSignal.timeout(10000) })
+      if (!res.ok) return ''
+      const xml = await res.text()
+      // Parse RSS XML — extract <title> tags (skip the first which is the channel title)
+      const titleRegex = /<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/g
+      const titles: string[] = []
+      let match
+      let count = 0
+      while ((match = titleRegex.exec(xml)) !== null) {
+        count++
+        if (count <= 1) continue // skip channel title
+        const title = (match[1] || match[2] || '').trim()
+        if (title && title.length > 5) {
+          titles.push(title)
+        }
+        if (titles.length >= 5) break
+      }
+      if (titles.length === 0) return ''
+      return `NOTICIAS DE NEGOCIOS (${feed.name}):\n${titles.map(t => ` * ${t}`).join('\n')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
+// --- API: MercadoLibre search for product prices (on-demand) ---
+export async function searchProductPrices(query: string, country: string): Promise<string> {
+  const site = COUNTRY_TO_ML_SITE[country]
+  if (!site || !query.trim()) return ''
+  const cacheKey = `ml-price-${site}-${query.toLowerCase().trim().replace(/\s+/g, '-')}`
+  return cached(cacheKey, SIX_HOURS, async () => {
+    try {
+      const res = await fetch(
+        `https://api.mercadolibre.com/sites/${site}/search?q=${encodeURIComponent(query)}&limit=8&sort=relevance`,
+        { signal: AbortSignal.timeout(10000) }
+      )
+      if (!res.ok) return ''
+      const data = await res.json()
+      const results = data.results as Array<{
+        title: string; price: number; currency_id: string;
+        sold_quantity?: number; condition?: string; shipping?: { free_shipping?: boolean }
+      }> | undefined
+      if (!results || results.length === 0) return ''
+
+      // Calcular rango de precios
+      const prices = results.map(r => r.price).filter(p => p > 0)
+      const minPrice = Math.min(...prices)
+      const maxPrice = Math.max(...prices)
+      const avgPrice = prices.reduce((a, b) => a + b, 0) / prices.length
+      const cur = results[0].currency_id || ''
+      const sym = CURRENCY_SYMBOLS[cur] || '$'
+
+      const countryName = COUNTRY_NAMES[country] || country
+      const items = results.slice(0, 5).map((r) => {
+        const envio = r.shipping?.free_shipping ? ' (envio gratis)' : ''
+        const vendidos = r.sold_quantity ? ` - ${r.sold_quantity} vendidos` : ''
+        return `  * ${r.title} — ${sym}${fmt(r.price)} ${cur}${vendidos}${envio}`
+      })
+
+      return `PRECIOS "${query}" EN MERCADOLIBRE (${countryName}):\nRango: ${sym}${fmt(minPrice)} - ${sym}${fmt(maxPrice)} ${cur} | Promedio: ${sym}${fmt(avgPrice)} ${cur}\n${items.join('\n')}`
+    } catch {
+      return ''
+    }
+  })
+}
+
 // --- Country detection from onboarding context ---
 export function detectCountry(contexto: Array<{ pregunta?: string; respuesta?: string }>): string {
   const allText = contexto.map(c => c.respuesta || '').join(' ').toLowerCase()
@@ -468,25 +808,38 @@ export async function getRealTimeContext(country: string): Promise<string> {
   const cc = COUNTRY_TO_CODE[country] || 'CL'
   const wbCode = COUNTRY_TO_WB_CODE[country] || 'CHL'
 
-  const promises = [
+  const promises: Promise<string>[] = [
     getExchangeRates(),
     getUpcomingHolidays(cc),
     getCountryIndicators(wbCode),
     getWeather(country),
+    getWeatherExtended(country),
+    getAirQuality(country),
+    getCryptoPrices(country),
+    getInflationHistory(wbCode),
+    getCommodityPrices(),
+    getBusinessNews(country),
   ]
 
   // Indicadores especificos por pais
   if (country === 'chile') {
     promises.push(getChileanIndicators())
+    promises.push(getTPMHistory())
+    promises.push(getIPCHistory())
   }
   if (country === 'argentina') {
     promises.push(getArgentinaIndicators())
+    promises.push(getDolarBlue())
+    promises.push(getDolaresArgentina())
   }
   if (country === 'peru') {
     promises.push(getPeruIndicators())
   }
   if (country === 'mexico') {
     promises.push(getMexicoIndicators())
+  }
+  if (country === 'colombia') {
+    promises.push(getTRMColombia())
   }
 
   // Tendencias MercadoLibre (util para ventas/inventario/marketing)
@@ -526,6 +879,10 @@ export async function getRealTimeContext(country: string): Promise<string> {
   // Costos publicidad referencia (util para marketing)
   const costosPub = getCostosPublicidad(country)
   if (costosPub) parts.push(costosPub)
+
+  // Unidades de referencia (UIT, UMA, UVT, etc.)
+  const unidades = getUnidadesReferencia(country)
+  if (unidades) parts.push(unidades)
 
   if (parts.length === 0) return ''
 

@@ -205,6 +205,25 @@ export async function POST(request: NextRequest) {
 
     // 6.5. Detect Google Sheets URL in message and auto-read
     let mensajeConArchivo = mensaje
+
+    // 6.2. Detect price queries ("cuánto cuesta", "precio de", "cuánto vale")
+    try {
+      const priceMatch = mensaje.match(/cu[aá]nto\s+cuesta|precio\s+de|cu[aá]nto\s+vale|precios?\s+del?/i)
+      if (priceMatch) {
+        const { searchProductPrices, detectCountry } = await import('@/lib/real-time-data')
+        const country = detectCountry(contexto || [])
+        const product = mensaje.replace(/.*(?:cu[aá]nto\s+cuesta|precio\s+de|cu[aá]nto\s+vale|precios?\s+del?)\s*/i, '').replace(/\?.*$/, '').trim()
+        if (product && product.length > 1) {
+          const prices = await searchProductPrices(product, country)
+          if (prices) {
+            mensajeConArchivo += '\n\n' + prices
+            console.log('Price search added for:', product)
+          }
+        }
+      }
+    } catch (err) {
+      console.log('Price search skipped:', err)
+    }
     const sheetsMatch = mensaje.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+[^\s]*/g)
     if (sheetsMatch && sheetsMatch[0]) {
       try {

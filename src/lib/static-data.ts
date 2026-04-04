@@ -13,6 +13,43 @@ export const SALARIOS_MINIMOS = {
   ecuador: { monto: 460, moneda: 'USD', periodo: 'mensual', vigencia: '2025' },
 }
 
+// --- Unidades de referencia por pais (valores fijos anuales) ---
+export const UNIDADES_REFERENCIA = {
+  chile: {
+    uf: { valor: 'Variable diario (~$38,000 CLP)', descripcion: 'Unidad de Fomento — se obtiene en tiempo real via mindicador.cl' },
+    utm: { valor: 'Variable mensual (~$67,000 CLP)', descripcion: 'Unidad Tributaria Mensual' },
+  },
+  peru: {
+    uit: { valor: 5350, moneda: 'PEN', vigencia: '2026', descripcion: 'Unidad Impositiva Tributaria — usada para tramos tributarios, multas, etc.' },
+  },
+  mexico: {
+    uma: { valor_diario: 113.14, valor_mensual: 3439.46, valor_anual: 41273.04, moneda: 'MXN', vigencia: '2026', descripcion: 'Unidad de Medida y Actualizacion — usada para multas, creditos INFONAVIT, seguridad social' },
+  },
+  colombia: {
+    uvt: { valor: 49799, moneda: 'COP', vigencia: '2026', descripcion: 'Unidad de Valor Tributario — usada para tramos de renta, multas DIAN' },
+  },
+  argentina: {
+    uma_ar: { valor: 'Variable', descripcion: 'En Argentina no existe UMA; se usa el SMVM (Salario Minimo Vital y Movil) como referencia' },
+  },
+  bolivia: {
+    smv: { valor: 2500, moneda: 'BOB', vigencia: '2025', descripcion: 'Salario Minimo Nacional' },
+  },
+  ecuador: {
+    sbu: { valor: 460, moneda: 'USD', vigencia: '2025', descripcion: 'Salario Basico Unificado' },
+  },
+}
+
+export function getUnidadesReferencia(country: string): string {
+  const data = UNIDADES_REFERENCIA[country as keyof typeof UNIDADES_REFERENCIA]
+  if (!data) return ''
+  const items = Object.entries(data).map(([key, val]) => {
+    const v = val as Record<string, unknown>
+    const valor = v.valor_diario ? `${v.valor_diario} ${v.moneda}/dia (${v.valor_mensual} /mes)` : `${v.valor} ${v.moneda || ''}`
+    return `${key.toUpperCase()}: ${valor} (${v.vigencia || 'variable'}) — ${v.descripcion}`
+  })
+  return `UNIDADES DE REFERENCIA (${country}):\n${items.map(i => ` * ${i}`).join('\n')}`
+}
+
 export const CALENDARIO_TRIBUTARIO = {
   chile: {
     iva_f29: 'Dia 12-20 de cada mes (segun ultimo digito RUT)',
