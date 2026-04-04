@@ -1,4 +1,4 @@
-import 'server-only'
+// server-only removed for Vercel compatibility
 import { createClient } from '@supabase/supabase-js'
 
 function getSupabase() {
