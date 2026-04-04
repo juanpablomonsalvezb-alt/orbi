@@ -1,4 +1,18 @@
 {
+  "functions": {
+    "src/app/api/chat/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/first-message/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/memory/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/whatsapp/route.ts": {
+      "maxDuration": 30
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/trial-emails",

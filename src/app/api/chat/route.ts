@@ -410,8 +410,9 @@ export async function POST(request: NextRequest) {
       },
     })
   } catch (error) {
-    console.error('Error en /api/chat:', error)
-    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.' }, { status: 500 })
+    const errMsg = error instanceof Error ? error.message : String(error)
+    console.error('Error en /api/chat:', errMsg, error)
+    return NextResponse.json({ error: 'Nuestros servidores están ocupados. Intenta en unos segundos.', debug: process.env.NODE_ENV === 'development' ? errMsg : undefined }, { status: 500 })
   }
 }
 
