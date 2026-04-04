@@ -32,15 +32,36 @@ function getProviderChain(): Provider[] {
     })
   }
 
-  // 2. Gemini Flash — best Spanish, multimodal, free 1500 req/day
-  if (process.env.GEMINI_API_KEY) {
+  // 2. Gemini Flash — best Spanish, multimodal, free 1500 req/day per key
+  // Rotate through multiple keys to multiply quota (4 keys = 6000 req/day)
+  const geminiKeys = [
+    process.env.GEMINI_API_KEY,
+    process.env.GEMINI_API_KEY_2,
+    process.env.GEMINI_API_KEY_3,
+    process.env.GEMINI_API_KEY_4,
+  ].filter(Boolean) as string[]
+
+  if (geminiKeys.length > 0) {
+    // Round-robin: pick key based on current minute
+    const keyIndex = Math.floor(Date.now() / 60000) % geminiKeys.length
     chain.push({
-      name: 'Gemini',
+      name: `Gemini-${keyIndex + 1}`,
       url: GEMINI_URL,
-      key: process.env.GEMINI_API_KEY,
+      key: geminiKeys[keyIndex],
       model: 'gemini-2.0-flash',
       type: 'gemini',
     })
+    // Add a second Gemini key as backup (next in rotation)
+    const backupIndex = (keyIndex + 1) % geminiKeys.length
+    if (geminiKeys.length > 1) {
+      chain.push({
+        name: `Gemini-${backupIndex + 1}`,
+        url: GEMINI_URL,
+        key: geminiKeys[backupIndex],
+        model: 'gemini-2.0-flash',
+        type: 'gemini',
+      })
+    }
   }
 
   // 3. OpenRouter — no daily limit, reliable fallback
