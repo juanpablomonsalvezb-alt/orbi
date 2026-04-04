@@ -12,6 +12,7 @@ export default function RegistroPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [aceptaTerminos, setAceptaTerminos] = useState(false)
 
   const handleRegistro = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,13 +98,16 @@ export default function RegistroPage() {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} placeholder="Mínimo 6 caracteres"
             className="w-full border border-ink/[0.08] rounded-md px-3 py-2.5 text-sm text-ink bg-ivory placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors" />
         </div>
-        <button type="submit" disabled={loading}
+        <label className="flex items-start gap-2 mt-4 cursor-pointer">
+          <input type="checkbox" checked={aceptaTerminos} onChange={(e) => setAceptaTerminos(e.target.checked)} className="mt-0.5 accent-ink" required />
+          <span className="text-[11px] text-muted/60 leading-relaxed">He leído y acepto los <a href="/terminos" target="_blank" className="underline hover:text-muted">términos de servicio</a> y la <a href="/privacidad" target="_blank" className="underline hover:text-muted">política de privacidad</a>. Autorizo el tratamiento de mis datos personales.</span>
+        </label>
+
+        <button type="submit" disabled={loading || !aceptaTerminos}
           className="w-full bg-ink text-ivory rounded-md py-2.5 text-sm font-medium hover:bg-ink-mid transition-colors disabled:opacity-40">
           {loading ? 'Creando cuenta...' : 'Comenzar gratis'}
         </button>
       </form>
-
-      <p className="text-[11px] text-muted/40 text-center mt-3">Al registrarte aceptas los <a href="/terminos" className="underline hover:text-muted">términos de servicio</a> y la <a href="/privacidad" className="underline hover:text-muted">política de privacidad</a>.</p>
 
       <div className="mt-7 pt-5 border-t border-ink/[0.06]">
         <p className="text-sm text-muted text-center">

@@ -27,13 +27,13 @@ export default function TerminosPage() {
           <p>Al crear una cuenta, proporcionas información veraz y actual. Eres responsable de mantener la seguridad de tu cuenta y contraseña. Orbbi no será responsable de pérdidas causadas por acceso no autorizado a tu cuenta.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">3. Prueba gratuita</h2>
-          <p>Las nuevas cuentas incluyen una prueba gratuita de 48 horas con acceso a todos los agentes. Al finalizar la prueba, necesitas seleccionar un plan de pago para continuar usando el servicio.</p>
+          <p>Las nuevas cuentas incluyen una prueba gratuita de 7 días con acceso a todos los agentes. Al finalizar la prueba, necesitas seleccionar un plan de pago para continuar usando el servicio.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">4. Pagos y facturación</h2>
           <p>Los pagos se procesan a través de Stripe. Al suscribirte, autorizas el cobro recurrente según el plan elegido. Puedes cancelar en cualquier momento desde tu panel de facturación. Las suscripciones mensuales se cancelan sin penalidad. Las anuales dan acceso hasta el fin del período pagado.</p>
 
-          <h2 className="text-lg text-ink font-medium mt-8">5. Uso del servicio</h2>
-          <p>Los agentes de Orbbi proporcionan orientación y análisis basados en la información que compartes. Las recomendaciones no constituyen asesoría profesional certificada (financiera, legal, contable). Para decisiones críticas, consulta con profesionales certificados.</p>
+          <h2 className="text-lg text-ink font-medium mt-8">5. Uso del servicio y limitaciones de la IA</h2>
+          <p>Los agentes de Orbbi son sistemas de inteligencia artificial generativa. Sus respuestas se generan automáticamente mediante modelos de lenguaje y pueden contener errores, imprecisiones o información desactualizada. Las recomendaciones NO constituyen asesoría profesional certificada en ninguna materia (financiera, legal, contable, tributaria, laboral). El usuario acepta que: (a) verificará de forma independiente cualquier información antes de tomar decisiones; (b) consultará con profesionales certificados para decisiones críticas; (c) Orbbi no será responsable por pérdidas derivadas de actuar con base en las respuestas.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">6. Privacidad de datos</h2>
           <p>La información de tu empresa se almacena de forma segura y solo se usa para personalizar las respuestas de tus agentes. No compartimos tus datos con terceros. Consulta nuestra <Link href="/privacidad" className="text-accent hover:underline">Política de Privacidad</Link> para más detalles.</p>
@@ -44,8 +44,20 @@ export default function TerminosPage() {
           <h2 className="text-lg text-ink font-medium mt-8">8. Modificaciones</h2>
           <p>Podemos actualizar estos términos. Te notificaremos por email sobre cambios significativos. El uso continuado del servicio constituye aceptación de los términos actualizados.</p>
 
+          <h2 className="text-lg text-ink font-medium mt-8">8.5. Propiedad intelectual</h2>
+          <p>Tus datos y contenido te pertenecen. Orbbi no reclama propiedad sobre ellos. Las respuestas de los agentes se proporcionan como herramienta y puedes usarlas libremente. La plataforma, código, diseño y marca son propiedad de Orbbi.</p>
+
           <h2 className="text-lg text-ink font-medium mt-8">9. Contacto</h2>
           <p>Para consultas sobre estos términos: <a href="mailto:legal@orbbi.com" className="text-accent hover:underline">legal@orbbi.com</a></p>
+
+          <h2 className="text-lg text-ink font-medium mt-8">9.5. Ley aplicable</h2>
+          <p>Estos términos se rigen por las leyes de la República de Chile. Disputas serán sometidas a tribunales de Santiago de Chile, sin perjuicio de derechos del consumidor en tu país.</p>
+
+          <h2 className="text-lg text-ink font-medium mt-8">10. Suspensión</h2>
+          <p>Orbbi puede suspender tu cuenta si: incumples términos, uso ilegal, acceso a datos de terceros, impago mayor a 30 días. Podrás exportar datos 30 días después de la notificación.</p>
+
+          <h2 className="text-lg text-ink font-medium mt-8">11. Edad mínima</h2>
+          <p>Debes tener al menos 18 años para crear una cuenta.</p>
         </div>
       </div>
     </div>

@@ -175,7 +175,7 @@ export async function POST(request: NextRequest) {
       .eq('empresa_id', empresa_id)
       .order('orden', { ascending: true })
 
-    // 5. Obtener historial (últimos 20 mensajes)
+    // 5. Obtener historial (últimos 10 mensajes)
     const { data: historialDB } = await supabase
       .from('mensajes')
       .select('rol, contenido')

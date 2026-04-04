@@ -12,6 +12,7 @@ export function initPostHog() {
     person_profiles: 'identified_only',
     capture_pageview: true,
     capture_pageleave: true,
+    respect_dnt: true,
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()
     },

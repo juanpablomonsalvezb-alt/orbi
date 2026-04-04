@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter, Source_Serif_4 } from 'next/font/google'
 import './globals.css'
 import PostHogProvider from '@/components/PostHogProvider'
+import CookieBanner from '@/components/CookieBanner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     url: '/',
     siteName: 'Orbbi',
     title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
-    description: 'El directorio que solo las grandes empresas podían pagar. 7 agentes de IA especializados para tu negocio. Prueba gratis 48 horas.',
+    description: 'El directorio que solo las grandes empresas podían pagar. 7 agentes de IA especializados para tu negocio. Prueba gratis 7 días.',
     images: [
       {
         url: '/og-image.png',
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Orbbi — El agente que orbita tu negocio 24/7',
-    description: 'Agentes de IA especializados para PYMEs en Latinoamérica. Prueba gratis 48 horas.',
+    description: 'Agentes de IA especializados para PYMEs en Latinoamérica. Prueba gratis 7 días.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -71,6 +72,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <PostHogProvider>
           {children}
+          <CookieBanner />
         </PostHogProvider>
       </body>
     </html>
