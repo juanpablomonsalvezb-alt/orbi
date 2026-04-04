@@ -3,10 +3,12 @@ import { createClient } from '@supabase/supabase-js'
 
 // Uses service role key to bypass RLS for registration
 function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  console.log('Supabase URL:', url ? url.substring(0, 30) + '...' : 'MISSING')
+  console.log('Supabase Key:', key ? key.substring(0, 20) + '...' : 'MISSING')
+  if (!url || !key) throw new Error(`Missing env vars: URL=${!!url}, KEY=${!!key}`)
+  return createClient(url, key)
 }
 
 export async function POST(request: NextRequest) {
