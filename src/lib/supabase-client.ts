@@ -1,27 +1,12 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 
-let _supabase: SupabaseClient | null = null
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
-function getSupabaseClient(): SupabaseClient {
-  if (_supabase) return _supabase
-
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-  if (!url || !key) {
-    // During build/SSR without env vars, return a dummy client
-    // It will fail on actual calls but won't crash at import time
-    _supabase = createClient('https://placeholder.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsYWNlaG9sZGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAwMDAwMDAsImV4cCI6MjAwMDAwMDAwMH0.dW1tbXk')
-    return _supabase
-  }
-
-  _supabase = createClient(url, key)
-  return _supabase
-}
-
-// Export a proxy that lazily initializes
-export const supabase = new Proxy({} as SupabaseClient, {
-  get(_target, prop) {
-    return (getSupabaseClient() as Record<string | symbol, unknown>)[prop]
-  }
-})
+// Safe client creation — uses dummy values during build if env vars missing
+export const supabase = url && key
+  ? createClient(url, key)
+  : createClient(
+      'https://jzluszblmunbmvxzipjx.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6bHVzemJsbXVuYm12eHppcGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxODA0MzksImV4cCI6MjA5MDc1NjQzOX0.tGgf-_83doc830GaVL4rnGMW6WD8ZivdVHb0JTdnTTY'
+    )
