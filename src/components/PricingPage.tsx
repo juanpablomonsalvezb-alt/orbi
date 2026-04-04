@@ -63,7 +63,7 @@ const AGENTES = [
   { n: 'Marketing', r: 'Campañas y ROI', p: '+$19/mes' },
   { n: 'RRHH', r: 'Personas y cultura', p: '+$19/mes' },
   { n: 'Inventario', r: 'Stock y logística', p: '+$19/mes' },
-  { n: 'Legal', r: 'Contratos y cumplimiento', p: '+$19/mes' },
+  { n: 'Cumplimiento', r: 'Orientación regulatoria', p: '+$19/mes' },
 ]
 
 const FAQS = [

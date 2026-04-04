@@ -54,7 +54,7 @@ const AGENTE_LABELS: Record<TipoAgente, string> = {
   marketing: 'Marketing',
   rrhh: 'RRHH',
   inventario: 'Inventario',
-  legal: 'Legal',
+  legal: 'Cumplimiento',
 }
 
 const AGENTE_COLORS: Record<TipoAgente, string> = {

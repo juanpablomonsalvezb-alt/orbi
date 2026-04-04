@@ -484,7 +484,7 @@ function AgentNetwork() {
     { x: 30, y: 90, label: 'RRHH', r: 9 },
     { x: 170, y: 90, label: 'Marketing', r: 9 },
     { x: 60, y: 110, label: 'Inventario', r: 8 },
-    { x: 140, y: 110, label: 'Legal', r: 8 },
+    { x: 140, y: 110, label: 'Cump.', r: 8 },
   ]
 
   const edges = [

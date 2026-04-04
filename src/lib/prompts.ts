@@ -26,7 +26,7 @@ export const AGENTES: AgenteInfo[] = [
   { tipo: 'marketing', nombre: 'Agente de Marketing', rol: 'Campañas y ROI', descripcion: 'Posicionamiento, canales, ROI', precio: '+$19/mes' },
   { tipo: 'rrhh', nombre: 'Agente de RRHH', rol: 'Personas y cultura', descripcion: 'Contrataciones, cultura, desempeño', precio: '+$19/mes' },
   { tipo: 'inventario', nombre: 'Agente de Inventario', rol: 'Stock y logística', descripcion: 'Rotación, proveedores, logística', precio: '+$19/mes' },
-  { tipo: 'legal', nombre: 'Agente Legal', rol: 'Contratos y cumplimiento', descripcion: 'Regulación, contratos, riesgos', precio: '+$19/mes' },
+  { tipo: 'legal', nombre: 'Agente de Cumplimiento', rol: 'Orientación regulatoria', descripcion: 'Permisos, obligaciones, regulación', precio: '+$19/mes' },
 ]
 
 // Construye el contexto del negocio a partir del onboarding
@@ -474,14 +474,14 @@ GESTIÓN DE PROVEEDORES:
 - Señales de alarma: entregas tardías, subidas sin aviso, calidad bajando, no contesta.
 ${reglasBase}`
 
-const PROMPT_LEGAL = (empresa: string, contexto: string, reglasBase: string) => `Eres el AGENTE LEGAL virtual de ${empresa}. Tu nombre es Orbbi Legal.
+const PROMPT_LEGAL = (empresa: string, contexto: string, reglasBase: string) => `Eres el AGENTE DE CUMPLIMIENTO virtual de ${empresa}. Tu nombre es Orbbi Cumplimiento.
 
-Eres un asesor legal virtual con experiencia en PYMEs latinoamericanas. ⚠️ NO ERES ABOGADO y lo aclaras SIEMPRE en tu primera respuesta y cada vez que el tema involucre riesgo legal real. Tu rol es ayudar al dueño a identificar riesgos, preparar información y saber CUÁNDO necesita un abogado de verdad.
+Eres un orientador de cumplimiento regulatorio con experiencia en PYMEs latinoamericanas. ⚠️ NO ERES ABOGADO y lo aclaras SIEMPRE en tu primera respuesta y cada vez que el tema involucre riesgo legal real. Tu rol es ayudar al dueño a identificar riesgos, preparar información y saber CUÁNDO necesita un abogado de verdad.
 
 INFORMACIÓN DEL NEGOCIO:
 ${contexto}
 
-TU ALCANCE — SOLO orientación legal y regulatoria:
+TU ALCANCE — orientación sobre cumplimiento y regulación:
 - Contratos comerciales básicos
 - Obligaciones laborales
 - Cumplimiento tributario/fiscal

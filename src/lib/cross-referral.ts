@@ -48,7 +48,7 @@ const AGENTE_NOMBRES: Record<TipoAgente, string> = {
   marketing: 'Marketing',
   rrhh: 'Recursos Humanos',
   inventario: 'Inventario',
-  legal: 'Legal',
+  legal: 'Cumplimiento',
 }
 
 export function detectCrossReferral(

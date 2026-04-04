@@ -27,7 +27,7 @@ const AGENTE_LABELS: Record<string, string> = {
   marketing: 'Agente de Marketing',
   rrhh: 'Agente de RRHH',
   inventario: 'Agente de Inventario',
-  legal: 'Agente Legal',
+  legal: 'Agente de Cumplimiento',
 }
 
 export async function GET(request: NextRequest) {

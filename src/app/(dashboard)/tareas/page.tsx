@@ -14,7 +14,7 @@ const AGENTE_LABELS: Record<string, string> = {
   marketing: 'Marketing',
   rrhh: 'RRHH',
   inventario: 'Inventario',
-  legal: 'Legal',
+  legal: 'Cumplimiento',
 }
 
 const PRIORIDAD_BADGE: Record<string, { bg: string; text: string; label: string }> = {

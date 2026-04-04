@@ -83,7 +83,7 @@ function HeroNetwork() {
     { x: 50, y: 260, label: 'RRHH', r: 46 },
     { x: 470, y: 260, label: 'Marketing', r: 46 },
     { x: 150, y: 380, label: 'Inventario', r: 44 },
-    { x: 370, y: 380, label: 'Legal', r: 44 },
+    { x: 370, y: 380, label: 'Cumplimiento', r: 44 },
   ]
   const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,3],[2,4],[3,5],[4,6],[5,6],[1,2]]
 
@@ -506,7 +506,7 @@ const TABS_DATA = [
     artifact: ['$ orbbi rrhh --equipo-resumen', '', '> Analizando equipo (14 personas)...', '', '  SATISFACCIÓN:    7.8/10', '  ROTACIÓN:        8% anual', '  VACANTES:        2 abiertas', '', '  ALERTAS:', '  [!] 3 personas sin evaluación 90d', '  [!] Carga desbalanceada en ventas', '', '> Acción: Programar 1-on-1 con equipo ventas'],
   },
   {
-    id: 'legal', label: 'Legal',
+    id: 'legal', label: 'Cumplimiento',
     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></svg>,
     title: 'Mantente al día con regulaciones',
     desc: 'Revisa contratos, cumplimiento normativo, permisos y regulación. Recibe alertas sobre cambios legales que impactan tu industria.',
@@ -1004,7 +1004,7 @@ function FinalCTA() {
 
 function Footer() {
   const cols = [
-    { title: 'Productos', links: ['Gerente General', 'Agente Financiero', 'Agente de Ventas', 'Agente de Marketing', 'RRHH', 'Inventario', 'Legal'] },
+    { title: 'Productos', links: ['Gerente General', 'Agente Financiero', 'Agente de Ventas', 'Agente de Marketing', 'RRHH', 'Inventario', 'Cumplimiento'] },
     { title: 'Soluciones', links: ['Para emprendedores', 'Para PYMEs', 'Para empresas', 'Por industria'] },
     { title: 'Recursos', links: ['Documentación', 'Blog', 'Casos de uso', 'Tutoriales', 'API'] },
     { title: 'Empresa', links: [

@@ -15,7 +15,7 @@ interface ChatSidebarProps {
 
 const AGENTE_LABELS: Record<TipoAgente, string> = {
   general: 'GM', financiero: 'FIN', ventas: 'VEN', marketing: 'MKT',
-  rrhh: 'RH', inventario: 'INV', legal: 'LEG',
+  rrhh: 'RH', inventario: 'INV', legal: 'CMP',
 }
 
 export default function ChatSidebar({

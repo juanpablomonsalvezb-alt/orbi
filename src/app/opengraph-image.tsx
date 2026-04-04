@@ -75,7 +75,7 @@ export default async function Image() {
             justifyContent: 'center',
           }}
         >
-          {['Finanzas', 'Ventas', 'Marketing', 'RRHH', 'Inventario', 'Legal'].map((agent) => (
+          {['Finanzas', 'Ventas', 'Marketing', 'RRHH', 'Inventario', 'Cumplimiento'].map((agent) => (
             <span
               key={agent}
               style={{
