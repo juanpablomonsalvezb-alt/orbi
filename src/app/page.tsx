@@ -302,22 +302,30 @@ function Hero() {
         <div className="grid-12 items-center">
           {/* Left 7 cols */}
           <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
-            <motion.h1 className="u-display-xl mb-4"
+            <motion.p className="text-xs font-medium tracking-widest uppercase mb-4"
+              style={{ color: '#d97757', letterSpacing: '0.12em' }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.25,0.46,0.45,0.94] }}
+            >
+              Plataforma de agentes de IA para PYMEs
+            </motion.p>
+            <motion.h1 className="u-display-xl mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
             >
               <AnimatedWords>
-                Porque nadie debería decidir solo.
+                7 gerentes de IA que conocen tu negocio.
               </AnimatedWords>
             </motion.h1>
-            <motion.p className="text-sm font-medium tracking-widest uppercase mb-6"
-              style={{ color: '#d97757', letterSpacing: '0.12em' }}
+            <motion.p className="text-base mb-6"
+              style={{ color: '#87867f', fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic' }}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25, ease: [0.25,0.46,0.45,0.94] }}
             >
-              7 gerentes · 24/7 · $29/mes
+              Porque nadie debería decidir solo.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -626,7 +634,122 @@ function UseCasesTabSection() {
 // ═══════════════════════════════════════════════════════════════════
 
 function SocialProofSection() {
-  return null
+  const partners = [
+    {
+      name: 'Vercel',
+      svg: (
+        <svg height="20" viewBox="0 0 283 64" fill="currentColor" aria-label="Vercel">
+          <path d="M141.68 16.25c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-18-18.99-18zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm117.14-14.5c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-18-18.99-18zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm-39.03 3.5c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9v-46h9zM37.59.25l36.95 64H.64l36.95-64zm92.38 5l-27.71 48-27.71-48h10.39l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10v14.8h-9v-34h9v9.2c0-5.08 5.91-9.2 13.2-9.2z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'GitHub',
+      svg: (
+        <svg height="20" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Supabase',
+      svg: (
+        <svg height="20" viewBox="0 0 109 113" fill="none" aria-label="Supabase">
+          <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874L63.708 110.284z" fill="url(#supaA)" />
+          <path d="M63.708 110.284c-2.86 3.601-8.658 1.628-8.727-2.97l-1.007-67.251h45.22c8.19 0 12.758 9.46 7.665 15.874L63.708 110.284z" fill="url(#supaB)" fillOpacity=".2" />
+          <path d="M45.317 2.071C48.177-1.53 53.976.443 54.044 5.041l.558 67.251H9.936c-8.19 0-12.759-9.46-7.665-15.875L45.317 2.071z" fill="#3ECF8E" />
+          <defs>
+            <linearGradient id="supaA" x1="53.974" y1="54.974" x2="94.163" y2="71.829" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#249361" /><stop offset="1" stopColor="#3ECF8E" />
+            </linearGradient>
+            <linearGradient id="supaB" x1="36.156" y1="30.578" x2="54.484" y2="65.035" gradientUnits="userSpaceOnUse">
+              <stop /><stop offset="1" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      name: 'Next.js',
+      svg: (
+        <svg height="20" viewBox="0 0 180 180" fill="currentColor" aria-label="Next.js">
+          <mask id="nextMask" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
+            <circle cx="90" cy="90" r="90" fill="black" />
+          </mask>
+          <g mask="url(#nextMask)">
+            <circle cx="90" cy="90" r="90" fill="black" />
+            <path d="M149.508 157.52L69.142 54H54V125.97H66.1V69.3L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#nextGrad)" />
+            <rect x="115" y="54" width="12" height="72" fill="url(#nextGrad2)" />
+          </g>
+          <defs>
+            <linearGradient id="nextGrad" x1="109" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
+              <stop stopColor="white" /><stop offset="1" stopColor="white" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="nextGrad2" x1="115" y1="54" x2="115.48" y2="106.5" gradientUnits="userSpaceOnUse">
+              <stop stopColor="white" /><stop offset="1" stopColor="white" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      name: 'Google Gemini',
+      svg: (
+        <svg height="20" viewBox="0 0 28 28" fill="none" aria-label="Google Gemini">
+          <path d="M14 28A14 14 0 0 1 14 0a6.587 6.587 0 0 0 6.235 4.42 6.587 6.587 0 0 0 1.765-4.42A14 14 0 0 1 28 14a6.587 6.587 0 0 0-4.42 6.235 6.587 6.587 0 0 0 4.42 1.765A14 14 0 0 1 14 28a6.587 6.587 0 0 0-6.235-4.42A6.587 6.587 0 0 0 0 21.765 14 14 0 0 1 0 14a6.587 6.587 0 0 0 4.42-6.235A6.587 6.587 0 0 0 0 6.235 14 14 0 0 1 14 0z" fill="url(#geminiGrad)" />
+          <defs>
+            <linearGradient id="geminiGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#4285F4" /><stop offset=".5" stopColor="#9B72CB" /><stop offset="1" stopColor="#D96570" />
+            </linearGradient>
+          </defs>
+        </svg>
+      ),
+    },
+    {
+      name: 'MercadoPago',
+      svg: (
+        <svg height="20" viewBox="0 0 80 20" fill="none" aria-label="MercadoPago">
+          <text x="0" y="15" fontFamily="system-ui, sans-serif" fontSize="13" fontWeight="600" fill="#009EE3">Mercado</text>
+          <text x="44" y="15" fontFamily="system-ui, sans-serif" fontSize="13" fontWeight="600" fill="#00BCFF">Pago</text>
+        </svg>
+      ),
+    },
+    {
+      name: 'Groq',
+      svg: (
+        <svg height="20" viewBox="0 0 80 20" fill="none" aria-label="Groq">
+          <text x="0" y="15" fontFamily="system-ui, sans-serif" fontSize="15" fontWeight="700" fill="currentColor" letterSpacing="-0.5">groq</text>
+        </svg>
+      ),
+    },
+    {
+      name: 'Resend',
+      svg: (
+        <svg height="20" viewBox="0 0 80 20" fill="none" aria-label="Resend">
+          <text x="0" y="15" fontFamily="system-ui, sans-serif" fontSize="15" fontWeight="600" fill="currentColor">Resend</text>
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <section className="bg-ivory-mid border-y border-ink/[0.05]">
+      <div className="u-container" style={{ padding: 'clamp(2.5rem, 2rem + 2vw, 4rem) 0' }}>
+        <FadeIn>
+          <p className="text-center text-xs font-medium uppercase tracking-[0.15em] text-muted mb-8">
+            Construido con tecnología de clase mundial
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            {partners.map((p) => (
+              <div key={p.name} className="text-ink/30 hover:text-ink/60 transition-colors" title={p.name}>
+                {p.svg}
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  )
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1110,8 +1233,8 @@ export default function Home() {
       <UseCasesTabSection />
       <SocialProofSection />
       <VideoSection />
-      <MetricsSection />
       <PlanesSection />
+      <MetricsSection />
       <ComoEmpezarSection />
       <FinalCTA />
       <Footer />
