@@ -19,6 +19,9 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'nGHKPqMTM96eNxu15Iec8ODTV_0ccRsDleY-Q_VDkdE',
+  },
   title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
   description: 'El directorio completo que solo las grandes empresas podían pagar. Finanzas, ventas, marketing, RRHH, inventario y legal — 7 agentes de IA que conocen tu negocio. Prueba la demo gratis.',
   keywords: ['IA para PYMEs', 'agente virtual', 'gestión empresarial', 'inteligencia artificial', 'PYME', 'Latinoamérica', 'CFO virtual', 'consultor IA'],
