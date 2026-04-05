@@ -43,7 +43,7 @@ export default function DashboardLayout({
   if (!autorizado) {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ink" />
       </div>
     )
   }

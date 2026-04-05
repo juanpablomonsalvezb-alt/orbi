@@ -61,8 +61,8 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Max 10 messages per demo session
-    if (messageCount > 10) {
+    // Max 20 messages per demo session (matches frontend MAX_MESSAGES)
+    if (messageCount > 20) {
       return new Response(JSON.stringify({ error: 'Has alcanzado el límite de mensajes de la demo. Crea tu cuenta para continuar sin límites.' }), {
         status: 429,
         headers: { 'Content-Type': 'application/json' },

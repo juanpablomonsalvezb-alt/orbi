@@ -37,16 +37,25 @@ export default function RegistroPage() {
       }
 
       // 2. Create empresa via server API (bypasses RLS)
+      // Use token from signUp response — server verifies it and extracts user_id
+      const token = data.session?.access_token
       const regRes = await fetch('/api/registro', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: data.user.id, nombre: empresa, email }),
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ nombre: empresa, email }),
       })
 
       if (!regRes.ok) {
         const regData = await regRes.json()
         console.error('Error empresa:', regData)
-        setError(regData.error || 'Error al registrar la empresa')
+        if (regRes.status === 401) {
+          setError('Confirma tu email para activar la cuenta y luego inicia sesión.')
+        } else {
+          setError(regData.error || 'Error al registrar la empresa')
+        }
         setLoading(false)
         return
       }

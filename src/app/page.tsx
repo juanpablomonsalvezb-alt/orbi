@@ -9,7 +9,7 @@ import PricingPage from '@/components/PricingPage'
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94]
 
-// ── Word-by-word animation (matches Anthropic's word animation exactly) ──
+// ── Word-by-word animation ──
 function AnimatedWords({ children, className = '' }: { children: string; className?: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
@@ -22,7 +22,7 @@ function AnimatedWords({ children, className = '' }: { children: string; classNa
           opacity: inView ? 1 : 0,
           transform: inView ? 'translateY(0)' : 'translateY(24px)',
           transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)`,
-          transitionDelay: `${100 + Math.random() * 400}ms`,
+          transitionDelay: `${100 + i * (350 / Math.max(words.length - 1, 1))}ms`,
         }}>
           {word}{i < words.length - 1 ? '\u00A0' : ''}
         </span>
@@ -187,16 +187,29 @@ function HeroNetwork() {
         />
       ))}
 
-      {/* Floating particles */}
-      {[...Array(12)].map((_,i) => (
+      {/* Floating particles — deterministic to avoid hydration mismatch */}
+      {[
+        { cx: 75,  cy: 55,  r: 1.7, op: 0.42, dy: -52, dur: 4.2, dl: 0.3 },
+        { cx: 190, cy: 38,  r: 2.1, op: 0.35, dy: -44, dur: 5.1, dl: 1.1 },
+        { cx: 340, cy: 28,  r: 1.5, op: 0.48, dy: -60, dur: 3.8, dl: 2.0 },
+        { cx: 450, cy: 70,  r: 2.3, op: 0.31, dy: -38, dur: 5.5, dl: 0.7 },
+        { cx: 60,  cy: 180, r: 1.6, op: 0.44, dy: -56, dur: 4.7, dl: 1.5 },
+        { cx: 480, cy: 150, r: 1.9, op: 0.37, dy: -42, dur: 4.0, dl: 2.5 },
+        { cx: 120, cy: 310, r: 2.0, op: 0.40, dy: -50, dur: 5.8, dl: 0.4 },
+        { cx: 400, cy: 330, r: 1.8, op: 0.33, dy: -46, dur: 3.5, dl: 1.8 },
+        { cx: 240, cy: 390, r: 2.2, op: 0.45, dy: -58, dur: 6.0, dl: 2.2 },
+        { cx: 310, cy: 100, r: 1.5, op: 0.38, dy: -40, dur: 4.4, dl: 0.9 },
+        { cx: 170, cy: 430, r: 1.7, op: 0.41, dy: -54, dur: 5.2, dl: 1.6 },
+        { cx: 430, cy: 420, r: 2.0, op: 0.36, dy: -48, dur: 4.9, dl: 0.1 },
+      ].map((p, i) => (
         <motion.circle key={`p${i}`}
-          cx={30 + Math.random() * 460} cy={20 + Math.random() * 420} r={1.5 + Math.random()}
+          cx={p.cx} cy={p.cy} r={p.r}
           fill="#d97757"
           animate={{
-            opacity: [0, 0.3 + Math.random() * 0.2, 0],
-            y: [0, -30 - Math.random() * 40, 0],
+            opacity: [0, p.op, 0],
+            y: [0, p.dy, 0],
           }}
-          transition={{ duration: 3 + Math.random()*3, delay: Math.random()*3, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: p.dur, delay: p.dl, repeat: Infinity, ease: 'easeInOut' }}
         />
       ))}
     </svg>
@@ -1141,20 +1154,12 @@ function Footer() {
           {/* Logo column (2 cols) */}
           <div className="col-span-2">
             <OrbiLogo size={36} color="light" />
-            {/* Mini prompt */}
-            <div className="flex items-center gap-2 bg-ink-mid rounded-lg px-3 py-2 mt-6 mb-4" style={{ maxWidth: '280px' }}>
-              <input
-                type="text"
-                placeholder="Pregunta algo..."
-                className="flex-1 bg-transparent text-xs text-cloud outline-none placeholder:text-muted"
-                readOnly
-              />
-              <button className="text-cloud hover:text-ivory transition-colors">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
-                </svg>
-              </button>
-            </div>
+            {/* Demo CTA */}
+            <Link href="/demo"
+              className="flex items-center gap-2 bg-ink-mid hover:bg-ink-light rounded-lg px-3 py-2 mt-6 mb-4 transition-colors group"
+              style={{ maxWidth: '280px' }}>
+              <span className="flex-1 text-xs text-muted group-hover:text-cloud transition-colors">Probar demo gratis →</span>
+            </Link>
             {/* Key numbers */}
             <div className="flex gap-4 mb-6">
               <div>
@@ -1162,7 +1167,7 @@ function Footer() {
                 <p className="text-[10px] text-muted">agentes</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-ivory-mid">7</p>
+                <p className="text-sm font-medium text-ivory-mid">6</p>
                 <p className="text-[10px] text-muted">países</p>
               </div>
               <div>

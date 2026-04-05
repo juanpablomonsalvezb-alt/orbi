@@ -13,6 +13,9 @@
   --color-cloud-light: #d1cfc5;
   --color-clay: #d97757;
   --color-accent: #c6613f;
+  --color-accent-bg: #fdf0eb;
+  --color-border: #e8e6dc;
+  --color-border-light: #f0eee6;
 
   /* Dark theme (chat, dashboard) */
   --color-obsidian: #1a1a19;

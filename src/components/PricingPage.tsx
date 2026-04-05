@@ -75,10 +75,10 @@ const PLANES = [
     nombre: 'Solo', desc: 'Para microempresas y emprendedores',
     mensual: 29, anual: 295.80,
     features: [
-      { t: 'Gerente General 24/7', ok: true },
-      { t: '100 mensajes al mes', ok: true },
+      { t: 'Gerente General 24/7 sin límite de mensajes', ok: true },
       { t: 'Onboarding con contexto de tu negocio', ok: true },
       { t: 'Historial de conversaciones', ok: true },
+      { t: 'Subir archivos (CSV, PDF, Excel)', ok: true },
       { t: 'Agentes especializados', ok: false },
     ],
   },

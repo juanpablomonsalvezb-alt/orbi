@@ -17,10 +17,14 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             Tu gerente virtual impulsado por IA. Analiza, alerta y apoya cada decisión.
           </p>
           <div className="mt-12 border-t border-ivory/[0.06] pt-5">
-            <p className="text-sm text-ivory/30 italic leading-relaxed" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-              &ldquo;En dos semanas ya sabía más de mi negocio que yo mismo.&rdquo;
-            </p>
-            <p className="text-xs text-muted mt-3">Carolina Pérez · Café Don Pedro</p>
+            <div className="flex items-center gap-3">
+              <div className="flex gap-1">
+                {[0,1,2,3,4].map(i => (
+                  <svg key={i} width="10" height="10" viewBox="0 0 10 10" fill="#d97757"><polygon points="5,1 6.2,3.8 9.5,4.1 7.2,6.2 7.9,9.5 5,7.8 2.1,9.5 2.8,6.2 0.5,4.1 3.8,3.8" /></svg>
+                ))}
+              </div>
+              <p className="text-xs text-ivory/30">Demo disponible ahora — sin tarjeta</p>
+            </div>
           </div>
         </div>
         <p className="text-[11px] text-muted/30">© 2026 Orbbi</p>
