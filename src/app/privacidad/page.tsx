@@ -42,7 +42,7 @@ export default function PrivacidadPage() {
           <p>Usamos Google Gemini para generar respuestas. Tus mensajes se envían a la API de Google con tu contexto de negocio. Google no almacena las conversaciones de la API según sus términos de servicio para desarrolladores.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">5. Pagos</h2>
-          <p>Los pagos se procesan a través de Stripe. Orbbi no almacena números de tarjeta. Stripe cumple con PCI DSS Level 1.</p>
+          <p>Los pagos se procesan a través de MercadoPago. Orbbi no almacena números de tarjeta ni datos de pago sensibles. MercadoPago cumple con PCI DSS Level 1.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">6. Tus derechos (ARCO)</h2>
           <p>Tienes derecho a:</p>
@@ -63,7 +63,7 @@ export default function PrivacidadPage() {
           <ul>
             <li><strong>Google Gemini</strong> (Estados Unidos) — procesamiento de IA</li>
             <li><strong>Supabase</strong> (Estados Unidos) — base de datos y autenticación</li>
-            <li><strong>Stripe</strong> (Estados Unidos) — procesamiento de pagos</li>
+            <li><strong>MercadoPago</strong> (Latinoamérica) — procesamiento de pagos</li>
             <li><strong>PostHog</strong> (Estados Unidos) — analytics de producto</li>
           </ul>
           <p>Al registrarte consientes la transferencia de datos a estos proveedores.</p>

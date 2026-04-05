@@ -30,7 +30,7 @@ export default function TerminosPage() {
           <p>Las nuevas cuentas incluyen una prueba gratuita de 7 días con acceso a todos los agentes. Al finalizar la prueba, necesitas seleccionar un plan de pago para continuar usando el servicio.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">4. Pagos y facturación</h2>
-          <p>Los pagos se procesan a través de Stripe. Al suscribirte, autorizas el cobro recurrente según el plan elegido. Puedes cancelar en cualquier momento desde tu panel de facturación. Las suscripciones mensuales se cancelan sin penalidad. Las anuales dan acceso hasta el fin del período pagado.</p>
+          <p>Los pagos se procesan a través de MercadoPago. Al suscribirte, autorizas el cobro recurrente según el plan elegido. Puedes cancelar en cualquier momento desde tu panel de facturación. Las suscripciones mensuales se cancelan sin penalidad. Las anuales dan acceso hasta el fin del período pagado.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">5. Uso del servicio y limitaciones de la IA</h2>
           <p>Los agentes de Orbbi son sistemas de inteligencia artificial generativa. Sus respuestas se generan automáticamente mediante modelos de lenguaje y pueden contener errores, imprecisiones o información desactualizada. Las recomendaciones NO constituyen asesoría profesional certificada en ninguna materia (financiera, legal, contable, tributaria, laboral). El usuario acepta que: (a) verificará de forma independiente cualquier información antes de tomar decisiones; (b) consultará con profesionales certificados para decisiones críticas; (c) Orbbi no será responsable por pérdidas derivadas de actuar con base en las respuestas.</p>

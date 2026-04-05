@@ -10,8 +10,8 @@ export interface Empresa {
   onboarding_completado: boolean
   plan: 'free' | 'solo' | 'equipo' | 'empresa'
   trial_ends_at: string | null
-  stripe_customer_id: string | null
-  stripe_subscription_id: string | null
+  mp_payment_id: string | null
+  mp_subscription_id: string | null
   subscription_status: string | null
   telefono: string | null
   created_at: string

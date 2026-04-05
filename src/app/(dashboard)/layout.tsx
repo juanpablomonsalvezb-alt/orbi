@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
 import { posthog } from '@/lib/posthog'
+import UpgradeModal from '@/components/UpgradeModal'
 
 // Layout protegido: redirige a login si no hay sesión
 // Verifica trial de 7 días
@@ -16,6 +17,9 @@ export default function DashboardLayout({
   const [autorizado, setAutorizado] = useState(false)
   const [trialExpired, setTrialExpired] = useState(false)
   const [trialHoursLeft, setTrialHoursLeft] = useState<number | null>(null)
+  const [showUpgrade, setShowUpgrade] = useState(false)
+  const [empresaId, setEmpresaId] = useState('')
+  const [userEmail, setUserEmail] = useState('')
 
   useEffect(() => {
     const verificar = async () => {
@@ -28,15 +32,17 @@ export default function DashboardLayout({
 
       // Identify user in PostHog
       posthog.identify(user.id, { email: user.email })
+      setUserEmail(user.email || '')
 
       // Check trial status
       const { data: empresa } = await supabase
         .from('empresas')
-        .select('trial_ends_at, plan, subscription_status')
+        .select('id, trial_ends_at, plan, subscription_status')
         .eq('user_id', user.id)
         .single()
 
       if (empresa) {
+        setEmpresaId(empresa.id)
         const hasActivePlan = empresa.plan !== 'free' && empresa.subscription_status === 'active'
         const trialEndsAt = empresa.trial_ends_at ? new Date(empresa.trial_ends_at) : null
         const now = new Date()
@@ -84,6 +90,11 @@ export default function DashboardLayout({
             usando tus agentes de Orbbi sin interrupción.
           </p>
           <div className="space-y-3">
+            <button
+              onClick={() => setShowUpgrade(true)}
+              className="block w-full bg-accent text-ivory rounded-md py-3 text-sm font-medium hover:bg-accent/90 transition-colors">
+              Pagar ahora
+            </button>
             <a href="/#precios"
               className="block w-full bg-ink text-ivory rounded-md py-3 text-sm font-medium hover:bg-ink-mid transition-colors">
               Ver planes desde $29/mes
@@ -98,6 +109,14 @@ export default function DashboardLayout({
             </button>
           </div>
         </div>
+
+        {showUpgrade && empresaId && userEmail && (
+          <UpgradeModal
+            empresaId={empresaId}
+            email={userEmail}
+            onClose={() => setShowUpgrade(false)}
+          />
+        )}
       </div>
     )
   }
@@ -109,11 +128,21 @@ export default function DashboardLayout({
         <div className="bg-accent/10 border-b border-accent/20 px-4 py-2 text-center">
           <p className="text-xs text-accent font-medium">
             Te quedan {trialHoursLeft} horas de prueba gratuita.{' '}
-            <a href="/#precios" className="underline hover:no-underline">Elegir plan</a>
+            <button onClick={() => setShowUpgrade(true)} className="underline hover:no-underline">
+              Elegir plan
+            </button>
           </p>
         </div>
       )}
       {children}
+
+      {showUpgrade && empresaId && userEmail && (
+        <UpgradeModal
+          empresaId={empresaId}
+          email={userEmail}
+          onClose={() => setShowUpgrade(false)}
+        />
+      )}
     </>
   )
 }
