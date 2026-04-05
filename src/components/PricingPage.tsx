@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 
@@ -17,6 +17,58 @@ function FadeIn({ children, className = '' }: { children: React.ReactNode; class
   )
 }
 
+// ── Currency conversion ──
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  CLP: '$', MXN: '$', COP: '$', PEN: 'S/', ARS: '$', BOB: 'Bs', USD: '$', EUR: '€',
+}
+
+const COUNTRY_CURRENCY: Record<string, string> = {
+  CL: 'CLP', MX: 'MXN', CO: 'COP', PE: 'PEN', AR: 'ARS', BO: 'BOB', EC: 'USD', US: 'USD',
+}
+
+function formatLocal(amount: number, currency: string): string {
+  const sym = CURRENCY_SYMBOLS[currency] || '$'
+  if (currency === 'USD' || currency === 'EUR') return `${sym}${amount}`
+  if (amount >= 10000) return `${sym}${Math.round(amount).toLocaleString('es-CL')}`
+  if (amount >= 100) return `${sym}${Math.round(amount).toLocaleString('es-CL')}`
+  return `${sym}${amount.toFixed(0)}`
+}
+
+function useLocalPricing() {
+  const [country, setCountry] = useState('')
+  const [currency, setCurrency] = useState('')
+  const [rate, setRate] = useState(0)
+
+  useEffect(() => {
+    async function detect() {
+      try {
+        // Detect country by IP
+        const geo = await fetch('https://ip-api.com/json/?fields=countryCode', { signal: AbortSignal.timeout(3000) })
+        if (!geo.ok) return
+        const { countryCode } = await geo.json()
+        const curr = COUNTRY_CURRENCY[countryCode]
+        if (!curr || curr === 'USD') return // No conversion needed for USD countries
+
+        setCountry(countryCode)
+        setCurrency(curr)
+
+        // Get exchange rate
+        const rateRes = await fetch(`https://open.er-api.com/v6/latest/USD`, { signal: AbortSignal.timeout(5000) })
+        if (!rateRes.ok) return
+        const rateData = await rateRes.json()
+        const r = rateData.rates?.[curr]
+        if (r) setRate(r)
+      } catch {
+        // Silent fail — just show USD
+      }
+    }
+    detect()
+  }, [])
+
+  return { country, currency, rate }
+}
+
+// ── Plan data ──
 const PLANES = [
   {
     id: 'solo',
@@ -71,10 +123,12 @@ const FAQS = [
   { q: '¿Qué pasa después de los 7 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
   { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
   { q: '¿Qué diferencia hay entre Orbbi y ChatGPT?', a: 'Orbbi conoce tu negocio en profundidad. Cada agente tiene frameworks especializados y contexto de tu empresa. No necesitas prompt engineering.' },
+  { q: '¿En qué moneda se cobra?', a: 'Los precios están en USD. Si pagas con tarjeta local, MercadoPago convierte automáticamente a tu moneda al tipo de cambio del día.' },
 ]
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>('annual')
+  const { currency, rate } = useLocalPricing()
 
   return (
     <div className="bg-ivory-mid">
@@ -93,7 +147,7 @@ export default function PricingPage() {
           </div>
         </FadeIn>
 
-        {/* Toggle — FIXED */}
+        {/* Toggle */}
         <FadeIn className="mb-10">
           <div className="flex items-center justify-center gap-3">
             <button onClick={() => setBilling('monthly')}
@@ -112,7 +166,10 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
           {PLANES.map((plan, pi) => {
             const anual = billing === 'annual'
-            const equiv = (plan.anual / 12).toFixed(0)
+            const precio = anual ? plan.anual : plan.mensual
+            const precioMes = anual ? plan.anual / 12 : plan.mensual
+            const localEquiv = rate > 0 ? formatLocal(precioMes * rate, currency) : ''
+
             return (
               <motion.div key={plan.nombre}
                 className={`rounded-xl p-6 ${plan.destacado ? 'bg-ink text-ivory relative' : 'border border-ink/[0.06] bg-ivory'}`}
@@ -136,15 +193,27 @@ export default function PricingPage() {
                         <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>
                           ${plan.anual.toLocaleString('es-CL')}
                         </span>
-                        <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>/año</span>
+                        <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>USD/año</span>
                       </div>
-                      <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-ivory/30' : 'text-muted/50'}`}>~${equiv}/mes</p>
+                      <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-ivory/30' : 'text-muted/50'}`}>~${(plan.anual / 12).toFixed(0)} USD/mes</p>
+                      {localEquiv && (
+                        <p className={`text-[11px] mt-0.5 ${plan.destacado ? 'text-ivory/40' : 'text-accent/70'}`}>
+                          ≈ {localEquiv}/{currency === 'CLP' ? 'mes' : 'mes'}
+                        </p>
+                      )}
                     </>
                   ) : (
-                    <div className="flex items-baseline gap-1">
-                      <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>${plan.mensual}</span>
-                      <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>/mes</span>
-                    </div>
+                    <>
+                      <div className="flex items-baseline gap-1">
+                        <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '36px', fontWeight: 400, letterSpacing: '-1px' }}>${plan.mensual}</span>
+                        <span className={`text-xs ${plan.destacado ? 'text-ivory/50' : 'text-muted'}`}>USD/mes</span>
+                      </div>
+                      {localEquiv && (
+                        <p className={`text-[11px] mt-1 ${plan.destacado ? 'text-ivory/40' : 'text-accent/70'}`}>
+                          ≈ {localEquiv}/mes
+                        </p>
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -189,15 +258,21 @@ export default function PricingPage() {
             <p className="text-sm text-muted mt-2 md:mt-0">Agrega solo lo que necesitas</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {AGENTES.map((a) => (
-              <div key={a.n} className="border border-ink/[0.06] rounded-lg px-4 py-3 bg-ivory flex items-center justify-between hover:border-ink/[0.12] transition-colors">
-                <div>
-                  <p className="text-sm text-ink">{a.n}</p>
-                  <p className="text-[11px] text-muted">{a.r}</p>
+            {AGENTES.map((a) => {
+              const localAgent = rate > 0 && a.p !== 'Incluido' ? ` ≈ ${formatLocal(19 * rate, currency)}` : ''
+              return (
+                <div key={a.n} className="border border-ink/[0.06] rounded-lg px-4 py-3 bg-ivory flex items-center justify-between hover:border-ink/[0.12] transition-colors">
+                  <div>
+                    <p className="text-sm text-ink">{a.n}</p>
+                    <p className="text-[11px] text-muted">{a.r}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className={`text-sm font-medium ${a.p === 'Incluido' ? 'text-muted/40' : 'text-accent'}`}>{a.p}</span>
+                    {localAgent && <p className="text-[10px] text-muted">{localAgent}</p>}
+                  </div>
                 </div>
-                <span className={`text-sm font-medium ${a.p === 'Incluido' ? 'text-muted/40' : 'text-accent'}`}>{a.p}</span>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </FadeIn>
 
