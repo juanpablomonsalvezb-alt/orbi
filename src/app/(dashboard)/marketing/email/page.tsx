@@ -45,6 +45,54 @@ type Tab = 'campanas' | 'prospectos' | 'plantillas'
 
 // ── Email templates ──
 const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }> = {
+  universal: {
+    asunto: 'Orbbi — IA para las PYMEs de {{pais}}',
+    tipo: 'gremio',
+    html: `<div style="font-family:'Georgia',serif;max-width:540px;margin:0 auto;padding:48px 24px;color:#141413;background:#ffffff;">
+
+<p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
+  Estimado/a {{nombre}},
+</p>
+
+<p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
+  Mi nombre es Juan Pablo Monsalvez. Soy el fundador de <strong style="color:#141413;">Orbbi</strong>, una startup chilena que lanzamos este año con una idea simple: que cualquier PYME en Latinoamérica pueda tomar mejores decisiones, sin necesitar contratar más gente ni pagar consultores.
+</p>
+
+<p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
+  Lo hacemos con agentes de inteligencia artificial especializados — uno para finanzas, otro para ventas, marketing, recursos humanos, inventario. Cada uno conoce el negocio en profundidad y está disponible 24/7 desde <strong style="color:#141413;">$29 USD al mes</strong>.
+</p>
+
+<p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
+  Le escribo porque {{org}} trabaja directamente con el tipo de empresa que Orbbi puede transformar. No busco una venta inmediata — busco conversación. Si ve potencial en que las empresas que acompaña accedan a esta herramienta, me encantaría mostrársela en 20 minutos.
+</p>
+
+<p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 32px;">
+  También puede ver la demo en vivo ahora mismo, sin registro:
+</p>
+
+<a href="https://www.orbbilatam.com/demo"
+   style="display:inline-block;background:#141413;color:#faf9f5;padding:13px 28px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.2px;">
+  Ver demo gratuita →
+</a>
+
+<p style="font-size:14px;line-height:1.7;color:#87867f;margin:36px 0 0;">
+  Quedo atento a cualquier pregunta. Responda directamente a este correo.
+</p>
+
+<p style="font-size:14px;color:#87867f;margin:4px 0 0;">
+  Juan Pablo Monsalvez<br/>
+  Fundador, Orbbi<br/>
+  <a href="https://www.orbbilatam.com" style="color:#c6613f;text-decoration:none;">orbbilatam.com</a>
+</p>
+
+<hr style="border:none;border-top:1px solid #e8e6dc;margin:40px 0 20px;" />
+
+<p style="font-size:11px;color:#b0aea5;line-height:1.6;margin:0;">
+  Si no deseas recibir más información de Orbbi, responde este correo con "dar de baja" y te eliminamos de inmediato.
+</p>
+
+</div>`,
+  },
   gremio: {
     asunto: 'Orbbi — IA para las PYMEs de {{org}}',
     tipo: 'gremio',
@@ -645,8 +693,14 @@ export default function EmailPage() {
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="text-xs text-[#6b6b6b]">Asunto *</label>
-                  <div className="flex gap-2">
-                    {Object.keys(PLANTILLAS).map(k => (
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => usarPlantilla('universal')}
+                      className="text-[10px] px-2 py-0.5 bg-[#c6613f] rounded text-white hover:bg-[#b5522f] transition-colors font-medium"
+                    >
+                      ★ Universal (recomendado)
+                    </button>
+                    {Object.keys(PLANTILLAS).filter(k => k !== 'universal').map(k => (
                       <button
                         key={k}
                         onClick={() => usarPlantilla(k)}
