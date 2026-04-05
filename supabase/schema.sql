@@ -1,297 +1,238 @@
--- ============================================
--- ORBBI — Schema de base de datos
--- "El agente que orbita tu negocio 24/7"
--- ============================================
-
--- Habilitar extensión para UUIDs
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
--- ============================================
--- TABLA: empresas
--- Cada usuario registrado = una empresa
--- ============================================
-CREATE TABLE empresas (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID NOT NULL UNIQUE REFERENCES auth.users(id) ON DELETE CASCADE,
-  nombre TEXT NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  onboarding_completado BOOLEAN NOT NULL DEFAULT FALSE,
-  plan TEXT NOT NULL DEFAULT 'free' CHECK (plan IN ('free', 'solo', 'equipo', 'empresa')),
-  trial_ends_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '7 days'),
-  stripe_customer_id TEXT,        -- Stores MercadoPago payment reference (legacy column name)
-  stripe_subscription_id TEXT,    -- Stores MercadoPago subscription reference (legacy column name)
-  subscription_status TEXT DEFAULT 'trialing',
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- ============================================
--- TABLA: contexto
--- Respuestas del onboarding (3 preguntas)
--- Cada fila = una pregunta respondida
--- ============================================
-CREATE TABLE contexto (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  pregunta TEXT NOT NULL,
-  respuesta TEXT NOT NULL,
-  bloque INTEGER NOT NULL CHECK (bloque BETWEEN 1 AND 1),
-  orden INTEGER NOT NULL CHECK (orden BETWEEN 1 AND 3),
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  UNIQUE(empresa_id, orden)
-);
-
--- ============================================
--- TABLA: conversaciones
--- Cada empresa puede tener múltiples chats
--- ============================================
-CREATE TABLE conversaciones (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  titulo TEXT NOT NULL DEFAULT 'Nueva conversación',
-  agente_tipo TEXT NOT NULL DEFAULT 'general' CHECK (agente_tipo IN ('general', 'financiero', 'ventas', 'marketing', 'rrhh', 'inventario', 'legal')),
-  estilo TEXT NOT NULL DEFAULT 'directo' CHECK (estilo IN ('directo', 'didactico', 'estrategico')),
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- ============================================
--- TABLA: mensajes
--- Historial de cada conversación
--- rol: 'user' | 'assistant'
--- ============================================
-CREATE TABLE mensajes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  conversacion_id UUID NOT NULL REFERENCES conversaciones(id) ON DELETE CASCADE,
-  rol TEXT NOT NULL CHECK (rol IN ('user', 'assistant')),
-  contenido TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- ============================================
--- ÍNDICES para performance
--- ============================================
-CREATE INDEX idx_contexto_empresa ON contexto(empresa_id);
-CREATE INDEX idx_conversaciones_empresa ON conversaciones(empresa_id);
-CREATE INDEX idx_mensajes_conversacion ON mensajes(conversacion_id);
-CREATE INDEX idx_mensajes_created ON mensajes(conversacion_id, created_at);
-CREATE INDEX idx_empresas_user ON empresas(user_id);
-
--- ============================================
--- ROW LEVEL SECURITY (RLS)
--- Cada empresa solo ve sus propios datos
--- ============================================
-
--- Activar RLS en todas las tablas
-ALTER TABLE empresas ENABLE ROW LEVEL SECURITY;
-ALTER TABLE contexto ENABLE ROW LEVEL SECURITY;
-ALTER TABLE conversaciones ENABLE ROW LEVEL SECURITY;
-ALTER TABLE mensajes ENABLE ROW LEVEL SECURITY;
-
--- Políticas para empresas: solo el dueño ve/modifica su empresa
-CREATE POLICY "empresas_select" ON empresas
-  FOR SELECT USING (user_id = auth.uid());
-
-CREATE POLICY "empresas_insert" ON empresas
-  FOR INSERT WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY "empresas_update" ON empresas
-  FOR UPDATE USING (user_id = auth.uid());
-
--- Políticas para contexto: solo la empresa dueña
-CREATE POLICY "contexto_select" ON contexto
-  FOR SELECT USING (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "contexto_insert" ON contexto
-  FOR INSERT WITH CHECK (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "contexto_update" ON contexto
-  FOR UPDATE USING (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
--- Políticas para conversaciones: solo la empresa dueña
-CREATE POLICY "conversaciones_select" ON conversaciones
-  FOR SELECT USING (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "conversaciones_insert" ON conversaciones
-  FOR INSERT WITH CHECK (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "conversaciones_update" ON conversaciones
-  FOR UPDATE USING (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY "conversaciones_delete" ON conversaciones
-  FOR DELETE USING (
-    empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid())
-  );
-
--- Políticas para mensajes: acceso via conversación de la empresa
-CREATE POLICY "mensajes_select" ON mensajes
-  FOR SELECT USING (
-    conversacion_id IN (
-      SELECT c.id FROM conversaciones c
-      JOIN empresas e ON e.id = c.empresa_id
-      WHERE e.user_id = auth.uid()
-    )
-  );
-
-CREATE POLICY "mensajes_insert" ON mensajes
-  FOR INSERT WITH CHECK (
-    conversacion_id IN (
-      SELECT c.id FROM conversaciones c
-      JOIN empresas e ON e.id = c.empresa_id
-      WHERE e.user_id = auth.uid()
-    )
-  );
-
--- ============================================
--- FUNCIÓN: actualizar updated_at automáticamente
--- ============================================
-CREATE OR REPLACE FUNCTION update_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Triggers para updated_at
-CREATE TRIGGER trigger_empresas_updated
-  BEFORE UPDATE ON empresas
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
-CREATE TRIGGER trigger_contexto_updated
-  BEFORE UPDATE ON contexto
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
-CREATE TRIGGER trigger_conversaciones_updated
-  BEFORE UPDATE ON conversaciones
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
--- ============================================
--- TABLA: archivos
--- Archivos subidos por usuarios para compartir con agentes
--- ============================================
-CREATE TABLE archivos (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  nombre TEXT NOT NULL,
-  tipo TEXT NOT NULL,
-  tamano INTEGER NOT NULL,
-  storage_path TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE INDEX idx_archivos_empresa ON archivos(empresa_id);
-ALTER TABLE archivos ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "archivos_select" ON archivos FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "archivos_insert" ON archivos FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "archivos_delete" ON archivos FOR DELETE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-
--- ============================================
--- TABLA: empresa_usuarios (multi-user support)
--- ============================================
-CREATE TABLE empresa_usuarios (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  rol TEXT NOT NULL DEFAULT 'miembro' CHECK (rol IN ('admin', 'miembro')),
-  email TEXT NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  UNIQUE(empresa_id, user_id)
-);
-CREATE INDEX idx_empresa_usuarios_empresa ON empresa_usuarios(empresa_id);
-CREATE INDEX idx_empresa_usuarios_user ON empresa_usuarios(user_id);
-ALTER TABLE empresa_usuarios ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "empresa_usuarios_select" ON empresa_usuarios FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "empresa_usuarios_insert" ON empresa_usuarios FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "empresa_usuarios_delete" ON empresa_usuarios FOR DELETE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-
--- ============================================
--- MIGRACIÓN: WhatsApp Integration
--- Columna telefono para vincular empresa con número de WhatsApp
--- ============================================
-ALTER TABLE empresas ADD COLUMN IF NOT EXISTS telefono TEXT;
-CREATE INDEX IF NOT EXISTS idx_empresas_telefono ON empresas(telefono);
-
--- ============================================
--- TABLA: memorias
--- Insights extraídos de conversaciones por los agentes
--- ============================================
-CREATE TABLE memorias (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  agente_tipo TEXT NOT NULL,
-  categoria TEXT NOT NULL CHECK (categoria IN ('dato', 'decision', 'tarea', 'alerta', 'meta')),
-  contenido TEXT NOT NULL,
-  fuente_conversacion_id UUID REFERENCES conversaciones(id) ON DELETE SET NULL,
-  activa BOOLEAN NOT NULL DEFAULT TRUE,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE INDEX idx_memorias_empresa ON memorias(empresa_id);
-ALTER TABLE memorias ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "memorias_select" ON memorias FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "memorias_insert" ON memorias FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "memorias_update" ON memorias FOR UPDATE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-
--- ============================================
--- TABLA: tareas
--- Acciones recomendadas por agentes con seguimiento
--- ============================================
-CREATE TABLE tareas (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  agente_tipo TEXT NOT NULL,
-  titulo TEXT NOT NULL,
-  descripcion TEXT,
-  estado TEXT NOT NULL DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'en_progreso', 'completada', 'descartada')),
-  prioridad TEXT NOT NULL DEFAULT 'media' CHECK (prioridad IN ('alta', 'media', 'baja')),
-  fecha_limite DATE,
-  fuente_conversacion_id UUID REFERENCES conversaciones(id) ON DELETE SET NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-CREATE INDEX idx_tareas_empresa ON tareas(empresa_id);
-ALTER TABLE tareas ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "tareas_select" ON tareas FOR SELECT USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "tareas_insert" ON tareas FOR INSERT WITH CHECK (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-CREATE POLICY "tareas_update" ON tareas FOR UPDATE USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-
--- ============================================
--- TABLA: feedback
--- Thumbs up/down en respuestas de agentes
--- ============================================
-CREATE TABLE feedback (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  mensaje_id UUID REFERENCES mensajes(id) ON DELETE CASCADE,
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  tipo TEXT NOT NULL CHECK (tipo IN ('positivo', 'negativo')),
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  UNIQUE(mensaje_id, empresa_id)
-);
-CREATE INDEX idx_feedback_empresa ON feedback(empresa_id);
-ALTER TABLE feedback ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "feedback_all" ON feedback FOR ALL USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
-
--- ============================================
--- TABLA: push_subscriptions
--- Suscripciones de notificaciones push
--- ============================================
-CREATE TABLE push_subscriptions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  empresa_id UUID NOT NULL REFERENCES empresas(id) ON DELETE CASCADE,
-  subscription JSONB NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "push_all" ON push_subscriptions FOR ALL USING (empresa_id IN (SELECT id FROM empresas WHERE user_id = auth.uid()));
+1                                                                                                                  
+  Hook: "¿Cuánto cobras tú por trabajar a las 3AM?"                                                                  
+  Desarrollo: Tu negocio no duerme. Tus empleados, sí. Tus proveedores, también. Pero los problemas llegan a
+  cualquier hora — y tú eres el único que los resuelve. Solo. Sin datos. Sin consejo.                                
+  Cierre: Orbbi son 7 gerentes de IA que trabajan 24/7. Menos de lo que pagas de internet. Prueba la demo gratis.    
+                                                                                                                     
+  ---                                                                                                                
+  2                                                         
+  Hook: "La razón por la que las grandes empresas siempre ganan."                                                    
+  Desarrollo: No es el capital. No es la suerte. Es que tienen un equipo directivo: un CFO que cuida el flujo de
+  caja, un CMO que construye marca, un COO que optimiza procesos. Las PYMEs toman esas mismas decisiones solas, con  
+  instinto.                                                                                                          
+  Cierre: Orbbi te da ese directorio completo. $29 al mes. Empieza hoy.                                              
+                                                                                                                     
+  ---                                                                                                                
+  3
+  Hook: "Tu contador cobra $300.000. Y solo sabe de números."                                                        
+  Desarrollo: Los negocios reales necesitan más que contabilidad. Necesitan estrategia de ventas, gestión de
+  personas, decisiones de marketing, control de inventario. Contratar a cada especialista cuesta millones. No        
+  contratar a ninguno, te cuesta más.                                                                                
+  Cierre: Orbbi reúne los 7 especialistas que necesitas en una sola plataforma. Sin sueldo fijo.                     
+                                                                                                                     
+  ---                                                                                                                
+  4
+  Hook: "Nadie te dice la verdad sobre tu negocio."                                                                  
+  Desarrollo: Tu equipo te dice lo que quieres escuchar. Tu contador llega una vez al mes. Tu familia no entiende de
+  negocios. Y las decisiones difíciles — contratar, despedir, subir precios, cambiar de rumbo — las tomas solo, sin 
+  un espejo honesto.                                                                                                 
+  Cierre: Orbbi es tu gerente virtual. Conoce tu negocio y te dice lo que necesitas oír. Pruébalo gratis.
+                                                                                                                     
+  ---                                                                                                                
+  5
+  Hook: "Abriste una empresa para ser libre. ¿Por qué trabajas más que nunca?"                                       
+  Desarrollo: Porque tú eres el gerente general, el de ventas, el de finanzas, el de marketing y el que abre y
+  cierra. Cada decisión pasa por ti. Cada problema te espera. El negocio te consume en vez de liberarte.             
+  Cierre: Delega las decisiones estratégicas a Orbbi. Recupera tu tiempo. $29/mes.                                   
+                                                                                                                     
+  ---                                                                                                                
+  6                                                         
+  Hook: "¿Qué pasa si este mes no vendes suficiente?"                                                                
+  Desarrollo: La mayoría de los dueños de PYME no tienen visibilidad real del flujo de caja. No saben cuánto
+  necesitan vender para sobrevivir el mes. No tienen un plan B. Solo esperan que lleguen los clientes.               
+  Cierre: Tu agente financiero de Orbbi analiza tus números y te alerta antes de que sea tarde. Empieza hoy.         
+                                                                                                                     
+  ---                                                                                                                
+  7                                                         
+  Hook: "Tu competidor más pequeño te está ganando. Y sabe exactamente por qué."                                     
+  Desarrollo: Mientras tú decides por intuición, los negocios más ágiles usan datos: saben qué producto tiene mejor
+  margen, qué cliente vale la pena retener, qué canal de marketing funciona. La diferencia no es presupuesto. Es     
+  información.                                                                                                       
+  Cierre: Orbbi convierte la información de tu negocio en decisiones claras. Sin consultores. Sin costos fijos.      
+                                                                                                                     
+  ---                                                                                                                
+  8
+  Hook: "Contraté a la persona equivocada. Me costó $4 millones."                                                    
+  Desarrollo: Una mala contratación no es solo el sueldo. Son meses de entrenamiento, errores con clientes, tiempo
+  perdido, el costo de empezar de cero. La mayoría de los dueños de PYME contratan por urgencia, sin proceso, sin    
+  criterio claro.                                                                                                    
+  Cierre: El agente de RRHH de Orbbi te ayuda a definir perfiles, evaluar candidatos y estructurar tu equipo. Sin    
+  improvisar.                                                                                                        
+                                                                                                                     
+  ---
+  9                                                                                                                  
+  Hook: "Vendiste más este mes. Y aun así tienes menos plata."                                                       
+  Desarrollo: Paradoja del crecimiento: más ventas = más costos, más personal, más inventario, más caja comprometida.
+   Sin un CFO que entienda tu flujo, crecer puede matarte antes que hacerte rico.                                    
+  Cierre: Orbbi Finanzas vigila tu flujo de caja en tiempo real y te explica qué está pasando. En español. Sin       
+  tecnicismos.                                                                                                       
+                                                                                                                     
+  ---                                                       
+  10                                                                                                                 
+  Hook: "Llevas 3 años 'a punto de' hacer marketing. Y nunca arrancas."
+  Desarrollo: Porque no sabes por dónde empezar, no tienes tiempo para hacerlo bien, y contratar una agencia cuesta
+  lo que no tienes. Mientras tanto, tus clientes te buscan — y encuentran a tu competencia.                          
+  Cierre: El agente de marketing de Orbbi te da una estrategia real para tu negocio específico. En minutos. $19/mes. 
+                                                                                                                     
+  ---                                                                                                                
+  11                                                        
+  Hook: "¿Qué tan cerca está tu negocio de quebrar? Probablemente no lo sabes."                                      
+  Desarrollo: El 82% de los negocios que cierran tenían ventas al momento del cierre. Murieron por falta de liquidez,
+   no por falta de clientes. La diferencia entre sobrevivir y cerrar es saber tus números antes de que sea tarde.    
+  Cierre: Orbbi analiza la salud financiera de tu empresa y te alerta cuando algo no cuadra. Empieza gratis.         
+                                                                                                                     
+  ---                                                                                                                
+  12                                                        
+  Hook: "Un gerente general cuesta $3 millones al mes. O $29."                                                       
+  Desarrollo: Las grandes corporaciones pagan millones por tener expertos que guíen cada decisión. Las PYMEs no
+  pueden permitírselo — y entonces improvisan. Pero la IA cambió eso completamente.                                  
+  Cierre: Orbbi pone un directorio completo a tu disposición por menos de un café diario. Prueba la demo, sin        
+  tarjeta.                                                                                                           
+                                                                                                                     
+  ---                                                       
+  13                                                                                                                 
+  Hook: "El peor momento para buscar consejo es cuando ya estás en crisis."
+  Desarrollo: Cuando las cosas van mal, los consultores cobran más, el banco no te presta y tu red de contactos
+  desaparece. Las decisiones buenas se toman cuando todo está bien — antes del problema, no después.                 
+  Cierre: Orbbi es el equipo que te acompaña antes, durante y después de cada decisión. 24/7. Sin cita previa.       
+                                                                                                                     
+  ---                                                                                                                
+  14                                                        
+  Hook: "Tus clientes nuevos cuestan 5 veces más que los que ya tienes."                                             
+  Desarrollo: Y aun así, la mayoría de los negocios gastan todo en conseguir clientes nuevos y nada en retener a los
+  que ya compraron. Sin una estrategia de fidelización, estás llenando un balde con hueco.                           
+  Cierre: El agente de ventas de Orbbi te ayuda a construir un sistema de retención real. Porque los mejores clientes
+   son los que ya tienes.                                                                                            
+                                                                                                                     
+  ---                                                       
+  15                                                                                                                 
+  Hook: "Tienes 47 conversaciones abiertas de proveedores. Y ninguna respuesta."
+  Desarrollo: Gestionar proveedores, negociar precios, controlar inventario, prever quiebres de stock — es un trabajo
+   de tiempo completo que nadie en tu equipo tiene tiempo de hacer bien. Y cuando falla, paras de vender.            
+  Cierre: El agente de inventario de Orbbi ordena el caos de tus compras y te avisa antes de quedarte sin stock.     
+                                                                                                                     
+  ---                                                                                                                
+  16                                                        
+  Hook: "Firmaste un contrato que no entendías. Todos lo hacemos."                                                   
+  Desarrollo: Los contratos con proveedores, arrendatarios, empleados y clientes están llenos de cláusulas que
+  parecen estándar y no lo son. Un abogado cobra $200.000 por revisión. Y muchos dueños de PYME firman de todas      
+  formas porque es lo que hay.                                                                                       
+  Cierre: El agente legal de Orbbi revisa documentos, explica cláusulas y te alerta sobre riesgos. Sin jerga. Sin    
+  facturas.                                                                                                          
+                                                                                                                     
+  ---
+  17                                                                                                                 
+  Hook: "¿Cuánto vale realmente tu empresa hoy?"            
+  Desarrollo: No lo que tú crees. No lo que te costó construirla. Lo que un comprador, un socio o un banco pagarían —
+   basado en flujos, activos, posición en el mercado. La mayoría de los dueños sobreestiman o subestiman por años.   
+  Cierre: Orbbi Finanzas te da una valoración clara de tu negocio y te dice cómo mejorarla. Empieza hoy.             
+   
+  ---                                                                                                                
+  18                                                        
+  Hook: "Despediste a alguien mal. Y ahora te están demandando."                                                     
+  Desarrollo: Una terminación sin proceso, sin documentación, sin el finiquito correcto puede costarte más que dos
+  años de sueldo en litigios, tiempo y estrés. Y nadie te enseñó cómo hacerlo bien.                                  
+  Cierre: El agente de RRHH de Orbbi te guía paso a paso en cada proceso laboral. Para que nunca más improvises con  
+  tu equipo.                                                                                                         
+                                                                                                                     
+  ---                                                       
+  19                                                                                                                 
+  Hook: "Subir los precios da miedo. Pero no subirlos te está matando."
+  Desarrollo: La inflación subió, tus costos subieron, pero tus precios llevan dos años iguales. Cada venta que haces
+   financia menos tu negocio que hace un año. Y no sabes cuánto subir, cuándo hacerlo ni cómo comunicarlo sin perder 
+  clientes.                                                                                                          
+  Cierre: Orbbi analiza tu estructura de costos y te dice exactamente cuánto puedes subir y cómo. Sin perder         
+  clientes.                                                                                                          
+                                                                                                                     
+  ---
+  20                                                                                                                 
+  Hook: "Tu negocio depende completamente de ti. Eso es un problema."
+  Desarrollo: Si te vas una semana, el negocio para. Si te enfermas, nadie sabe qué hacer. Si quieres vender la
+  empresa algún día, no vale nada sin ti. El dueño que es irremplazable es también el prisionero de su propio éxito. 
+  Cierre: Orbbi te ayuda a documentar procesos, delegar decisiones y construir un negocio que funciona sin que estés 
+  presente todo el tiempo.                                                                                           
+                                                                                                                     
+  ---                                                       
+  21                                                                                                                 
+  Hook: "¿Cuánto tiempo llevas diciéndote 'cuando tenga tiempo lo hago'?"
+  Desarrollo: El plan de marketing, la revisión de precios, el proceso de contratación, la estrategia para el próximo
+   año. Están todos en tu cabeza. Y nunca encuentras el momento porque siempre hay un incendio que apagar.           
+  Cierre: Orbbi convierte esas tareas pendientes en planes concretos, ahora mismo. Sin reuniones. Sin consultores.   
+  Sin esperar.                                                                                                       
+                                                                                                                     
+  ---                                                       
+  22                                                                                                                 
+  Hook: "El banco te rechazó el crédito. Aunque tu negocio va bien."
+  Desarrollo: Los bancos no financian a quienes más lo necesitan. Financian a quienes demuestran orden: estados
+  financieros claros, proyecciones creíbles, historial documentado. La mayoría de las PYMEs tienen el negocio en la  
+  cabeza, no en el papel.                                                                                            
+  Cierre: Orbbi te ayuda a preparar la documentación financiera que necesitas para acceder a financiamiento real.    
+  Empieza hoy.                                                                                                       
+                                                                                                                     
+  ---
+  23                                                                                                                 
+  Hook: "Tu socio y tú no están de acuerdo. Y el negocio lo está pagando."
+  Desarrollo: Las sociedades se rompen por falta de claridad: quién decide qué, cómo se distribuyen utilidades, qué
+  pasa si uno quiere salir. Lo que empezó como confianza se convierte en conflicto cuando el dinero está de por      
+  medio.                                                                                                             
+  Cierre: El agente legal de Orbbi te ayuda a estructurar acuerdos claros entre socios antes de que sea un problema. 
+  No después.                                                                                                        
+                                                                                                                     
+  ---
+  24                                                                                                                 
+  Hook: "Llevas 6 meses en redes sociales y no has vendido nada."
+  Desarrollo: Publicar por publicar no es marketing. Sin estrategia de conversión, sin segmentación, sin un embudo
+  claro, las redes son solo tiempo y energía que se van sin retorno. Las publicaciones bonitas no pagan el arriendo. 
+  Cierre: El agente de marketing de Orbbi te diseña una estrategia enfocada en ventas reales, no en likes. Pruébalo. 
+                                                                                                                     
+  ---                                                                                                                
+  25                                                        
+  Hook: "¿Qué pasa con tu negocio si tú no estás?"                                                                   
+  Desarrollo: Accidente, enfermedad, emergencia familiar. Nadie quiere pensarlo, pero cualquier empresa que no tiene
+  un plan de continuidad es una empresa que puede desaparecer de un día para otro. Y tus empleados, tus clientes y tu
+   familia lo pagarían.                                                                                              
+  Cierre: Orbbi te ayuda a documentar los procesos críticos de tu negocio para que funcione incluso en los peores    
+  momentos.                                                                                                          
+                                                                                                                     
+  ---
+  26                                                                                                                 
+  Hook: "Tienes 3 empleados que hacen el trabajo de 1. Y 1 que no hace nada."
+  Desarrollo: La productividad de los equipos pequeños depende de claridad de roles, metas concretas y
+  retroalimentación constante. Sin estructura, los buenos se cansan y los malos se quedan. El talento no se retiene  
+  solo con buenas intenciones.                                                                                       
+  Cierre: El agente de RRHH de Orbbi te da las herramientas para estructurar, evaluar y motivar a tu equipo. Sin     
+  curso de liderazgo.                                                                                                
+                                                                                                                     
+  ---
+  27                                                                                                                 
+  Hook: "Cada decisión que tomas hoy vale más de lo que crees."
+  Desarrollo: Las empresas que escalan no lo hacen por suerte. Lo hacen porque sus dueños toman mejores decisiones,
+  más rápido, con mejor información. La ventaja competitiva real es la velocidad y calidad de tus decisiones — no tu 
+  producto.                                                                                                          
+  Cierre: Orbbi es el sistema que convierte información en decisiones. Para que nunca más decidas a ciegas.          
+                                                                                                                     
+  ---                                                                                                                
+  28
+  Hook: "Tu mejor empleado está pensando en renunciar. Y tú no lo sabes."                                            
+  Desarrollo: El talento no avisa. Un día está, al otro ya recibió una oferta mejor. Las empresas pequeñas pierden a
+  sus mejores personas porque no tienen cultura de reconocimiento, ni planes de carrera, ni conversaciones de        
+  crecimiento.                                                                                                       
+  Cierre: El agente de RRHH de Orbbi te da señales de alerta antes de que sea tarde. Retén a quien vale la pena      
+  retener.                                                                                                           
+                                                                                                                     
+  ---
+  29                                                                                                                 
+  Hook: "Orbbi sabe más de tu negocio que tú."              
+  Desarrollo: No porque sea mágico. Sino porque tiene todo el contexto: tus números, tus procesos, tu equipo, tus
+  metas. Y sin sesgos emocionales, sin miedo a decirte lo que no quieres escuchar, sin interés propio. Un espejo     
+  perfecto para tu empresa.                                                                                          
+  Cierre: 3 minutos de onboarding. Tu directorio completo listo para trabajar. Prueba la demo gratis en orbbi.com.   
+                                                                                                                     
+  ---                                                                                                                
+  30
+  Hook: "Nadie debería decidir solo."                                                                                
+  Desarrollo: Construir un negocio es de las cosas más difíciles que existe. Implica riesgo personal, financiero,
+  emocional. Y hacerlo sin el equipo correcto — sin alguien que conozca tus números, tu mercado, tu equipo — es jugar
+   en modo difícil sin necesidad.                                                                                    
+  Cierre: Orbbi. Tu directorio sin sueldo. Empieza gratis en orbbi.com.                                              
+                                                                                               

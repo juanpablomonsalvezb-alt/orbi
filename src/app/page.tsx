@@ -59,7 +59,6 @@ function Nav() {
           <a href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</a>
           <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
           <a href="/demo" className="text-sm text-ink-light hover:text-ink transition-colors">Demo</a>
-          <a href="/restaurantes" className="text-sm text-ink-light hover:text-ink transition-colors">Restaurantes</a>
           <a href="#contacto" className="text-sm text-ink-light hover:text-ink transition-colors">Contacto</a>
         </div>
         <div className="flex items-center gap-3">
