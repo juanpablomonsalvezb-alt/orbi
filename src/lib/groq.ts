@@ -171,14 +171,12 @@ export async function streamGroq(
 
   for (const provider of chain) {
     try {
-      console.log(`Trying ${provider.name}...`)
       const stream = provider.type === 'gemini'
         ? await streamGemini(provider, messages)
         : await streamOpenAI(provider, messages)
-      console.log(`${provider.name} OK`)
       return stream
     } catch (err) {
-      console.log(`${provider.name} failed: ${err instanceof Error ? err.message : err}`)
+      console.warn(`[LLM] ${provider.name} failed: ${err instanceof Error ? err.message : err}`)
     }
   }
 
@@ -261,7 +259,7 @@ export async function sendGroq(
         : await sendOpenAI(provider, messages)
       return result
     } catch (err) {
-      console.log(`${provider.name} send failed: ${err instanceof Error ? err.message : err}`)
+      console.warn(`[LLM] ${provider.name} send failed: ${err instanceof Error ? err.message : err}`)
     }
   }
 

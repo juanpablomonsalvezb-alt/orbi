@@ -77,9 +77,9 @@ export async function buildMemoryContext(empresaId: string): Promise<string> {
     }
   }
 
-  // Cap at 800 chars
+  // Cap at 800 chars to keep prompt size manageable
   if (result.length > 800) {
-    result = result.substring(0, 1997) + '...'
+    result = result.substring(0, 797) + '...'
   }
 
   memoryCache.set(empresaId, { data: result, timestamp: Date.now() })

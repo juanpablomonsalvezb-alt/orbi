@@ -18,8 +18,8 @@ CREATE TABLE empresas (
   onboarding_completado BOOLEAN NOT NULL DEFAULT FALSE,
   plan TEXT NOT NULL DEFAULT 'free' CHECK (plan IN ('free', 'solo', 'equipo', 'empresa')),
   trial_ends_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '7 days'),
-  stripe_customer_id TEXT,
-  stripe_subscription_id TEXT,
+  stripe_customer_id TEXT,        -- Stores MercadoPago payment reference (legacy column name)
+  stripe_subscription_id TEXT,    -- Stores MercadoPago subscription reference (legacy column name)
   subscription_status TEXT DEFAULT 'trialing',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

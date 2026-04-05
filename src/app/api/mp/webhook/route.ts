@@ -52,21 +52,22 @@ export async function POST(request: NextRequest) {
 
       if (payment.status === 'approved') {
         // Payment approved - activate the plan
-        await supabase
+        // Uses stripe_customer_id column to store MP payment reference
+        const { error: updateErr } = await supabase
           .from('empresas')
           .update({
             plan: planId,
             subscription_status: 'active',
-            mp_payment_id: String(paymentId),
+            stripe_customer_id: `mp_payment:${paymentId}`,
             trial_ends_at: null,
           })
           .eq('id', empresaId)
 
-        console.log(`Plan ${planId} activated for empresa ${empresaId}`)
-      } else if (payment.status === 'rejected' || payment.status === 'cancelled') {
-        console.log(`Payment ${paymentId} status: ${payment.status} for empresa ${empresaId}`)
+        if (updateErr) {
+          console.error(`Failed to activate plan ${planId} for empresa ${empresaId}:`, updateErr)
+        }
       }
-      // Other statuses (pending, in_process) - do nothing, wait for final status
+      // Other statuses (pending, in_process, rejected, cancelled) - do nothing, wait for final status
     }
 
     // Handle subscription (preapproval) notifications
@@ -102,38 +103,40 @@ export async function POST(request: NextRequest) {
 
       if (preapproval.status === 'authorized') {
         // Subscription authorized - activate the plan
-        await supabase
+        // Uses stripe_subscription_id column to store MP subscription reference
+        const { error: updateErr } = await supabase
           .from('empresas')
           .update({
             plan: planId,
             subscription_status: 'active',
-            mp_subscription_id: String(preapprovalId),
+            stripe_subscription_id: `mp_sub:${preapprovalId}`,
             trial_ends_at: null,
           })
           .eq('id', empresaId)
 
-        console.log(`Subscription ${planId} activated for empresa ${empresaId}`)
+        if (updateErr) {
+          console.error(`Failed to activate subscription ${planId} for empresa ${empresaId}:`, updateErr)
+        }
       } else if (preapproval.status === 'cancelled' || preapproval.status === 'paused') {
-        await supabase
+        const { error: updateErr } = await supabase
           .from('empresas')
           .update({
             plan: 'free',
             subscription_status: preapproval.status,
-            mp_subscription_id: null,
+            stripe_subscription_id: null,
           })
           .eq('id', empresaId)
 
-        console.log(`Subscription ${preapproval.status} for empresa ${empresaId}`)
+        if (updateErr) {
+          console.error(`Failed to cancel subscription for empresa ${empresaId}:`, updateErr)
+        }
       }
     }
 
     // Handle subscription authorized payment
+    // The subscription is already active, payment just confirms continued access
     if (type === 'subscription_authorized_payment') {
-      const paymentId = data?.id
-      if (paymentId) {
-        console.log(`Subscription payment received: ${paymentId}`)
-        // The subscription is already active, payment just confirms continued access
-      }
+      // No action needed - subscription stays active
     }
 
     return NextResponse.json({ received: true })

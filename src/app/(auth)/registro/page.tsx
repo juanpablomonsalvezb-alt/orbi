@@ -21,7 +21,6 @@ export default function RegistroPage() {
 
     try {
       // 1. Create auth user
-      console.log('Registrando usuario...')
       const { data, error: err } = await supabase.auth.signUp({ email, password })
 
       if (err) {
@@ -37,10 +36,7 @@ export default function RegistroPage() {
         return
       }
 
-      console.log('Usuario creado:', data.user.id)
-
       // 2. Create empresa via server API (bypasses RLS)
-      console.log('Registrando empresa...')
       const regRes = await fetch('/api/registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -54,8 +50,6 @@ export default function RegistroPage() {
         setLoading(false)
         return
       }
-
-      console.log('Empresa registrada. Redirigiendo...')
 
       // 3. Send welcome email (fire and forget)
       fetch('/api/email', {

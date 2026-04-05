@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
       const realTimeData = await getRealTimeContext(country)
       systemPrompt += realTimeData
     } catch (err) {
-      console.log('Real-time data skipped:', err)
+      // Real-time data unavailable, non-blocking
     }
 
     // 6.5. Detect Google Sheets URL in message and auto-read
@@ -215,12 +215,12 @@ export async function POST(request: NextRequest) {
           const prices = await searchProductPrices(product, country)
           if (prices) {
             mensajeConArchivo += '\n\n' + prices
-            console.log('Price search added for:', product)
+            // Price data appended
           }
         }
       }
     } catch (err) {
-      console.log('Price search skipped:', err)
+      // Price search unavailable, non-blocking
     }
 
     // 6.3. Detect course/training queries ("curso de", "capacitacion en", "aprender")
@@ -233,12 +233,12 @@ export async function POST(request: NextRequest) {
           const courses = await getBusinessCourses(topic)
           if (courses) {
             mensajeConArchivo += '\n\n' + courses
-            console.log('Course search added for:', topic)
+            // Course data appended
           }
         }
       }
     } catch (err) {
-      console.log('Course search skipped:', err)
+      // Course search unavailable, non-blocking
     }
 
     // 6.4. Detect business search queries for Mexico DENUE ("buscar negocio", "negocios de", "directorio")
@@ -253,13 +253,13 @@ export async function POST(request: NextRequest) {
             const results = await searchDENUE(query, '00')
             if (results) {
               mensajeConArchivo += '\n\n' + results
-              console.log('DENUE search added for:', query)
+              // DENUE data appended
             }
           }
         }
       }
     } catch (err) {
-      console.log('DENUE search skipped:', err)
+      // DENUE search unavailable, non-blocking
     }
 
     const sheetsMatch = mensaje.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+[^\s]*/g)
@@ -267,7 +267,7 @@ export async function POST(request: NextRequest) {
       try {
         const sheetData = await readGoogleSheet(sheetsMatch[0])
         mensajeConArchivo = `${mensaje}\n\n[DATOS DE GOOGLE SHEETS - LEÍDOS EN TIEMPO REAL]\n${sheetData}`
-        console.log('Google Sheet read successfully:', sheetData.length, 'chars')
+        // Google Sheet data appended
       } catch (err) {
         console.error('Error reading Google Sheet:', err)
         mensajeConArchivo = `${mensaje}\n\n(El usuario compartió un link de Google Sheets pero no se pudo leer. Posiblemente no tiene permisos públicos. Pídele que cambie los permisos a "Cualquier persona con el enlace puede ver".)`
@@ -283,7 +283,7 @@ export async function POST(request: NextRequest) {
       try {
         const igData = await getInstagramProfile(instagramUser)
         mensajeConArchivo = `${mensajeConArchivo}\n\n[DATOS DE INSTAGRAM - LEÍDOS EN TIEMPO REAL]\n${igData}`
-        console.log('Instagram profile read:', instagramUser)
+        // Instagram data appended
       } catch (err) {
         console.error('Error reading Instagram profile:', err)
       }
@@ -303,7 +303,7 @@ export async function POST(request: NextRequest) {
         try {
           const scrapedData = await scrapeCompetitor(scrapableUrl)
           mensajeConArchivo = `${mensajeConArchivo}\n\n[DATOS DE SITIO WEB - LEÍDOS EN TIEMPO REAL]\n${scrapedData}`
-          console.log('URL scraped successfully:', scrapableUrl)
+          // URL scrape data appended
         } catch (err) {
           console.error('Error scraping URL:', err)
           // No agregar nada al mensaje si falla — el scraping es best-effort
@@ -316,7 +316,7 @@ export async function POST(request: NextRequest) {
             const analysis = await analyzeWebsite(scrapableUrl)
             if (analysis) {
               mensajeConArchivo += '\n\n' + analysis
-              console.log('PageSpeed analysis added for:', scrapableUrl)
+              // PageSpeed data appended
             }
           } catch {
             // PageSpeed es best-effort — no bloquear el chat

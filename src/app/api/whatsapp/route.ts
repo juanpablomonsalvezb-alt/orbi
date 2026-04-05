@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const challenge = searchParams.get('hub.challenge')
 
   if (mode === 'subscribe' && token === process.env.WHATSAPP_VERIFY_TOKEN) {
-    console.log('WhatsApp webhook verificado correctamente')
+    // WhatsApp webhook verified
     return new Response(challenge, { status: 200 })
   }
 
