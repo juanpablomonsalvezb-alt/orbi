@@ -131,6 +131,7 @@ export default function ChatSidebar({
       <div className="px-2 py-3 border-t border-[#e9e9e7] space-y-0.5">
         {[
           { href: '/dashboard', label: 'Panel', icon: '📊' },
+          { href: '/marketing', label: 'Marketing', icon: '📣' },
           { href: '/tareas', label: 'Tareas', icon: '✓' },
           { href: '/equipo', label: 'Equipo', icon: '👥' },
           { href: '/exportar', label: 'Exportar datos', icon: '📁' },
