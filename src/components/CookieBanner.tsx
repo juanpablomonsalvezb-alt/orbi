@@ -7,20 +7,20 @@ export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const consent = localStorage.getItem('orbbi_cookies')
-    if (!consent) {
-      setVisible(true)
-    }
+    try {
+      const consent = localStorage.getItem('orbbi_cookies')
+      if (!consent) setVisible(true)
+    } catch { setVisible(true) }
   }, [])
 
   const handleAccept = () => {
-    localStorage.setItem('orbbi_cookies', 'accepted')
+    try { localStorage.setItem('orbbi_cookies', 'accepted') } catch { /* private mode */ }
     posthog.opt_in_capturing()
     setVisible(false)
   }
 
   const handleReject = () => {
-    localStorage.setItem('orbbi_cookies', 'rejected')
+    try { localStorage.setItem('orbbi_cookies', 'rejected') } catch { /* private mode */ }
     setVisible(false)
   }
 

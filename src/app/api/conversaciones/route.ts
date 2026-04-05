@@ -24,11 +24,15 @@ export async function GET(request: NextRequest) {
 
   const supabase = getSupabase()
 
+  const limit = Math.min(parseInt(request.nextUrl.searchParams.get('limit') || '100'), 200)
+  const offset = Math.max(parseInt(request.nextUrl.searchParams.get('offset') || '0'), 0)
+
   const { data, error } = await supabase
     .from('conversaciones')
     .select('*')
     .eq('empresa_id', empresaId)
     .order('updated_at', { ascending: false })
+    .range(offset, offset + limit - 1)
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

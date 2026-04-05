@@ -103,7 +103,7 @@ function HeroNetwork() {
   const colors = ['', '#e8c4b0', '#e8c4b0', '#ddd5c8', '#ddd5c8', '#d6cfc3', '#d6cfc3']
 
   return (
-    <svg viewBox="0 0 520 460" className="w-full mx-auto" style={{ maxWidth: 520 }}>
+    <svg viewBox="0 0 520 460" className="w-full mx-auto" style={{ maxWidth: 520 }} aria-hidden="true" role="img">
       <defs>
         <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#d97757" stopOpacity="0.15" />

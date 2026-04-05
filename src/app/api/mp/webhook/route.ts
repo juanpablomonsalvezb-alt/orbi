@@ -48,6 +48,14 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ received: true })
       }
 
+      // Whitelist valid plans and validate empresaId is a UUID
+      const VALID_PLANS = ['solo', 'equipo', 'empresa']
+      const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+      if (!VALID_PLANS.includes(planId) || !UUID_REGEX.test(empresaId)) {
+        console.warn('Invalid plan or empresaId in webhook:', { planId, empresaId })
+        return NextResponse.json({ received: true })
+      }
+
       const supabase = getSupabase()
 
       if (payment.status === 'approved') {
@@ -96,6 +104,14 @@ export async function POST(request: NextRequest) {
       const [empresaId, planId] = externalRef.split(':')
 
       if (!empresaId || !planId) {
+        return NextResponse.json({ received: true })
+      }
+
+      // Whitelist valid plans and validate empresaId is a UUID
+      const VALID_PLANS_SUB = ['solo', 'equipo', 'empresa']
+      const UUID_REGEX_SUB = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+      if (!VALID_PLANS_SUB.includes(planId) || !UUID_REGEX_SUB.test(empresaId)) {
+        console.warn('Invalid plan or empresaId in subscription webhook:', { planId, empresaId })
         return NextResponse.json({ received: true })
       }
 

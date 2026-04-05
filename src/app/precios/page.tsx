@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 import PricingPage from '@/components/PricingPage'
+
+export const metadata: Metadata = {
+  title: 'Precios — Orbbi',
+  description: 'Planes desde $29/mes. 7 agentes de IA para tu PYME. Solo, Equipo o Empresa. Prueba la demo gratis antes de decidir.',
+}
 
 function Nav() {
   return (

@@ -17,7 +17,7 @@ export default function OrbiLogo({ size = 40, showText = true, className = '', c
   // ── Icon-only version ──
   if (!showText) {
     return (
-      <svg viewBox="0 0 48 48" width={size} height={size} className={className} fill="none">
+      <svg viewBox="0 0 48 48" width={size} height={size} className={className} fill="none" aria-label="Orbbi" role="img">
         {/* Outer orbit ring */}
         <ellipse cx="24" cy="24" rx="21" ry="21" stroke={c} strokeWidth="1" opacity="0.12" />
         {/* Mid orbit — tilted, animated */}
@@ -88,7 +88,7 @@ export default function OrbiLogo({ size = 40, showText = true, className = '', c
 
   // ── Full logo with text ──
   return (
-    <svg viewBox="0 0 155 44" height={size} className={className} fill="none">
+    <svg viewBox="0 0 155 44" height={size} className={className} fill="none" aria-label="Orbbi" role="img">
       {/* Icon at left */}
       <g transform="translate(2, 2)">
         {/* Outer orbit */}

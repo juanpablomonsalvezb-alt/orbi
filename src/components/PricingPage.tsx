@@ -42,6 +42,16 @@ function useLocalPricing() {
   useEffect(() => {
     async function detect() {
       try {
+        // Check sessionStorage cache first (avoid repeat API calls within same session)
+        const cached = sessionStorage.getItem('orbbi_geo')
+        if (cached) {
+          const { countryCode, rate: cachedRate, currency: cachedCurrency } = JSON.parse(cached)
+          if (countryCode) setCountry(countryCode)
+          if (cachedCurrency) setCurrency(cachedCurrency)
+          if (typeof cachedRate === 'number' && cachedRate > 0) setRate(cachedRate)
+          return
+        }
+
         // Detect country by IP
         const geo = await fetch('https://ip-api.com/json/?fields=countryCode', { signal: AbortSignal.timeout(3000) })
         if (!geo.ok) return
@@ -57,7 +67,11 @@ function useLocalPricing() {
         if (!rateRes.ok) return
         const rateData = await rateRes.json()
         const r = rateData.rates?.[curr]
-        if (r) setRate(r)
+        if (typeof r === 'number' && r > 0) {
+          setRate(r)
+          // Cache in sessionStorage
+          try { sessionStorage.setItem('orbbi_geo', JSON.stringify({ countryCode, currency: curr, rate: r })) } catch { /* private mode */ }
+        }
       } catch {
         // Silent fail — just show USD
       }
