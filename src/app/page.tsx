@@ -250,7 +250,7 @@ function MetricRing({ value, max, label, color, delay = 0 }: {
       transition={{ duration: 0.5, delay, ease }}
     >
       <div className="relative w-24 h-24">
-        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90" aria-hidden="true">
           <circle cx={50} cy={50} r={RING_R} fill="none" stroke="#e3dacc" strokeWidth={5} />
           {inView && (
             <motion.circle cx={50} cy={50} r={RING_R} fill="none" stroke={color} strokeWidth={5} strokeLinecap="round"
@@ -285,7 +285,7 @@ function SparklineChart() {
   return (
     <div ref={ref} className="bg-white rounded-xl border border-cloud-light/50 p-5 w-full">
       <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Ingresos mensuales</p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full" preserveAspectRatio="none">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="spFill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#d97757" stopOpacity={0.15} />
@@ -630,7 +630,7 @@ function UseCasesTabSection() {
               <p className="u-paragraph-s mb-6" style={{ maxWidth: '40ch' }}>{tab.desc}</p>
               <Link href="/demo" className="inline-flex items-center gap-2 text-sm font-medium text-clay hover:opacity-70 transition-opacity">
                 Probar demo
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                 </svg>
               </Link>
@@ -778,35 +778,61 @@ function VideoCard({ videos, phrase, agente, delay = 0 }: {
   delay?: number
 }) {
   const [active, setActive] = useState(0)
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const containerRef = useRef<HTMLDivElement>(null)
+  const video0Ref = useRef<HTMLVideoElement>(null)
+  const video1Ref = useRef<HTMLVideoElement>(null)
+  const inView = useInView(containerRef, { once: true, margin: '-60px' })
 
   useEffect(() => {
-    const id = setInterval(() => setActive(a => (a + 1) % 2), 5000)
-    return () => clearInterval(id)
-  }, [])
+    const el = containerRef.current
+    if (!el) return
+    let intervalId: ReturnType<typeof setInterval> | null = null
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const activeVideo = active === 0 ? video0Ref.current : video1Ref.current
+        activeVideo?.play().catch(() => {})
+        intervalId = setInterval(() => setActive(a => (a + 1) % 2), 5000)
+      } else {
+        video0Ref.current?.pause()
+        video1Ref.current?.pause()
+        if (intervalId) clearInterval(intervalId)
+      }
+    }, { threshold: 0.3 })
+
+    observer.observe(el)
+    return () => { observer.disconnect(); if (intervalId) clearInterval(intervalId) }
+  }, [active])
 
   return (
     <motion.div
-      ref={ref}
+      ref={containerRef}
       className="relative overflow-hidden rounded-2xl"
       style={{ aspectRatio: '9/14' }}
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease, delay }}
     >
-      {videos.map((src, i) => (
-        <video
-          key={src}
-          src={src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-          style={{ opacity: active === i ? 1 : 0 }}
-        />
-      ))}
+      <video
+        ref={video0Ref}
+        src={videos[0]}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+        style={{ opacity: active === 0 ? 1 : 0 }}
+      />
+      <video
+        ref={video1Ref}
+        src={videos[1]}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+        style={{ opacity: active === 1 ? 1 : 0 }}
+      />
 
       {/* gradient overlay */}
       <div className="absolute inset-0" style={{
@@ -1144,7 +1170,7 @@ function ComparisonSection() {
 
               {/* Genérica */}
               <div className="py-5 md:px-4 border-t border-ivory/[0.07] flex items-start gap-2.5">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5" aria-hidden="true">
                   <path d="M4 4L12 12M12 4L4 12" stroke="#87867f" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
                 <span className="text-sm text-ivory/30 leading-relaxed">{row.generica}</span>
@@ -1152,7 +1178,7 @@ function ComparisonSection() {
 
               {/* Orbbi */}
               <div className="py-5 md:px-4 border-t border-ivory/[0.07] flex items-start gap-2.5">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5" aria-hidden="true">
                   <path d="M3 8.5L6.5 12L13 4" stroke="#d97757" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <span className="text-sm text-ivory/90 leading-relaxed">{row.orbbi}</span>
@@ -1432,20 +1458,20 @@ function Footer() {
         {/* Bottom social row */}
         <div className="border-t border-ink-mid pt-6 flex items-center gap-4">
           {/* Twitter/X */}
-          <a href="#" className="text-muted hover:text-ivory transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <a href="#" aria-label="Orbbi en X (Twitter)" className="text-muted hover:text-ivory transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
           </a>
           {/* LinkedIn */}
-          <a href="#" className="text-muted hover:text-ivory transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <a href="#" aria-label="Orbbi en LinkedIn" className="text-muted hover:text-ivory transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
           </a>
           {/* Instagram */}
-          <a href="#" className="text-muted hover:text-ivory transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <a href="#" aria-label="Orbbi en Instagram" className="text-muted hover:text-ivory transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
             </svg>
           </a>

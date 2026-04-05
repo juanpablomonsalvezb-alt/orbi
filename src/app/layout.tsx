@@ -61,6 +61,18 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: 'https://www.orbbilatam.com',
+    languages: {
+      'es-CL': 'https://www.orbbilatam.com',
+      'es-MX': 'https://www.orbbilatam.com',
+      'es-CO': 'https://www.orbbilatam.com',
+      'es-PE': 'https://www.orbbilatam.com',
+      'es-AR': 'https://www.orbbilatam.com',
+      'es-UY': 'https://www.orbbilatam.com',
+      'es': 'https://www.orbbilatam.com',
+    },
+  },
 }
 
 const schemaSoftwareApplication = {

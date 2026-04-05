@@ -112,6 +112,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${articulo.titulo} — Orbbi Blog`,
     description: articulo.descripcion,
     keywords: articulo.keywords,
+    alternates: {
+      canonical: `${baseUrl}/blog/${articulo.slug}`,
+    },
     openGraph: {
       title: articulo.titulo,
       description: articulo.descripcion,
@@ -214,8 +217,42 @@ export default async function BlogArticuloPage({ params }: PageProps) {
       ? contentHtml.slice(0, insertAfter + 4) + ctaHtml + contentHtml.slice(insertAfter + 4)
       : contentHtml + ctaHtml
 
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
+
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.orbbilatam.com' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.orbbilatam.com/blog' },
+      { '@type': 'ListItem', position: 3, name: articulo.titulo, item: `https://www.orbbilatam.com/blog/${articulo.slug}` },
+    ],
+  }
+
+  const schemaArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: articulo.titulo,
+    description: articulo.descripcion,
+    datePublished: articulo.created_at,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Orbbi',
+      url: 'https://www.orbbilatam.com',
+    },
+    mainEntityOfPage: `https://www.orbbilatam.com/blog/${articulo.slug}`,
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
+      />
       <Nav />
       <main style={{ background: '#faf9f5', minHeight: '80vh' }}>
         <div
@@ -300,6 +337,29 @@ export default async function BlogArticuloPage({ params }: PageProps) {
             <span>{articulo.tiempo_lectura} min de lectura</span>
           </div>
 
+          {/* Featured image */}
+          <div
+            style={{
+              width: '100%',
+              aspectRatio: '1200/630',
+              background: 'linear-gradient(135deg, #141413 0%, #1e1c1a 100%)',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              marginBottom: '32px',
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${baseUrl}/blog/${articulo.slug}/opengraph-image`}
+              alt={articulo.titulo}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+
           {/* Article content */}
           <div
             className="prose-blog"
@@ -332,7 +392,7 @@ export default async function BlogArticuloPage({ params }: PageProps) {
                 letterSpacing: '-0.02em',
               }}
             >
-              Más recursos para tu negocio
+              También te puede interesar:
             </h2>
             <div
               style={{
@@ -345,6 +405,7 @@ export default async function BlogArticuloPage({ params }: PageProps) {
                 <Link
                   key={rel.id}
                   href={`/blog/${rel.slug}`}
+                  title={rel.titulo}
                   style={{ textDecoration: 'none' }}
                 >
                   <article

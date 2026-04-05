@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     description: 'Artículos prácticos sobre gestión empresarial para PYMEs latinoamericanas.',
     url: '/blog',
   },
+  alternates: {
+    canonical: 'https://www.orbbilatam.com/blog',
+  },
 }
 
 interface BlogArticulo {
@@ -102,8 +105,27 @@ function Footer() {
 export default async function BlogPage() {
   const articulos = await getArticulos()
 
+  const schemaItemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Blog Orbbi — Recursos para PYMEs',
+    description: 'Artículos sobre gestión empresarial para PYMEs en Latinoamérica',
+    url: 'https://www.orbbilatam.com/blog',
+    numberOfItems: articulos.length,
+    itemListElement: articulos.map((art, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: art.titulo,
+      url: `https://www.orbbilatam.com/blog/${art.slug}`,
+    })),
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaItemList) }}
+      />
       <Nav />
       <main style={{ background: '#faf9f5', minHeight: '80vh' }}>
         {/* Header */}

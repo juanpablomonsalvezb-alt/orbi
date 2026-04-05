@@ -6,6 +6,17 @@ import PricingPage from '@/components/PricingPage'
 export const metadata: Metadata = {
   title: 'Precios — Orbbi',
   description: 'Planes desde $29/mes. 7 agentes de IA para tu PYME. Solo, Equipo o Empresa. Prueba la demo gratis antes de decidir.',
+  alternates: {
+    canonical: 'https://www.orbbilatam.com/precios',
+    languages: {
+      'es-CL': 'https://www.orbbilatam.com/precios',
+      'es-MX': 'https://www.orbbilatam.com/precios',
+      'es-CO': 'https://www.orbbilatam.com/precios',
+      'es-PE': 'https://www.orbbilatam.com/precios',
+      'es-AR': 'https://www.orbbilatam.com/precios',
+      'es-UY': 'https://www.orbbilatam.com/precios',
+    },
+  },
 }
 
 function Nav() {
