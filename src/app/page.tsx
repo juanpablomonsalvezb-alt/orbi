@@ -769,81 +769,154 @@ function SocialProofSection() {
 // 4. VIDEO / MEDIA SECTION (bg-ivory)
 // ═══════════════════════════════════════════════════════════════════
 
-function VideoSection() {
-  const chatLines = [
-    { from: 'user', text: '¿Cuánto necesito vender este mes para cubrir costos fijos?' },
-    { from: 'agent', label: 'Agente Financiero', text: 'Basado en tus costos fijos de $8.2M y margen promedio de 34%, necesitas vender al menos $24.1M este mes. Llevas $18.7M — te faltan $5.4M en 12 días.' },
-    { from: 'user', text: '¿Qué puedo hacer para acelerar ventas?' },
-    { from: 'agent', label: 'Agente de Ventas', text: 'Tienes 8 cotizaciones pendientes por $12.3M. Te recomiendo priorizar las 3 con mayor probabilidad de cierre. ¿Quieres que prepare un plan de seguimiento?' },
-  ]
+// ── Video card: crossfades between 2 clips, unique phrase overlay ──
+function VideoCard({ videos, phrase, agente, delay = 0 }: {
+  videos: [string, string]
+  phrase: string
+  agente: string
+  delay?: number
+}) {
+  const [active, setActive] = useState(0)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  useEffect(() => {
+    const id = setInterval(() => setActive(a => (a + 1) % 2), 5000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
-    <section className="bg-ivory">
+    <motion.div
+      ref={ref}
+      className="relative overflow-hidden rounded-2xl"
+      style={{ aspectRatio: '9/14' }}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease, delay }}
+    >
+      {videos.map((src, i) => (
+        <video
+          key={src}
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+          style={{ opacity: active === i ? 1 : 0 }}
+        />
+      ))}
+
+      {/* gradient overlay */}
+      <div className="absolute inset-0" style={{
+        background: 'linear-gradient(to top, rgba(14,13,12,0.92) 0%, rgba(14,13,12,0.3) 50%, rgba(14,13,12,0.05) 100%)'
+      }} />
+
+      {/* Text */}
+      <div className="absolute bottom-0 left-0 right-0 p-5">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-accent mb-2">{agente}</p>
+        <p style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: 'clamp(14px, 1.8vw, 17px)',
+          color: '#faf9f5',
+          lineHeight: 1.45,
+          fontWeight: 400,
+          letterSpacing: '-0.2px',
+        }}>
+          {phrase}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
+const VIDEO_CARDS = [
+  {
+    videos: [
+      '/videos/Female_student_looking_202604050751.mp4',
+      '/videos/Man_blinking_at_202604050815.mp4',
+    ] as [string, string],
+    agente: 'Gerente General',
+    phrase: 'Las 11pm. Una decisión urgente. Sin contador, sin gerente. Solo tú y tu intuición.',
+  },
+  {
+    videos: [
+      '/videos/Female_student_typing_202604050836.mp4',
+      '/videos/Woman_typing_on_202604050838.mp4',
+    ] as [string, string],
+    agente: 'Agente Financiero',
+    phrase: '¿Cuánto necesito vender este mes para no perder plata? Ya tiene la respuesta.',
+  },
+  {
+    videos: [
+      '/videos/Girl_typing_on_202604050010.mp4',
+      '/videos/Girl_typing_on_202604050847.mp4',
+    ] as [string, string],
+    agente: 'Agente de Ventas',
+    phrase: 'Tienes 8 cotizaciones abiertas. Tres de ellas van a cerrar esta semana si actúas hoy.',
+  },
+  {
+    videos: [
+      '/videos/Man_typing_code_202604050840.mp4',
+      '/videos/Man_typing_on_202604050842.mp4',
+    ] as [string, string],
+    agente: 'Agente de Marketing',
+    phrase: 'Tu competencia publica 3 veces por semana. Tu último post fue hace 18 días.',
+  },
+  {
+    videos: [
+      '/videos/Man_typing_on_202604050845.mp4',
+      '/videos/Student_blinking_at_202604050812.mp4',
+    ] as [string, string],
+    agente: 'Agente RRHH',
+    phrase: 'Una PYME no fracasa por falta de ganas. Fracasa por falta de información a tiempo.',
+  },
+  {
+    videos: [
+      '/videos/Student_typing_and_202604050844.mp4',
+      '/videos/Woman_looking_at_202604050001.mp4',
+    ] as [string, string],
+    agente: 'Agente de Inventario',
+    phrase: 'Nadie debería decidir solo el futuro de su negocio.',
+  },
+]
+
+function VideoSection() {
+  return (
+    <section className="bg-ivory-mid">
       <div className="space-medium" />
       <div className="u-container">
-        <FadeIn className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" />
-            </svg>
-          </div>
-          <h2 className="u-display-l">
-            <AnimatedWords>Ve cómo funciona</AnimatedWords>
-          </h2>
-        </FadeIn>
 
-        {/* Chat mockup preview */}
-        <FadeIn delay={0.15}>
-          <div className="relative rounded-2xl overflow-hidden shadow-lg mx-auto" style={{ maxWidth: '720px' }}>
-            {/* Chat interface mockup */}
-            <div className="bg-white">
-              {/* Chat header */}
-              <div className="flex items-center gap-3 px-6 py-4 border-b border-cloud-light/50">
-                <div className="w-8 h-8 rounded-full bg-clay/15 flex items-center justify-center">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-ink">Orbbi Chat</p>
-                  <p className="text-xs text-muted">Tu equipo directivo inteligente</p>
-                </div>
-              </div>
-              {/* Chat messages */}
-              <div className="px-6 py-5 space-y-4">
-                {chatLines.map((line, i) => (
-                  <div key={i} className={`flex ${line.from === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[80%] rounded-xl px-4 py-3 ${
-                      line.from === 'user'
-                        ? 'bg-ink text-ivory text-sm'
-                        : 'bg-ivory-dark text-ink text-sm'
-                    }`}>
-                      {line.from === 'agent' && (
-                        <p className="text-xs font-medium text-clay mb-1">{line.label}</p>
-                      )}
-                      <p className="leading-relaxed">{line.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <FadeIn className="mb-12">
+          <div className="grid-12 items-end">
+            <div style={{ gridColumn: 'span 6' }} className="max-md:col-span-full">
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-accent mb-3">Personas reales</p>
+              <h2 className="u-display-l">
+                <AnimatedWords>Así se ve cuando tu negocio tiene apoyo</AnimatedWords>
+              </h2>
             </div>
-
-            {/* Semi-transparent overlay with CTA */}
-            <div className="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/80 to-transparent flex flex-col items-center justify-end pb-10">
-              <p className="text-lg font-medium text-ink mb-4" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                Así conversa tu equipo directivo
+            <div style={{ gridColumn: 'span 6' }} className="max-md:col-span-full flex items-end">
+              <p className="u-paragraph-s" style={{ maxWidth: '44ch' }}>
+                Cada dueño de PYME enfrenta momentos donde necesita una respuesta
+                especializada. Orbbi está ahí, en cada uno de esos momentos.
               </p>
-              <Link
-                href="/demo"
-                className="bg-clay text-white text-sm font-medium px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Ver demo con mi negocio
-              </Link>
             </div>
           </div>
         </FadeIn>
 
-        {/* 2-col subtitle */}
+        {/* 3-col video grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {VIDEO_CARDS.map((card, i) => (
+            <VideoCard
+              key={i}
+              videos={card.videos}
+              phrase={card.phrase}
+              agente={card.agente}
+              delay={i * 0.07}
+            />
+          ))}
+        </div>
+
         <div className="space-medium" />
         <div className="grid-12">
           <div style={{ gridColumn: 'span 5' }} className="max-md:col-span-full">
