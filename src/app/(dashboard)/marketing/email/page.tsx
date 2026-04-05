@@ -46,7 +46,7 @@ type Tab = 'campanas' | 'prospectos' | 'plantillas'
 // ── Email templates ──
 const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }> = {
   universal: {
-    asunto: 'Orbbi — IA para las PYMEs de {{pais}}',
+    asunto: 'El problema que nadie en {{org}} debería ignorar',
     tipo: 'gremio',
     html: `<div style="font-family:'Georgia',serif;max-width:540px;margin:0 auto;padding:48px 24px;color:#141413;background:#ffffff;">
 
@@ -55,33 +55,32 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
-  Mi nombre es Juan Pablo Monsalvez. Soy el fundador de <strong style="color:#141413;">Orbbi</strong>, una startup chilena que lanzamos este año con una idea simple: que cualquier PYME en Latinoamérica pueda tomar mejores decisiones, sin necesitar contratar más gente ni pagar consultores.
+  El dueño de una PYME promedio en Latinoamérica toma decisiones de finanzas, ventas, personal e inventario — solo, todos los días, sin apoyo especializado. No porque no quiera ayuda, sino porque contratar gerentes o consultores está fuera de su alcance.
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
-  Lo hacemos con agentes de inteligencia artificial especializados — uno para finanzas, otro para ventas, marketing, recursos humanos, inventario. Cada uno conoce el negocio en profundidad y está disponible 24/7 desde <strong style="color:#141413;">$29 USD al mes</strong>.
+  Eso tiene un costo enorme. Y las organizaciones como <strong style="color:#141413;">{{org}}</strong> lo ven de cerca.
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
-  Le escribo porque {{org}} trabaja directamente con el tipo de empresa que Orbbi puede transformar. No busco una venta inmediata — busco conversación. Si ve potencial en que las empresas que acompaña accedan a esta herramienta, me encantaría mostrársela en 20 minutos.
+  <strong style="color:#141413;">Orbbi</strong> resuelve exactamente eso. Es una plataforma de agentes de IA especializados — Financiero, Ventas, Marketing, RRHH, Inventario — que conocen el negocio en profundidad y están disponibles 24/7. No es un chatbot genérico. Es como tener un equipo de gerentes que nunca duerme, desde <strong style="color:#141413;">$29 USD al mes</strong>.
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 32px;">
-  También puede ver la demo en vivo ahora mismo, sin registro:
+  Porque nadie debería decidir solo.
 </p>
 
 <a href="https://www.orbbilatam.com/demo"
    style="display:inline-block;background:#141413;color:#faf9f5;padding:13px 28px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;letter-spacing:0.2px;">
-  Ver demo gratuita →
+  Ver demo gratuita — sin registro →
 </a>
 
 <p style="font-size:14px;line-height:1.7;color:#87867f;margin:36px 0 0;">
-  Quedo atento a cualquier pregunta. Responda directamente a este correo.
+  Si le interesa explorar cómo Orbbi puede ser un recurso para las empresas que acompaña, responda este correo.
 </p>
 
-<p style="font-size:14px;color:#87867f;margin:4px 0 0;">
-  Juan Pablo Monsalvez<br/>
-  Fundador, Orbbi<br/>
+<p style="font-size:14px;color:#87867f;margin:16px 0 0;">
+  Equipo Orbbi<br/>
   <a href="https://www.orbbilatam.com" style="color:#c6613f;text-decoration:none;">orbbilatam.com</a>
 </p>
 
