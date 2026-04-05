@@ -18,6 +18,7 @@ function Nav() {
             <Link href="/#producto" className="t-small text-muted hover:text-ink transition-colors duration-200">Producto</Link>
             <Link href="/#agentes" className="t-small text-muted hover:text-ink transition-colors duration-200">Agentes</Link>
             <Link href="/precios" className="t-small text-ink font-medium">Precios</Link>
+            <Link href="/blog" className="t-small text-muted hover:text-ink transition-colors duration-200">Blog</Link>
           </div>
           <div className="flex items-center space-x-4">
             <Link href="/login" className="t-small text-muted hover:text-ink transition-colors duration-200">Entrar</Link>
@@ -38,6 +39,7 @@ function Footer() {
         <OrbiLogo size={22} color="dark" />
         <div className="flex items-center space-x-8">
           <Link href="/" className="text-[12px] text-muted hover:text-ink transition-colors duration-200">Inicio</Link>
+          <Link href="/blog" className="text-[12px] text-muted hover:text-ink transition-colors duration-200">Blog</Link>
           <Link href="/login" className="text-[12px] text-muted hover:text-ink transition-colors duration-200">Entrar</Link>
         </div>
         <p className="text-[11px] text-muted">© 2026 Orbbi</p>

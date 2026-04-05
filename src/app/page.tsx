@@ -60,6 +60,7 @@ function Nav() {
           <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
           <a href="/demo" className="text-sm text-ink-light hover:text-ink transition-colors">Demo</a>
           <a href="#contacto" className="text-sm text-ink-light hover:text-ink transition-colors">Contacto</a>
+          <Link href="/blog" className="text-sm text-ink-light hover:text-ink transition-colors">Blog</Link>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="text-sm text-ink-light hover:text-ink transition-colors hidden sm:block">Entrar</Link>
@@ -1367,7 +1368,7 @@ function Footer() {
   const cols = [
     { title: 'Productos', links: ['Gerente General', 'Agente Financiero', 'Agente de Ventas', 'Agente de Marketing', 'RRHH', 'Inventario', 'Cumplimiento'] },
     { title: 'Soluciones', links: ['Para emprendedores', 'Para PYMEs', 'Para empresas', 'Por industria'] },
-    { title: 'Recursos', links: ['Documentación', 'Blog', 'Casos de uso', 'Tutoriales', 'API'] },
+    { title: 'Recursos', links: ['Documentación', { text: 'Blog', href: '/blog' }, 'Casos de uso', 'Tutoriales', 'API'] },
     { title: 'Empresa', links: [
       { text: 'Sobre nosotros', href: '#' },
       { text: 'Contacto', href: 'mailto:hola@orbbilatam.com' },
