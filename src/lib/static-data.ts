@@ -9,8 +9,7 @@ export const SALARIOS_MINIMOS = {
   colombia: { monto: 1423500, moneda: 'COP', periodo: 'mensual', vigencia: '2026', auxTransporte: 200000 },
   peru: { monto: 1130, moneda: 'PEN', periodo: 'mensual', vigencia: '2025' },
   argentina: { monto: 286000, moneda: 'ARS', periodo: 'mensual', vigencia: '2025', nota: 'Actualizacion trimestral' },
-  bolivia: { monto: 2500, moneda: 'BOB', periodo: 'mensual', vigencia: '2025' },
-  ecuador: { monto: 460, moneda: 'USD', periodo: 'mensual', vigencia: '2025' },
+  uruguay: { monto: 22268, moneda: 'UYU', periodo: 'mensual', vigencia: '2025' },
 }
 
 // --- Unidades de referencia por pais (valores fijos anuales) ---
@@ -31,11 +30,8 @@ export const UNIDADES_REFERENCIA = {
   argentina: {
     uma_ar: { valor: 'Variable', descripcion: 'En Argentina no existe UMA; se usa el SMVM (Salario Minimo Vital y Movil) como referencia' },
   },
-  bolivia: {
-    smv: { valor: 2500, moneda: 'BOB', vigencia: '2025', descripcion: 'Salario Minimo Nacional' },
-  },
-  ecuador: {
-    sbu: { valor: 460, moneda: 'USD', vigencia: '2025', descripcion: 'Salario Basico Unificado' },
+  uruguay: {
+    bpc: { valor: 6177, moneda: 'UYU', vigencia: '2025', descripcion: 'Base de Prestaciones y Contribuciones — usada para tramos tributarios y prestaciones sociales' },
   },
 }
 
@@ -87,18 +83,14 @@ export const CALENDARIO_TRIBUTARIO = {
     iva_tasa: '21%',
     ganancias_tasa: '25-35%',
   },
-  bolivia: {
-    iva_mensual: 'Segun ultimo digito NIT (mes siguiente)',
-    iue_anual: '120 dias post cierre (generalmente abril)',
-    iva_tasa: '13%',
-    iue_tasa: '25%',
-    it_tasa: '3% sobre ingresos brutos',
-  },
-  ecuador: {
-    iva_mensual: 'Segun 9no digito RUC (mes siguiente)',
-    renta_anual: 'Marzo-Abril (segun 9no digito)',
-    iva_tasa: '15%',
-    renta_tasa: '25% (general) o RIMPE 1-2%',
+  uruguay: {
+    iva: 'Mensual (grandes contribuyentes) o bimestral (pequenos)',
+    irae_anual: 'Declaracion anual, anticipos mensuales',
+    irpf: 'Retencion mensual por empleador',
+    bps: 'Aporte mensual',
+    iva_tasa: '22% (tasa basica), 10% (tasa minima)',
+    irae_tasa: '25%',
+    autoridad: 'DGI (dgi.gub.uy)',
   },
 }
 
@@ -143,19 +135,16 @@ export const COTIZACIONES_PREVISIONALES = {
     costo_total_empleador: '~24-27% sobre remuneracion bruta',
     nota: 'Varia por convenio colectivo',
   },
-  bolivia: {
-    afp_empleador: '14.71% (2% riesgo profesional + 1.71% comision + 10% + 1% solidario)',
-    cns_empleador: '10%',
-    vivienda_empleador: '2%',
-    costo_total_empleador: '~26-28% sobre remuneracion bruta',
-  },
-  ecuador: {
-    iess_empleador: '11.15%',
-    iess_trabajador: '9.45%',
-    fondos_reserva: '8.33% (despues del primer año)',
-    decimo_tercero: '1/12 de remuneracion',
-    decimo_cuarto: '1 salario basico unificado/12',
-    costo_total_empleador: '~30-35% sobre remuneracion bruta',
+  uruguay: {
+    bps_jubilacion_empleador: '7.5%',
+    bps_fonasa_empleador: '5%',
+    bps_frl_empleador: '0.125%',
+    bps_trabajador_jubilacion: '15%',
+    bps_trabajador_fonasa: '3-8%',
+    aguinaldo: '1 sueldo/ano (pagado en 2 cuotas: junio y diciembre)',
+    licencia: '20 dias habiles minimo',
+    salario_vacacional: '100% del salario del periodo de licencia',
+    costo_total_empleador: '~12.625% sobre remuneracion bruta + aguinaldo + salario vacacional',
   },
 }
 
@@ -166,8 +155,7 @@ export const PRECIOS_COMBUSTIBLE: Record<string, Record<string, unknown>> = {
   colombia: { corriente: 14500, extra: 17000, diesel: 10500, moneda: 'COP/galon', vigencia: 'Abril 2026 aprox.' },
   peru: { regular_90: 16.5, premium_95: 19.0, diesel: 15.5, moneda: 'PEN/galon', vigencia: 'Abril 2026 aprox.' },
   argentina: { super: 1200, premium: 1500, diesel: 1100, moneda: 'ARS/litro', vigencia: 'Abril 2026 aprox.', nota: 'Varia por provincia' },
-  bolivia: { gasolina: 3.74, diesel: 3.72, moneda: 'BOB/litro', vigencia: '2026', nota: 'Precio regulado por gobierno' },
-  ecuador: { extra: 2.72, super: 3.89, diesel: 1.75, moneda: 'USD/galon', vigencia: '2026' },
+  uruguay: { nafta_super_95: 76, gasoil_50s: 58, moneda: 'UYU/litro', vigencia: '2026' },
 }
 
 // --- Calendario comercial por pais ---
@@ -211,18 +199,13 @@ export const CALENDARIO_COMERCIAL: Record<string, Array<{ mes: string; evento: s
     { mes: 'Noviembre', evento: 'CyberMonday AR + Black Friday', impacto: 'alto' },
     { mes: 'Diciembre', evento: 'Navidad + aguinaldo', impacto: 'muy alto' },
   ],
-  bolivia: [
-    { mes: 'Febrero', evento: 'Carnaval de Oruro', impacto: 'alto (turismo)' },
-    { mes: 'Mayo', evento: 'Dia de la Madre (27 mayo)', impacto: 'alto' },
-    { mes: 'Agosto', evento: 'Independencia (6 ago)', impacto: 'medio' },
-    { mes: 'Diciembre', evento: 'Navidad + aguinaldo', impacto: 'alto' },
-  ],
-  ecuador: [
-    { mes: 'Febrero', evento: 'Carnaval', impacto: 'medio' },
+  uruguay: [
+    { mes: 'Marzo', evento: 'Semana de Turismo (Semana Santa)', impacto: 'alto (turismo)' },
     { mes: 'Mayo', evento: 'Dia de la Madre', impacto: 'alto' },
-    { mes: 'Agosto', evento: 'Independencia (10 ago)', impacto: 'medio' },
+    { mes: 'Agosto', evento: 'Dia del Nino', impacto: 'medio' },
+    { mes: 'Septiembre', evento: 'Dia del Patrimonio', impacto: 'medio' },
     { mes: 'Noviembre', evento: 'Black Friday', impacto: 'alto' },
-    { mes: 'Diciembre', evento: 'Navidad + decimo tercero', impacto: 'muy alto' },
+    { mes: 'Diciembre', evento: 'Navidad + aguinaldo', impacto: 'muy alto' },
   ],
 }
 
@@ -233,8 +216,7 @@ export const COSTOS_PUBLICIDAD: Record<string, Record<string, string>> = {
   colombia: { meta_cpc: '$500-2,000 COP', meta_cpm: '$8,000-25,000 COP', google_cpc: '$1,000-4,000 COP' },
   peru: { meta_cpc: '$0.50-1.50 PEN', meta_cpm: '$8-20 PEN', google_cpc: '$1-4 PEN' },
   argentina: { meta_cpc: '$50-200 ARS', meta_cpm: '$800-3,000 ARS', google_cpc: '$100-500 ARS', nota: 'Muy volatil por inflacion' },
-  bolivia: { meta_cpc: '$0.30-0.80 BOB', meta_cpm: '$5-15 BOB', google_cpc: '$0.50-2 BOB' },
-  ecuador: { meta_cpc: '$0.15-0.50 USD', meta_cpm: '$3-10 USD', google_cpc: '$0.30-1.50 USD' },
+  uruguay: { meta_cpc: '$0.20-0.60 USD', meta_cpm: '$4-12 USD', google_cpc: '$0.40-1.50 USD' },
 }
 
 // --- Integraciones disponibles (OAuth / API key del usuario) ---
@@ -312,16 +294,10 @@ export const TARIFAS_ENERGIA: Record<string, Record<string, string>> = {
     vigencia: '2026 aprox.',
     nota: 'Muy variable por subsidios y zona',
   },
-  bolivia: {
-    residencial: 'Bs 0.50-0.80 BOB/kWh',
-    comercial: 'Bs 0.70-1.20 BOB/kWh',
-    fuente: 'Autoridad de Fiscalizacion de Electricidad',
-    vigencia: '2026 aprox.',
-  },
-  ecuador: {
-    residencial: '$0.08-0.10 USD/kWh',
-    comercial: '$0.09-0.12 USD/kWh',
-    fuente: 'ARCONEL',
+  uruguay: {
+    residencial: '$U 5.50-7.50 UYU/kWh',
+    comercial: '$U 4.50-6.50 UYU/kWh',
+    fuente: 'UTE (Administracion Nacional de Usinas y Trasmisiones Electricas)',
     vigencia: '2026 aprox.',
   },
 }
@@ -357,14 +333,11 @@ export const COSTOS_ENVIO: Record<string, Record<string, string>> = {
     oca: 'Desde $2,800 ARS (hasta 1kg, nacional)',
     nota: 'Precios muy variables por inflacion',
   },
-  bolivia: {
-    ems_bolivia: 'Desde Bs 25 BOB (hasta 500g, nacional)',
-    nota: 'Opciones limitadas; courier privado mas caro',
-  },
-  ecuador: {
-    servientrega_ec: 'Desde $3.50 USD (hasta 1kg, nacional)',
-    tramaco: 'Desde $4.00 USD (hasta 1kg, nacional)',
-    nota: 'Precios en USD',
+  uruguay: {
+    dac: 'Desde $U 250 UYU (hasta 1kg, nacional)',
+    ues: 'Desde $U 200 UYU (hasta 1kg, Montevideo)',
+    mirtrans: 'Desde $U 280 UYU (hasta 1kg, nacional)',
+    nota: 'Precios varian por origen/destino y peso',
   },
 }
 
@@ -400,15 +373,11 @@ export const TASAS_CREDITO_PYME: Record<string, Record<string, string>> = {
     nota: 'Tasas altisimas por inflacion; creditos a tasa subsidiada disponibles',
     fuente: 'BCRA / bancos comerciales',
   },
-  bolivia: {
-    credito_pyme: '6-11.5% anual (tasa regulada)',
-    nota: 'Tasas reguladas por gobierno para sector productivo',
-    fuente: 'ASFI',
-  },
-  ecuador: {
-    credito_pyme: '9.5-11.5% anual (tasa referencial)',
-    cfn: 'Tasa preferencial via CFN (Corporacion Financiera Nacional)',
-    fuente: 'Superintendencia de Bancos',
+  uruguay: {
+    credito_pyme: '10-18% anual (UI o pesos)',
+    ande: 'Lineas preferenciales via ANDE (Agencia Nacional de Desarrollo)',
+    microCredito: '20-40% anual',
+    fuente: 'BCU / bancos comerciales',
   },
 }
 

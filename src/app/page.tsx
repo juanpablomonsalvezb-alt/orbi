@@ -963,8 +963,7 @@ function FinalCTA() {
                       <option value="Colombia">Colombia</option>
                       <option value="Perú">Perú</option>
                       <option value="Argentina">Argentina</option>
-                      <option value="Bolivia">Bolivia</option>
-                      <option value="Ecuador">Ecuador</option>
+                      <option value="Uruguay">Uruguay</option>
                       <option value="Otro">Otro</option>
                     </select>
                   </div>

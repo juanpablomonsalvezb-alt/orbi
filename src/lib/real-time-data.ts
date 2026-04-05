@@ -29,12 +29,12 @@ const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000
 
 const COUNTRY_TO_CODE: Record<string, string> = {
   chile: 'CL', mexico: 'MX', colombia: 'CO', peru: 'PE',
-  argentina: 'AR', bolivia: 'BO', ecuador: 'EC',
+  argentina: 'AR', uruguay: 'UY',
 }
 
 const COUNTRY_TO_WB_CODE: Record<string, string> = {
   chile: 'CHL', mexico: 'MEX', colombia: 'COL', peru: 'PER',
-  argentina: 'ARG', bolivia: 'BOL', ecuador: 'ECU',
+  argentina: 'ARG', uruguay: 'URY',
 }
 
 const CITY_COORDS: Record<string, { lat: number; lon: number; name: string }> = {
@@ -43,17 +43,16 @@ const CITY_COORDS: Record<string, { lat: number; lon: number; name: string }> = 
   colombia: { lat: 4.71, lon: -74.07, name: 'Bogota' },
   peru: { lat: -12.04, lon: -77.03, name: 'Lima' },
   argentina: { lat: -34.60, lon: -58.38, name: 'Buenos Aires' },
-  bolivia: { lat: -16.50, lon: -68.15, name: 'La Paz' },
-  ecuador: { lat: -0.18, lon: -78.47, name: 'Quito' },
+  uruguay: { lat: -34.90, lon: -56.16, name: 'Montevideo' },
 }
 
 const COUNTRY_NAMES: Record<string, string> = {
   chile: 'Chile', mexico: 'Mexico', colombia: 'Colombia', peru: 'Peru',
-  argentina: 'Argentina', bolivia: 'Bolivia', ecuador: 'Ecuador',
+  argentina: 'Argentina', uruguay: 'Uruguay',
 }
 
 const CURRENCY_SYMBOLS: Record<string, string> = {
-  CLP: '$', MXN: '$', COP: '$', PEN: 'S/', ARS: '$', BOB: 'Bs',
+  CLP: '$', MXN: '$', COP: '$', PEN: 'S/', ARS: '$', UYU: '$U',
 }
 
 const WEATHER_CODES: Record<number, string> = {
@@ -87,7 +86,7 @@ export async function getExchangeRates(): Promise<string> {
       fetch('https://mindicador.cl/api/dolar', {
         signal: AbortSignal.timeout(8000),
       }),
-      // open.er-api: CLP, COP, PEN, ARS, BOB + confirmacion MXN
+      // open.er-api: CLP, COP, PEN, ARS, UYU + confirmacion MXN
       fetch('https://open.er-api.com/v1/latest/USD', {
         signal: AbortSignal.timeout(8000),
       }),
@@ -122,7 +121,7 @@ export async function getExchangeRates(): Promise<string> {
         const data = await erRes.value.json()
         const rates = data.rates as Record<string, number> | undefined
         if (rates) {
-          const latamCurrencies = ['COP', 'PEN', 'ARS', 'BOB']
+          const latamCurrencies = ['COP', 'PEN', 'ARS', 'UYU']
           // Solo agregar CLP si no lo obtuvimos de mindicador
           if (!parts.some(p => p.includes('CLP'))) latamCurrencies.push('CLP')
           for (const cur of latamCurrencies) {
@@ -385,7 +384,7 @@ export async function getCommodityPrices(): Promise<string> {
 export async function getCountryInfo(country: string): Promise<string> {
   const codeMap: Record<string, string> = {
     chile: 'cl', mexico: 'mx', colombia: 'co', peru: 'pe',
-    argentina: 'ar', bolivia: 'bo', ecuador: 'ec',
+    argentina: 'ar', uruguay: 'uy',
   }
   const code = codeMap[country]
   if (!code) return ''
@@ -598,7 +597,7 @@ export async function getBackupExchangeRates(): Promise<string> {
         { code: 'cop', label: 'COP', decimals: 0 },
         { code: 'pen', label: 'PEN', decimals: 2 },
         { code: 'ars', label: 'ARS', decimals: 0 },
-        { code: 'bob', label: 'BOB', decimals: 2 },
+        { code: 'uyu', label: 'UYU', decimals: 2 },
       ]
       const parts: string[] = []
       for (const c of currencies) {
@@ -618,7 +617,7 @@ export async function getBackupExchangeRates(): Promise<string> {
 // --- MercadoLibre Site IDs ---
 const COUNTRY_TO_ML_SITE: Record<string, string> = {
   chile: 'MLC', mexico: 'MLM', colombia: 'MCO', peru: 'MPE',
-  argentina: 'MLA', bolivia: 'MBO', ecuador: 'MEC',
+  argentina: 'MLA', uruguay: 'MLU',
 }
 
 // --- API: MercadoLibre Trends (public endpoint, no auth) ---
@@ -887,7 +886,7 @@ export async function getIPCHistory(): Promise<string> {
 export async function getCryptoPrices(country: string): Promise<string> {
   const currencyMap: Record<string, string> = {
     chile: 'clp', mexico: 'mxn', colombia: 'cop', peru: 'pen',
-    argentina: 'ars', bolivia: 'usd', ecuador: 'usd',
+    argentina: 'ars', uruguay: 'uyu',
   }
   const localCur = currencyMap[country] || 'usd'
   return cached(`crypto-${localCur}`, THREE_HOURS, async () => {
@@ -1071,8 +1070,7 @@ export function detectCountry(contexto: Array<{ pregunta?: string; respuesta?: s
   if (allText.includes('colombia') || allText.includes('bogotá') || allText.includes('bogota') || allText.includes('medellín') || allText.includes('medellin') || allText.includes('dian')) return 'colombia'
   if (allText.includes('perú') || allText.includes('peru') || allText.includes('lima') || allText.includes('sunat')) return 'peru'
   if (allText.includes('argentina') || allText.includes('buenos aires') || allText.includes('afip')) return 'argentina'
-  if (allText.includes('bolivia') || allText.includes('la paz') || allText.includes('sin')) return 'bolivia'
-  if (allText.includes('ecuador') || allText.includes('quito') || allText.includes('sri')) return 'ecuador'
+  if (allText.includes('uruguay') || allText.includes('montevideo') || allText.includes('dgi')) return 'uruguay'
   return 'chile' // default
 }
 

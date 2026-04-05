@@ -19,11 +19,11 @@ function FadeIn({ children, className = '' }: { children: React.ReactNode; class
 
 // ── Currency conversion ──
 const CURRENCY_SYMBOLS: Record<string, string> = {
-  CLP: '$', MXN: '$', COP: '$', PEN: 'S/', ARS: '$', BOB: 'Bs', USD: '$', EUR: '€',
+  CLP: '$', MXN: '$', COP: '$', PEN: 'S/', ARS: '$', UYU: '$U', USD: '$', EUR: '€',
 }
 
 const COUNTRY_CURRENCY: Record<string, string> = {
-  CL: 'CLP', MX: 'MXN', CO: 'COP', PE: 'PEN', AR: 'ARS', BO: 'BOB', EC: 'USD', US: 'USD',
+  CL: 'CLP', MX: 'MXN', CO: 'COP', PE: 'PEN', AR: 'ARS', UY: 'UYU', US: 'USD',
 }
 
 function formatLocal(amount: number, currency: string): string {
