@@ -14,7 +14,7 @@ const INITIAL_MESSAGE: Message = {
   content: '¡Hola! Soy tu Gerente General virtual. Para darte un diagnóstico de tu negocio, necesito saber 3 cosas.\n\nPrimero: **¿a qué se dedica tu empresa y cuántas personas son?**',
 }
 
-const MAX_MESSAGES = 10
+const MAX_MESSAGES = 20
 
 export default function DemoPage() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE])

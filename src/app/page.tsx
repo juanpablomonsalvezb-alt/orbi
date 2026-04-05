@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion, useInView } from 'framer-motion'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 import PricingPage from '@/components/PricingPage'
@@ -58,6 +59,7 @@ function Nav() {
           <a href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</a>
           <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
           <a href="/demo" className="text-sm text-ink-light hover:text-ink transition-colors">Demo</a>
+          <a href="/restaurantes" className="text-sm text-ink-light hover:text-ink transition-colors">Restaurantes</a>
           <a href="#contacto" className="text-sm text-ink-light hover:text-ink transition-colors">Contacto</a>
         </div>
         <div className="flex items-center gap-3">
@@ -293,6 +295,7 @@ function SparklineChart() {
 }
 
 function Hero() {
+  const router = useRouter()
   return (
     <header className="bg-ivory-dark">
       <div style={{ paddingTop: 'clamp(3rem, 2rem + 3vw, 5rem)' }} />
@@ -300,19 +303,27 @@ function Hero() {
         <div className="grid-12 items-center">
           {/* Left 7 cols */}
           <div style={{ gridColumn: 'span 7' }} className="max-md:col-span-full">
-            <motion.h1 className="u-display-xl mb-6"
+            <motion.h1 className="u-display-xl mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
             >
               <AnimatedWords>
-                7 gerentes. 24/7. $29/mes.
+                Porque nadie debería decidir solo.
               </AnimatedWords>
             </motion.h1>
+            <motion.p className="text-sm font-medium tracking-widest uppercase mb-6"
+              style={{ color: '#d97757', letterSpacing: '0.12em' }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25, ease: [0.25,0.46,0.45,0.94] }}
+            >
+              7 gerentes · 24/7 · $29/mes
+            </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.25,0.46,0.45,0.94] }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.25,0.46,0.45,0.94] }}
             >
               <p className="u-paragraph-l mb-8" style={{ maxWidth: '44ch' }}>
                 Las grandes empresas tienen un directorio completo: finanzas,
@@ -323,22 +334,32 @@ function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.25,0.46,0.45,0.94] }}
+              transition={{ duration: 0.6, delay: 0.6, ease: [0.25,0.46,0.45,0.94] }}
             >
-              <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm" style={{ maxWidth: '480px' }}>
+              <div
+                className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm cursor-text group hover:shadow-md transition-shadow"
+                style={{ maxWidth: '480px' }}
+                onClick={() => router.push('/demo')}
+              >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#87867f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
                 </svg>
                 <input
                   type="text"
-                  placeholder="¿Cómo puedo ayudarte hoy?"
-                  className="flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
+                  placeholder="Pregúntale algo a tu gerente..."
+                  className="flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted cursor-text"
+                  onFocus={() => router.push('/demo')}
                   readOnly
                 />
-                <Link href="/demo" className="bg-clay text-white text-sm font-medium px-5 py-2 rounded-lg hover:opacity-90 transition-opacity shrink-0">
+                <Link
+                  href="/demo"
+                  onClick={e => e.stopPropagation()}
+                  className="bg-clay text-white text-sm font-medium px-5 py-2 rounded-lg hover:opacity-90 transition-opacity shrink-0"
+                >
                   Ver demo
                 </Link>
               </div>
+              <p className="text-xs text-muted mt-2 ml-1">Sin registro · Sin tarjeta · Responde en segundos</p>
             </motion.div>
           </div>
 
@@ -813,7 +834,84 @@ function VideoSection() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// 5. PLANES SECTION (bg-ivory-mid)
+// 5. TESTIMONIALS SECTION (bg-ivory-dark)
+// ═══════════════════════════════════════════════════════════════════
+
+function MetricsSection() {
+  const metrics = [
+    {
+      value: '7',
+      label: 'Gerentes especializados',
+      sub: 'Finanzas, Ventas, Marketing, RRHH, Inventario, Legal + General',
+    },
+    {
+      value: '24/7',
+      label: 'Disponibilidad',
+      sub: 'Sin horarios, sin feriados, sin días de enfermedad',
+    },
+    {
+      value: '< 2s',
+      label: 'Tiempo de respuesta',
+      sub: 'Más rápido que cualquier consultor humano',
+    },
+    {
+      value: '6',
+      label: 'Países de LATAM',
+      sub: 'Chile · México · Colombia · Perú · Argentina · Uruguay',
+    },
+    {
+      value: '3 min',
+      label: 'Setup completo',
+      sub: 'De cero a tu equipo directivo funcionando',
+    },
+    {
+      value: '$29',
+      label: 'USD al mes',
+      sub: 'Vs. $2M+ que cuesta un gerente general real',
+    },
+  ]
+
+  return (
+    <section className="bg-ink">
+      <div className="space-main" />
+      <div className="u-container">
+        <FadeIn className="text-center mb-14">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] mb-3" style={{ color: '#d97757' }}>
+            Por qué Orbbi
+          </p>
+          <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 'clamp(26px, 3.5vw, 40px)', fontWeight: 400, letterSpacing: '-0.8px', color: '#fffff0', lineHeight: 1.1 }}>
+            El directorio que tu negocio<br />nunca pudo pagar
+          </h2>
+        </FadeIn>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-ivory/[0.06] rounded-2xl overflow-hidden">
+          {metrics.map((m, i) => (
+            <FadeIn key={m.label} delay={i * 0.06}>
+              <div className="bg-ink px-8 py-10 flex flex-col gap-2 hover:bg-ink-mid transition-colors">
+                <span style={{
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontWeight: 400,
+                  letterSpacing: '-1.5px',
+                  color: '#d97757',
+                  lineHeight: 1,
+                }}>
+                  {m.value}
+                </span>
+                <p className="text-sm font-medium" style={{ color: '#fffff0' }}>{m.label}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#87867f' }}>{m.sub}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+      <div className="space-main" />
+    </section>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// 6. PLANES SECTION (bg-ivory-mid)
 // ═══════════════════════════════════════════════════════════════════
 
 function PlanesSection() {
@@ -1114,6 +1212,7 @@ export default function Home() {
       <UseCasesTabSection />
       <SocialProofSection />
       <VideoSection />
+      <MetricsSection />
       <PlanesSection />
       <ComoEmpezarSection />
       <FinalCTA />

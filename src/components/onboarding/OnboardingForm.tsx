@@ -13,7 +13,8 @@ export default function OnboardingForm() {
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
 
-  const completo = respuestas.every(r => r.trim() !== '')
+  const requeridas = PREGUNTAS_ONBOARDING.filter(p => !p.opcional)
+  const completo = requeridas.every((p) => respuestas[p.orden - 1]?.trim() !== '')
 
   const guardar = async () => {
     setError('')
@@ -88,21 +89,51 @@ export default function OnboardingForm() {
       <div className="space-y-6">
         {PREGUNTAS_ONBOARDING.map((pregunta, index) => (
           <div key={pregunta.orden}>
-            <label className="text-sm text-ink font-medium block mb-2">
-              {index + 1}. {pregunta.pregunta}
-            </label>
-            <textarea
-              value={respuestas[index]}
-              onChange={(e) => {
-                const copia = [...respuestas]
-                copia[index] = e.target.value
-                setRespuestas(copia)
-              }}
-              placeholder={pregunta.placeholder}
-              rows={2}
-              className="w-full border border-ink/[0.08] rounded-lg px-4 py-3 text-sm text-ink bg-ivory
-                         placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors resize-none"
-            />
+            {pregunta.opcional ? (
+              <div className="border border-dashed border-ink/[0.12] rounded-xl p-5 bg-ivory/50">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                  </svg>
+                  <label className="text-sm font-medium text-ink">
+                    {pregunta.pregunta}
+                  </label>
+                </div>
+                <p className="text-xs text-muted mb-3">
+                  Entre más datos compartes, más específicas serán las respuestas de tus agentes. Puedes pegar texto, tablas o listas.
+                </p>
+                <textarea
+                  value={respuestas[index]}
+                  onChange={(e) => {
+                    const copia = [...respuestas]
+                    copia[index] = e.target.value
+                    setRespuestas(copia)
+                  }}
+                  placeholder={pregunta.placeholder}
+                  rows={6}
+                  className="w-full border border-ink/[0.08] rounded-lg px-4 py-3 text-sm text-ink bg-ivory
+                             placeholder:text-muted/40 focus:outline-none focus:border-ink/25 transition-colors resize-none font-mono text-xs leading-relaxed"
+                />
+              </div>
+            ) : (
+              <>
+                <label className="text-sm text-ink font-medium block mb-2">
+                  {index + 1}. {pregunta.pregunta}
+                </label>
+                <textarea
+                  value={respuestas[index]}
+                  onChange={(e) => {
+                    const copia = [...respuestas]
+                    copia[index] = e.target.value
+                    setRespuestas(copia)
+                  }}
+                  placeholder={pregunta.placeholder}
+                  rows={2}
+                  className="w-full border border-ink/[0.08] rounded-lg px-4 py-3 text-sm text-ink bg-ivory
+                             placeholder:text-muted/50 focus:outline-none focus:border-ink/25 transition-colors resize-none"
+                />
+              </>
+            )}
           </div>
         ))}
       </div>
