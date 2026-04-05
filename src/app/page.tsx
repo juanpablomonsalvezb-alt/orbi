@@ -85,7 +85,7 @@ function HeroNetwork() {
     { x: 50, y: 260, label: 'RRHH', r: 46 },
     { x: 470, y: 260, label: 'Marketing', r: 46 },
     { x: 150, y: 380, label: 'Inventario', r: 44 },
-    { x: 370, y: 380, label: 'Cumplimiento', r: 44 },
+    { x: 370, y: 380, label: 'Cumplimiento', r: 58 },
   ]
   const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,3],[2,4],[3,5],[4,6],[5,6],[1,2]]
 
