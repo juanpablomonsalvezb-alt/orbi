@@ -26,8 +26,8 @@ export async function enviarEmailBienvenida(email: string, nombre: string) {
             Hola ${nombre},
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 16px;">
-            Tu cuenta de Orbbi ya está activa. Tienes <strong>7 días gratis</strong> para explorar
-            todos los agentes y descubrir cómo pueden ayudar a tu negocio.
+            Tu cuenta de Orbbi ya está activa. Tus 7 gerentes especializados están listos
+            para ayudarte con tu negocio.
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 24px;">
             El siguiente paso es completar el onboarding — son 3 preguntas rápidas para que

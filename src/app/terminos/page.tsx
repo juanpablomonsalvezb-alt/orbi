@@ -26,8 +26,8 @@ export default function TerminosPage() {
           <h2 className="text-lg text-ink font-medium mt-8">2. Cuenta y registro</h2>
           <p>Al crear una cuenta, proporcionas información veraz y actual. Eres responsable de mantener la seguridad de tu cuenta y contraseña. Orbbi no será responsable de pérdidas causadas por acceso no autorizado a tu cuenta.</p>
 
-          <h2 className="text-lg text-ink font-medium mt-8">3. Prueba gratuita</h2>
-          <p>Las nuevas cuentas incluyen una prueba gratuita de 7 días con acceso a todos los agentes. Al finalizar la prueba, necesitas seleccionar un plan de pago para continuar usando el servicio.</p>
+          <h2 className="text-lg text-ink font-medium mt-8">3. Demo gratuita</h2>
+          <p>Orbbi ofrece una demo gratuita sin necesidad de registro para que puedas conocer el producto. Para acceso completo a todos los agentes, necesitas crear una cuenta y seleccionar un plan de pago.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">4. Pagos y facturación</h2>
           <p>Los pagos se procesan a través de MercadoPago. Al suscribirte, autorizas el cobro recurrente según el plan elegido. Puedes cancelar en cualquier momento desde tu panel de facturación. Las suscripciones mensuales se cancelan sin penalidad. Las anuales dan acceso hasta el fin del período pagado.</p>

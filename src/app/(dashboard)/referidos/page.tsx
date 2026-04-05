@@ -39,7 +39,7 @@ export default function ReferidosPage() {
   }
 
   const mensajeWhatsApp = encodeURIComponent(
-    `Te recomiendo Orbbi — son 7 gerentes de IA para tu negocio por $29/mes. Yo lo uso para ${empresaNombre} y es increíble. Pruébalo gratis 7 días: ${link}`
+    `Te recomiendo Orbbi — son 7 gerentes de IA para tu negocio por $29/mes. Yo lo uso para ${empresaNombre} y es increíble. Prueba la demo gratis: ${link}`
   )
 
   return (
@@ -88,7 +88,7 @@ export default function ReferidosPage() {
           <button
             onClick={() => {
               const subject = encodeURIComponent('Te recomiendo Orbbi para tu negocio')
-              const body = encodeURIComponent(`Hola,\n\nTe recomiendo Orbbi — son 7 gerentes de IA para tu negocio por $29/mes.\n\nPruébalo gratis 7 días: ${link}\n\nSaludos`)
+              const body = encodeURIComponent(`Hola,\n\nTe recomiendo Orbbi — son 7 gerentes de IA para tu negocio por $29/mes.\n\nPrueba la demo gratis: ${link}\n\nSaludos`)
               window.open(`mailto:?subject=${subject}&body=${body}`)
             }}
             className="flex items-center justify-center gap-2 w-full border border-[#e9e9e7] text-[#37352f] rounded-lg py-3 text-[14px] font-medium hover:bg-[#f7f6f3] transition-colors"

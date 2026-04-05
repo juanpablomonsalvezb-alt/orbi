@@ -33,5 +33,4 @@ export const PREGUNTAS_ONBOARDING: PreguntaOnboarding[] = [
   },
 ]
 
-// Trial duration in hours (7 days — optimal for SMB conversion)
-export const TRIAL_HOURS = 168
+// Trial duration removed — replaced by self-service demo flow

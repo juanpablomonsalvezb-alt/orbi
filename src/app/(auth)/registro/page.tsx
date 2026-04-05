@@ -78,7 +78,7 @@ export default function RegistroPage() {
       <h2 className="text-ink mb-1" style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '24px', fontWeight: 400, letterSpacing: '-0.3px' }}>
         Crea tu cuenta
       </h2>
-      <p className="text-sm text-muted mb-7">7 días gratis. Sin tarjeta.</p>
+      <p className="text-sm text-muted mb-7">Crea tu cuenta para acceder a tus 7 gerentes.</p>
 
       {error && <div className="bg-accent-bg border border-accent/15 rounded-md px-3 py-2.5 mb-5"><p className="text-sm text-accent">{error}</p></div>}
 
@@ -105,7 +105,7 @@ export default function RegistroPage() {
 
         <button type="submit" disabled={loading || !aceptaTerminos}
           className="w-full bg-ink text-ivory rounded-md py-2.5 text-sm font-medium hover:bg-ink-mid transition-colors disabled:opacity-40">
-          {loading ? 'Creando cuenta...' : 'Comenzar gratis'}
+          {loading ? 'Creando cuenta...' : 'Crear cuenta'}
         </button>
       </form>
 

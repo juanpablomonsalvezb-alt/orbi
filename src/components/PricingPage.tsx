@@ -120,7 +120,7 @@ const AGENTES = [
 
 const FAQS = [
   { q: '¿Puedo cancelar cuando quiera?', a: 'Sí. Mensual cancelas sin penalidad. Anual tienes acceso hasta el fin del período.' },
-  { q: '¿Qué pasa después de los 7 días?', a: 'Te pedimos tarjeta para continuar. Si no sigues, no se cobra nada.' },
+  { q: '¿Puedo probar antes de pagar?', a: 'Sí. Puedes usar la demo gratuita sin registrarte. Cuando estés listo, creas tu cuenta en segundos.' },
   { q: '¿Puedo cambiar de plan?', a: 'Sí. Si subes se cobra la diferencia. Si bajas, aplica al siguiente ciclo.' },
   { q: '¿Qué diferencia hay entre Orbbi y ChatGPT?', a: 'Orbbi conoce tu negocio en profundidad. Cada agente tiene frameworks especializados y contexto de tu empresa. No necesitas prompt engineering.' },
   { q: '¿En qué moneda se cobra?', a: 'Los precios están en USD. Si pagas con tarjeta local, MercadoPago convierte automáticamente a tu moneda al tipo de cambio del día.' },
@@ -142,7 +142,7 @@ export default function PricingPage() {
               Un agente para cada área de tu negocio
             </h1>
             <p className="text-sm text-ink-light mt-3 max-w-md mx-auto" style={{ fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.6 }}>
-              Todos los planes incluyen 7 días gratis. Sin tarjeta.
+              <a href="/demo" className="text-accent hover:underline font-medium">Prueba la demo gratis →</a>
             </p>
           </div>
         </FadeIn>
@@ -238,7 +238,7 @@ export default function PricingPage() {
                   className={`block w-full text-center rounded-md py-2.5 text-sm font-medium transition-colors ${
                     plan.destacado ? 'bg-ivory text-ink hover:bg-ivory-mid' : 'bg-ink text-ivory hover:bg-ink-mid'
                   }`}>
-                  Probar gratis 7 días
+                  Comenzar ahora
                 </Link>
               </motion.div>
             )

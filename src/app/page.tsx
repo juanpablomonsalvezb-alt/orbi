@@ -57,12 +57,13 @@ function Nav() {
           <a href="#producto" className="text-sm text-ink-light hover:text-ink transition-colors">Producto</a>
           <a href="#agentes" className="text-sm text-ink-light hover:text-ink transition-colors">Agentes</a>
           <a href="#precios" className="text-sm text-ink-light hover:text-ink transition-colors">Precios</a>
+          <a href="/demo" className="text-sm text-ink-light hover:text-ink transition-colors">Demo</a>
           <a href="#contacto" className="text-sm text-ink-light hover:text-ink transition-colors">Contacto</a>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/login" className="text-sm text-ink-light hover:text-ink transition-colors hidden sm:block">Entrar</Link>
-          <Link href="/registro" className="bg-ink text-ivory text-sm font-medium px-4 py-2 rounded hover:opacity-90 transition-opacity">
-            Probar gratis
+          <Link href="/demo" className="bg-ink text-ivory text-sm font-medium px-4 py-2 rounded hover:opacity-90 transition-opacity">
+            Ver demo gratis
           </Link>
         </div>
       </div>
@@ -334,8 +335,8 @@ function Hero() {
                   className="flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
                   readOnly
                 />
-                <Link href="/registro" className="bg-clay text-white text-sm font-medium px-5 py-2 rounded-lg hover:opacity-90 transition-opacity shrink-0">
-                  Preguntar
+                <Link href="/demo" className="bg-clay text-white text-sm font-medium px-5 py-2 rounded-lg hover:opacity-90 transition-opacity shrink-0">
+                  Ver demo
                 </Link>
               </div>
             </motion.div>
@@ -419,8 +420,8 @@ function ProblemSolversSection() {
             <p className="u-paragraph-s text-ink" style={{ color: '#141413' }}>
               3 preguntas sobre tu negocio. 1 minuto. Y tu equipo directivo empieza a trabajar.
             </p>
-            <Link href="/registro" className="bg-clay text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shrink-0">
-              Comenzar gratis
+            <Link href="/demo" className="bg-clay text-white text-sm font-medium px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shrink-0">
+              Ver demo gratis
             </Link>
           </div>
         </FadeIn>
@@ -585,8 +586,8 @@ function UseCasesTabSection() {
             <FadeIn key={tab.id + '-desc'}>
               <h3 className="u-display-s mb-4">{tab.title}</h3>
               <p className="u-paragraph-s mb-6" style={{ maxWidth: '40ch' }}>{tab.desc}</p>
-              <Link href="/registro" className="inline-flex items-center gap-2 text-sm font-medium text-clay hover:opacity-70 transition-opacity">
-                Explorar
+              <Link href="/demo" className="inline-flex items-center gap-2 text-sm font-medium text-clay hover:opacity-70 transition-opacity">
+                Probar demo
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                 </svg>
@@ -777,12 +778,12 @@ function VideoSection() {
               <p className="text-lg font-medium text-ink mb-4" style={{ fontFamily: "'Source Serif 4', Georgia, serif" }}>
                 Así conversa tu equipo directivo
               </p>
-              <a
-                href="#contacto"
+              <Link
+                href="/demo"
                 className="bg-clay text-white text-sm font-medium px-8 py-3 rounded-lg hover:opacity-90 transition-opacity"
               >
-                Solicitar demo
-              </a>
+                Ver demo con mi negocio
+              </Link>
             </div>
           </div>
         </FadeIn>
@@ -829,9 +830,9 @@ function PlanesSection() {
 
 function ComoEmpezarSection() {
   const pasos = [
-    { num: '01', titulo: 'Regístrate en 30 segundos', desc: 'Solo necesitas email y contraseña. Sin tarjeta de crédito. 7 días gratis con acceso a todos los agentes.' },
-    { num: '02', titulo: '3 preguntas sobre tu negocio', desc: 'Cuéntanos a qué te dedicas, tus ventas y tu mayor desafío. En 1 minuto tu equipo te conoce.' },
-    { num: '03', titulo: 'Habla con tu primer agente', desc: 'El Gerente General analiza tu situación y te propone las primeras acciones. Después, activa los agentes que necesites.' },
+    { num: '01', titulo: 'Prueba la demo gratis', desc: 'Sin registrarte. Habla con el Gerente General y recibe un diagnóstico de tu negocio en 1 minuto.' },
+    { num: '02', titulo: 'Crea tu cuenta', desc: 'Cuando estés listo, regístrate con email y contraseña. Accede a tus 7 gerentes especializados.' },
+    { num: '03', titulo: 'Tu equipo empieza a trabajar', desc: 'El Gerente General analiza tu situación y te propone las primeras acciones. Después, activa los agentes que necesites.' },
   ]
 
   return (
@@ -860,8 +861,8 @@ function ComoEmpezarSection() {
         </div>
 
         <FadeIn delay={0.3} className="text-center mt-10">
-          <Link href="/registro" className="bg-ink text-ivory text-sm font-medium px-8 py-3 rounded-lg hover:bg-ink-mid transition-colors inline-block">
-            Comenzar gratis
+          <Link href="/demo" className="bg-ink text-ivory text-sm font-medium px-8 py-3 rounded-lg hover:bg-ink-mid transition-colors inline-block">
+            Ver demo con mi negocio
           </Link>
         </FadeIn>
       </div>

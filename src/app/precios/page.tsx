@@ -15,8 +15,8 @@ function Nav() {
           </div>
           <div className="flex items-center space-x-4">
             <Link href="/login" className="t-small text-muted hover:text-ink transition-colors duration-200">Entrar</Link>
-            <Link href="/registro" className="rounded-[4px] bg-ink text-ivory px-4 py-2 text-[13px] font-medium hover:bg-ink-mid transition-colors duration-200">
-              Probar gratis
+            <Link href="/demo" className="rounded-[4px] bg-ink text-ivory px-4 py-2 text-[13px] font-medium hover:bg-ink-mid transition-colors duration-200">
+              Ver demo gratis
             </Link>
           </div>
         </div>
