@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       // No encontrada — invitar a registrarse
       await sendWhatsAppMessage(
         from,
-        'Regístrate en orbbi.com para usar este servicio. 🚀\n\nOrbbi es tu gerente virtual con IA — te ayuda a tomar mejores decisiones para tu negocio.'
+        'Regístrate en www.orbbilatam.com para usar este servicio. 🚀\n\nOrbbi es tu gerente virtual con IA — te ayuda a tomar mejores decisiones para tu negocio.'
       )
       return NextResponse.json({ status: 'ok' })
     }

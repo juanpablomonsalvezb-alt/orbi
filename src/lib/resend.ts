@@ -9,7 +9,7 @@ function getResend(): Resend {
   return _resend
 }
 
-const FROM_EMAIL = 'Orbbi <noreply@orbbi.com>'
+const FROM_EMAIL = 'Orbbi <noreply@orbbilatam.com>'
 
 export async function enviarEmailBienvenida(email: string, nombre: string) {
   try {
@@ -93,7 +93,7 @@ export async function enviarEmailTrialExpira(email: string, nombre: string, hora
 
 export async function enviarEmailInvitacion(email: string, empresaNombre: string, invitadoPor: string) {
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
     await getResend().emails.send({
       from: FROM_EMAIL,
       to: email,
@@ -135,7 +135,7 @@ export async function enviarEmailInvitacion(email: string, empresaNombre: string
 
 export async function enviarEmailReengagement(email: string, nombre: string) {
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
     await getResend().emails.send({
       from: FROM_EMAIL,
       to: email,
@@ -176,7 +176,7 @@ export async function enviarEmailReengagement(email: string, nombre: string) {
 
 export async function enviarEmailOnboardingIncompleto(email: string, nombre: string) {
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
     await getResend().emails.send({
       from: FROM_EMAIL,
       to: email,

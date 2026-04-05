@@ -24,7 +24,7 @@ export async function GET(
       .single()
 
     if (error || !data) {
-      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'))
+      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'))
     }
 
     // Increment click count (fire and forget)
@@ -49,6 +49,6 @@ export async function GET(
     return NextResponse.redirect(destUrl)
   } catch (err) {
     console.error('[/r/slug]', err)
-    return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'))
+    return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'))
   }
 }

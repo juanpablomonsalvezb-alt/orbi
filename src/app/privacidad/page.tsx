@@ -21,7 +21,7 @@ export default function PrivacidadPage() {
           <p><strong>Última actualización:</strong> Abril 2026</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">0. Responsable del tratamiento</h2>
-          <p><strong>Razón social:</strong> Orbbi SpA. <strong>Domicilio:</strong> Santiago, Chile. <strong>Contacto DPO:</strong> <a href="mailto:privacidad@orbbi.com" className="text-accent hover:underline">privacidad@orbbi.com</a></p>
+          <p><strong>Razón social:</strong> Orbbi SpA. <strong>Domicilio:</strong> Santiago, Chile. <strong>Contacto DPO:</strong> <a href="mailto:privacidad@orbbilatam.com" className="text-accent hover:underline">privacidad@orbbilatam.com</a></p>
 
           <h2 className="text-lg text-ink font-medium mt-8">1. Información que recopilamos</h2>
           <p><strong>Datos de cuenta:</strong> nombre de empresa, email, contraseña (encriptada).</p>
@@ -53,7 +53,7 @@ export default function PrivacidadPage() {
             <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos para fines específicos.</li>
             <li><strong>Portabilidad:</strong> exportar tus datos en formato estructurado desde <a href="/exportar" className="text-accent hover:underline">/exportar</a>.</li>
           </ul>
-          <p>Para ejercer estos derechos, escribe a <a href="mailto:privacidad@orbbi.com" className="text-accent hover:underline">privacidad@orbbi.com</a>. Procesaremos tu solicitud en un máximo de 15 días hábiles.</p>
+          <p>Para ejercer estos derechos, escribe a <a href="mailto:privacidad@orbbilatam.com" className="text-accent hover:underline">privacidad@orbbilatam.com</a>. Procesaremos tu solicitud en un máximo de 15 días hábiles.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">7. Cookies y analytics</h2>
           <p>Usamos PostHog para analytics de producto. Puedes optar por no ser rastreado configurando &quot;Do Not Track&quot; en tu navegador.</p>
@@ -69,7 +69,7 @@ export default function PrivacidadPage() {
           <p>Al registrarte consientes la transferencia de datos a estos proveedores.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">8. Contacto</h2>
-          <p>Para consultas de privacidad: <a href="mailto:privacidad@orbbi.com" className="text-accent hover:underline">privacidad@orbbi.com</a></p>
+          <p>Para consultas de privacidad: <a href="mailto:privacidad@orbbilatam.com" className="text-accent hover:underline">privacidad@orbbilatam.com</a></p>
 
           <h2 className="text-lg text-ink font-medium mt-8">8.5. Retención de datos</h2>
           <p>Datos se mantienen mientras tu cuenta esté activa. Tras cancelación, tienes 90 días para exportar tus datos. Luego se procede a la eliminación, excepto datos requeridos por obligaciones legales (hasta 5 años).</p>

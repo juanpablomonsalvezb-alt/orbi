@@ -17,8 +17,8 @@ function getSupabase() {
   )
 }
 
-const FROM_EMAIL = 'Orbbi <noreply@orbbi.com>'
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'
+const FROM_EMAIL = 'Orbbi <noreply@orbbilatam.com>'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
 
 const AGENTE_LABELS: Record<string, string> = {
   general: 'Gerente General',

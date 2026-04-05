@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const safeMensaje = escapeHtml(String(mensaje).slice(0, 5000))
 
     await getResend().emails.send({
-      from: 'Orbbi <noreply@orbbi.com>',
+      from: 'Orbbi <noreply@orbbilatam.com>',
       to: 'cseplataforma@gmail.com',
       replyTo: email,
       subject: `Contacto Orbbi: ${safeNombre}`,
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
           </div>
           <hr style="border: none; border-top: 1px solid #e8e6dc; margin: 24px 0;" />
           <p style="font-size: 12px; color: #b0aea5;">
-            Enviado desde el formulario de contacto de orbbi.com
+            Enviado desde el formulario de contacto de orbbilatam.com
           </p>
         </div>
       `,

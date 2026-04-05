@@ -1141,7 +1141,7 @@ function Footer() {
     { title: 'Recursos', links: ['Documentación', 'Blog', 'Casos de uso', 'Tutoriales', 'API'] },
     { title: 'Empresa', links: [
       { text: 'Sobre nosotros', href: '#' },
-      { text: 'Contacto', href: 'mailto:hola@orbbi.com' },
+      { text: 'Contacto', href: 'mailto:hola@orbbilatam.com' },
       { text: 'Términos de servicio', href: '/terminos' },
       { text: 'Política de privacidad', href: '/privacidad' },
     ] },

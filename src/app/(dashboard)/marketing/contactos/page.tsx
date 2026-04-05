@@ -34,7 +34,7 @@ const CANAL_OPTIONS = ['whatsapp', 'email', 'linkedin', 'llamada', 'otro']
 const ESTADO_OPTIONS = ['prospecto', 'contactado', 'interesado', 'aliado', 'rechazado']
 
 const MENSAJE_WA = (nombre: string) =>
-  `Hola ${nombre}, te escribo porque trabajo con Orbbi, una plataforma de IA para PYMEs. Muchos de tus clientes podrían optimizar su gestión con los 7 agentes que tenemos. ¿Tienes 10 minutos para conocer cómo funciona? La demo es gratis: orbbi.com/demo`
+  `Hola ${nombre}, te escribo porque trabajo con Orbbi, una plataforma de IA para PYMEs. Muchos de tus clientes podrían optimizar su gestión con los 7 agentes que tenemos. ¿Tienes 10 minutos para conocer cómo funciona? La demo es gratis: www.orbbilatam.com/demo`
 
 const EMPTY_FORM = {
   nombre: '', cargo: '', empresa_nombre: '', canal: 'whatsapp',

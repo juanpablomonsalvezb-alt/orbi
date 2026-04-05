@@ -16,7 +16,7 @@ interface Link {
   created_at: string
 }
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://orbbi.com'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
 
 const SOURCE_OPTIONS = ['linkedin', 'whatsapp', 'instagram', 'facebook', 'reddit', 'email', 'otro']
 const MEDIUM_OPTIONS = ['social', 'message', 'referral', 'organic', 'paid']

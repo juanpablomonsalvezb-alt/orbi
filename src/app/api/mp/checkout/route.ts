@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Plan no válido' }, { status: 400 })
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://orbi-ochre.vercel.app'
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'
 
     const body = {
       items: [

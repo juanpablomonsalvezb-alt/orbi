@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         currency_id: 'USD',
       },
       payer_email: email,
-      back_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://orbi-ochre.vercel.app'}/chat?payment=success`,
+      back_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'}/chat?payment=success`,
       status: 'pending',
       external_reference: `${empresa_id}:${plan_id}`,
     }

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   keywords: ['IA para PYMEs', 'agente virtual', 'gestión empresarial', 'inteligencia artificial', 'PYME', 'Latinoamérica', 'CFO virtual', 'consultor IA'],
   authors: [{ name: 'Orbbi' }],
   creator: 'Orbbi',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://orbi-ochre.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://www.orbbilatam.com'),
   openGraph: {
     type: 'website',
     locale: 'es_CL',

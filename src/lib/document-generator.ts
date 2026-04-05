@@ -223,7 +223,7 @@ function buildHeader(params: DocumentParams, tipoLabel: string): string {
 function buildFooter(): string {
   return `
     <div class="footer">
-      Documento generado por Orbbi — orbbi.com<br>
+      Documento generado por Orbbi — orbbilatam.com<br>
       Este documento es informativo y no constituye asesoría profesional vinculante.
     </div>
   `

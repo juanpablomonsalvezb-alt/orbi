@@ -48,7 +48,7 @@ export default function TerminosPage() {
           <p>Tus datos y contenido te pertenecen. Orbbi no reclama propiedad sobre ellos. Las respuestas de los agentes se proporcionan como herramienta y puedes usarlas libremente. La plataforma, código, diseño y marca son propiedad de Orbbi.</p>
 
           <h2 className="text-lg text-ink font-medium mt-8">9. Contacto</h2>
-          <p>Para consultas sobre estos términos: <a href="mailto:legal@orbbi.com" className="text-accent hover:underline">legal@orbbi.com</a></p>
+          <p>Para consultas sobre estos términos: <a href="mailto:legal@orbbilatam.com" className="text-accent hover:underline">legal@orbbilatam.com</a></p>
 
           <h2 className="text-lg text-ink font-medium mt-8">9.5. Ley aplicable</h2>
           <p>Estos términos se rigen por las leyes de la República de Chile. Disputas serán sometidas a tribunales de Santiago de Chile, sin perjuicio de derechos del consumidor en tu país.</p>
