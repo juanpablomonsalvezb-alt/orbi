@@ -948,6 +948,162 @@ function MetricsSection() {
 // 6. PLANES SECTION (bg-ivory-mid)
 // ═══════════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════════
+// COMPARISON SECTION — Orbbi vs IA genérica
+// ═══════════════════════════════════════════════════════════════════
+
+const COMPARISON_ROWS = [
+  {
+    concepto: 'Conoce tu negocio',
+    tag: 'Contexto',
+    generica: 'Cero. Cada conversación empieza desde cero.',
+    orbbi: 'Tu empresa, tu industria, tus números. Siempre.',
+    tecnico: false,
+  },
+  {
+    concepto: 'Especialización',
+    tag: 'Arquitectura',
+    generica: 'Un modelo generalista para todo.',
+    orbbi: '7 agentes con frameworks propios por área.',
+    tecnico: true,
+  },
+  {
+    concepto: 'Cómo se usa',
+    tag: 'UX',
+    generica: 'Aprendes a escribir prompts. Prueba y error.',
+    orbbi: 'Le preguntas como a un gerente. Sin instrucciones.',
+    tecnico: false,
+  },
+  {
+    concepto: 'Respuesta típica',
+    tag: 'Output',
+    generica: '"Generalmente se recomienda considerar…"',
+    orbbi: '"Dado tu margen actual del 18%, te sugiero…"',
+    tecnico: true,
+  },
+  {
+    concepto: 'Memoria',
+    tag: 'Técnico',
+    generica: 'Sin memoria entre sesiones.',
+    orbbi: 'Memoria persistente. Aprende de cada conversación.',
+    tecnico: true,
+  },
+  {
+    concepto: 'Para quién fue diseñado',
+    tag: 'Propósito',
+    generica: 'Para todos. O sea, para nadie en particular.',
+    orbbi: 'Para PYMEs latinoamericanas. Nada más.',
+    tecnico: false,
+  },
+]
+
+function ComparisonSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  return (
+    <section className="bg-ink" ref={ref}>
+      <div className="space-medium" />
+      <div className="u-container">
+
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <motion.p
+            className="text-xs font-medium uppercase tracking-[0.15em] text-accent mb-4"
+            initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0 }}
+          >
+            La pregunta que todos se hacen
+          </motion.p>
+          <motion.h2
+            className="text-ivory"
+            style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, letterSpacing: '-1px', lineHeight: 1.1 }}
+            initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease, delay: 0.1 }}
+          >
+            ¿Por qué no usar<br />ChatGPT o Gemini?
+          </motion.h2>
+          <motion.p
+            className="mt-5 text-ivory/50"
+            style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: '17px', lineHeight: 1.7 }}
+            initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease, delay: 0.2 }}
+          >
+            Puedes. Son herramientas brillantes. Pero hay una diferencia fundamental
+            entre una IA que sabe de todo y una IA que sabe de <em>tu</em> negocio.
+          </motion.p>
+        </div>
+
+        {/* Comparison table */}
+        <div className="overflow-hidden">
+          {/* Column headers */}
+          <motion.div
+            className="grid grid-cols-[1fr_1fr_1fr] gap-px mb-1 hidden md:grid"
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
+            <div className="pb-3 pl-2" />
+            <div className="pb-3 pl-4">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ivory/25">IA Genérica</span>
+            </div>
+            <div className="pb-3 pl-4">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">Orbbi</span>
+            </div>
+          </motion.div>
+
+          {/* Rows */}
+          {COMPARISON_ROWS.map((row, i) => (
+            <motion.div
+              key={row.concepto}
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr] gap-px"
+              initial={{ opacity: 0, x: -24 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, ease, delay: 0.35 + i * 0.09 }}
+            >
+              {/* Concepto */}
+              <div className="py-5 md:pr-8 border-t border-ivory/[0.07] flex items-start gap-3">
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full border border-ivory/[0.12] text-ivory/30 shrink-0 mt-0.5">
+                  {row.tag}
+                </span>
+                <span className="text-sm font-medium text-ivory/70">{row.concepto}</span>
+              </div>
+
+              {/* Genérica */}
+              <div className="py-5 md:px-4 border-t border-ivory/[0.07] flex items-start gap-2.5">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5">
+                  <path d="M4 4L12 12M12 4L4 12" stroke="#87867f" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                <span className="text-sm text-ivory/30 leading-relaxed">{row.generica}</span>
+              </div>
+
+              {/* Orbbi */}
+              <div className="py-5 md:px-4 border-t border-ivory/[0.07] flex items-start gap-2.5">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 mt-0.5">
+                  <path d="M3 8.5L6.5 12L13 4" stroke="#d97757" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-sm text-ivory/90 leading-relaxed">{row.orbbi}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Pull quote */}
+        <motion.div
+          className="mt-16 border-l-2 border-accent pl-8 max-w-xl"
+          initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease, delay: 1.0 }}
+        >
+          <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: 'clamp(18px, 2.5vw, 24px)', color: '#faf9f5', fontWeight: 400, lineHeight: 1.5, letterSpacing: '-0.3px' }}>
+            "ChatGPT responde preguntas.<br />Orbbi conoce tu negocio."
+          </p>
+        </motion.div>
+
+      </div>
+      <div className="space-medium" />
+    </section>
+  )
+}
+
 function PlanesSection() {
   return (
     <section id="precios">
@@ -1238,6 +1394,7 @@ export default function Home() {
       <UseCasesTabSection />
       <SocialProofSection />
       <VideoSection />
+      <ComparisonSection />
       <PlanesSection />
       <MetricsSection />
       <ComoEmpezarSection />
