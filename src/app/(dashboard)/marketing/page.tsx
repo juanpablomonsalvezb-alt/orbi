@@ -84,6 +84,7 @@ export default function MarketingPage() {
   const quickActions = [
     { label: 'Generar contenido', href: '/marketing/contenido', color: '#c6613f', icon: '✦' },
     { label: 'CRM Outreach', href: '/marketing/contactos', color: '#2563eb', icon: '◎' },
+    { label: 'Campañas Email', href: '/marketing/email', color: '#7c3aed', icon: '✉' },
     { label: 'Links UTM', href: '/marketing/links', color: '#16a34a', icon: '⊛' },
     { label: 'Broadcast WhatsApp', href: '/marketing/whatsapp', color: '#25D366', icon: '▶' },
   ]
@@ -123,7 +124,7 @@ export default function MarketingPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10">
           {quickActions.map(action => (
             <button
               key={action.href}
