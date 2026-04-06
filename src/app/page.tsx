@@ -1397,7 +1397,7 @@ function Footer() {
     { title: 'Recursos', links: ['Documentación', { text: 'Blog', href: '/blog' }, 'Casos de uso', 'Tutoriales', 'API'] },
     { title: 'Empresa', links: [
       { text: 'Sobre nosotros', href: '#' },
-      { text: 'Contacto', href: 'mailto:hola@orbbilatam.com' },
+      { text: 'Contacto', href: 'mailto:cse.coordinacion@gmail.com' },
       { text: 'Términos de servicio', href: '/terminos' },
       { text: 'Política de privacidad', href: '/privacidad' },
     ] },
