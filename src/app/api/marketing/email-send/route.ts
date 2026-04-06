@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       const res = await resend.emails.send({
         from: FROM_OUTREACH,
         to: dest.email,
-        reply_to: 'cse.coordinacion@gmail.com',
+        replyTo: 'cse.coordinacion@gmail.com',
         subject: asunto,
         html,
       })
