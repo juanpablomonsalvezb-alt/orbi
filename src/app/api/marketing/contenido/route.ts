@@ -21,7 +21,7 @@ Responde SOLO con un JSON válido con esta estructura exacta:
   "reddit": "post para reddit (máx 600 chars, sin marketing directo, como consejo genuino, incluye el producto como ejemplo natural)",
   "email": "asunto|||cuerpo del email (separados por |||, asunto máx 60 chars, cuerpo máx 400 chars, tono directo y valor claro)"
 }
-El contexto del negocio es: somos Orbbi, plataforma de IA para PYMEs latinoamericanas, 7 agentes virtuales de gestión desde $29/mes.`
+El contexto del negocio es: somos Orbbi, plataforma de IA para PYMEs latinoamericanas, 7 agentes virtuales de gestión desde $49/mes.`
 
 export async function POST(request: NextRequest) {
   try {

@@ -72,7 +72,7 @@ export async function enviarEmailTrialExpira(email: string, nombre: string, hora
             Para seguir usando tus agentes sin interrupción, elige un plan.
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #5e5d59; margin-bottom: 24px;">
-            Planes desde <strong>$29/mes</strong> con el Gerente General incluido.
+            Planes desde <strong>$49/mes</strong> con el Gerente General incluido.
           </p>
           <a href="${process.env.NEXT_PUBLIC_APP_URL}/chat?upgrade=true"
              style="display: inline-block; background: #141413; color: #faf9f5; padding: 12px 24px;

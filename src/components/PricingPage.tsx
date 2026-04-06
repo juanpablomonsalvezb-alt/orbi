@@ -87,7 +87,7 @@ const PLANES = [
   {
     id: 'solo',
     nombre: 'Solo', desc: 'Para microempresas y emprendedores',
-    mensual: 29, anual: 295.80,
+    mensual: 49, anual: 499.80,
     features: [
       { t: 'Gerente General 24/7 sin límite de mensajes', ok: true },
       { t: 'Onboarding con contexto de tu negocio', ok: true },
@@ -99,7 +99,7 @@ const PLANES = [
   {
     id: 'equipo',
     nombre: 'Equipo', desc: 'Para negocios con operación activa',
-    mensual: 79, anual: 805.80, destacado: true,
+    mensual: 129, anual: 1315.80, destacado: true,
     features: [
       '3 agentes a elegir',
       'Mensajes ilimitados',
@@ -111,7 +111,7 @@ const PLANES = [
   {
     id: 'empresa',
     nombre: 'Empresa', desc: 'Para medianas empresas',
-    mensual: 249, anual: 2539.80,
+    mensual: 349, anual: 3559.80,
     features: [
       'Los 7 agentes incluidos',
       'Mensajes ilimitados',

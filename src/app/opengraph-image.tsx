@@ -183,7 +183,7 @@ export default async function Image() {
                 letterSpacing: '-0.5px',
               }}
             >
-              $29/mes
+              $49/mes
             </span>
           </div>
         </div>

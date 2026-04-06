@@ -51,7 +51,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
     html: `<div style="font-family:'Georgia',serif;max-width:540px;margin:0 auto;padding:48px 24px;color:#141413;background:#ffffff;">
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
-  Estimado/a {{nombre}},
+  Estimado/a,
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
@@ -63,7 +63,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 20px;">
-  <strong style="color:#141413;">Orbbi</strong> resuelve exactamente eso. Es una plataforma de agentes de IA especializados — Financiero, Ventas, Marketing, RRHH, Inventario — que conocen el negocio en profundidad y están disponibles 24/7. No es un chatbot genérico. Es como tener un equipo de gerentes que nunca duerme, desde <strong style="color:#141413;">$29 USD al mes</strong>.
+  <strong style="color:#141413;">Orbbi</strong> resuelve exactamente eso. Es una plataforma de agentes de IA especializados — Financiero, Ventas, Marketing, RRHH, Inventario — que conocen el negocio en profundidad y están disponibles 24/7. No es un chatbot genérico. Es como tener un equipo de gerentes que nunca duerme, desde <strong style="color:#141413;">$49 USD al mes</strong>.
 </p>
 
 <p style="font-size:15px;line-height:1.8;color:#5e5d59;margin:0 0 32px;">
@@ -75,11 +75,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
   Ver demo gratuita — sin registro →
 </a>
 
-<p style="font-size:14px;line-height:1.7;color:#87867f;margin:36px 0 0;">
-  Si le interesa explorar cómo Orbbi puede ser un recurso para las empresas que acompaña, responda este correo.
-</p>
-
-<p style="font-size:14px;color:#87867f;margin:16px 0 0;">
+<p style="font-size:14px;color:#87867f;margin:36px 0 0;">
   Equipo Orbbi<br/>
   <a href="https://www.orbbilatam.com" style="color:#c6613f;text-decoration:none;">orbbilatam.com</a>
 </p>
@@ -110,7 +106,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
   En lugar de contratar consultores o usar herramientas genéricas, los empresarios acceden a 7 agentes especializados: Gerente General, Financiero, Ventas, Marketing, RRHH, Inventario y Cumplimiento. Todos operan con el contexto específico del negocio, disponibles 24/7.
 </p>
 <p style="font-size:15px;line-height:1.7;color:#5e5d59;margin-bottom:24px;">
-  Planes desde <strong>$29 USD/mes</strong>. Demo gratuita sin registro.
+  Planes desde <strong>$49 USD/mes</strong>. Demo gratuita sin registro.
 </p>
 <a href="https://www.orbbilatam.com/demo" style="display:inline-block;background:#141413;color:#faf9f5;padding:12px 24px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;">
   Ver demo en vivo →
@@ -138,7 +134,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
   Soy Juan Pablo Monsalvez, fundador de Orbbi — agentes de IA especializados para PYMEs en LATAM. Desarrollamos la plataforma pensando exactamente en los desafíos que enfrentan los founders en etapas tempranas: poca capacidad de contratar, decisiones urgentes, cero tiempo.
 </p>
 <p style="font-size:15px;line-height:1.7;color:#5e5d59;margin-bottom:16px;">
-  Orbbi les da acceso a 7 agentes especializados (Finanzas, Ventas, Marketing, RRHH, y más) que conocen el contexto específico del negocio. Todo desde $29 USD/mes.
+  Orbbi les da acceso a 7 agentes especializados (Finanzas, Ventas, Marketing, RRHH, y más) que conocen el contexto específico del negocio. Todo desde $49 USD/mes.
 </p>
 <p style="font-size:15px;line-height:1.7;color:#5e5d59;margin-bottom:24px;">
   ¿Podría ser un recurso útil para las empresas en programa de {{org}}?
@@ -174,7 +170,7 @@ const PLANTILLAS: Record<string, { asunto: string; tipo: string; html: string }>
 <ul style="font-size:14px;line-height:1.8;color:#5e5d59;margin-bottom:16px;padding-left:20px;">
   <li>7 agentes especializados con IA Gemini 2.0 Flash de Google</li>
   <li>Contexto personalizado por empresa vía onboarding estructurado</li>
-  <li>Disponible en 6 países de LATAM. Planes desde $29 USD/mes</li>
+  <li>Disponible en 6 países de LATAM. Planes desde $49 USD/mes</li>
   <li>Demo gratuita sin necesidad de registro</li>
 </ul>
 <p style="font-size:15px;line-height:1.7;color:#5e5d59;margin-bottom:24px;">

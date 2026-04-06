@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'nGHKPqMTM96eNxu15Iec8ODTV_0ccRsDleY-Q_VDkdE',
   },
-  title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
+  title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $49/mes.',
   description: 'El directorio completo que solo las grandes empresas podían pagar. Finanzas, ventas, marketing, RRHH, inventario y legal — 7 agentes de IA que conocen tu negocio. Prueba la demo gratis.',
   keywords: ['IA para PYMEs', 'agente virtual', 'gestión empresarial', 'inteligencia artificial', 'PYME', 'Latinoamérica', 'CFO virtual', 'consultor IA'],
   authors: [{ name: 'Orbbi' }],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: 'es_CL',
     url: '/',
     siteName: 'Orbbi',
-    title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $29/mes.',
+    title: 'Orbbi — 7 gerentes para tu PYME. 24/7. $49/mes.',
     description: 'El directorio que solo las grandes empresas podían pagar. 7 agentes de IA especializados para tu negocio. Prueba la demo gratis.',
     images: [
       {
@@ -154,7 +154,7 @@ const schemaFAQ = {
       name: '¿Cuánto cuesta Orbbi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Planes desde $29 USD/mes con el Gerente General incluido. Plan Equipo con 3 agentes a $79/mes. Plan Empresa con los 7 agentes a $249/mes.',
+        text: 'Planes desde $49 USD/mes con el Gerente General incluido. Plan Equipo con 3 agentes a $129/mes. Plan Empresa con los 7 agentes a $349/mes.',
       },
     },
   ],

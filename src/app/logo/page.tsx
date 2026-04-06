@@ -111,6 +111,33 @@ const SVG_VIBRANT = `
 </svg>
 `
 
+const SVG_PROFILE = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="200" height="200">
+  <rect width="500" height="500" fill="#1a1a1a"/>
+  <circle cx="250" cy="250" r="200" fill="none" stroke="#FFFFF0" stroke-width="3" opacity="0.3"/>
+  <circle cx="250" cy="250" r="170" fill="none" stroke="#FFFFF0" stroke-width="1.5" opacity="0.15"/>
+  <text
+    x="250"
+    y="328"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="260"
+    font-weight="700"
+    fill="#FFFFF0"
+    text-anchor="middle"
+    letter-spacing="-4">O</text>
+  <text
+    x="250"
+    y="400"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="28"
+    font-weight="400"
+    fill="#FFFFF0"
+    text-anchor="middle"
+    letter-spacing="6"
+    opacity="0.6">RBBI</text>
+</svg>
+`
+
 const SVG_LIGHT = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <!-- Background -->
@@ -241,6 +268,33 @@ export default function LogoPage() {
                 >
                   <span style={{ fontSize: '13px', fontWeight: 500 }}>{d.label}</span>
                   <span style={{ fontSize: '11px', color: '#87867f' }}>↓ {d.note}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Profile version */}
+        <div style={{ background: '#111', borderRadius: '16px', padding: '32px', marginBottom: '16px', border: '1px solid #333' }}>
+          <p style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#FFFFF0', marginBottom: '20px' }}>
+            Versión perfil — Instagram / TikTok / Email
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
+            <LogoPreview svg={SVG_PROFILE} label="Logo perfil" />
+            <div style={{ flex: 1, minWidth: '220px' }}>
+              {downloads.map(d => (
+                <button
+                  key={d.file + '-profile'}
+                  onClick={() => downloadPng(SVG_PROFILE, d.size, d.file.replace('.png', '-profile.png'))}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    width: '100%', background: '#1a1a1a', border: '1px solid #333',
+                    borderRadius: '8px', padding: '10px 14px', marginBottom: '8px',
+                    cursor: 'pointer', color: '#FFFFF0',
+                  }}
+                >
+                  <span style={{ fontSize: '13px', fontWeight: 500 }}>{d.label}</span>
+                  <span style={{ fontSize: '11px', color: '#888' }}>↓ {d.note}</span>
                 </button>
               ))}
             </div>

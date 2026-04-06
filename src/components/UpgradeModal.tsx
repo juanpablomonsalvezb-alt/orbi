@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabase-client'
 
 const PLANS = {
-  solo: { nombre: 'Solo', precio: 29, agentes: 1 },
-  equipo: { nombre: 'Equipo', precio: 79, agentes: 3 },
-  empresa: { nombre: 'Empresa', precio: 249, agentes: 7 },
+  solo: { nombre: 'Solo', precio: 49, agentes: 1 },
+  equipo: { nombre: 'Equipo', precio: 129, agentes: 3 },
+  empresa: { nombre: 'Empresa', precio: 349, agentes: 7 },
 } as const
 
 type PlanId = keyof typeof PLANS

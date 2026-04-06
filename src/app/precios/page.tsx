@@ -5,7 +5,7 @@ import PricingPage from '@/components/PricingPage'
 
 export const metadata: Metadata = {
   title: 'Precios — Orbbi',
-  description: 'Planes desde $29/mes. 7 agentes de IA para tu PYME. Solo, Equipo o Empresa. Prueba la demo gratis antes de decidir.',
+  description: 'Planes desde $49/mes. 7 agentes de IA para tu PYME. Solo, Equipo o Empresa. Prueba la demo gratis antes de decidir.',
   alternates: {
     canonical: 'https://www.orbbilatam.com/precios',
     languages: {

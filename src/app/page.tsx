@@ -448,7 +448,7 @@ function ProblemSolversSection() {
             </svg>
           </div>
           <h2 className="u-display-l mb-4">
-            <AnimatedWords>Lo que antes costaba $15M al mes, ahora cuesta $29</AnimatedWords>
+            <AnimatedWords>Lo que antes costaba $15M al mes, ahora cuesta $49</AnimatedWords>
           </h2>
           <p className="u-paragraph-s mx-auto" style={{ maxWidth: '50ch' }}>
             Un equipo directivo completo que conoce tu negocio en profundidad.
@@ -999,7 +999,7 @@ function MetricsSection() {
       sub: 'De cero a tu equipo directivo funcionando',
     },
     {
-      value: '$29',
+      value: '$49',
       label: 'USD al mes',
       sub: 'Vs. $2M+ que cuesta un gerente general real',
     },
