@@ -3,57 +3,71 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import PageHero from "@/components/PageHero";
-import Image from "next/image";
 import Link from "next/link";
 
 const caseStudies = [
   {
-    client: "ThoughtSpot",
-    description: "Powering global AI with seamlessly integrated web development",
-    image: "/images/3fo_website_case-studies_tsp_cover.jpg",
-    href: "/case-study/thoughtspot",
-    tags: ["Technology Audits", "Website Development", "Website Re-platforming"],
-    industry: "Technology",
-  },
-  {
     client: "Parker Palm Springs",
     description: "High-impact digital marketing for an iconic desert oasis resort",
-    image: "/images/3fo_website_case-studies_pps_cover_1.jpg",
+    video: "/videos/3fo_website_case-studies_pps_cover.mp4",
     href: "/case-study/parker-palm-springs",
-    tags: ["Digital Channel Strategy", "Campaign Ideation", "Digital Advertising", "SEM"],
-    industry: "Hospitality",
+  },
+  {
+    client: "ThoughtSpot",
+    description: "Powering global AI with seamlessly integrated web development",
+    video: "/videos/3fo_website_case-studies_tsp_cover.mp4",
+    href: "/case-study/thoughtspot",
   },
   {
     client: "Personalis",
     description: "Scaling next-stage biotech growth into commercialization",
-    image: "/images/3fo_website_case-studies_per_tech-cover.jpg",
+    video: "/videos/3fo_website_case-studies_per_tech-cover.mp4",
     href: "/case-study/personalis",
-    tags: ["Campaign Ideation + Implementation", "Custom Website Design", "Motion Graphics"],
-    industry: "Biotech",
   },
   {
     client: "ECS Senior Living",
     description: "Re-envisioning a new corporate brand strategy for a century-old company",
-    image: "/images/3fo_website_case-studies_ecs_cover_1.jpg",
+    video: "/videos/3fo_website_case-studies_ecs_cover.mp4",
     href: "/case-study/ecs-senior-living",
-    tags: ["Brand Identity & Design", "Campaign Ideation", "Content Marketing"],
-    industry: "Real Estate",
   },
   {
     client: "Highgate",
     description: "Driving digital marketing growth with a $15B global hospitality powerhouse",
-    image: "/images/3fo_website_case-studies_highgate_cover.jpg",
+    video: "/videos/3fo_website_case-studies_highgate_cover.mp4",
     href: "/case-study/highgate",
-    tags: ["Content Creation", "Custom Website Design", "SEM"],
-    industry: "Hospitality",
   },
   {
     client: "SF State University",
     description: "Igniting change with a multi-channel campaign for education",
-    image: "/images/3fo_website-about_hero-3.jpg",
+    image: "/images/3fo_forrest-spotlight_hero.jpg",
     href: "/case-study/sf-state-university",
-    tags: ["Brand & Positioning", "Content Creation", "Campaign Marketing"],
-    industry: "Education",
+  },
+];
+
+const spotlightProjects = [
+  {
+    title: "Forrest Spotlight",
+    description: "Behind the scenes of creative direction",
+    image: "/images/3fo_forrest-spotlight_hero.jpg",
+    href: "/work",
+  },
+  {
+    title: "Brand Systems",
+    description: "Building scalable visual identities",
+    image: "/images/3fo_website-about_hero-3.jpg",
+    href: "/work",
+  },
+  {
+    title: "Motion Design",
+    description: "Bringing stories to life through motion",
+    image: "/images/3fo_website-work_hero-3.jpg",
+    href: "/work",
+  },
+  {
+    title: "Digital Campaigns",
+    description: "Performance-driven creative strategies",
+    image: "/images/3fo_website_case-studies_pps_cover_1.jpg",
+    href: "/work",
   },
 ];
 
@@ -63,58 +77,204 @@ export default function WorkPage() {
       <Navbar />
       <PageHero
         title="Break-thru with"
-        cycleWords={["impact.", "connection.", "differentiation.", "innovation.", "creativity."]}
+        cycleWords={["impact.", "connection.", "differentiation.", "innovation."]}
         image="/images/3fo_website-work_hero-3.jpg"
       />
 
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 120px" }}>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "64px", flexWrap: "wrap", gap: "16px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
-            Standout{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>case studies</span>
-          </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", maxWidth: "400px", lineHeight: 1.6 }}>
-            Our favorite projects aren't just pretty. They tackle complex problems and realize business goals.
-          </p>
-        </div>
+      {/* Standout case studies */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "100px 40px 120px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 64,
+          }}
+        >
+          Standout{" "}
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>case studies</span>
+        </h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
+        <div
+          className="cs-grid"
+          style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}
+        >
           {caseStudies.map((cs) => (
             <Link
               key={cs.client}
               href={cs.href}
               style={{
                 display: "block",
-                background: "#f5f5f5",
-                borderRadius: "16px",
+                position: "relative",
+                borderRadius: 16,
                 overflow: "hidden",
-                border: "1px solid rgba(0,0,0,0.06)",
-                transition: "border-color 0.3s",
+                aspectRatio: "4/3",
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)")}
             >
-              <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
-                <Image src={cs.image} alt={cs.client} fill style={{ objectFit: "cover", transition: "transform 0.6s ease" }} />
-              </div>
-              <div style={{ padding: "28px 28px 32px" }}>
-                <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: "8px" }}>
-                  {cs.industry}
-                </span>
-                <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "22px", letterSpacing: "-0.02em", color: "#000", lineHeight: 1.1, marginBottom: "8px" }}>
+              {"video" in cs && cs.video ? (
+                <video
+                  src={cs.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
+                <img
+                  src={(cs as { image: string }).image}
+                  alt={cs.client}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              )}
+              {/* overlay */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.05) 100%)",
+                }}
+              />
+              {/* content */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: 32,
+                  zIndex: 2,
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "'Aeonik', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 28,
+                    color: "#fff",
+                    lineHeight: 1.15,
+                    marginBottom: 8,
+                  }}
+                >
                   {cs.client}
                 </h3>
-                <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
+                <p
+                  style={{
+                    fontFamily: "'Aeonik', sans-serif",
+                    fontSize: 14,
+                    color: "rgba(255,255,255,0.8)",
+                    lineHeight: 1.5,
+                    marginBottom: 16,
+                  }}
+                >
                   {cs.description}
                 </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                  {cs.tags.map((tag) => (
-                    <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", color: "rgba(0,0,0,0.4)", background: "rgba(0,0,0,0.06)", padding: "4px 10px", borderRadius: "100px", border: "1px solid rgba(0,0,0,0.08)" }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <span
+                  style={{
+                    fontFamily: "'Aeonik', sans-serif",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: "#fdc115",
+                  }}
+                >
+                  view case →
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Spotlight projects */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px 120px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 64,
+          }}
+        >
+          Spotlight{" "}
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>projects</span>
+        </h2>
+
+        <div
+          className="sp-grid"
+          style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}
+        >
+          {spotlightProjects.map((p) => (
+            <Link
+              key={p.title}
+              href={p.href}
+              style={{
+                display: "block",
+                position: "relative",
+                borderRadius: 16,
+                overflow: "hidden",
+                aspectRatio: "16/9",
+                textDecoration: "none",
+              }}
+            >
+              <img
+                src={p.image}
+                alt={p.title}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 60%)",
+                }}
+              />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 28, zIndex: 2 }}>
+                <h3
+                  style={{
+                    fontFamily: "'Aeonik', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 22,
+                    color: "#fff",
+                    marginBottom: 6,
+                  }}
+                >
+                  {p.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'Aeonik', sans-serif",
+                    fontSize: 14,
+                    color: "rgba(255,255,255,0.8)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {p.description}
+                </p>
               </div>
             </Link>
           ))}
@@ -126,7 +286,9 @@ export default function WorkPage() {
 
       <style>{`
         @media (max-width: 768px) {
-          [style*="grid-template-columns: repeat(2, 1fr)"] { grid-template-columns: 1fr !important; }
+          .cs-grid { grid-template-columns: 1fr !important; }
+          .sp-grid { grid-template-columns: 1fr !important; }
+          h2 { font-size: clamp(36px, 8vw, 64px) !important; }
         }
       `}</style>
     </main>

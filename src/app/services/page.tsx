@@ -3,130 +3,148 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import PageHero from "@/components/PageHero";
+import { useState } from "react";
 
-const serviceGroups = [
+const SERVICE_TAGS = ["SEM", "Digital Advertising", "Web Development", "Web Design", "Content Marketing", "SEO", "Video Marketing", "Campaign Strategy"];
+
+const SERVICE_GROUPS = [
   {
-    id: "craft",
-    number: "01",
-    title: "Craft a game plan",
-    description: "After nearly three decades in the game, we know it takes a strategic village to bring a brand to life. It starts with defining who you are — because if you don't know, your audience won't either.",
-    services: [
-      { name: "Brand & Positioning Sprints", description: "Like refreshed logos or taglines." },
-      { name: "Technology Audits", description: "Tech stack, APIs, third party vendors." },
-      { name: "Information Architecture Mapping", description: "Site maps, user paths, functionality." },
-      { name: "Content Marketing Strategy", description: "What we say + when we say it + who we talk to." },
-      { name: "Digital Channel Strategy", description: "Where are your people at? LinkedIn? Social?" },
+    num: "01", title: "Craft a game plan",
+    desc: "After nearly three decades in the game, we know it takes a strategic village to bring a brand to life. It starts with defining who you are — because if you don't know, your audience won't either.",
+    items: [
+      { name: "Brand & Positioning Sprints", note: "Like refreshed logos or taglines." },
+      { name: "Technology Audits", note: "Tech stack, APIs, third party vendors." },
+      { name: "Information Architecture Mapping", note: "Site maps, user paths, functionality." },
+      { name: "Content Marketing Strategy", note: "What we say + when we say it + who we talk to." },
+      { name: "Digital Channel Strategy", note: "Where are your people at? LinkedIn? Social?" },
     ],
   },
   {
-    id: "create",
-    number: "02",
-    title: "Create amazing",
-    description: "By amplifying your brand's strategy and strengths, we deliver messaging and visuals that don't just catch the eye — they make people stop, take a closer look, and come back for more.",
-    services: [
-      { name: "Custom Website Design", description: "Pixel-perfect, conversion-focused designs." },
-      { name: "Brand Identity & Design Support", description: "Visual systems that scale." },
-      { name: "Campaign Ideation + Implementation", description: "End-to-end campaign execution." },
-      { name: "Motion Graphics, Animation & Video", description: "Moving visuals that tell your story." },
-      { name: "Content Creation", description: "Copy, photography, video, and more." },
+    num: "02", title: "Create amazing",
+    desc: "By amplifying your brand's strategy and strengths, we deliver messaging and visuals that don't just look good — they connect, convert, and leave a lasting impression.",
+    items: [
+      { name: "Website Copy & Blog", note: "Website copy, blog and newsletters, etc." },
+      { name: "Brand Identity Design", note: "Logos, color palettes, typography systems." },
+      { name: "Website Design & Development", note: "From wireframe to launch." },
+      { name: "Motion & Video Production", note: "Story-driven brand content." },
+      { name: "Photography & Art Direction", note: "Styled shoots, lifestyle, product." },
     ],
   },
   {
-    id: "connect",
-    number: "03",
-    title: "Connect with people",
-    description: "Real connections beat clever gimmicks. Ditch the fake, forget the fluff — focus on being genuinely good at what you do. That's how you win.",
-    services: [
-      { name: "Website Development", description: "Next.js, React, WordPress, and more." },
-      { name: "Digital Advertising", description: "Paid campaigns across all channels." },
-      { name: "Search Engine Marketing", description: "SEM & SEO that drives revenue." },
-      { name: "Website Re-platforming, Takeovers & Support", description: "Seamless migrations and ongoing support." },
-      { name: "Website Security & Performance Optimization", description: "Fast, secure, resilient sites." },
+    num: "03", title: "Connect with people",
+    desc: "Real connections beat clever gimmicks. Ditch the fake, forget the fluff — focus on being genuinely good at what you do. That's how you win.",
+    items: [
+      { name: "Search Engine Marketing", note: "Google Ads, Bing, paid search." },
+      { name: "Social Media Marketing", note: "Organic + paid across platforms." },
+      { name: "Email Marketing", note: "Campaigns, drips, automations." },
+      { name: "Digital Advertising", note: "Display, retargeting, programmatic." },
+      { name: "Analytics & Reporting", note: "GA4, dashboards, insights." },
     ],
   },
 ];
 
+const STATS = [
+  { num: "203%", desc: "increase in revenue from search traffic", client: "Alohilani Resort" },
+  { num: "247%", desc: "increase in revenue from Google ads", client: "Parker Palm Springs" },
+  { num: "535%", desc: "boost in site traffic since launch", client: "ECS Senior Living" },
+];
+
 export default function ServicesPage() {
+  const [openGroup, setOpenGroup] = useState<number | null>(null);
+
   return (
-    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
+    <main style={{ background: "#fff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
-        title="Digital"
-        cycleWords={["marketing", "advertising", "brand", "campaign", "web", "interactive"]}
-        prefix="experiences."
+        title="Digital marketing"
+        cycleWords={["advertising", "brand", "campaign", "web", "interactive"]}
         image="/images/3fo_website-services_hero-3.jpg"
+        prefix="experiences."
       />
 
-      {/* Intro */}
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 40px" }}>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: "32px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
-            All things{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>digital</span>
-          </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", maxWidth: "500px", lineHeight: 1.7 }}>
-            All in one place. Explore our award-winning services — crafted to fulfill your brand promise and make a lasting impact with your clients.
-          </p>
+      {/* All things digital */}
+      <section style={{ padding: "clamp(80px,10vw,160px) clamp(24px,5vw,80px)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 48 }}>
+            <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 64, lineHeight: "70.4px", letterSpacing: "-1.44px" }}>
+              All things<br /><span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>digital</span>
+            </h2>
+            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 22, fontWeight: 300, lineHeight: 1.5, color: "rgba(0,0,0,0.55)", maxWidth: 500 }}>
+              All in one place. Explore our award-winning services — crafted to fulfill your brand promise and make it stick.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+            {SERVICE_TAGS.map(tag => (
+              <span key={tag} style={{
+                fontFamily: "'Aeonik', sans-serif", fontSize: 15, fontWeight: 500,
+                padding: "10px 20px", borderRadius: 100, border: "1px solid rgba(0,0,0,0.15)",
+                color: "#000", cursor: "pointer", transition: "all .2s",
+              }}>{tag}</span>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Scrolling tags */}
-        <div style={{ marginTop: "48px", overflow: "hidden", borderTop: "1px solid rgba(0,0,0,0.08)", borderBottom: "1px solid rgba(0,0,0,0.08)", padding: "16px 0" }}>
-          {["SEM", "Digital Advertising", "Web Development", "Web Design", "Branding", "Content Marketing", "SEO", "Video Marketing", "Campaign Marketing"].map((tag) => (
-            <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.3)", letterSpacing: "0.05em", marginRight: "32px" }}>{tag}</span>
+      {/* Full service or à la carte */}
+      <section style={{ padding: "0 clamp(24px,5vw,80px) clamp(80px,10vw,160px)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 64 }}>
+            <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 64, lineHeight: "70.4px", letterSpacing: "-1.44px" }}>
+              Full service<br />or <span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>à la carte</span>
+            </h2>
+            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 22, fontWeight: 300, lineHeight: 1.5, color: "rgba(0,0,0,0.55)", maxWidth: 500 }}>
+              You need powerful digital solutions — we deliver them. With a proven track record creating success stories across industries.
+            </p>
+          </div>
+
+          {/* Accordion service groups */}
+          {SERVICE_GROUPS.map((g, i) => (
+            <div key={g.num} style={{ borderTop: "1px solid rgba(0,0,0,0.08)", padding: "32px 0" }}>
+              <button
+                onClick={() => setOpenGroup(openGroup === i ? null : i)}
+                style={{
+                  width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
+                  fontFamily: "'Aeonik', sans-serif", fontSize: 48, fontWeight: 700, letterSpacing: "-1px",
+                  color: "#000", textAlign: "left", cursor: "pointer",
+                  background: "none", border: "none", padding: 0,
+                }}
+              >
+                {g.title}
+                <span style={{ fontSize: 28, color: "var(--yellow)", transform: openGroup === i ? "rotate(45deg)" : "none", transition: "transform .3s ease" }}>✦</span>
+              </button>
+              {openGroup === i && (
+                <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 48px" }}>
+                  <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 22, fontWeight: 300, lineHeight: 1.5, color: "rgba(0,0,0,0.55)", gridColumn: "1 / -1", marginBottom: 16 }}>{g.desc}</p>
+                  {g.items.map(item => (
+                    <div key={item.name} style={{ padding: "12px 0", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+                      <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 16, fontWeight: 500, marginBottom: 4 }}>{item.name}</p>
+                      <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(0,0,0,0.5)" }}>{item.note}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Service groups */}
-      {serviceGroups.map((group, gi) => (
-        <section key={group.id} id={group.id} style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px", borderTop: gi > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-            {/* Left */}
-            <div>
-              <span style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 300, fontSize: "13px", color: "rgba(0,0,0,0.3)", letterSpacing: "0.08em", display: "block", marginBottom: "24px" }}>
-                {group.number}
-              </span>
-              <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0, marginBottom: "24px" }}>
-                {group.title}
-              </h2>
-              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.5)", lineHeight: 1.7 }}>
-                {group.description}
-              </p>
+      {/* Stats section */}
+      <section style={{ padding: "clamp(60px,8vw,120px) clamp(24px,5vw,80px)", background: "var(--yellow)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 64, lineHeight: "70.4px", letterSpacing: "-1.44px", marginBottom: 48 }}>
+            Land knockout<br /><span style={{ color: "#000", fontWeight: 300, fontStyle: "italic" }}>results</span>
+          </h2>
+          {STATS.map(s => (
+            <div key={s.num} style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", padding: "28px 0", borderTop: "1px solid rgba(0,0,0,0.15)", flexWrap: "wrap", gap: 16 }}>
+              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "clamp(48px, 8vw, 80px)", fontWeight: 300, color: "#000" }}>{s.num}</span>
+              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 22, fontWeight: 300, flex: 1, marginLeft: 24 }}>{s.desc}</span>
+              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 15, fontWeight: 700 }}>{s.client} →</span>
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Right: service list */}
-            <div>
-              {group.services.map((service) => (
-                <div
-                  key={service.name}
-                  style={{
-                    borderTop: "1px solid rgba(0,0,0,0.08)",
-                    padding: "20px 0",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "16px",
-                  }}
-                >
-                  <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "18px", color: "rgba(0,0,0,0.2)", flexShrink: 0, marginTop: "2px" }}>+</span>
-                  <div>
-                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: "16px", color: "#000", marginBottom: "4px" }}>{service.name}</p>
-                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.4)", lineHeight: 1.5 }}>{service.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ))}
-
-      <CTASection />
       <Footer />
-
-      <style>{`
-        @media (max-width: 900px) {
-          [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
-        }
-      `}</style>
     </main>
   );
 }

@@ -4,7 +4,7 @@ import TogetherSection from "@/components/TogetherSection";
 import ClientsSection from "@/components/ClientsSection";
 import ServicesSection from "@/components/ServicesSection";
 import WorkSection from "@/components/WorkSection";
-import Ticker from "@/components/Ticker";
+// Ticker removed per user request
 import StatsSection from "@/components/StatsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -18,7 +18,7 @@ export default function Home() {
       <ClientsSection />
       <ServicesSection />
       <WorkSection />
-      <Ticker />
+      {/* Ticker removed */}
       <StatsSection />
       <CTASection />
       <Footer />

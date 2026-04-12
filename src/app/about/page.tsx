@@ -9,28 +9,46 @@ const values = [
   {
     tagline: "Go hard or go home",
     title: "Driven",
-    description: "We are in it for results that count. So we speculate over every idea, reach for the best possible solution, and we bring it. Each and every time.",
+    description:
+      "We are in it for results that count. So we speculate over every idea, reach for the best possible solution, and we bring it. Each and every time.",
   },
   {
     tagline: "We're honest, not modest",
     title: "Sincere",
-    description: "We won't jerk you around. In fact, you can always count on full disclosure. Because we want you to make the best decisions possible. No regrets.",
+    description:
+      "We won't jerk you around. In fact, you can always count on full disclosure. Because we want you to make the best decisions possible. No regrets.",
   },
   {
-    tagline: "We get (sh)it done",
+    tagline: "We get it done",
     title: "Committed",
-    description: "We anticipate everything. What's wanted. What's needed. What's been overlooked. We prepare a plan A, B and C. Most firms don't go so far. We're not most firms.",
+    description:
+      "We anticipate everything. What's wanted. What's needed. What's been overlooked. We prepare a plan A, B and C. Most firms don't go so far. We're not most firms.",
   },
   {
-    tagline: "We risk for reward",
+    tagline: "Let's go there",
     title: "Fearless",
-    description: "No guts. No glory. We push the outer reaches of what's possible, and stand by our ideas. And fight for our client's successes. But we're never too proud to take a step back when it's needed.",
+    description:
+      "No guts. No glory. We push the outer reaches of what's possible, and stand by our ideas. And fight for our client's successes. But we're never too proud to take a step back when it's needed.",
   },
   {
-    tagline: "We make a difference",
+    tagline: "It's all about the humans",
     title: "People-centric",
-    description: "We're in this together. So we work as one. Because the world can change at a moment's notice. And moving toward it with the best people, makes us change with it.",
+    description:
+      "We're in this together. So we work as one. Because the world can change at a moment's notice. And moving toward it with the best people, makes us change with it.",
   },
+];
+
+const teamMembers = [
+  "Barbara Stephenson",
+  "Rex Vokey",
+  "Stephanie Frier",
+  "Greg Tornincasa",
+  "Chantel Keith",
+  "Joren Mathews",
+  "Mia Pinzelik",
+  "Hector Banuelos",
+  "Forrest Darabian",
+  "Colin Grafft",
 ];
 
 export default function AboutPage() {
@@ -38,57 +56,127 @@ export default function AboutPage() {
     <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
-        title="25 years in the game"
-        cycleWords={["winning.", "innovating.", "growing.", "learning.", "creating."]}
-        prefix="and still"
+        title="25 years in the game and still"
+        cycleWords={["winning.", "innovating.", "growing."]}
         image="/images/3fo_website-about_hero-3.jpg"
       />
 
-      {/* Intro */}
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
-            Meet{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>300FeetOut</span>
-          </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "17px", color: "rgba(0,0,0,0.6)", lineHeight: 1.8, paddingTop: "8px" }}>
-            An offbeat, no-holds-barred kind of digital marketing agency — giving it all we&apos;ve got, with zero reservations. We jump in with both feet and take ownership of your project, using every tool we&apos;ve got to get you world-class results. We were a startup before startups were cool.
-          </p>
-        </div>
+      {/* Meet 300FeetOut */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "100px 40px 80px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 40,
+          }}
+        >
+          Meet{" "}
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>300FeetOut</span>
+        </h2>
+        <p
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontSize: 22,
+            fontWeight: 300,
+            color: "#000",
+            lineHeight: 1.6,
+            maxWidth: 800,
+          }}
+        >
+          An offbeat, no-holds-barred kind of digital marketing agency — giving it all
+          we&apos;ve got, with zero reservations. We jump in with both feet and take
+          ownership of your project, using every tool we&apos;ve got to get you
+          world-class results. We were a startup before startups were cool.
+        </p>
       </section>
 
-      {/* Clients */}
+      {/* Top-notch clients */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px 80px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 48,
+          }}
+        >
+          Top-notch{" "}
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>clients</span>
+        </h2>
+      </section>
       <ClientsSection />
 
-      {/* Values */}
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px" }}>
-        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0, marginBottom: "64px" }}>
+      {/* Living by our values */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "100px 40px 120px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 80,
+          }}
+        >
           Living by{" "}
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>our values</span>
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>our values</span>
         </h2>
-        <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.4)", marginBottom: "64px", lineHeight: 1.7 }}>
-          Who we are is at the core of everything we do and we partner with companies who think like us.
-        </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(0,0,0,0.06)", borderRadius: "16px", overflow: "hidden" }}>
-          {values.map((value) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {values.map((value, i) => (
             <div
               key={value.title}
               style={{
-                background: "#ffffff",
-                padding: "48px 36px",
-                transition: "background 0.3s",
+                paddingTop: i === 0 ? 0 : 56,
+                paddingBottom: 56,
+                borderBottom:
+                  i < values.length - 1 ? "1px solid rgba(0,0,0,0.1)" : "none",
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#f0f0f0")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#ffffff")}
             >
-              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: "20px" }}>
+              <p
+                style={{
+                  fontFamily: "'Aeonik', sans-serif",
+                  fontSize: 14,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "#fdc115",
+                  fontWeight: 700,
+                  marginBottom: 16,
+                }}
+              >
                 {value.tagline}
-              </span>
-              <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "28px", letterSpacing: "-0.02em", color: "#000", marginBottom: "16px" }}>
+              </p>
+              <h3
+                style={{
+                  fontFamily: "'Aeonik', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 64,
+                  letterSpacing: "-1.44px",
+                  color: "#000",
+                  lineHeight: 1.05,
+                  marginBottom: 20,
+                }}
+              >
                 {value.title}
               </h3>
-              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", lineHeight: 1.7 }}>
+              <p
+                style={{
+                  fontFamily: "'Aeonik', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 300,
+                  color: "#000",
+                  lineHeight: 1.6,
+                  maxWidth: 700,
+                }}
+              >
                 {value.description}
               </p>
             </div>
@@ -96,15 +184,83 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team blurb */}
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px" }}>
-        <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: "80px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
-            A tight-knit{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>team</span>
+      {/* A tight-knit team */}
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px 120px" }}>
+        <h2
+          style={{
+            fontFamily: "'Aeonik', sans-serif",
+            fontWeight: 700,
+            fontSize: 64,
+            letterSpacing: "-1.44px",
+            color: "#000",
+            lineHeight: 1.05,
+            marginBottom: 64,
+          }}
+        >
+          A tight-knit{" "}
+          <span style={{ fontStyle: "italic", color: "#fdc115" }}>team</span>
+        </h2>
+
+        <div
+          className="team-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "24px 80px",
+          }}
+        >
+          {teamMembers.map((name) => (
+            <p
+              key={name}
+              style={{
+                fontFamily: "'Aeonik', sans-serif",
+                fontSize: 22,
+                fontWeight: 300,
+                color: "#000",
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
+              {name}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      {/* Join our team */}
+      <section
+        style={{
+          background: "#fdc115",
+          padding: "100px 40px",
+        }}
+      >
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "'Aeonik', sans-serif",
+              fontWeight: 700,
+              fontSize: 64,
+              letterSpacing: "-1.44px",
+              color: "#000",
+              lineHeight: 1.05,
+              marginBottom: 24,
+            }}
+          >
+            JOIN OUR TEAM *
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.5)", lineHeight: 1.8 }}>
-            Strategists, creatives, in-house engineers — trusted and certified. Respected by our peers and validated by the people who matter. We&apos;ve been at this since 1997, and we&apos;re just getting started.
+          <p
+            style={{
+              fontFamily: "'Aeonik', sans-serif",
+              fontSize: 22,
+              fontWeight: 300,
+              color: "#000",
+              lineHeight: 1.6,
+              maxWidth: 700,
+            }}
+          >
+            We&apos;re always looking for talented people who share our passion and
+            drive. If you think you have what it takes, we&apos;d love to hear from
+            you.
           </p>
         </div>
       </section>
@@ -113,9 +269,9 @@ export default function AboutPage() {
       <Footer />
 
       <style>{`
-        @media (max-width: 900px) {
-          [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
-          [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+        @media (max-width: 768px) {
+          .team-grid { grid-template-columns: 1fr !important; }
+          h2, h3 { font-size: clamp(36px, 8vw, 64px) !important; }
         }
       `}</style>
     </main>
