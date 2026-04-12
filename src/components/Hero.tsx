@@ -45,7 +45,7 @@ export default function Hero() {
       </video>
       <div style={{ position: "absolute", inset: 0, zIndex: 1, background: "linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.08) 35%, transparent 100%)" }} />
       <div style={{ position: "absolute", insetInline: 0, bottom: 0, zIndex: 2, display: "flex", flexDirection: "column", gap: 28, padding: "0 clamp(24px,5vw,80px) clamp(48px,7vh,96px)" }}>
-        <h1 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(44px, 7vw, 112px)", lineHeight: 0.98, letterSpacing: "-0.035em", color: "#fff", maxWidth: 1200 }}>
+        <h1 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(44px, 7vw, 100px)", lineHeight: "110px", letterSpacing: "-2.2px", color: "#fff", maxWidth: 1200 }}>
           Connecting{" "}
           <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
             <span key={`i${idx}`} style={{ display: "inline-block", color: "var(--yellow)", animation: "cycleIn .55s cubic-bezier(.16,1,.3,1) forwards" }}>

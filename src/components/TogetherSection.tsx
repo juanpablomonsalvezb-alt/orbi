@@ -36,9 +36,9 @@ export default function TogetherSection() {
       transition: "opacity 0.9s ease, transform 0.9s ease",
     }}>
       <h2 style={{
-        fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
-        fontSize: "clamp(36px, 5.5vw, 80px)", lineHeight: 1.08,
-        letterSpacing: "-0.03em", color: "#000", maxWidth: 1100,
+        fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
+        fontSize: "clamp(36px, 5.5vw, 64px)", lineHeight: "70.4px",
+        letterSpacing: "-1.44px", color: "#000", maxWidth: 1100,
       }}>
         Together
         <Image src={INLINE_IMAGES[0].src} alt={INLINE_IMAGES[0].alt} width={120} height={80} style={imgStyle} />

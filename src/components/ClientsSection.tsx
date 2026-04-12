@@ -61,9 +61,9 @@ export default function ClientsSection() {
         <h2
           style={{
             fontFamily: "'Aeonik', sans-serif",
-            fontWeight: 900,
+            fontWeight: 700,
             fontSize: "clamp(36px, 4vw, 64px)",
-            letterSpacing: "-0.03em",
+            letterSpacing: "-1.44px",
             color: "#000000",
             lineHeight: 1.0,
           }}

@@ -29,11 +29,11 @@ export default function WorkSection() {
     }}>
       {/* Header */}
       <div style={{ padding: "0 clamp(24px, 5vw, 80px)", marginBottom: 48, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 24 }}>
-        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-1.44px" }}>
           Dig into<br />our <span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>work</span>
         </h2>
         <div style={{ maxWidth: 420 }}>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 16, lineHeight: 1.6, color: "rgba(0,0,0,0.6)", marginBottom: 16 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 22, lineHeight: 1.5, color: "rgba(0,0,0,0.55)", fontWeight: 300, marginBottom: 16 }}>
             Looking to attract more people, launch a new product, or upgrade your tech stack? Explore our real-world success stories.
           </p>
           <Link href="/work" style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 15, color: "#000", display: "inline-flex", alignItems: "center", gap: 6 }}>

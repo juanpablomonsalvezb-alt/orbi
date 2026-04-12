@@ -62,9 +62,9 @@ export default function ServicesSection() {
         {/* Title + description (centered) */}
         <div style={{ textAlign: "center", maxWidth: 600, margin: "0 auto 48px" }}>
           <h2 style={{
-            fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
-            fontSize: "clamp(28px, 3.5vw, 48px)", lineHeight: 1.1,
-            letterSpacing: "-0.02em", marginBottom: 16,
+            fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
+            fontSize: "clamp(36px, 4.5vw, 64px)", lineHeight: 1.1,
+            letterSpacing: "-1.44px", marginBottom: 16,
           }}>
             {s.title.split(" ").slice(0, 1).join(" ")}{" "}
             <span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>
@@ -72,7 +72,7 @@ export default function ServicesSection() {
             </span>
           </h2>
           <p style={{
-            fontFamily: "'Aeonik', sans-serif", fontWeight: 400, fontSize: 16,
+            fontFamily: "'Aeonik', sans-serif", fontWeight: 300, fontSize: 22,
             lineHeight: 1.6, color: "rgba(0,0,0,0.6)", marginBottom: 20,
           }}>{s.desc}</p>
           <Link href="/services" style={{

@@ -168,9 +168,9 @@ export default function StatsSection() {
       <h2
         style={{
           fontFamily: "'Aeonik', sans-serif",
-          fontWeight: 900,
+          fontWeight: 700,
           fontSize: "clamp(48px, 6vw, 96px)",
-          letterSpacing: "-0.03em",
+          letterSpacing: "-1.44px",
           color: "#000000",
           lineHeight: 1.0,
           marginBottom: "8px",

@@ -27,15 +27,15 @@ export default function Navbar() {
   return (
     <>
       <header style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        position: "fixed", top: 32, left: 0, right: 0, zIndex: 100,
         padding: "0 clamp(20px, 4vw, 56px)",
-        height: 80, display: "flex", alignItems: "center", justifyContent: "space-between",
+        height: 96, display: "flex", alignItems: "center", justifyContent: "space-between",
         background: bg, backdropFilter: scrolled ? "blur(8px)" : "none",
         transition: "background 0.5s ease, backdrop-filter 0.5s ease",
       }}>
         <Link href="/" style={{
-          fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
-          fontSize: scrolled ? 20 : 18, letterSpacing: "-0.02em",
+          fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
+          fontSize: scrolled ? 22 : 22, letterSpacing: "-0.02em",
           color: fg, transition: "color 0.4s ease",
         }}>
           {logo}
@@ -46,7 +46,7 @@ export default function Navbar() {
           <nav style={{ display: "flex", alignItems: "center", gap: 36 }} className="nav-desktop">
             {NAV_LINKS.map(l => (
               <Link key={l.label} href={l.href} style={{
-                fontFamily: "'Aeonik', sans-serif", fontWeight: 400, fontSize: 15,
+                fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: 22,
                 color: fg, transition: "opacity .2s",
               }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.6")}
@@ -54,7 +54,7 @@ export default function Navbar() {
               >{l.label}</Link>
             ))}
             <Link href="/contact" style={{
-              fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: 15,
+              fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: 22,
               color: "#000", background: "var(--yellow)", padding: "10px 24px",
               borderRadius: 100, transition: "opacity .2s",
             }}

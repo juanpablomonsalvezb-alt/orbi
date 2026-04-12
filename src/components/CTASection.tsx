@@ -30,7 +30,7 @@ export default function CTASection() {
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h2 style={{
-          fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
+          fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
           fontSize: "clamp(44px, 7vw, 112px)", lineHeight: 1.0,
           letterSpacing: "-0.035em", color: "#000",
         }}>
