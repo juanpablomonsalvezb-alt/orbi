@@ -16,7 +16,7 @@ const images = [
 export default function TogetherSection() {
   const [activeImg, setActiveImg] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {

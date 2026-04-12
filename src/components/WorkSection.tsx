@@ -44,7 +44,7 @@ const caseStudies = [
 export default function WorkSection() {
   const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

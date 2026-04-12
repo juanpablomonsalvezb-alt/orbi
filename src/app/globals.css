@@ -1,100 +1,134 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* ── Aeonik Font Family ── */
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Air.woff2') format('woff2'), url('/fonts/Aeonik-Air.woff') format('woff');
-  font-weight: 100; font-style: normal; font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Light.woff2') format('woff2'), url('/fonts/Aeonik-Light.woff') format('woff');
-  font-weight: 300; font-style: normal; font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Regular.woff2') format('woff2'), url('/fonts/Aeonik-Regular.woff') format('woff');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Medium.woff2') format('woff2'), url('/fonts/Aeonik-Medium.woff') format('woff');
-  font-weight: 500; font-style: normal; font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Bold.woff2') format('woff2'), url('/fonts/Aeonik-Bold.woff') format('woff');
-  font-weight: 700; font-style: normal; font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik-Black.woff2') format('woff2'), url('/fonts/Aeonik-Black.woff') format('woff');
-  font-weight: 900; font-style: normal; font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
-
-/* ── Lenis smooth scroll ── */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
 
 /* ── Ticker animation ── */
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-/* ── Cycle text ── */
-@keyframes cycleIn { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
-@keyframes cycleOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-100%); } }
-
-@theme {
-  --color-ivory: #faf9f5;
-  --color-ivory-mid: #f0eee6;
-  --color-ivory-dark: #e8e6dc;
-  --color-oat: #e3dacc;
-  --color-ink: #141413;
-  --color-ink-mid: #3d3d3a;
-  --color-ink-light: #5e5d59;
-  --color-muted: #87867f;
-  --color-cloud: #b0aea5;
-  --color-cloud-light: #d1cfc5;
-  --color-clay: #d97757;
-  --color-accent: #c6613f;
-  --color-accent-bg: #fdf0eb;
-  --color-border: #e8e6dc;
-  --color-border-light: #f0eee6;
-
-  /* Dark theme (chat, dashboard) */
-  --color-obsidian: #1a1a19;
-  --color-grafito: #2a2a28;
-  --color-humo: #3d3d3a;
-  --color-ceniza: #87867f;
-  --color-señal: #d97757;
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; }
-html { background-color: #0a0a0a; }
-body {
-  margin: 0;
-  font-family: 'Aeonik', 'Inter', system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  color: #ffffff;
-  background: #0a0a0a;
+/* ── Fade up animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Selection ── */
-::selection { background: rgba(204, 120, 92, 0.5); }
+/* ── Cycle text animation ── */
+@keyframes cycleIn {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cycleOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-100%); }
+}
 
-/* ── Site layout ── */
+/* ── Counter animation ── */
+@keyframes countUp {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Aeonik', ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  --site-margin: clamp(2rem, 1.08rem + 3.92vw, 5rem);
-  --nav-height: 4.25rem;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --muted: rgba(255,255,255,0.5);
+  --border: rgba(255,255,255,0.12);
+  --accent: #f5f0e8;
 }
 
-/* ── Scrollbar (dark theme for public site) ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1a1a19; }
-::-webkit-scrollbar-thumb { background: #3d3d3a; border-radius: 3px; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+html {
+  font-family: 'Aeonik', ui-sans-serif, system-ui, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(255,255,255,0.2);
 }
