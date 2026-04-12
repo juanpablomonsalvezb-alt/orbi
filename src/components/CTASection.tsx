@@ -16,18 +16,13 @@ const cycleVerbs = [
 
 export default function CTASection() {
   const [verbIdx, setVerbIdx] = useState(0);
-  const [verbAnim, setVerbAnim] = useState<"in" | "out">("in");
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setVerbAnim("out");
-      setTimeout(() => {
-        setVerbIdx((i) => (i + 1) % cycleVerbs.length);
-        setVerbAnim("in");
-      }, 350);
-    }, 1800);
+      setVerbIdx((i) => (i + 1) % cycleVerbs.length);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -83,12 +78,10 @@ export default function CTASection() {
             }}
           >
             <span
+              key={verbIdx}
               style={{
                 display: "block",
-                animation:
-                  verbAnim === "in"
-                    ? "cycleIn 0.35s cubic-bezier(0.16,1,0.3,1) both"
-                    : "cycleOut 0.35s cubic-bezier(0.16,1,0.3,1) both",
+                animation: "cycleIn 0.5s cubic-bezier(0.16,1,0.3,1) both",
               }}
             >
               {cycleVerbs[verbIdx]}

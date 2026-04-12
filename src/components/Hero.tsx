@@ -25,19 +25,13 @@ const heroVideos = [
 export default function Hero() {
   const [industryIdx, setIndustryIdx] = useState(0);
   const [audienceIdx, setAudienceIdx] = useState(0);
-  const [industryAnim, setIndustryAnim] = useState<"in" | "out">("in");
-  const [audienceAnim, setAudienceAnim] = useState<"in" | "out">("in");
   const [videoIdx, setVideoIdx] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Cycle industry words
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndustryAnim("out");
-      setTimeout(() => {
-        setIndustryIdx((i) => (i + 1) % industryWords.length);
-        setIndustryAnim("in");
-      }, 400);
+      setIndustryIdx((i) => (i + 1) % industryWords.length);
     }, 2200);
     return () => clearInterval(interval);
   }, []);
@@ -45,15 +39,9 @@ export default function Hero() {
   // Cycle audience words (offset timing)
   useEffect(() => {
     const interval = setInterval(() => {
-      setAudienceAnim("out");
-      setTimeout(() => {
-        setAudienceIdx((i) => (i + 1) % audienceWords.length);
-        setAudienceAnim("in");
-      }, 400);
+      setAudienceIdx((i) => (i + 1) % audienceWords.length);
     }, 2200);
-    return () => {
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   // Cycle videos on ended
@@ -68,15 +56,9 @@ export default function Hero() {
     }
   }, [videoIdx]);
 
-  const cycleInStyle = {
+  const cycleStyle = {
     display: "inline-block",
-    animation: "cycleIn 0.4s cubic-bezier(0.16,1,0.3,1) both",
-    overflow: "hidden",
-  };
-  const cycleOutStyle = {
-    display: "inline-block",
-    animation: "cycleOut 0.4s cubic-bezier(0.16,1,0.3,1) both",
-    overflow: "hidden",
+    animation: "cycleIn 0.5s cubic-bezier(0.16,1,0.3,1) both",
   };
 
   return (
@@ -154,7 +136,7 @@ export default function Hero() {
               minWidth: "280px",
             }}
           >
-            <span style={industryAnim === "in" ? cycleInStyle : cycleOutStyle}>
+            <span key={`i-${industryIdx}`} style={cycleStyle}>
               {industryWords[industryIdx]}
             </span>
           </span>
@@ -168,7 +150,7 @@ export default function Hero() {
               minWidth: "240px",
             }}
           >
-            <span style={audienceAnim === "in" ? cycleInStyle : cycleOutStyle}>
+            <span key={`a-${audienceIdx}`} style={cycleStyle}>
               {audienceWords[audienceIdx]}
             </span>
           </span>
