@@ -11,7 +11,6 @@ const CASES = [
 ];
 
 export default function WorkSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -23,13 +22,13 @@ export default function WorkSection() {
 
   return (
     <section ref={sectionRef} style={{
-      background: "#fff", padding: "clamp(80px, 10vw, 160px) 0 clamp(60px, 8vw, 120px)",
+      background: "#fff", padding: "clamp(80px, 10vw, 160px) clamp(24px, 5vw, 80px)",
       opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(40px)",
       transition: "opacity 0.8s ease, transform 0.8s ease",
     }}>
       {/* Header */}
-      <div style={{ padding: "0 clamp(24px, 5vw, 80px)", marginBottom: 48, display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 24 }}>
-        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.05, letterSpacing: "-1.44px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto 48px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 24 }}>
+        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(36px, 5vw, 64px)", lineHeight: "70.4px", letterSpacing: "-1.44px" }}>
           Dig into<br />our <span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>work</span>
         </h2>
         <div style={{ maxWidth: 420 }}>
@@ -42,20 +41,24 @@ export default function WorkSection() {
         </div>
       </div>
 
-      {/* Horizontal scroll carousel */}
-      <div ref={scrollRef} style={{
-        display: "flex", gap: 20, overflowX: "auto", scrollSnapType: "x mandatory",
-        paddingLeft: "clamp(24px, 5vw, 80px)", paddingRight: "clamp(24px, 5vw, 80px)",
-        scrollbarWidth: "none",
+      {/* Grid layout */}
+      <div style={{
+        maxWidth: 1400, margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 400px), 1fr))",
+        gap: 24,
       }}>
         {CASES.map(c => (
           <Link key={c.title} href={c.href} style={{
-            flex: "0 0 clamp(300px, 40vw, 520px)", scrollSnapAlign: "start",
             borderRadius: 16, overflow: "hidden", position: "relative",
             aspectRatio: "4 / 3", display: "block",
-          }}>
+          }}
+            onMouseEnter={e => { const v = e.currentTarget.querySelector("video"); if (v) (v as HTMLVideoElement).style.transform = "scale(1.05)"; }}
+            onMouseLeave={e => { const v = e.currentTarget.querySelector("video"); if (v) (v as HTMLVideoElement).style.transform = "scale(1)"; }}
+          >
             <video autoPlay muted loop playsInline style={{
               position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+              transition: "transform 0.5s ease",
             }}>
               <source src={c.video} type="video/mp4" />
             </video>
@@ -64,7 +67,7 @@ export default function WorkSection() {
               background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
               display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 28,
             }}>
-              <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 22, color: "#fff", marginBottom: 6 }}>{c.title}</h3>
+              <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: 24, color: "#fff", marginBottom: 6 }}>{c.title}</h3>
               <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.8)", lineHeight: 1.4 }}>{c.desc}</p>
               <span style={{
                 marginTop: 12, fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: 14,
@@ -74,10 +77,6 @@ export default function WorkSection() {
           </Link>
         ))}
       </div>
-
-      <style>{`
-        div::-webkit-scrollbar { display: none; }
-      `}</style>
     </section>
   );
 }
