@@ -35,7 +35,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
         title="25 years in the game"
@@ -47,11 +47,11 @@ export default function AboutPage() {
       {/* Intro */}
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             Meet{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>300FeetOut</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>300FeetOut</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "17px", color: "rgba(255,255,255,0.6)", lineHeight: 1.8, paddingTop: "8px" }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "17px", color: "rgba(0,0,0,0.6)", lineHeight: 1.8, paddingTop: "8px" }}>
             An offbeat, no-holds-barred kind of digital marketing agency — giving it all we&apos;ve got, with zero reservations. We jump in with both feet and take ownership of your project, using every tool we&apos;ve got to get you world-class results. We were a startup before startups were cool.
           </p>
         </div>
@@ -62,33 +62,33 @@ export default function AboutPage() {
 
       {/* Values */}
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px" }}>
-        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0, marginBottom: "64px" }}>
+        <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0, marginBottom: "64px" }}>
           Living by{" "}
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>our values</span>
+          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>our values</span>
         </h2>
-        <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.4)", marginBottom: "64px", lineHeight: 1.7 }}>
+        <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.4)", marginBottom: "64px", lineHeight: 1.7 }}>
           Who we are is at the core of everything we do and we partner with companies who think like us.
         </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)", borderRadius: "16px", overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(0,0,0,0.06)", borderRadius: "16px", overflow: "hidden" }}>
           {values.map((value) => (
             <div
               key={value.title}
               style={{
-                background: "#0a0a0a",
+                background: "#ffffff",
                 padding: "48px 36px",
                 transition: "background 0.3s",
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#111")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#0a0a0a")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#f0f0f0")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.background = "#ffffff")}
             >
-              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: "20px" }}>
+              <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: "20px" }}>
                 {value.tagline}
               </span>
-              <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "28px", letterSpacing: "-0.02em", color: "#fff", marginBottom: "16px" }}>
+              <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "28px", letterSpacing: "-0.02em", color: "#000", marginBottom: "16px" }}>
                 {value.title}
               </h3>
-              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", lineHeight: 1.7 }}>
                 {value.description}
               </p>
             </div>
@@ -98,12 +98,12 @@ export default function AboutPage() {
 
       {/* Team blurb */}
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px" }}>
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "80px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+        <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: "80px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             A tight-knit{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>team</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>team</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.5)", lineHeight: 1.8 }}>
             Strategists, creatives, in-house engineers — trusted and certified. Respected by our peers and validated by the people who matter. We&apos;ve been at this since 1997, and we&apos;re just getting started.
           </p>
         </div>

@@ -39,7 +39,7 @@ const posts = [
 
 export default function InsightsPage() {
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
         title="Dive in deep with"
@@ -49,11 +49,11 @@ export default function InsightsPage() {
 
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 120px" }}>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "64px", flexWrap: "wrap", gap: "16px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             News, brags,{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>shenanigans.</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>shenanigans.</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.5)", maxWidth: "400px", lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", maxWidth: "400px", lineHeight: 1.6 }}>
             From strategy, to technology, to marketing, to design trends and more, this is your spot for lifelong learning.
           </p>
         </div>
@@ -65,24 +65,24 @@ export default function InsightsPage() {
               href={post.href}
               style={{
                 display: "block",
-                background: "#111",
+                background: "#f5f5f5",
                 borderRadius: "16px",
                 overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.06)",
+                border: "1px solid rgba(0,0,0,0.06)",
                 transition: "border-color 0.3s",
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)")}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)")}
             >
               <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
                 <Image src={post.image} alt={post.title} fill style={{ objectFit: "cover", transition: "transform 0.6s ease" }} />
               </div>
               <div style={{ padding: "24px 28px 28px" }}>
-                <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: "8px" }}>
+                <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: "8px" }}>
                   {post.category}
                 </span>
-                <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "20px", letterSpacing: "-0.02em", color: "#fff", lineHeight: 1.2 }}>
+                <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "20px", letterSpacing: "-0.02em", color: "#000", lineHeight: 1.2 }}>
                   {post.title}
                 </h3>
               </div>

@@ -48,7 +48,7 @@ const serviceGroups = [
 
 export default function ServicesPage() {
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
         title="Digital"
@@ -60,36 +60,36 @@ export default function ServicesPage() {
       {/* Intro */}
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 40px" }}>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: "32px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             All things{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>digital</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>digital</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.5)", maxWidth: "500px", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", maxWidth: "500px", lineHeight: 1.7 }}>
             All in one place. Explore our award-winning services — crafted to fulfill your brand promise and make a lasting impact with your clients.
           </p>
         </div>
 
         {/* Scrolling tags */}
-        <div style={{ marginTop: "48px", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "16px 0" }}>
+        <div style={{ marginTop: "48px", overflow: "hidden", borderTop: "1px solid rgba(0,0,0,0.08)", borderBottom: "1px solid rgba(0,0,0,0.08)", padding: "16px 0" }}>
           {["SEM", "Digital Advertising", "Web Development", "Web Design", "Branding", "Content Marketing", "SEO", "Video Marketing", "Campaign Marketing"].map((tag) => (
-            <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.05em", marginRight: "32px" }}>{tag}</span>
+            <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.3)", letterSpacing: "0.05em", marginRight: "32px" }}>{tag}</span>
           ))}
         </div>
       </section>
 
       {/* Service groups */}
       {serviceGroups.map((group, gi) => (
-        <section key={group.id} id={group.id} style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px", borderTop: gi > 0 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+        <section key={group.id} id={group.id} style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px", borderTop: gi > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
             {/* Left */}
             <div>
-              <span style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 300, fontSize: "13px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.08em", display: "block", marginBottom: "24px" }}>
+              <span style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 300, fontSize: "13px", color: "rgba(0,0,0,0.3)", letterSpacing: "0.08em", display: "block", marginBottom: "24px" }}>
                 {group.number}
               </span>
-              <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0, marginBottom: "24px" }}>
+              <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0, marginBottom: "24px" }}>
                 {group.title}
               </h2>
-              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
+              <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.5)", lineHeight: 1.7 }}>
                 {group.description}
               </p>
             </div>
@@ -100,17 +100,17 @@ export default function ServicesPage() {
                 <div
                   key={service.name}
                   style={{
-                    borderTop: "1px solid rgba(255,255,255,0.08)",
+                    borderTop: "1px solid rgba(0,0,0,0.08)",
                     padding: "20px 0",
                     display: "flex",
                     alignItems: "flex-start",
                     gap: "16px",
                   }}
                 >
-                  <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "18px", color: "rgba(255,255,255,0.2)", flexShrink: 0, marginTop: "2px" }}>+</span>
+                  <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "18px", color: "rgba(0,0,0,0.2)", flexShrink: 0, marginTop: "2px" }}>+</span>
                   <div>
-                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: "16px", color: "#fff", marginBottom: "4px" }}>{service.name}</p>
-                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>{service.description}</p>
+                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 500, fontSize: "16px", color: "#000", marginBottom: "4px" }}>{service.name}</p>
+                    <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.4)", lineHeight: 1.5 }}>{service.description}</p>
                   </div>
                 </div>
               ))}

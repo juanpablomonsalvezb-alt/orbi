@@ -14,15 +14,15 @@ export default function ContactPage() {
     setSelected((prev) => prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]);
 
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
 
       {/* Hero */}
       <section style={{ padding: "160px 40px 80px", maxWidth: "1400px", margin: "0 auto" }}>
-        <h1 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(48px,7vw,120px)", letterSpacing: "-0.04em", lineHeight: 0.95, color: "#fff" }}>
+        <h1 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(48px,7vw,120px)", letterSpacing: "-0.04em", lineHeight: 0.95, color: "#000" }}>
           Let&apos;s create new
           <br />
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.4)" }}>futures</span>
+          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.4)" }}>futures</span>
           <br />
           together.
         </h1>
@@ -34,18 +34,18 @@ export default function ContactPage() {
       {/* Contact form */}
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 120px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
         <div>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0, marginBottom: "24px" }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0, marginBottom: "24px" }}>
             We&apos;re all about{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>connecting</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>connecting</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.5)", lineHeight: 1.7 }}>
             Let&apos;s chat about your next project, idea or endeavor.
           </p>
         </div>
 
         {submitted ? (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "300px" }}>
-            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "24px", color: "#fff", textAlign: "center" }}>
+            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "24px", color: "#000", textAlign: "center" }}>
               Thanks! We&apos;ll be in touch soon. →
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function ContactPage() {
             style={{ display: "flex", flexDirection: "column", gap: "32px" }}
           >
             <div>
-              <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
+              <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "12px" }}>
                 I&apos;d like to chat about
               </label>
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -70,9 +70,9 @@ export default function ContactPage() {
                       padding: "8px 20px",
                       borderRadius: "100px",
                       border: "1px solid",
-                      borderColor: selected.includes(t) ? "#fff" : "rgba(255,255,255,0.2)",
+                      borderColor: selected.includes(t) ? "#fff" : "rgba(0,0,0,0.2)",
                       background: selected.includes(t) ? "#fff" : "transparent",
-                      color: selected.includes(t) ? "#000" : "rgba(255,255,255,0.7)",
+                      color: selected.includes(t) ? "#000" : "rgba(0,0,0,0.7)",
                       cursor: "pointer",
                       transition: "all 0.2s",
                     }}
@@ -89,7 +89,7 @@ export default function ContactPage() {
               { name: "company", label: "Company", type: "text" },
             ].map((field) => (
               <div key={field.name}>
-                <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
+                <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
                   {field.label}
                 </label>
                 <input
@@ -100,22 +100,22 @@ export default function ContactPage() {
                     width: "100%",
                     background: "none",
                     border: "none",
-                    borderBottom: "1px solid rgba(255,255,255,0.2)",
+                    borderBottom: "1px solid rgba(0,0,0,0.2)",
                     outline: "none",
                     fontFamily: "'Aeonik', sans-serif",
                     fontSize: "16px",
-                    color: "#fff",
+                    color: "#000",
                     padding: "8px 0",
                     transition: "border-color 0.2s",
                   }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.6)")}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.2)")}
                 />
               </div>
             ))}
 
             <div>
-              <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
+              <label style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.4)", letterSpacing: "0.05em", textTransform: "uppercase", display: "block", marginBottom: "8px" }}>
                 Message
               </label>
               <textarea
@@ -125,17 +125,17 @@ export default function ContactPage() {
                   width: "100%",
                   background: "none",
                   border: "none",
-                  borderBottom: "1px solid rgba(255,255,255,0.2)",
+                  borderBottom: "1px solid rgba(0,0,0,0.2)",
                   outline: "none",
                   fontFamily: "'Aeonik', sans-serif",
                   fontSize: "16px",
-                  color: "#fff",
+                  color: "#000",
                   padding: "8px 0",
                   resize: "none",
                   transition: "border-color 0.2s",
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)")}
+                onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.6)")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.2)")}
               />
             </div>
 
@@ -164,19 +164,19 @@ export default function ContactPage() {
       </section>
 
       {/* Address */}
-      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px 120px", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
         <div style={{ paddingTop: "80px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(28px,3vw,52px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             The place we{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>call home</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>call home</span>
           </h2>
           <div>
-            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.6)", lineHeight: 1.9 }}>
+            <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.6)", lineHeight: 1.9 }}>
               1035 Folsom Street<br />
               San Francisco, CA 94103<br /><br />
-              <a href="mailto:hello@300FeetOut.com" style={{ color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
+              <a href="mailto:hello@300FeetOut.com" style={{ color: "rgba(0,0,0,0.6)", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}>
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(0,0,0,0.6)")}>
                 hello@300FeetOut.com
               </a><br />
               415.571.2377 x23

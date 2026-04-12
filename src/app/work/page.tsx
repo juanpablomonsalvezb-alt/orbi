@@ -59,7 +59,7 @@ const caseStudies = [
 
 export default function WorkPage() {
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <main style={{ background: "#ffffff", minHeight: "100vh" }}>
       <Navbar />
       <PageHero
         title="Break-thru with"
@@ -69,11 +69,11 @@ export default function WorkPage() {
 
       <section style={{ maxWidth: "1400px", margin: "0 auto", padding: "80px 40px 120px" }}>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "64px", flexWrap: "wrap", gap: "16px" }}>
-          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#fff", lineHeight: 1.0 }}>
+          <h2 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "clamp(32px,4vw,60px)", letterSpacing: "-0.03em", color: "#000", lineHeight: 1.0 }}>
             Standout{" "}
-            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>case studies</span>
+            <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(0,0,0,0.5)" }}>case studies</span>
           </h2>
-          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.5)", maxWidth: "400px", lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "15px", color: "rgba(0,0,0,0.5)", maxWidth: "400px", lineHeight: 1.6 }}>
             Our favorite projects aren't just pretty. They tackle complex problems and realize business goals.
           </p>
         </div>
@@ -85,32 +85,32 @@ export default function WorkPage() {
               href={cs.href}
               style={{
                 display: "block",
-                background: "#111",
+                background: "#f5f5f5",
                 borderRadius: "16px",
                 overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.06)",
+                border: "1px solid rgba(0,0,0,0.06)",
                 transition: "border-color 0.3s",
                 textDecoration: "none",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)")}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.06)")}
             >
               <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
                 <Image src={cs.image} alt={cs.client} fill style={{ objectFit: "cover", transition: "transform 0.6s ease" }} />
               </div>
               <div style={{ padding: "28px 28px 32px" }}>
-                <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: "8px" }}>
+                <span style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: "8px" }}>
                   {cs.industry}
                 </span>
-                <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "22px", letterSpacing: "-0.02em", color: "#fff", lineHeight: 1.1, marginBottom: "8px" }}>
+                <h3 style={{ fontFamily: "'Aeonik', sans-serif", fontWeight: 900, fontSize: "22px", letterSpacing: "-0.02em", color: "#000", lineHeight: 1.1, marginBottom: "8px" }}>
                   {cs.client}
                 </h3>
-                <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
+                <p style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.5)", lineHeight: 1.6, marginBottom: "20px" }}>
                   {cs.description}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                   {cs.tags.map((tag) => (
-                    <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.4)", background: "rgba(255,255,255,0.06)", padding: "4px 10px", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <span key={tag} style={{ fontFamily: "'Aeonik', sans-serif", fontSize: "11px", color: "rgba(0,0,0,0.4)", background: "rgba(0,0,0,0.06)", padding: "4px 10px", borderRadius: "100px", border: "1px solid rgba(0,0,0,0.08)" }}>
                       {tag}
                     </span>
                   ))}
