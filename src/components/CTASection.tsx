@@ -58,35 +58,7 @@ export default function CTASection() {
           <span style={{ color: "#fff" }}>new futures together.</span>
         </h2>
 
-        {/* Email subscription */}
-        <div style={{
-          marginTop: 48, display: "flex", alignItems: "center", gap: 12,
-          maxWidth: 420,
-        }}>
-          <div style={{
-            fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(16px, 2vw, 20px)",
-            color: "#000", whiteSpace: "nowrap",
-          }}>
-            Send cool stuff to my inbox
-          </div>
-          <span style={{ fontSize: 24, color: "#000" }}>→</span>
-        </div>
-
-        <div style={{
-          marginTop: 16, display: "flex", alignItems: "center", maxWidth: 420,
-          borderBottom: "2px solid rgba(0,0,0,0.3)", paddingBottom: 8,
-        }}>
-          <input type="email" placeholder="Enter your email"
-            style={{
-              flex: 1, background: "transparent", border: "none", outline: "none",
-              fontFamily: "'Aeonik', sans-serif", fontSize: 16, color: "#000",
-            }}
-          />
-          <button style={{
-            background: "none", border: "none", cursor: "pointer",
-            fontSize: 20, color: "#000",
-          }}>→</button>
-        </div>
+        {/* Spacer — email subscribe is in Footer */}
       </div>
     </section>
   );
