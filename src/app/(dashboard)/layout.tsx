@@ -1,5 +1,6 @@
 'use client'
 
+import '../dashboard.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase-client'
@@ -42,11 +43,11 @@ export default function DashboardLayout({
 
   if (!autorizado) {
     return (
-      <div className="flex h-screen items-center justify-center bg-white">
+      <div className="orbbi-app flex h-screen items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ink" />
       </div>
     )
   }
 
-  return <>{children}</>
+  return <div className="orbbi-app">{children}</div>
 }

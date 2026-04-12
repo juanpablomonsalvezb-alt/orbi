@@ -1,11 +1,12 @@
 export const dynamic = 'force-dynamic'
 
+import '../dashboard.css'
 import Link from 'next/link'
 import OrbiLogo from '@/components/ui/OrbiLogo'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex">
+    <div className="orbbi-app min-h-screen flex">
       {/* Branding panel */}
       <div className="hidden lg:flex lg:w-[44%] bg-ink flex-col justify-between p-10">
         <Link href="/"><OrbiLogo size={24} color="light" /></Link>
