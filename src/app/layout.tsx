@@ -3,6 +3,7 @@ import { Inter, Source_Serif_4 } from 'next/font/google'
 import './globals.css'
 import PostHogProvider from '@/components/PostHogProvider'
 import CookieBanner from '@/components/CookieBanner'
+import LenisProvider from '@/components/LenisProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -181,7 +182,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }}
         />
         <PostHogProvider>
-          {children}
+          <LenisProvider>
+            {children}
+          </LenisProvider>
           <CookieBanner />
         </PostHogProvider>
       </body>
