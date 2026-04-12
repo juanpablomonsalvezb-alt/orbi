@@ -1,133 +1,58 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
-const images = [
-  { src: "/images/3fo_home_thrive-01.gif", alt: "Thrive 1" },
-  { src: "/images/3fo_home-thrive-02.jpg", alt: "Thrive 2" },
-  { src: "/images/3fo_home-thrive-03.jpg", alt: "Thrive 3" },
-  { src: "/images/3fo_home-thrive-04.jpg", alt: "Thrive 4" },
-  { src: "/images/3fo_home-thrive-05.jpg", alt: "Thrive 5" },
-  { src: "/images/3fo_home-thrive-06.jpg", alt: "Thrive 6" },
-  { src: "/images/3fo_home-thrive-07.jpg", alt: "Thrive 7" },
-  { src: "/images/3fo_home-thrive-08.jpg", alt: "Thrive 8" },
+// Inline images that appear BETWEEN the words (real 300feetout pattern)
+const INLINE_IMAGES = [
+  { src: "/images/3fo_home-thrive-02.jpg", alt: "thrive" },
+  { src: "/images/3fo_home-thrive-03.jpg", alt: "change" },
+  { src: "/images/3fo_home-thrive-04.jpg", alt: "help" },
 ];
 
 export default function TogetherSection() {
-  const [activeImg, setActiveImg] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(true);
+  const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveImg((i) => (i + 1) % images.length);
-    }, 1800);
-    return () => clearInterval(interval);
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.15 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const imgStyle: React.CSSProperties = {
+    display: "inline-block",
+    width: "clamp(60px, 8vw, 120px)",
+    height: "clamp(40px, 5vw, 80px)",
+    borderRadius: 8,
+    objectFit: "cover",
+    verticalAlign: "middle",
+    margin: "0 6px",
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#ffffff",
-        padding: "120px 40px",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "80px",
-        alignItems: "center",
-        maxWidth: "1400px",
-        margin: "0 auto",
-      }}
-    >
-      {/* Left: text */}
-      <div
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(40px)",
-          transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Aeonik', sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(32px, 4vw, 64px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            color: "#0a0a0a",
-          }}
-        >
-          Together
-          <span style={{ color: "rgba(10,10,10,0.3)" }}>,</span>
-          <br />
-          we inspire
-          <br />
-          meaningful
-          <br />
-          change
-          <br />
-          and help
-          <br />
-          others{" "}
-          <span
-            style={{
-              color: "rgba(10,10,10,0.4)",
-              fontStyle: "italic",
-            }}
-          >
-            thrive.
-          </span>
-        </p>
-      </div>
-
-      {/* Right: image slideshow */}
-      <div
-        style={{
-          position: "relative",
-          aspectRatio: "1200/850",
-          borderRadius: "16px",
-          overflow: "hidden",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(40px)",
-          transition: "all 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s",
-        }}
-      >
-        {images.map((img, i) => (
-          <div
-            key={img.src}
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: i === activeImg ? 1 : 0,
-              transition: "opacity 0.8s ease",
-            }}
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              style={{ objectFit: "cover" }}
-              priority={i === 0}
-              unoptimized={img.src.endsWith(".gif")}
-            />
-          </div>
-        ))}
-      </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          section { grid-template-columns: 1fr !important; gap: 48px !important; }
-        }
-      `}</style>
+    <section ref={ref} style={{
+      background: "#fff", padding: "clamp(100px, 12vw, 200px) clamp(24px, 5vw, 80px)",
+      opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(40px)",
+      transition: "opacity 0.9s ease, transform 0.9s ease",
+    }}>
+      <h2 style={{
+        fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
+        fontSize: "clamp(36px, 5.5vw, 80px)", lineHeight: 1.08,
+        letterSpacing: "-0.03em", color: "#000", maxWidth: 1100,
+      }}>
+        Together
+        <Image src={INLINE_IMAGES[0].src} alt={INLINE_IMAGES[0].alt} width={120} height={80} style={imgStyle} />
+        , we<br />
+        inspire meaningful<br />
+        change
+        <Image src={INLINE_IMAGES[1].src} alt={INLINE_IMAGES[1].alt} width={120} height={80} style={imgStyle} />
+        {" "}
+        <span style={{ color: "var(--yellow)" }}>and help</span>
+        <br />
+        <Image src={INLINE_IMAGES[2].src} alt={INLINE_IMAGES[2].alt} width={120} height={80} style={imgStyle} />
+        {" "}others{" "}
+        <span style={{ color: "var(--yellow)", fontWeight: 300, fontStyle: "italic" }}>thrive.</span>
+      </h2>
     </section>
   );
 }

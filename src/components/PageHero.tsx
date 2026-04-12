@@ -11,11 +11,16 @@ interface PageHeroProps {
 
 export default function PageHero({ title, cycleWords, image, prefix }: PageHeroProps) {
   const [wordIdx, setWordIdx] = useState(0);
+  const [anim, setAnim] = useState<"in" | "out">("in");
 
   useEffect(() => {
     if (cycleWords.length <= 1) return;
     const interval = setInterval(() => {
-      setWordIdx((i) => (i + 1) % cycleWords.length);
+      setAnim("out");
+      setTimeout(() => {
+        setWordIdx((i) => (i + 1) % cycleWords.length);
+        setAnim("in");
+      }, 350);
     }, 2000);
     return () => clearInterval(interval);
   }, [cycleWords.length]);
@@ -41,9 +46,10 @@ export default function PageHero({ title, cycleWords, image, prefix }: PageHeroP
           {cycleWords.length > 0 && (
             <>
               <br />
-              <span style={{ display: "inline-block", verticalAlign: "bottom" }}>
+              <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
                 <span style={{
                   display: "inline-block",
+                  animation: anim === "in" ? "cycleIn 0.35s cubic-bezier(0.16,1,0.3,1) both" : "cycleOut 0.35s cubic-bezier(0.16,1,0.3,1) both",
                   color: "rgba(255,255,255,0.6)",
                   fontWeight: 300,
                   fontStyle: "italic",

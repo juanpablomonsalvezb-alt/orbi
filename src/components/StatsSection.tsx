@@ -1,124 +1,138 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 
 const stats = [
   {
-    number: "203%",
+    number: 203,
+    suffix: "%",
     label: "increase in revenue from search traffic",
     client: "Alohilani Resort",
-    href: "/",
+    href: "/case-study/alohilani-resort",
   },
   {
-    number: "247%",
+    number: 247,
+    suffix: "%",
     label: "increase in revenue from Google ads",
     client: "Parker Palm Springs",
     href: "/case-study/parker-palm-springs",
   },
   {
-    number: "535%",
+    number: 535,
+    suffix: "%",
     label: "boost in site traffic since launch",
     client: "ECS Senior Living",
     href: "/case-study/ecs-senior-living",
   },
   {
-    number: "50%",
+    number: 50,
+    suffix: "%",
     label: "increase in engagement",
     client: "ThoughtSpot",
     href: "/case-study/thoughtspot",
   },
-  {
-    number: "36+",
-    label: "students and staff video shoot",
-    client: "SF State University",
-    href: "/case-study/sf-state-university",
-  },
 ];
 
-function useCountUp(target: string, trigger: boolean) {
-  const [display, setDisplay] = useState("0");
+function useCountUp(target: number, trigger: boolean): number {
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     if (!trigger) return;
-    const suffix = target.replace(/[0-9]/g, "");
-    const num = parseInt(target);
-    if (isNaN(num)) return;
 
     let start = 0;
-    const duration = 1500;
-    const step = 16;
-    const increment = num / (duration / step);
+    const duration = 1800;
+    const stepTime = 16;
+    const totalSteps = duration / stepTime;
+    const increment = target / totalSteps;
+    let frame: number;
 
-    const timer = setInterval(() => {
+    const tick = () => {
       start += increment;
-      if (start >= num) {
-        setDisplay(num + suffix);
-        clearInterval(timer);
+      if (start >= target) {
+        setCurrent(target);
       } else {
-        setDisplay(Math.floor(start) + suffix);
+        setCurrent(Math.floor(start));
+        frame = window.requestAnimationFrame(tick);
       }
-    }, step);
+    };
 
-    return () => clearInterval(timer);
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
   }, [trigger, target]);
 
-  return display;
+  return current;
 }
 
-function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean }) {
-  const display = useCountUp(stat.number, visible);
+function StatRow({
+  stat,
+  visible,
+  isLast,
+}: {
+  stat: (typeof stats)[0];
+  visible: boolean;
+  isLast: boolean;
+}) {
+  const count = useCountUp(stat.number, visible);
 
   return (
     <div
       style={{
         padding: "48px 0",
-        borderBottom: "1px solid rgba(10,10,10,0.08)",
+        borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.08)",
         display: "grid",
-        gridTemplateColumns: "200px 1fr 200px",
+        gridTemplateColumns: "240px 1fr auto",
         alignItems: "center",
         gap: "32px",
       }}
     >
+      {/* Big number */}
       <span
         style={{
           fontFamily: "'Aeonik', sans-serif",
-          fontWeight: 900,
-          fontSize: "clamp(48px, 5vw, 80px)",
+          fontWeight: 300,
+          fontSize: "clamp(60px, 8vw, 120px)",
           letterSpacing: "-0.04em",
-          color: "#0a0a0a",
+          color: "var(--yellow)",
           lineHeight: 1,
-          tabularNums: "tabular-nums",
-        } as React.CSSProperties}
+          fontVariantNumeric: "tabular-nums",
+        }}
       >
-        {display}
+        {count}
+        {stat.suffix}
       </span>
+
+      {/* Description */}
       <p
         style={{
           fontFamily: "'Aeonik', sans-serif",
           fontWeight: 400,
           fontSize: "16px",
-          color: "rgba(10,10,10,0.6)",
+          color: "rgba(0,0,0,0.55)",
           lineHeight: 1.5,
+          maxWidth: "360px",
         }}
       >
         {stat.label}
       </p>
+
+      {/* Case study link */}
       <Link
         href={stat.href}
         style={{
           fontFamily: "'Aeonik', sans-serif",
           fontSize: "14px",
-          color: "rgba(10,10,10,0.5)",
-          display: "flex",
+          fontWeight: 500,
+          color: "#000000",
+          display: "inline-flex",
           alignItems: "center",
           gap: "6px",
-          justifyContent: "flex-end",
-          transition: "color 0.2s",
+          whiteSpace: "nowrap" as const,
+          transition: "opacity 0.2s",
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
       >
-        {stat.client} →
+        {stat.client} &rarr;
       </Link>
     </div>
   );
@@ -126,11 +140,13 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
 
 export default function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
       { threshold: 0.1 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -142,19 +158,20 @@ export default function StatsSection() {
       ref={sectionRef}
       style={{
         background: "#ffffff",
-        padding: "80px 40px 120px",
+        padding: "120px 40px",
         maxWidth: "1400px",
         margin: "0 auto",
         width: "100%",
       }}
     >
+      {/* Title */}
       <h2
         style={{
           fontFamily: "'Aeonik', sans-serif",
           fontWeight: 900,
-          fontSize: "clamp(32px, 4vw, 60px)",
+          fontSize: "clamp(48px, 6vw, 96px)",
           letterSpacing: "-0.03em",
-          color: "#0a0a0a",
+          color: "#000000",
           lineHeight: 1.0,
           marginBottom: "8px",
           opacity: visible ? 1 : 0,
@@ -163,27 +180,44 @@ export default function StatsSection() {
         }}
       >
         Results-driven{" "}
-        <span style={{ fontWeight: 300, fontStyle: "italic", color: "#f2b233" }}>
+        <span
+          style={{
+            fontWeight: 300,
+            fontStyle: "italic",
+            color: "#fdc115",
+          }}
+        >
           impact
         </span>
       </h2>
 
+      {/* Stats list */}
       <div
         style={{
           marginTop: "48px",
-          borderTop: "1px solid rgba(10,10,10,0.08)",
+          borderTop: "1px solid rgba(0,0,0,0.08)",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(20px)",
+          transition: "all 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s",
         }}
       >
-        {stats.map((stat) => (
-          <StatItem key={stat.number} stat={stat} visible={visible} />
+        {stats.map((stat, i) => (
+          <StatRow
+            key={stat.number}
+            stat={stat}
+            visible={visible}
+            isLast={i === stats.length - 1}
+          />
         ))}
       </div>
 
+      {/* Responsive override for mobile */}
       <style>{`
         @media (max-width: 768px) {
-          [style*="grid-template-columns: 200px 1fr 200px"] {
+          section [style*="grid-template-columns: 240px"] {
             grid-template-columns: 1fr !important;
             gap: 12px !important;
+            padding: 32px 0 !important;
           }
         }
       `}</style>

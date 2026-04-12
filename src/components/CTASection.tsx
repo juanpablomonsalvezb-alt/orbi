@@ -1,131 +1,93 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
-const cycleVerbs = [
-  "create",
-  "discover",
-  "strategize",
-  "ideate",
-  "craft",
-  "design",
-  "build",
-  "develop",
-  "optimize",
+const VERBS = ["create", "discover", "strategize", "ideate", "craft", "design", "build", "develop", "optimize"];
+// Small inline images that appear next to the cycling verb
+const VERB_IMAGES = [
+  "/images/3fo_home-thrive-05.jpg",
+  "/images/3fo_home-thrive-06.jpg",
+  "/images/3fo_home-thrive-07.jpg",
+  "/images/3fo_home-thrive-08.jpg",
+  "/images/3fo_home-thrive-02.jpg",
+  "/images/3fo_home-thrive-03.jpg",
+  "/images/3fo_home-thrive-04.jpg",
+  "/images/3fo_home-thrive-05.jpg",
+  "/images/3fo_home-thrive-06.jpg",
 ];
 
 export default function CTASection() {
-  const [verbIdx, setVerbIdx] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(true);
+  const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVerbIdx((i) => (i + 1) % cycleVerbs.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    const id = setInterval(() => setIdx(i => (i + 1) % VERBS.length), 2000);
+    return () => clearInterval(id);
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#f5c94c",
-        padding: "120px 40px 160px",
-        textAlign: "center",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(40px)",
-        transition: "all 0.9s cubic-bezier(0.16,1,0.3,1)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "48px",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "'Aeonik', sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(48px, 7vw, 120px)",
-            letterSpacing: "-0.04em",
-            lineHeight: 0.95,
-            color: "#0a0a0a",
-          }}
-        >
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
-            Let&apos;s
-          </span>
-          <span style={{ display: "block", overflow: "hidden", height: "1.05em" }}>
-            <span
-              key={verbIdx}
+    <section style={{
+      background: "var(--yellow)", padding: "clamp(80px, 10vw, 160px) clamp(24px, 5vw, 80px) 60px",
+    }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <h2 style={{
+          fontFamily: "'Aeonik', sans-serif", fontWeight: 900,
+          fontSize: "clamp(44px, 7vw, 112px)", lineHeight: 1.0,
+          letterSpacing: "-0.035em", color: "#000",
+        }}>
+          Let&apos;s{" "}
+          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
+            <Image
+              src={VERB_IMAGES[idx % VERB_IMAGES.length]}
+              alt=""
+              width={100} height={68}
               style={{
-                display: "block",
-                color: "#0a0a0a",
-                animation: "cycleIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
+                display: "inline-block", width: "clamp(60px, 8vw, 110px)", height: "clamp(40px, 5vw, 70px)",
+                borderRadius: 8, objectFit: "cover", verticalAlign: "middle", marginRight: 8,
               }}
-            >
-              {cycleVerbs[verbIdx]}
+            />
+          </span>
+          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
+            <span key={idx} style={{
+              display: "inline-block",
+              animation: "cycleIn .55s cubic-bezier(.16,1,.3,1) forwards",
+            }}>
+              {VERBS[idx]}
             </span>
           </span>
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
-            new futures
-          </span>
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
-            together.
-          </span>
+          <br />
+          <span style={{ color: "#fff" }}>new futures together.</span>
         </h2>
 
-        <Link
-          href="/contact"
-          style={{
-            fontFamily: "'Aeonik', sans-serif",
-            fontWeight: 500,
-            fontSize: "16px",
-            color: "#000",
-            background: "#fff",
-            padding: "16px 40px",
-            borderRadius: "100px",
-            letterSpacing: "0.01em",
-            transition: "opacity 0.2s, transform 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity = "0.85";
-            e.currentTarget.style.transform = "scale(1.02)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = "1";
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-        >
-          let&apos;s chat
-        </Link>
-      </div>
+        {/* Email subscription */}
+        <div style={{
+          marginTop: 48, display: "flex", alignItems: "center", gap: 12,
+          maxWidth: 420,
+        }}>
+          <div style={{
+            fontFamily: "'Aeonik', sans-serif", fontWeight: 700, fontSize: "clamp(16px, 2vw, 20px)",
+            color: "#000", whiteSpace: "nowrap",
+          }}>
+            Send cool stuff to my inbox
+          </div>
+          <span style={{ fontSize: 24, color: "#000" }}>→</span>
+        </div>
 
-      <style>{`
-        @keyframes cycleIn {
-          from { transform: translateY(100%); opacity: 0; }
-          to   { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes cycleOut {
-          from { transform: translateY(0); opacity: 1; }
-          to   { transform: translateY(-100%); opacity: 0; }
-        }
-      `}</style>
+        <div style={{
+          marginTop: 16, display: "flex", alignItems: "center", maxWidth: 420,
+          borderBottom: "2px solid rgba(0,0,0,0.3)", paddingBottom: 8,
+        }}>
+          <input type="email" placeholder="Enter your email"
+            style={{
+              flex: 1, background: "transparent", border: "none", outline: "none",
+              fontFamily: "'Aeonik', sans-serif", fontSize: 16, color: "#000",
+            }}
+          />
+          <button style={{
+            background: "none", border: "none", cursor: "pointer",
+            fontSize: 20, color: "#000",
+          }}>→</button>
+        </div>
+      </div>
     </section>
   );
 }

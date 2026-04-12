@@ -17,9 +17,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "#f5c94c",
-        borderTop: "1px solid rgba(10,10,10,0.08)",
-        padding: "60px 40px 40px",
+        background: "#fdc115",
+        padding: "80px 40px 40px",
       }}
     >
       <div
@@ -28,93 +27,136 @@ export default function Footer() {
           margin: "0 auto",
         }}
       >
-        {/* Top row */}
+        {/* Newsletter row */}
         <div
           style={{
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "40px",
-            marginBottom: "60px",
+            marginBottom: "80px",
           }}
         >
-          {/* Newsletter */}
-          <div style={{ maxWidth: "400px" }}>
+          <p
+            style={{
+              fontFamily: "'Aeonik', sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(24px, 3vw, 40px)",
+              color: "#000000",
+              marginBottom: "24px",
+              lineHeight: 1.2,
+            }}
+          >
+            Send cool stuff to my inbox
+          </p>
+          {submitted ? (
             <p
               style={{
                 fontFamily: "'Aeonik', sans-serif",
-                fontWeight: 400,
-                fontSize: "14px",
-                color: "rgba(10,10,10,0.5)",
-                marginBottom: "20px",
-                letterSpacing: "0.01em",
+                fontSize: "16px",
+                color: "#000000",
               }}
             >
-              Send cool stuff to my inbox
+              Thanks! You&apos;re subscribed.
             </p>
-            {submitted ? (
-              <p
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                borderBottom: "2px solid #000000",
+                paddingBottom: "12px",
+                maxWidth: "480px",
+                gap: "12px",
+              }}
+            >
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
                 style={{
+                  background: "none",
+                  border: "none",
+                  outline: "none",
                   fontFamily: "'Aeonik', sans-serif",
-                  fontSize: "14px",
-                  color: "rgba(10,10,10,0.6)",
+                  fontSize: "16px",
+                  color: "#000000",
+                  flex: 1,
+                  letterSpacing: "0.01em",
                 }}
-              >
-                Thanks! You&apos;re subscribed.
-              </p>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
+              />
+              <button
+                type="submit"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderBottom: "1px solid rgba(10,10,10,0.2)",
-                  paddingBottom: "8px",
-                  gap: "12px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "#000000",
+                  fontSize: "22px",
+                  padding: "0",
+                  lineHeight: 1,
+                  transition: "opacity 0.2s",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.opacity = "0.5")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.opacity = "1")
+                }
+                aria-label="Subscribe"
               >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  style={{
-                    background: "none",
-                    border: "none",
-                    outline: "none",
-                    fontFamily: "'Aeonik', sans-serif",
-                    fontSize: "14px",
-                    color: "#0a0a0a",
-                    flex: 1,
-                    letterSpacing: "0.01em",
-                  }}
-                />
-                <button
-                  type="submit"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    color: "rgba(10,10,10,0.6)",
-                    fontSize: "18px",
-                    padding: "0",
-                    transition: "color 0.2s",
-                    lineHeight: 1,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
-                  aria-label="Subscribe"
-                >
-                  →
-                </button>
-              </form>
-            )}
-          </div>
+                &rarr;
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Bottom row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap" as const,
+            gap: "16px",
+          }}
+        >
+          {/* Copyright + Privacy */}
+          <p
+            style={{
+              fontFamily: "'Aeonik', sans-serif",
+              fontSize: "13px",
+              color: "#000000",
+              letterSpacing: "0.01em",
+              opacity: 0.6,
+            }}
+          >
+            &copy;2026 300FeetOut All Rights Reserved{" "}
+            <span style={{ margin: "0 6px" }}>|</span>
+            <Link
+              href="/privacy-policy"
+              style={{
+                color: "#000000",
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.opacity = "0.5")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.opacity = "1")
+              }
+            >
+              Privacy Policy
+            </Link>
+          </p>
 
           {/* Social links */}
-          <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "24px",
+              alignItems: "center",
+            }}
+          >
             <Link
               href="https://www.instagram.com/300feetout/"
               target="_blank"
@@ -122,12 +164,16 @@ export default function Footer() {
               style={{
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: "14px",
-                color: "rgba(10,10,10,0.5)",
+                color: "#000000",
                 letterSpacing: "0.01em",
-                transition: "color 0.2s",
+                transition: "opacity 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.opacity = "0.5")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.opacity = "1")
+              }
             >
               Instagram
             </Link>
@@ -138,52 +184,20 @@ export default function Footer() {
               style={{
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: "14px",
-                color: "rgba(10,10,10,0.5)",
+                color: "#000000",
                 letterSpacing: "0.01em",
-                transition: "color 0.2s",
+                transition: "opacity 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.opacity = "0.5")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.opacity = "1")
+              }
             >
               LinkedIn
             </Link>
           </div>
-        </div>
-
-        {/* Bottom row */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'Aeonik', sans-serif",
-              fontSize: "13px",
-              color: "rgba(10,10,10,0.25)",
-              letterSpacing: "0.01em",
-            }}
-          >
-            ©2026 300FeetOut All Rights Reserved
-          </p>
-          <Link
-            href="/privacy-policy"
-            style={{
-              fontFamily: "'Aeonik', sans-serif",
-              fontSize: "13px",
-              color: "rgba(10,10,10,0.25)",
-              letterSpacing: "0.01em",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.25)")}
-          >
-            Privacy Policy
-          </Link>
         </div>
       </div>
     </footer>
