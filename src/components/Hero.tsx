@@ -58,7 +58,6 @@ export default function Hero() {
 
   const cycleStyle = {
     display: "inline-block",
-    animation: "cycleIn 0.5s cubic-bezier(0.16,1,0.3,1) both",
   };
 
   return (
@@ -128,31 +127,13 @@ export default function Hero() {
           }}
         >
           Connecting{" "}
-          <span
-            style={{
-              display: "inline-block",
-              overflow: "hidden",
-              verticalAlign: "bottom",
-              minWidth: "280px",
-            }}
-          >
-            <span key={`i-${industryIdx}`} style={cycleStyle}>
-              {industryWords[industryIdx]}
-            </span>
+          <span style={{ color: "#fff" }}>
+            {industryWords[industryIdx]}
           </span>
           <br />
           with{" "}
-          <span
-            style={{
-              display: "inline-block",
-              overflow: "hidden",
-              verticalAlign: "bottom",
-              minWidth: "240px",
-            }}
-          >
-            <span key={`a-${audienceIdx}`} style={cycleStyle}>
-              {audienceWords[audienceIdx]}
-            </span>
+          <span style={{ color: "#fff" }}>
+            {audienceWords[audienceIdx]}
           </span>
           .
         </h1>

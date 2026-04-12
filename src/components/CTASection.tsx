@@ -73,19 +73,10 @@ export default function CTASection() {
           <span
             style={{
               display: "block",
-              overflow: "hidden",
-              height: "1.05em",
+              color: "#fff",
             }}
           >
-            <span
-              key={verbIdx}
-              style={{
-                display: "block",
-                animation: "cycleIn 0.5s cubic-bezier(0.16,1,0.3,1) both",
-              }}
-            >
-              {cycleVerbs[verbIdx]}
-            </span>
+            {cycleVerbs[verbIdx]}
           </span>
           <span style={{ display: "block", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
             new futures

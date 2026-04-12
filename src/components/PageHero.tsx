@@ -41,10 +41,9 @@ export default function PageHero({ title, cycleWords, image, prefix }: PageHeroP
           {cycleWords.length > 0 && (
             <>
               <br />
-              <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
-                <span key={wordIdx} style={{
+              <span style={{ display: "inline-block", verticalAlign: "bottom" }}>
+                <span style={{
                   display: "inline-block",
-                  animation: "cycleIn 0.5s cubic-bezier(0.16,1,0.3,1) both",
                   color: "rgba(255,255,255,0.6)",
                   fontWeight: 300,
                   fontStyle: "italic",
