@@ -18,7 +18,7 @@ const logos = [
 
 export default function ClientsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

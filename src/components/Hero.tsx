@@ -127,13 +127,31 @@ export default function Hero() {
           }}
         >
           Connecting{" "}
-          <span style={{ color: "#f5c94c" }}>
-            {industryWords[industryIdx]}
+          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
+            <span
+              key={`i-${industryIdx}`}
+              style={{
+                display: "inline-block",
+                color: "#f5c94c",
+                animation: "cycleIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
+              }}
+            >
+              {industryWords[industryIdx]}
+            </span>
           </span>
           <br />
           with{" "}
-          <span style={{ color: "#f5c94c" }}>
-            {audienceWords[audienceIdx]}
+          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
+            <span
+              key={`a-${audienceIdx}`}
+              style={{
+                display: "inline-block",
+                color: "#f5c94c",
+                animation: "cycleIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
+              }}
+            >
+              {audienceWords[audienceIdx]}
+            </span>
           </span>
           .
         </h1>

@@ -40,7 +40,7 @@ const services = [
 export default function ServicesSection() {
   const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

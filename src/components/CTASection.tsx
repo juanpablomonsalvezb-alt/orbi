@@ -70,13 +70,17 @@ export default function CTASection() {
           <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
             Let&apos;s
           </span>
-          <span
-            style={{
-              display: "block",
-              color: "#0a0a0a",
-            }}
-          >
-            {cycleVerbs[verbIdx]}
+          <span style={{ display: "block", overflow: "hidden", height: "1.05em" }}>
+            <span
+              key={verbIdx}
+              style={{
+                display: "block",
+                color: "#0a0a0a",
+                animation: "cycleIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
+              }}
+            >
+              {cycleVerbs[verbIdx]}
+            </span>
           </span>
           <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
             new futures
