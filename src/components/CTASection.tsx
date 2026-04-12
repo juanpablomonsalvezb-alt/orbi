@@ -18,7 +18,7 @@ export default function CTASection() {
   const [verbIdx, setVerbIdx] = useState(0);
   const [verbAnim, setVerbAnim] = useState<"in" | "out">("in");
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {

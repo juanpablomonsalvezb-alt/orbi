@@ -126,7 +126,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
 
 export default function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
