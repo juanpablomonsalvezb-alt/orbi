@@ -71,13 +71,13 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
-html { background-color: #f0eee6; }
+html { background-color: #0a0a0a; }
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Aeonik', 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  color: #141413;
-  background: #f0eee6;
+  color: #ffffff;
+  background: #0a0a0a;
 }
 
 /* ── Selection ── */
