@@ -72,7 +72,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
     <div
       style={{
         padding: "48px 0",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(10,10,10,0.08)",
         display: "grid",
         gridTemplateColumns: "200px 1fr 200px",
         alignItems: "center",
@@ -85,7 +85,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
           fontWeight: 900,
           fontSize: "clamp(48px, 5vw, 80px)",
           letterSpacing: "-0.04em",
-          color: "#fff",
+          color: "#0a0a0a",
           lineHeight: 1,
           tabularNums: "tabular-nums",
         } as React.CSSProperties}
@@ -97,7 +97,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
           fontFamily: "'Aeonik', sans-serif",
           fontWeight: 400,
           fontSize: "16px",
-          color: "rgba(255,255,255,0.6)",
+          color: "rgba(10,10,10,0.6)",
           lineHeight: 1.5,
         }}
       >
@@ -108,7 +108,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
         style={{
           fontFamily: "'Aeonik', sans-serif",
           fontSize: "14px",
-          color: "rgba(255,255,255,0.5)",
+          color: "rgba(10,10,10,0.5)",
           display: "flex",
           alignItems: "center",
           gap: "6px",
@@ -116,7 +116,7 @@ function StatItem({ stat, visible }: { stat: (typeof stats)[0]; visible: boolean
           transition: "color 0.2s",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
       >
         {stat.client} →
       </Link>
@@ -141,7 +141,7 @@ export default function StatsSection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#ffffff",
         padding: "80px 40px 120px",
         maxWidth: "1400px",
         margin: "0 auto",
@@ -154,7 +154,7 @@ export default function StatsSection() {
           fontWeight: 900,
           fontSize: "clamp(32px, 4vw, 60px)",
           letterSpacing: "-0.03em",
-          color: "#fff",
+          color: "#0a0a0a",
           lineHeight: 1.0,
           marginBottom: "8px",
           opacity: visible ? 1 : 0,
@@ -163,7 +163,7 @@ export default function StatsSection() {
         }}
       >
         Results-driven{" "}
-        <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>
+        <span style={{ fontWeight: 300, fontStyle: "italic", color: "#f2b233" }}>
           impact
         </span>
       </h2>
@@ -171,7 +171,7 @@ export default function StatsSection() {
       <div
         style={{
           marginTop: "48px",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderTop: "1px solid rgba(10,10,10,0.08)",
         }}
       >
         {stats.map((stat) => (

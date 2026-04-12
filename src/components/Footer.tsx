@@ -17,8 +17,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "#0a0a0a",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        background: "#f5c94c",
+        borderTop: "1px solid rgba(10,10,10,0.08)",
         padding: "60px 40px 40px",
       }}
     >
@@ -46,7 +46,7 @@ export default function Footer() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 400,
                 fontSize: "14px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 marginBottom: "20px",
                 letterSpacing: "0.01em",
               }}
@@ -58,7 +58,7 @@ export default function Footer() {
                 style={{
                   fontFamily: "'Aeonik', sans-serif",
                   fontSize: "14px",
-                  color: "rgba(255,255,255,0.6)",
+                  color: "rgba(10,10,10,0.6)",
                 }}
               >
                 Thanks! You&apos;re subscribed.
@@ -69,7 +69,7 @@ export default function Footer() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  borderBottom: "1px solid rgba(255,255,255,0.2)",
+                  borderBottom: "1px solid rgba(10,10,10,0.2)",
                   paddingBottom: "8px",
                   gap: "12px",
                 }}
@@ -86,7 +86,7 @@ export default function Footer() {
                     outline: "none",
                     fontFamily: "'Aeonik', sans-serif",
                     fontSize: "14px",
-                    color: "#fff",
+                    color: "#0a0a0a",
                     flex: 1,
                     letterSpacing: "0.01em",
                   }}
@@ -97,14 +97,14 @@ export default function Footer() {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
-                    color: "rgba(255,255,255,0.6)",
+                    color: "rgba(10,10,10,0.6)",
                     fontSize: "18px",
                     padding: "0",
                     transition: "color 0.2s",
                     lineHeight: 1,
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
                   aria-label="Subscribe"
                 >
                   →
@@ -122,12 +122,12 @@ export default function Footer() {
               style={{
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: "14px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 letterSpacing: "0.01em",
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
             >
               Instagram
             </Link>
@@ -138,12 +138,12 @@ export default function Footer() {
               style={{
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: "14px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 letterSpacing: "0.01em",
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
             >
               LinkedIn
             </Link>
@@ -164,7 +164,7 @@ export default function Footer() {
             style={{
               fontFamily: "'Aeonik', sans-serif",
               fontSize: "13px",
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(10,10,10,0.25)",
               letterSpacing: "0.01em",
             }}
           >
@@ -175,12 +175,12 @@ export default function Footer() {
             style={{
               fontFamily: "'Aeonik', sans-serif",
               fontSize: "13px",
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(10,10,10,0.25)",
               letterSpacing: "0.01em",
               transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.25)")}
           >
             Privacy Policy
           </Link>

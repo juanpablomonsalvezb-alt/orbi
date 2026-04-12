@@ -33,7 +33,7 @@ export default function ClientsSection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#ffffff",
         padding: "80px 40px 120px",
         maxWidth: "1400px",
         margin: "0 auto",
@@ -59,12 +59,12 @@ export default function ClientsSection() {
             fontWeight: 900,
             fontSize: "clamp(32px, 4vw, 60px)",
             letterSpacing: "-0.03em",
-            color: "#fff",
+            color: "#0a0a0a",
             lineHeight: 1.0,
           }}
         >
           Top-notch{" "}
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>
+          <span style={{ fontWeight: 300, fontStyle: "italic", color: "#f2b233" }}>
             clients
           </span>
         </h2>
@@ -73,7 +73,7 @@ export default function ClientsSection() {
             fontFamily: "'Aeonik', sans-serif",
             fontWeight: 400,
             fontSize: "15px",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(10,10,10,0.5)",
             maxWidth: "400px",
             lineHeight: 1.6,
           }}
@@ -85,14 +85,14 @@ export default function ClientsSection() {
           style={{
             fontFamily: "'Aeonik', sans-serif",
             fontSize: "14px",
-            color: "rgba(255,255,255,0.6)",
+            color: "rgba(10,10,10,0.6)",
             display: "flex",
             alignItems: "center",
             gap: "6px",
             transition: "color 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
         >
           about →
         </Link>
@@ -117,11 +117,12 @@ export default function ClientsSection() {
               position: "relative",
               height: "40px",
               width: "120px",
-              filter: "brightness(0.7)",
+              filter: "invert(1) brightness(0.15)",
               transition: "filter 0.2s",
+              opacity: 0.85,
             }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.filter = "brightness(1)")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.filter = "brightness(0.7)")}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.opacity = "1")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.opacity = "0.85")}
           >
             <Image
               src={logo.src}

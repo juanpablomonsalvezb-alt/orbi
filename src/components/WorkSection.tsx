@@ -61,7 +61,7 @@ export default function WorkSection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#ffffff",
         padding: "80px 40px 120px",
         maxWidth: "1400px",
         margin: "0 auto",
@@ -88,12 +88,12 @@ export default function WorkSection() {
             fontWeight: 900,
             fontSize: "clamp(32px, 4vw, 60px)",
             letterSpacing: "-0.03em",
-            color: "#fff",
+            color: "#0a0a0a",
             lineHeight: 1.0,
           }}
         >
           Dig into{" "}
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>
+          <span style={{ fontWeight: 300, fontStyle: "italic", color: "#f2b233" }}>
             our work
           </span>
         </h2>
@@ -102,7 +102,7 @@ export default function WorkSection() {
             fontFamily: "'Aeonik', sans-serif",
             fontWeight: 400,
             fontSize: "15px",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(10,10,10,0.5)",
             maxWidth: "420px",
             lineHeight: 1.6,
           }}
@@ -114,14 +114,14 @@ export default function WorkSection() {
           style={{
             fontFamily: "'Aeonik', sans-serif",
             fontSize: "14px",
-            color: "rgba(255,255,255,0.6)",
+            color: "rgba(10,10,10,0.6)",
             display: "flex",
             alignItems: "center",
             gap: "6px",
             transition: "color 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
         >
           work →
         </Link>
@@ -169,7 +169,7 @@ export default function WorkSection() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 300,
                 fontSize: "12px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 marginBottom: "8px",
@@ -183,7 +183,7 @@ export default function WorkSection() {
                 fontWeight: 900,
                 fontSize: "28px",
                 letterSpacing: "-0.02em",
-                color: "#fff",
+                color: "#0a0a0a",
                 lineHeight: 1.1,
                 marginBottom: "8px",
               }}
@@ -195,7 +195,7 @@ export default function WorkSection() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 400,
                 fontSize: "15px",
-                color: "rgba(255,255,255,0.6)",
+                color: "rgba(10,10,10,0.6)",
                 lineHeight: 1.5,
               }}
             >
@@ -213,7 +213,7 @@ export default function WorkSection() {
               style={{
                 background: "none",
                 border: "none",
-                borderBottom: "1px solid rgba(255,255,255,0.08)",
+                borderBottom: "1px solid rgba(10,10,10,0.08)",
                 padding: "20px 0",
                 cursor: "pointer",
                 textAlign: "left",
@@ -228,7 +228,7 @@ export default function WorkSection() {
                   fontFamily: "'Aeonik', sans-serif",
                   fontWeight: active === i ? 700 : 400,
                   fontSize: "15px",
-                  color: active === i ? "#fff" : "rgba(255,255,255,0.4)",
+                  color: active === i ? "#fff" : "rgba(10,10,10,0.4)",
                   letterSpacing: "-0.01em",
                   transition: "color 0.2s",
                 }}
@@ -237,7 +237,7 @@ export default function WorkSection() {
               </span>
               <span
                 style={{
-                  color: "rgba(255,255,255,0.3)",
+                  color: "rgba(10,10,10,0.3)",
                   fontSize: "16px",
                   transform: active === i ? "translateX(4px)" : "none",
                   transition: "transform 0.2s",
@@ -257,11 +257,11 @@ export default function WorkSection() {
                   fontFamily: "'Aeonik', sans-serif",
                   fontWeight: 400,
                   fontSize: "12px",
-                  color: "rgba(255,255,255,0.5)",
-                  background: "rgba(255,255,255,0.07)",
+                  color: "rgba(10,10,10,0.5)",
+                  background: "rgba(10,10,10,0.07)",
                   padding: "6px 12px",
                   borderRadius: "100px",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(10,10,10,0.1)",
                   display: "flex",
                   alignItems: "center",
                   gap: "4px",
@@ -287,8 +287,8 @@ export default function WorkSection() {
           onClick={() => setActive((a) => (a - 1 + caseStudies.length) % caseStudies.length)}
           style={{
             background: "none",
-            border: "1px solid rgba(255,255,255,0.2)",
-            color: "#fff",
+            border: "1px solid rgba(10,10,10,0.2)",
+            color: "#0a0a0a",
             width: "40px",
             height: "40px",
             borderRadius: "50%",
@@ -306,7 +306,7 @@ export default function WorkSection() {
           style={{
             fontFamily: "'Aeonik', sans-serif",
             fontSize: "13px",
-            color: "rgba(255,255,255,0.4)",
+            color: "rgba(10,10,10,0.4)",
           }}
         >
           {String(active + 1).padStart(2, "0")} / {String(caseStudies.length).padStart(2, "0")}
@@ -315,8 +315,8 @@ export default function WorkSection() {
           onClick={() => setActive((a) => (a + 1) % caseStudies.length)}
           style={{
             background: "none",
-            border: "1px solid rgba(255,255,255,0.2)",
-            color: "#fff",
+            border: "1px solid rgba(10,10,10,0.2)",
+            color: "#0a0a0a",
             width: "40px",
             height: "40px",
             borderRadius: "50%",

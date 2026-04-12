@@ -80,11 +80,12 @@
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --muted: rgba(255,255,255,0.5);
-  --border: rgba(255,255,255,0.12);
-  --accent: #f5f0e8;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --muted: rgba(10,10,10,0.5);
+  --border: rgba(10,10,10,0.12);
+  --accent: #f2b233;
+  --yellow: #f5c94c;
 }
 
 * {

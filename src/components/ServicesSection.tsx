@@ -55,7 +55,7 @@ export default function ServicesSection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#ffffff",
         padding: "80px 40px 120px",
         maxWidth: "1400px",
         margin: "0 auto",
@@ -81,12 +81,12 @@ export default function ServicesSection() {
             fontWeight: 900,
             fontSize: "clamp(32px, 4vw, 60px)",
             letterSpacing: "-0.03em",
-            color: "#fff",
+            color: "#0a0a0a",
             lineHeight: 1.0,
           }}
         >
           Digital marketing{" "}
-          <span style={{ fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.5)" }}>
+          <span style={{ fontWeight: 300, fontStyle: "italic", color: "#f2b233" }}>
             services
           </span>
         </h2>
@@ -95,14 +95,14 @@ export default function ServicesSection() {
           style={{
             fontFamily: "'Aeonik', sans-serif",
             fontSize: "14px",
-            color: "rgba(255,255,255,0.6)",
+            color: "rgba(10,10,10,0.6)",
             display: "flex",
             alignItems: "center",
             gap: "6px",
             transition: "color 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.6)")}
         >
           services →
         </Link>
@@ -114,8 +114,8 @@ export default function ServicesSection() {
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "1px",
-          background: "rgba(255,255,255,0.08)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(10,10,10,0.08)",
+          border: "1px solid rgba(10,10,10,0.08)",
           borderRadius: "16px",
           overflow: "hidden",
           opacity: visible ? 1 : 0,
@@ -128,7 +128,7 @@ export default function ServicesSection() {
             key={service.number}
             onMouseEnter={() => setActive(i)}
             style={{
-              background: active === i ? "rgba(255,255,255,0.06)" : "#0a0a0a",
+              background: active === i ? "rgba(10,10,10,0.06)" : "#0a0a0a",
               padding: "48px 32px",
               cursor: "pointer",
               transition: "background 0.3s ease",
@@ -142,7 +142,7 @@ export default function ServicesSection() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 300,
                 fontSize: "13px",
-                color: "rgba(255,255,255,0.3)",
+                color: "rgba(10,10,10,0.3)",
                 letterSpacing: "0.08em",
               }}
             >
@@ -154,7 +154,7 @@ export default function ServicesSection() {
                 fontWeight: 700,
                 fontSize: "20px",
                 letterSpacing: "-0.02em",
-                color: "#fff",
+                color: "#0a0a0a",
                 lineHeight: 1.2,
               }}
             >
@@ -165,7 +165,7 @@ export default function ServicesSection() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 400,
                 fontSize: "14px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 lineHeight: 1.7,
                 flex: 1,
               }}
@@ -177,7 +177,7 @@ export default function ServicesSection() {
               style={{
                 fontFamily: "'Aeonik', sans-serif",
                 fontSize: "13px",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(10,10,10,0.5)",
                 display: "flex",
                 alignItems: "center",
                 gap: "4px",
@@ -185,7 +185,7 @@ export default function ServicesSection() {
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(10,10,10,0.5)")}
             >
               services →
             </Link>

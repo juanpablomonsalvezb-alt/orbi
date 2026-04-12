@@ -5,9 +5,9 @@ export default function Ticker() {
   return (
     <div
       style={{
-        background: "#0a0a0a",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        background: "#ffffff",
+        borderTop: "1px solid rgba(10,10,10,0.08)",
+        borderBottom: "1px solid rgba(10,10,10,0.08)",
         overflow: "hidden",
         padding: "20px 0",
         whiteSpace: "nowrap",
@@ -29,7 +29,7 @@ export default function Ticker() {
               fontSize: "13px",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.3)",
+              color: "rgba(10,10,10,0.3)",
               padding: "0 48px",
             }}
           >

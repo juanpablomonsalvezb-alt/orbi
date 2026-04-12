@@ -127,12 +127,12 @@ export default function Hero() {
           }}
         >
           Connecting{" "}
-          <span style={{ color: "#fff" }}>
+          <span style={{ color: "#f5c94c" }}>
             {industryWords[industryIdx]}
           </span>
           <br />
           with{" "}
-          <span style={{ color: "#fff" }}>
+          <span style={{ color: "#f5c94c" }}>
             {audienceWords[audienceIdx]}
           </span>
           .

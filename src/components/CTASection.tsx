@@ -39,7 +39,7 @@ export default function CTASection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#f5c94c",
         padding: "120px 40px 160px",
         textAlign: "center",
         opacity: visible ? 1 : 0,
@@ -64,24 +64,24 @@ export default function CTASection() {
             fontSize: "clamp(48px, 7vw, 120px)",
             letterSpacing: "-0.04em",
             lineHeight: 0.95,
-            color: "#fff",
+            color: "#0a0a0a",
           }}
         >
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
+          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
             Let&apos;s
           </span>
           <span
             style={{
               display: "block",
-              color: "#fff",
+              color: "#0a0a0a",
             }}
           >
             {cycleVerbs[verbIdx]}
           </span>
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
+          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
             new futures
           </span>
-          <span style={{ display: "block", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}>
+          <span style={{ display: "block", fontWeight: 300, color: "rgba(10,10,10,0.4)" }}>
             together.
           </span>
         </h2>

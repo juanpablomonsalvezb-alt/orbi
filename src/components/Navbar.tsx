@@ -19,6 +19,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const textColor = scrolled ? "#0a0a0a" : "#ffffff";
+
   return (
     <header
       style={{
@@ -33,8 +35,9 @@ export default function Navbar() {
         alignItems: "center",
         justifyContent: "space-between",
         transition: "background 0.4s ease, backdrop-filter 0.4s ease",
-        background: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
+        background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(10,10,10,0.08)" : "none",
       }}
     >
       {/* Logo */}
@@ -45,7 +48,8 @@ export default function Navbar() {
           fontWeight: 900,
           fontSize: "20px",
           letterSpacing: "-0.02em",
-          color: "#fff",
+          color: textColor,
+          transition: "color 0.3s ease",
         }}
       >
         300FeetOut
@@ -68,9 +72,9 @@ export default function Navbar() {
               fontFamily: "'Aeonik', sans-serif",
               fontWeight: 400,
               fontSize: "15px",
-              color: "rgba(255,255,255,0.9)",
+              color: textColor,
               letterSpacing: "0.01em",
-              transition: "opacity 0.2s",
+              transition: "color 0.3s ease, opacity 0.2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
@@ -84,14 +88,14 @@ export default function Navbar() {
             fontFamily: "'Aeonik', sans-serif",
             fontWeight: 500,
             fontSize: "15px",
-            color: "#000",
-            background: "#fff",
+            color: "#0a0a0a",
+            background: "#f5c94c",
             padding: "8px 20px",
             borderRadius: "100px",
             letterSpacing: "0.01em",
             transition: "opacity 0.2s",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           Let&apos;s Chat
@@ -106,7 +110,7 @@ export default function Navbar() {
           background: "none",
           border: "none",
           cursor: "pointer",
-          color: "#fff",
+          color: textColor,
           fontSize: "14px",
           fontFamily: "'Aeonik', sans-serif",
           letterSpacing: "0.05em",
@@ -124,7 +128,7 @@ export default function Navbar() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "#0a0a0a",
+            background: "#ffffff",
             zIndex: 99,
             display: "flex",
             flexDirection: "column",
@@ -142,7 +146,7 @@ export default function Navbar() {
                 fontFamily: "'Aeonik', sans-serif",
                 fontWeight: 700,
                 fontSize: "36px",
-                color: "#fff",
+                color: "#0a0a0a",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -156,8 +160,8 @@ export default function Navbar() {
               fontFamily: "'Aeonik', sans-serif",
               fontWeight: 500,
               fontSize: "20px",
-              color: "#000",
-              background: "#fff",
+              color: "#0a0a0a",
+              background: "#f5c94c",
               padding: "12px 32px",
               borderRadius: "100px",
               marginTop: "16px",

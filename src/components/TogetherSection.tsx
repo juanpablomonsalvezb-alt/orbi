@@ -38,7 +38,7 @@ export default function TogetherSection() {
     <section
       ref={sectionRef}
       style={{
-        background: "#0a0a0a",
+        background: "#ffffff",
         padding: "120px 40px",
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -63,11 +63,11 @@ export default function TogetherSection() {
             fontSize: "clamp(32px, 4vw, 64px)",
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
-            color: "#fff",
+            color: "#0a0a0a",
           }}
         >
           Together
-          <span style={{ color: "rgba(255,255,255,0.3)" }}>,</span>
+          <span style={{ color: "rgba(10,10,10,0.3)" }}>,</span>
           <br />
           we inspire
           <br />
@@ -80,7 +80,7 @@ export default function TogetherSection() {
           others{" "}
           <span
             style={{
-              color: "rgba(255,255,255,0.4)",
+              color: "rgba(10,10,10,0.4)",
               fontStyle: "italic",
             }}
           >
