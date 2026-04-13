@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TogetherSection from "@/components/TogetherSection";
 import GrowSection from "@/components/GrowSection";
 import PlatformSection from "@/components/PlatformSection";
+import GetStartedSection from "@/components/GetStartedSection";
 import WorkSection from "@/components/WorkSection";
 import StatsSection from "@/components/StatsSection";
 import CTASection from "@/components/CTASection";
@@ -16,6 +17,7 @@ export default function Home() {
       <TogetherSection />
       <GrowSection />
       <PlatformSection />
+      <GetStartedSection />
       <WorkSection />
       <StatsSection />
       <CTASection />
