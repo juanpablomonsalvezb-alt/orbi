@@ -244,7 +244,7 @@ export default function Hero() {
             animation: "slideUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s both",
           }}
         >
-          <Link href="https://app.nebbuler.com" style={{
+          <Link href="https://app.nebbuler.com/plantillas/comenzar" style={{
             fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
             fontSize: 15, color: "#000", background: "var(--yellow)",
             padding: "14px 36px", borderRadius: 100,
