@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { Client } from '@hubspot/api-client'
 
 let _resend: Resend | null = null
 function getResend(): Resend {
@@ -63,6 +64,26 @@ export async function POST(request: NextRequest) {
         </div>
       `,
     })
+
+    // Sync to HubSpot CRM (optional — only if HUBSPOT_ACCESS_TOKEN is set)
+    const hubspotToken = process.env.HUBSPOT_ACCESS_TOKEN
+    if (hubspotToken) {
+      try {
+        const hubspot = new Client({ accessToken: hubspotToken })
+        await hubspot.crm.contacts.basicApi.create({
+          properties: {
+            email: safeEmail,
+            firstname: safeNombre,
+            hs_lead_status: 'NEW',
+            message: safeMensaje,
+            country: safePais,
+            lifecyclestage: 'lead',
+          },
+        })
+      } catch (hsErr) {
+        console.warn('HubSpot sync failed (non-critical):', hsErr)
+      }
+    }
 
     return NextResponse.json({ sent: true })
   } catch (error) {
