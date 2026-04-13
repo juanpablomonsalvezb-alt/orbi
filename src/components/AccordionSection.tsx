@@ -65,12 +65,12 @@ const FAQS = [
 
 const SUPPORT_LINKS = [
   {
-    href: "https://nebbuler.com/ayuda",
+    href: "https://app.nebbuler.com",
     title: "Centro de ayuda",
     body: "Recibe ayuda de nuestro galardonado equipo de Atención al Cliente.",
   },
   {
-    href: "https://nebbuler.com/aprender",
+    href: "https://app.nebbuler.com",
     title: "Seminarios web",
     body: "Sesiones gratuitas en línea para aprender los aspectos básicos y refinar tus habilidades.",
   },

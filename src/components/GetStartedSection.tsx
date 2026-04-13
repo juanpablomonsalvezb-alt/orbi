@@ -429,14 +429,14 @@ export default function GetStartedSection() {
 
           {/* Tablet CTA */}
           <div className="gs-mobile-cta">
-            <a href="https://nebbuler.com/registro">Ver las plantillas</a>
+            <a href="https://app.nebbuler.com">Ver las plantillas</a>
           </div>
         </div>
 
         {/* AI Entrypoints — 2 video cards (desktop only) */}
         <div className="gs-entrypoints">
           {/* Card 1: Kit de diseño con IA */}
-          <a className={`gs-card${visible ? " is-visible" : ""}`} href="https://nebbuler.com/registro">
+          <a className={`gs-card${visible ? " is-visible" : ""}`} href="https://app.nebbuler.com">
             <div className="gs-card__asset">
               <div className="gs-card__overlay" />
               {/* TIME magazine badge */}
@@ -472,7 +472,7 @@ export default function GetStartedSection() {
           </a>
 
           {/* Card 2: Plantillas profesionales */}
-          <a className={`gs-card${visible ? " is-visible" : ""}`} href="https://nebbuler.com/registro">
+          <a className={`gs-card${visible ? " is-visible" : ""}`} href="https://app.nebbuler.com">
             <div className="gs-card__asset">
               <div className="gs-card__overlay" />
               <video
