@@ -79,14 +79,13 @@ function LiveCard({ label, visible }: { label: string; visible: boolean }) {
   const [target, setTarget] = useState(() => getCount(new Date()));
   const displayed = useAnimatedCount(target, visible);
 
-  // re-check every hour (matches the algorithm's hourly tick)
   useEffect(() => {
     const id = setInterval(() => setTarget(getCount(new Date())), 60_000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <article className="stat-card">
+    <article className={`stat-card${visible ? " is-visible" : ""}`}>
       <div className="stat-card__number stat-card__number--yellow stat-card__number--live">
         {displayed.toLocaleString("es-CL")}
         <span className="stat-card__live-dot" aria-hidden="true" />
@@ -107,7 +106,7 @@ function StatCard({
   delay: number;
 }) {
   return (
-    <article className="stat-card" style={{ transitionDelay: `${delay}ms` }}>
+    <article className={`stat-card${visible ? " is-visible" : ""}`} style={{ transitionDelay: `${delay}ms` }}>
       <div className="stat-card__number stat-card__number--yellow">{card.value}</div>
       <p className="stat-card__label">{card.label}</p>
       {card.source && <p className="stat-card__source">{card.source}</p>}
