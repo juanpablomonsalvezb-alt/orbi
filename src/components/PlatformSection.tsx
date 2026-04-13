@@ -6,16 +6,17 @@ const CARDS = [
   { title: "Dominios",                     desc: "Registra el dominio de tus sueños. Incluye privacidad de WHOIS, SSL y DNS premium gratuitos.",                                                             img: "/images/sq_platform_domains.webp" },
   { title: "Analytics",                    desc: "Realiza un seguimiento del rendimiento de tu sitio web con indicadores clave de tráfico y comercio electrónico.",                                          img: "/images/sq_platform_analytics.webp" },
   { title: "Optimización de IA y búsqueda", desc: "Aumenta el tráfico de tus plataformas de búsqueda e IA con herramientas integradas de auditoría de sitios de SEO e IA.",                                img: "/images/sq_platform_ai-seo.webp" },
-  { title: "Contactos",                    desc: "Captura, almacena y segmenta tu audiencia para crear campañas de marketing personalizadas.",                                                               img: "/images/sq_platform_contacts.webp" },
+  { title: "Contactos",                    desc: "Captura, almacena y segmenta tu audiencia para crear campañas de marketing personalizadas.",                                                               img: "/images/sq_platform_memberships.webp" },
   { title: "Email Marketing",              desc: "Herramientas de email marketing eficaces a tu alcance para hacer crecer tu audiencia y potenciar tu marca.",                                               img: "/images/sq_platform_email-campaigns.webp" },
-  { title: "Diseño inteligente",           desc: "Tu asistente creativo de IA para generar diseños, imágenes y contenido diseñado exclusivamente para ti.",                                                  img: "/images/sq_platform_design-intelligence.webp" },
+  { title: "Diseño inteligente",           desc: "Tu asistente creativo de IA para generar diseños, imágenes y contenido diseñado exclusivamente para ti.",                                                  img: "/images/sq_platform_design-intelligence-3.webp" },
   { title: "Correo empresarial",           desc: "Aporta legitimidad a tu negocio con un correo electrónico profesional para tu empresa de Google Workspace.",                                              img: "/images/sq_platform_business-email.webp" },
   { title: "Tienda online",                desc: "Vende productos físicos o digitales con pagos integrados vía Stripe o MercadoPago y checkout optimizado.",                                                 img: "/images/sq_platform_online-store.webp" },
-  { title: "Reserva de citas",             desc: "Acepta reservas automáticamente, gestiona tu disponibilidad y elimina la fricción en la agenda de tus clientes.",                                         img: "/images/sq_platform_invoicing.webp" },
+  { title: "Reserva de citas",             desc: "Acepta reservas automáticamente, gestiona tu disponibilidad y elimina la fricción en la agenda de tus clientes.",                                         img: "/images/sq_platform_scheduling.webp" },
 ];
 
 const CARD_W = 300;   // ancho fijo por card en px
 const CARD_GAP = 16;  // gap entre cards
+const CARD_H = 444;   // 370px + 20%
 
 export default function PlatformSection() {
   const [headerVisible, setHeaderVisible] = useState(false);
@@ -67,7 +68,7 @@ export default function PlatformSection() {
         .platform-card {
           flex-shrink: 0;
           width: ${CARD_W}px;
-          height: 370px;
+          height: ${CARD_H}px;
           border-radius: 8px;
           overflow: hidden;
           position: relative;
@@ -83,12 +84,12 @@ export default function PlatformSection() {
         .platform-card:hover img { transform: scale(1.05); }
         .platform-card-overlay {
           position: absolute; inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+          background: linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0) 100%);
           z-index: 1;
         }
         .platform-card-content {
-          position: absolute; bottom: 0; left: 0; right: 0;
-          padding: 20px 20px 44px;
+          position: absolute; top: 0; left: 0; right: 0;
+          padding: 24px 20px 20px;
           z-index: 2;
         }
         .platform-card-title {
