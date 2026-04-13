@@ -59,7 +59,7 @@ export default function Navbar() {
               >{l.label}</Link>
             ))}
             <LanguageSwitcher dark={false} />
-            <Link href="/contact" style={{
+            <Link href="https://app.nebbuler.com" style={{
               fontFamily: "'Aeonik', sans-serif", fontWeight: 600, fontSize: 14,
               color: "#000", background: "var(--yellow)", padding: "10px 24px",
               borderRadius: 100, whiteSpace: "nowrap",
@@ -80,7 +80,7 @@ export default function Navbar() {
               >{l.label}</Link>
             ))}
             <LanguageSwitcher dark={true} />
-            <Link href="/contact" style={{
+            <Link href="https://app.nebbuler.com" style={{
               fontFamily: "'Aeonik', sans-serif", fontWeight: 600, fontSize: 14,
               color: "#000", background: "var(--yellow)", padding: "10px 24px",
               borderRadius: 100, whiteSpace: "nowrap",
@@ -113,7 +113,7 @@ export default function Navbar() {
             }}>{l.label}</Link>
           ))}
           <LanguageSwitcher dark={true} />
-          <Link href="/contact" onClick={() => setMenuOpen(false)} style={{
+          <Link href="https://app.nebbuler.com" onClick={() => setMenuOpen(false)} style={{
             fontFamily: "'Aeonik', sans-serif", fontWeight: 600, fontSize: 16,
             color: "#000", background: "var(--yellow)", padding: "14px 36px", borderRadius: 100, marginTop: 8,
           }}>{tr.nav_cta}</Link>

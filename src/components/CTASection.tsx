@@ -24,7 +24,7 @@ export default function CTASection() {
         }}>
           {tr.cta_sub}
         </p>
-        <Link href="/contact" style={{
+        <Link href="https://app.nebbuler.com" style={{
           fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
           fontSize: 16, color: "#fff", background: "#000",
           padding: "16px 40px", borderRadius: 100, display: "inline-block",
