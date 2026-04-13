@@ -4,6 +4,7 @@ import TogetherSection from "@/components/TogetherSection";
 import GrowSection from "@/components/GrowSection";
 import PlatformSection from "@/components/PlatformSection";
 import GetStartedSection from "@/components/GetStartedSection";
+import AccordionSection from "@/components/AccordionSection";
 import WorkSection from "@/components/WorkSection";
 import StatsSection from "@/components/StatsSection";
 import CTASection from "@/components/CTASection";
@@ -18,6 +19,7 @@ export default function Home() {
       <GrowSection />
       <PlatformSection />
       <GetStartedSection />
+      <AccordionSection />
       <WorkSection />
       <StatsSection />
       <CTASection />
