@@ -180,6 +180,9 @@ export default function StatsSection() {
           padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px);
           display: flex;
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
           gap: 12px;
           opacity: 0;
           transform: translateY(20px);
@@ -198,6 +201,7 @@ export default function StatsSection() {
           -webkit-font-smoothing: antialiased;
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 10px;
         }
         .stat-card__number--yellow { color: #fdc115; }
