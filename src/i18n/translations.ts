@@ -52,7 +52,7 @@ export const t: Record<Lang, {
     hero_sub:        "Diseño profesional, precio justo, sin reuniones previas. Tu negocio online hoy.",
     hero_cta:        "Empezar ahora",
     hero_secondary:  "Ver plantillas",
-    together:        "Juntos, creamos presencia digital que hace crecer tu negocio.",
+    together:        "Tu competencia ya está online. Tus clientes también. ¿Y tú?",
     stats_title:     "Resultados que",
     stats_italic:    "importan",
     cta_title:       "Hagamos crecer tu negocio",
