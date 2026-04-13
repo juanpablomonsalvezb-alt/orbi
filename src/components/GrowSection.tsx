@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
 const TABS = [
@@ -30,7 +30,7 @@ const TABS = [
   {
     label: "Donaciones",
     title: "Recibe donaciones",
-    body: "Crea una campaña de recaudación de fondos, acepta donaciones en tu sitio web y envía correos a los donantes.",
+    body: "Crea una campaña de recaudación de fondos, acepta donaciones en tu sitio web.",
     img: "/images/sq_donations.jpg",
   },
   {
@@ -53,15 +53,31 @@ const TABS = [
   },
 ];
 
+const GAP = 16; // px between cards
+
 export default function GrowSection() {
   const [active, setActive] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [offset, setOffset] = useState(0);
+
   const sectionRef = useRef<HTMLElement>(null);
   const pillsRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [trackW, setTrackW] = useState(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
-  // Entrada section
+  // Compute the translateX offset so the active card is centered with ~10% peeks on each side
+  const computeOffset = useCallback((idx: number) => {
+    if (!viewportRef.current) return;
+    const W = viewportRef.current.offsetWidth;
+    const cardW = W * 0.80;   // card = 80% of viewport
+    const peek = (W - cardW) / 2; // ~10% on each side
+    // Each card step = cardW + GAP
+    const step = cardW + GAP;
+    // Center first card: translateX = peek
+    // For card idx: translateX = peek - idx * step
+    setOffset(peek - idx * step);
+  }, []);
+
+  // Intersection observer (entrance animation)
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) setVisible(true); },
@@ -71,31 +87,26 @@ export default function GrowSection() {
     return () => obs.disconnect();
   }, []);
 
-  // Medir ancho del track para el translateX
+  // Recompute on mount, resize, and active change
   useEffect(() => {
-    const measure = () => {
-      if (trackRef.current) setTrackW(trackRef.current.offsetWidth);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
+    computeOffset(active);
+    const onResize = () => computeOffset(active);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [active, computeOffset]);
 
-  // Scroll pill activo al centro (mobile)
+  // Scroll active pill into view on mobile
   useEffect(() => {
     if (!pillsRef.current) return;
-    const pill = pillsRef.current.querySelectorAll<HTMLElement>("[data-pill]")[active];
-    if (pill) pill.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const pills = pillsRef.current.querySelectorAll<HTMLElement>("[data-pill]");
+    pills[active]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [active]);
-
-  const goTo = (i: number) => setActive(i);
 
   return (
     <>
       <style>{`
         .grow-pills-wrap::-webkit-scrollbar { display: none; }
         .grow-pills-wrap { -ms-overflow-style: none; scrollbar-width: none; }
-
         .grow-pill {
           font-family: 'Aeonik', sans-serif;
           font-size: 15px;
@@ -111,29 +122,15 @@ export default function GrowSection() {
           z-index: 1;
           transition: opacity 0.2s;
         }
-        .grow-pill:hover { opacity: 0.65; }
+        .grow-pill:hover { opacity: 0.6; }
         .grow-pill.active { font-weight: 500; }
-
-        .grow-card-link {
-          display: block;
-          width: 100%;
-          height: 100%;
-          text-decoration: none;
-          position: relative;
-          overflow: hidden;
-          border-radius: 12px;
+        .grow-slide-inactive {
+          filter: brightness(0.65);
+          transition: filter 0.5s ease;
         }
-        .grow-card-link::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.12) 55%, transparent 100%);
-          z-index: 1;
-        }
-
-        @media (max-width: 700px) {
-          .grow-track-slide { width: 85vw !important; min-width: 85vw !important; }
-          .grow-track-slide-sm { display: none !important; }
+        .grow-slide-inactive:hover {
+          filter: brightness(0.85);
+          cursor: pointer;
         }
       `}</style>
 
@@ -142,7 +139,7 @@ export default function GrowSection() {
         style={{
           background: "#fff",
           paddingTop: 80,
-          paddingBottom: 80,
+          paddingBottom: 64,
           opacity: visible ? 1 : 0,
           transform: visible ? "none" : "translateY(40px)",
           transition: "opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)",
@@ -157,7 +154,7 @@ export default function GrowSection() {
             lineHeight: 1.1,
             letterSpacing: "-0.5px",
             color: "#000",
-            margin: "0 0 16px",
+            margin: "0 0 14px",
           }}>
             Haz crecer tu negocio
           </h2>
@@ -179,31 +176,28 @@ export default function GrowSection() {
             className="grow-pills-wrap"
             style={{
               display: "flex",
-              flexDirection: "row",
               alignItems: "center",
-              gap: 0,
               borderRadius: 100,
               backgroundColor: "rgba(0,0,0,0.06)",
               padding: 4,
               overflowX: "auto",
-              flexShrink: 0,
+              gap: 0,
             }}
           >
             {TABS.map((tab, i) => (
               <div key={tab.label} style={{ position: "relative", flexShrink: 0 }}>
                 {active === i && (
                   <div style={{
-                    position: "absolute", inset: 0,
-                    borderRadius: 100,
+                    position: "absolute", inset: 0, borderRadius: 100,
                     backgroundColor: "#fff",
-                    boxShadow: "0 1px 6px rgba(0,0,0,0.13)",
+                    boxShadow: "0 1px 6px rgba(0,0,0,0.14)",
                     zIndex: 0,
                   }} />
                 )}
                 <button
                   data-pill
                   className={`grow-pill${active === i ? " active" : ""}`}
-                  onClick={() => goTo(i)}
+                  onClick={() => setActive(i)}
                 >
                   {tab.label}
                 </button>
@@ -212,61 +206,67 @@ export default function GrowSection() {
           </div>
         </div>
 
-        {/* Carousel */}
+        {/* Carousel viewport — overflow hidden */}
         <div
-          ref={trackRef}
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            paddingLeft: 16,
-            paddingRight: 16,
-            overflow: "hidden",
-          }}
+          ref={viewportRef}
+          style={{ overflow: "hidden", width: "100%" }}
         >
-          {/* Track — all slides side by side */}
+          {/* Track — all cards side by side, translated */}
           <div
             style={{
               display: "flex",
               flexDirection: "row",
-              gap: 12,
-              // Each "slide unit" = 2/3 of track (main) + 1/3 (preview) but we offset by full "main card" width
-              // We shift by active * (trackW * 0.655 + 12) so each click moves one card
-              transform: `translateX(calc(-${active} * (65% + 12px)))`,
-              transition: "transform 0.55s cubic-bezier(0.77,0,0.175,1)",
+              gap: GAP,
+              transform: `translateX(${offset}px)`,
+              transition: "transform 0.6s cubic-bezier(0.77,0,0.175,1)",
               willChange: "transform",
             }}
           >
-            {TABS.map((tab, i) => (
-              <div
-                key={tab.label}
-                className="grow-track-slide"
-                style={{
-                  flexShrink: 0,
-                  width: "65%",
-                  minWidth: "65%",
-                  height: 520,
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  position: "relative",
-                  cursor: i !== active ? "pointer" : "default",
-                }}
-                onClick={() => { if (i !== active) goTo(i); }}
-              >
-                <div className="grow-card-link">
+            {TABS.map((tab, i) => {
+              const isActive = i === active;
+              const W = viewportRef.current?.offsetWidth ?? 1200;
+              const cardW = W * 0.80;
+
+              return (
+                <div
+                  key={tab.label}
+                  className={isActive ? "" : "grow-slide-inactive"}
+                  onClick={() => { if (!isActive) setActive(i); }}
+                  style={{
+                    flexShrink: 0,
+                    width: cardW,
+                    height: "clamp(420px, 52vw, 620px)",
+                    borderRadius: 12,
+                    overflow: "hidden",
+                    position: "relative",
+                    transition: "filter 0.5s ease",
+                  }}
+                >
+                  {/* Background image */}
                   <Image
                     src={tab.img}
                     alt={tab.title}
                     fill
                     style={{ objectFit: "cover" }}
-                    sizes="(max-width: 700px) 85vw, 65vw"
-                    priority={i === 0}
+                    sizes="80vw"
+                    priority={i <= 1}
                   />
-                  {/* Overlay via ::after in CSS */}
-                  <div style={{ position: "absolute", inset: 0, zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "32px 36px" }}>
+                  {/* Gradient overlay */}
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
+                    zIndex: 1,
+                  }} />
+                  {/* Text */}
+                  <div style={{
+                    position: "absolute", bottom: 0, left: 0, right: 0,
+                    zIndex: 2,
+                    padding: "36px 40px",
+                  }}>
                     <h3 style={{
                       fontFamily: "'Aeonik', sans-serif",
                       fontWeight: 500,
-                      fontSize: "clamp(20px, 2.2vw, 28px)",
+                      fontSize: "clamp(20px, 2vw, 28px)",
                       color: "#fff",
                       margin: "0 0 10px",
                       lineHeight: 1.2,
@@ -278,15 +278,17 @@ export default function GrowSection() {
                       fontSize: 15,
                       color: "rgba(255,255,255,0.85)",
                       margin: 0,
-                      lineHeight: 1.5,
-                      maxWidth: 380,
+                      lineHeight: 1.55,
+                      maxWidth: 420,
+                      opacity: isActive ? 1 : 0,
+                      transition: "opacity 0.4s ease",
                     }}>
                       {tab.body}
                     </p>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -295,7 +297,7 @@ export default function GrowSection() {
           {TABS.map((_, i) => (
             <button
               key={i}
-              onClick={() => goTo(i)}
+              onClick={() => setActive(i)}
               style={{
                 width: i === active ? 22 : 6,
                 height: 6,
