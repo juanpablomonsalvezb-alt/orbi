@@ -1,64 +1,36 @@
 "use client";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-
-const VERBS = ["create", "discover", "strategize", "ideate", "craft", "design", "build", "develop", "optimize"];
-// Small inline images that appear next to the cycling verb
-const VERB_IMAGES = [
-  "/images/3fo_home-thrive-05.jpg",
-  "/images/3fo_home-thrive-06.jpg",
-  "/images/3fo_home-thrive-07.jpg",
-  "/images/3fo_home-thrive-08.jpg",
-  "/images/3fo_home-thrive-02.jpg",
-  "/images/3fo_home-thrive-03.jpg",
-  "/images/3fo_home-thrive-04.jpg",
-  "/images/3fo_home-thrive-05.jpg",
-  "/images/3fo_home-thrive-06.jpg",
-];
+import { useLang } from "@/contexts/LangContext";
+import Link from "next/link";
 
 export default function CTASection() {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setIdx(i => (i + 1) % VERBS.length), 2000);
-    return () => clearInterval(id);
-  }, []);
+  const { tr } = useLang();
 
   return (
     <section style={{
-      background: "var(--yellow)", padding: "clamp(80px, 10vw, 160px) clamp(24px, 5vw, 80px) 60px",
+      background: "var(--yellow)",
+      padding: "clamp(80px, 10vw, 160px) clamp(24px, 5vw, 80px) 60px",
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h2 style={{
           fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
           fontSize: "clamp(44px, 7vw, 112px)", lineHeight: 1.0,
-          letterSpacing: "-0.035em", color: "#000",
+          letterSpacing: "-0.035em", color: "#000", marginBottom: 32,
         }}>
-          Let&apos;s{" "}
-          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
-            <Image
-              src={VERB_IMAGES[idx % VERB_IMAGES.length]}
-              alt=""
-              width={100} height={68}
-              style={{
-                display: "inline-block", width: "clamp(60px, 8vw, 110px)", height: "clamp(40px, 5vw, 70px)",
-                borderRadius: 8, objectFit: "cover", verticalAlign: "middle", marginRight: 8,
-              }}
-            />
-          </span>
-          <span style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}>
-            <span key={idx} style={{
-              display: "inline-block",
-              animation: "cycleIn .55s cubic-bezier(.16,1,.3,1) forwards",
-            }}>
-              {VERBS[idx]}
-            </span>
-          </span>
-          <br />
-          <span style={{ color: "#fff" }}>new futures together.</span>
+          {tr.cta_title}
         </h2>
-
-        {/* Spacer — email subscribe is in Footer */}
+        <p style={{
+          fontFamily: "'Aeonik', sans-serif", fontSize: 20,
+          color: "rgba(0,0,0,0.55)", marginBottom: 40,
+        }}>
+          {tr.cta_sub}
+        </p>
+        <Link href="/contact" style={{
+          fontFamily: "'Aeonik', sans-serif", fontWeight: 700,
+          fontSize: 16, color: "#fff", background: "#000",
+          padding: "16px 40px", borderRadius: 100, display: "inline-block",
+        }}>
+          {tr.hero_cta}
+        </Link>
       </div>
     </section>
   );
