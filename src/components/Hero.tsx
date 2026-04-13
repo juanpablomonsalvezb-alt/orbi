@@ -100,19 +100,6 @@ const SLIDES: {
     },
   },
   {
-    video: "/videos/slide_08.mp4",
-    texts: {
-      es: { title: "Conectando tu marca, siempre.",            sub: "Presencia online 24/7, sin interrupciones." },
-      pt: { title: "Conectando sua marca, sempre.",            sub: "Presença online 24/7, sem interrupções." },
-      ar: { title: "نربط علامتك دائماً.",                      sub: "حضور إلكتروني ٢٤/٧ بلا انقطاع." },
-      tr: { title: "Markanı her zaman bağlıyoruz.",            sub: "7/24 kesintisiz çevrimiçi varlık." },
-      pl: { title: "Łączymy Twoją markę, zawsze.",             sub: "Obecność online 24/7 bez przerw." },
-      ro: { title: "Conectăm brandul tău, mereu.",             sub: "Prezență online 24/7, fără întreruperi." },
-      ms: { title: "Menghubungkan jenama anda, sentiasa.",     sub: "Kehadiran online 24/7 tanpa gangguan." },
-      en: { title: "Connecting your brand, always.",           sub: "Online presence 24/7, without interruptions." },
-    },
-  },
-  {
     video: "/videos/slide_09.mp4",
     texts: {
       es: { title: "Conectando tu esfuerzo, siempre.",         sub: "Cada hora de trabajo merece ser vista." },
@@ -130,17 +117,47 @@ const SLIDES: {
 export default function Hero() {
   const [idx, setIdx] = useState(0);
   const [animKey, setAnimKey] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [fade, setFade] = useState(false);
+  const videoARef = useRef<HTMLVideoElement>(null);
+  const videoBRef = useRef<HTMLVideoElement>(null);
+  const [activeLayer, setActiveLayer] = useState<"a" | "b">("a");
   const { lang, tr, dir } = useLang();
 
+  // Preload next video into the inactive layer
+  const nextIdx = (idx + 1) % SLIDES.length;
+
   useEffect(() => {
-    const v = videoRef.current;
-    if (v) { v.load(); v.play().catch(() => {}); }
-  }, [idx]);
+    const active = activeLayer === "a" ? videoARef.current : videoBRef.current;
+    if (active) { active.load(); active.play().catch(() => {}); }
+  }, [idx, activeLayer]);
+
+  // Preload next into inactive layer
+  useEffect(() => {
+    const inactive = activeLayer === "a" ? videoBRef.current : videoARef.current;
+    if (inactive) {
+      inactive.src = SLIDES[nextIdx].video;
+      inactive.load();
+    }
+  }, [idx, activeLayer, nextIdx]);
 
   const handleVideoEnd = () => {
-    setIdx(i => (i + 1) % SLIDES.length);
-    setAnimKey(k => k + 1);
+    setFade(true);
+    setTimeout(() => {
+      setIdx(nextIdx);
+      setActiveLayer(l => l === "a" ? "b" : "a");
+      setAnimKey(k => k + 1);
+      setFade(false);
+    }, 400);
+  };
+
+  const goTo = (i: number) => {
+    setFade(true);
+    setTimeout(() => {
+      setIdx(i);
+      setActiveLayer(l => l === "a" ? "b" : "a");
+      setAnimKey(k => k + 1);
+      setFade(false);
+    }, 300);
   };
 
   const slide = SLIDES[idx];
@@ -149,26 +166,49 @@ export default function Hero() {
   return (
     <section style={{
       position: "relative", width: "100%", height: "100vh",
-      minHeight: 640, overflow: "hidden", background: "#000",
+      minHeight: 640, overflow: "hidden", background: "#111",
     }}>
+      {/* Layer A */}
       <video
-        ref={videoRef}
+        ref={videoARef}
         autoPlay muted playsInline
-        onEnded={handleVideoEnd}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+        onEnded={activeLayer === "a" ? handleVideoEnd : undefined}
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover",
+          opacity: activeLayer === "a" ? (fade ? 0 : 1) : 0,
+          transition: "opacity 0.4s ease",
+          zIndex: activeLayer === "a" ? 1 : 0,
+        }}
       >
-        <source src={slide.video} type="video/mp4" />
+        <source src={SLIDES[idx].video} type="video/mp4" />
+      </video>
+
+      {/* Layer B */}
+      <video
+        ref={videoBRef}
+        autoPlay muted playsInline
+        onEnded={activeLayer === "b" ? handleVideoEnd : undefined}
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover",
+          opacity: activeLayer === "b" ? (fade ? 0 : 1) : 0,
+          transition: "opacity 0.4s ease",
+          zIndex: activeLayer === "b" ? 1 : 0,
+        }}
+      >
+        <source src={SLIDES[nextIdx].video} type="video/mp4" />
       </video>
 
       {/* Gradient */}
       <div style={{
-        position: "absolute", inset: 0, zIndex: 1,
-        background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 45%, transparent 100%)",
+        position: "absolute", inset: 0, zIndex: 2,
+        background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.08) 45%, transparent 100%)",
       }} />
 
       {/* Text overlay */}
       <div style={{
-        position: "absolute", insetInline: 0, bottom: 0, zIndex: 2,
+        position: "absolute", insetInline: 0, bottom: 0, zIndex: 3,
         display: "flex", flexDirection: "column", gap: 20,
         padding: "0 clamp(24px,5vw,80px) clamp(56px,8vh,110px)",
         direction: dir,
@@ -223,12 +263,12 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* Slide indicators */}
+        {/* Indicators */}
         <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
           {SLIDES.map((_, i) => (
             <button
               key={i}
-              onClick={() => { setIdx(i); setAnimKey(k => k + 1); }}
+              onClick={() => goTo(i)}
               style={{
                 width: i === idx ? 24 : 6, height: 6,
                 borderRadius: 99, border: "none", cursor: "pointer", padding: 0,
