@@ -3,14 +3,14 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
 const TABS = [
-  { label: "Servicios",      title: "Ofrece servicios",       body: "Promociona tu experiencia y ofertas, recopila información de los asistentes y recibe pagos por tu trabajo.",                          img: "/images/sq_services.jpg" },
-  { label: "Tienda online",  title: "Vende productos",         body: "Comercializa tus productos, acepta pagos, gestiona pedidos y envíos y más.",                                                         img: "/images/sq_online-store.jpg" },
-  { label: "Facturación",    title: "Factura a tus clientes",  body: "Legitima tu negocio y recibe pagos con propuestas, contratos y facturas profesionales.",                                              img: "/images/sq_invoicing.jpg" },
-  { label: "Reserva de citas", title: "Acepta reservas",       body: "Obtén reservas de citas sin inconvenientes, gestión automatizada del calendario y pagos integrados.",                                img: "/images/sq_scheduling.jpg" },
-  { label: "Donaciones",     title: "Recibe donaciones",       body: "Crea una campaña de recaudación de fondos, acepta donaciones en tu sitio web.",                                                      img: "/images/sq_donations.jpg" },
-  { label: "Membresías",     title: "Crea membresías",         body: "Monetiza tu contenido o comunidad con planes de membresía recurrentes y acceso exclusivo.",                                          img: "/images/sq_memberships.jpg" },
-  { label: "Blog",           title: "Publica tu blog",         body: "Comparte tu historia, construye autoridad y atrae más visitantes con contenido que conecta.",                                       img: "/images/sq_blog.jpg" },
-  { label: "Portafolio",     title: "Muestra tu portafolio",   body: "Presenta tu trabajo de forma impactante con galerías elegantes y proyectos organizados.",                                           img: "/images/sq_portfolio.jpg" },
+  { label: "Servicios",      title: "Ofrece servicios",       body: "Promociona tu experiencia y ofertas, recopila información de los asistentes y recibe pagos por tu trabajo.",                          img: "/images/sq_services.png" },
+  { label: "Tienda online",  title: "Vende productos",         body: "Comercializa tus productos, acepta pagos, gestiona pedidos y envíos y más.",                                                         img: "/images/sq_online-store.png" },
+  { label: "Facturación",    title: "Factura a tus clientes",  body: "Legitima tu negocio y recibe pagos con propuestas, contratos y facturas profesionales.",                                              img: "/images/sq_invoicing.png" },
+  { label: "Reserva de citas", title: "Acepta reservas",       body: "Obtén reservas de citas sin inconvenientes, gestión automatizada del calendario y pagos integrados.",                                img: "/images/sq_scheduling.png" },
+  { label: "Donaciones",     title: "Recibe donaciones",       body: "Crea una campaña de recaudación de fondos, acepta donaciones en tu sitio web.",                                                      img: "/images/sq_donations.png" },
+  { label: "Membresías",     title: "Crea membresías",         body: "Monetiza tu contenido o comunidad con planes de membresía recurrentes y acceso exclusivo.",                                          img: "/images/sq_memberships.png" },
+  { label: "Blog",           title: "Publica tu blog",         body: "Comparte tu historia, construye autoridad y atrae más visitantes con contenido que conecta.",                                       img: "/images/sq_blog.png" },
+  { label: "Portafolio",     title: "Muestra tu portafolio",   body: "Presenta tu trabajo de forma impactante con galerías elegantes y proyectos organizados.",                                           img: "/images/sq_portfolio.png" },
 ];
 
 const N = TABS.length;
