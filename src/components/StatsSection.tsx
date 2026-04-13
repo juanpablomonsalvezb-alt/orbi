@@ -1,226 +1,273 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-const stats = [
+/*
+ * Datos exactos desde: Nebbuler_Prompt_Maestro_ClaudeCode.docx — Sección 4
+ * Card 1: Contador en vivo (algoritmo exacto del documento)
+ * Card 2: 36% pymes sin sitio web (OECD 2025)
+ * Card 3: 72h entrega garantizada
+ * Card 4: 18 países
+ */
+
+/* ─── Algoritmo contador vivo ───────────────────────────────────────── */
+const BASE_COUNT = 1975;
+const PER_DAY = 17;
+const LAUNCH_DATE = new Date("2026-04-13T00:00:00");
+
+function getCount(now: Date): number {
+  const totalHours = Math.floor((now.getTime() - LAUNCH_DATE.getTime()) / 3_600_000);
+  if (totalHours < 0) return BASE_COUNT;
+  const completeDays = Math.floor(totalHours / 24);
+  const hoursToday = totalHours % 24;
+  const addedToday = Math.min(hoursToday, PER_DAY);
+  return BASE_COUNT + completeDays * PER_DAY + addedToday;
+}
+
+/* ─── easeOutCubic animación ────────────────────────────────────────── */
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function useAnimatedCount(target: number, trigger: boolean, duration = 1800): number {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!trigger) return;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setValue(Math.floor(easeOutCubic(progress) * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [trigger, target, duration]);
+  return value;
+}
+
+/* ─── Cards config ──────────────────────────────────────────────────── */
+type Card =
+  | { type: "live"; label: string }
+  | { type: "stat"; value: string; label: string; source?: string };
+
+const CARDS: Card[] = [
   {
-    number: 203,
-    suffix: "%",
-    label: "increase in revenue from search traffic",
-    client: "Alohilani Resort",
-    href: "/case-study/alohilani-resort",
+    type: "live",
+    label: "sitios web publicados con Nebbuler",
   },
   {
-    number: 247,
-    suffix: "%",
-    label: "increase in revenue from Google ads",
-    client: "Parker Palm Springs",
-    href: "/case-study/parker-palm-springs",
+    type: "stat",
+    value: "36%",
+    label: "de las pymes en el mundo no tiene sitio web",
+    source: "OECD 2025",
   },
   {
-    number: 535,
-    suffix: "%",
-    label: "boost in site traffic since launch",
-    client: "ECS Senior Living",
-    href: "/case-study/ecs-senior-living",
+    type: "stat",
+    value: "72h",
+    label: "tiempo máximo de entrega garantizado",
   },
   {
-    number: 50,
-    suffix: "%",
-    label: "increase in engagement",
-    client: "ThoughtSpot",
-    href: "/case-study/thoughtspot",
+    type: "stat",
+    value: "18",
+    label: "países donde opera Nebbuler",
   },
 ];
 
-function useCountUp(target: number, trigger: boolean): number {
-  const [current, setCurrent] = useState(0);
+/* ─── LiveCard ──────────────────────────────────────────────────────── */
+function LiveCard({ label, visible }: { label: string; visible: boolean }) {
+  const [target, setTarget] = useState(() => getCount(new Date()));
+  const displayed = useAnimatedCount(target, visible);
 
+  // re-check every hour (matches the algorithm's hourly tick)
   useEffect(() => {
-    if (!trigger) return;
-
-    let start = 0;
-    const duration = 1800;
-    const stepTime = 16;
-    const totalSteps = duration / stepTime;
-    const increment = target / totalSteps;
-    let frame: number;
-
-    const tick = () => {
-      start += increment;
-      if (start >= target) {
-        setCurrent(target);
-      } else {
-        setCurrent(Math.floor(start));
-        frame = window.requestAnimationFrame(tick);
-      }
-    };
-
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [trigger, target]);
-
-  return current;
-}
-
-function StatRow({
-  stat,
-  visible,
-  isLast,
-}: {
-  stat: (typeof stats)[0];
-  visible: boolean;
-  isLast: boolean;
-}) {
-  const count = useCountUp(stat.number, visible);
+    const id = setInterval(() => setTarget(getCount(new Date())), 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div
-      style={{
-        padding: "48px 0",
-        borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.08)",
-        display: "grid",
-        gridTemplateColumns: "240px 1fr auto",
-        alignItems: "center",
-        gap: "32px",
-      }}
-    >
-      {/* Big number */}
-      <span
-        style={{
-          fontFamily: "'Aeonik', sans-serif",
-          fontWeight: 300,
-          fontSize: "clamp(60px, 8vw, 120px)",
-          letterSpacing: "-0.04em",
-          color: "var(--yellow)",
-          lineHeight: 1,
-          fontVariantNumeric: "tabular-nums",
-        }}
-      >
-        {count}
-        {stat.suffix}
-      </span>
-
-      {/* Description */}
-      <p
-        style={{
-          fontFamily: "'Aeonik', sans-serif",
-          fontWeight: 400,
-          fontSize: "16px",
-          color: "rgba(0,0,0,0.55)",
-          lineHeight: 1.5,
-          maxWidth: "360px",
-        }}
-      >
-        {stat.label}
-      </p>
-
-      {/* Case study link */}
-      <Link
-        href={stat.href}
-        style={{
-          fontFamily: "'Aeonik', sans-serif",
-          fontSize: "14px",
-          fontWeight: 500,
-          color: "#000000",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "6px",
-          whiteSpace: "nowrap" as const,
-          transition: "opacity 0.2s",
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-      >
-        {stat.client} &rarr;
-      </Link>
-    </div>
+    <article className="stat-card">
+      <div className="stat-card__number stat-card__number--yellow stat-card__number--live">
+        {displayed.toLocaleString("es-CL")}
+        <span className="stat-card__live-dot" aria-hidden="true" />
+      </div>
+      <p className="stat-card__label">{label}</p>
+    </article>
   );
 }
 
+/* ─── StatCard ──────────────────────────────────────────────────────── */
+function StatCard({
+  card,
+  visible,
+  delay,
+}: {
+  card: Extract<Card, { type: "stat" }>;
+  visible: boolean;
+  delay: number;
+}) {
+  return (
+    <article className="stat-card" style={{ transitionDelay: `${delay}ms` }}>
+      <div className="stat-card__number stat-card__number--yellow">{card.value}</div>
+      <p className="stat-card__label">{card.label}</p>
+      {card.source && <p className="stat-card__source">{card.source}</p>}
+    </article>
+  );
+}
+
+/* ─── StatsSection ──────────────────────────────────────────────────── */
 export default function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
       { threshold: 0.1 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#ffffff",
-        padding: "120px 40px",
-        maxWidth: "1400px",
-        margin: "0 auto",
-        width: "100%",
-      }}
-    >
-      {/* Title */}
-      <h2
-        style={{
-          fontFamily: "'Aeonik', sans-serif",
-          fontWeight: 700,
-          fontSize: "clamp(48px, 6vw, 96px)",
-          letterSpacing: "-1.44px",
-          color: "#000000",
-          lineHeight: 1.0,
-          marginBottom: "8px",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(30px)",
-          transition: "all 0.7s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
-        Results-driven{" "}
-        <span
-          style={{
-            fontWeight: 300,
-            fontStyle: "italic",
-            color: "#fdc115",
-          }}
-        >
-          impact
-        </span>
-      </h2>
-
-      {/* Stats list */}
-      <div
-        style={{
-          marginTop: "48px",
-          borderTop: "1px solid rgba(0,0,0,0.08)",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(20px)",
-          transition: "all 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s",
-        }}
-      >
-        {stats.map((stat, i) => (
-          <StatRow
-            key={stat.number}
-            stat={stat}
-            visible={visible}
-            isLast={i === stats.length - 1}
-          />
-        ))}
-      </div>
-
-      {/* Responsive override for mobile */}
+    <>
       <style>{`
-        @media (max-width: 768px) {
-          section [style*="grid-template-columns: 240px"] {
-            grid-template-columns: 1fr !important;
-            gap: 12px !important;
-            padding: 32px 0 !important;
-          }
+        .stats-section {
+          background: #fff;
+          padding: clamp(64px, 8vw, 120px) clamp(16px, 4vw, 40px);
+        }
+        .stats-section__inner {
+          max-width: 1320px;
+          margin: 0 auto;
+        }
+
+        /* ── Título ── */
+        .stats-title {
+          font-family: 'Aeonik', sans-serif;
+          font-weight: 700;
+          font-size: clamp(40px, 6vw, 96px);
+          letter-spacing: -0.04em;
+          color: #000;
+          line-height: 1;
+          margin: 0 0 clamp(40px, 5vw, 80px);
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        }
+        .stats-title.is-visible { opacity: 1; transform: none; }
+        .stats-title em {
+          font-weight: 300;
+          font-style: italic;
+          color: #fdc115;
+        }
+
+        /* ── Grid de 4 cards ── */
+        .stats-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          background: rgba(0,0,0,0.1);
+          border: 1px solid rgba(0,0,0,0.1);
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        @media (min-width: 900px) {
+          .stats-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        /* ── Card individual ── */
+        .stat-card {
+          background: #fff;
+          padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px);
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .stat-card.is-visible { opacity: 1; transform: none; }
+
+        /* ── Número grande ── */
+        .stat-card__number {
+          font-family: 'Aeonik', sans-serif;
+          font-weight: 700;
+          font-size: clamp(48px, 6vw, 80px);
+          letter-spacing: -0.04em;
+          line-height: 1;
+          color: #000;
+          -webkit-font-smoothing: antialiased;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .stat-card__number--yellow { color: #fdc115; }
+
+        /* ── Punto vivo animado ── */
+        .stat-card__live-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #22c55e;
+          flex-shrink: 0;
+          animation: livePulse 2s ease-in-out infinite;
+        }
+        @keyframes livePulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%       { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        /* ── Label ── */
+        .stat-card__label {
+          font-family: 'Aeonik', sans-serif;
+          font-weight: 400;
+          font-size: clamp(14px, 1.4vw, 16px);
+          line-height: 1.4;
+          letter-spacing: -0.01em;
+          color: rgba(0,0,0,0.55);
+          -webkit-font-smoothing: antialiased;
+          margin: 0;
+        }
+
+        /* ── Fuente ── */
+        .stat-card__source {
+          font-family: 'Aeonik', sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: rgba(0,0,0,0.3);
+          margin: 0;
+          margin-top: auto;
+          padding-top: 8px;
         }
       `}</style>
-    </section>
+
+      <section ref={sectionRef} className="stats-section">
+        <div className="stats-section__inner">
+          <h2 className={`stats-title${visible ? " is-visible" : ""}`}>
+            Results-driven <em>impact</em>
+          </h2>
+
+          <div className="stats-grid">
+            {CARDS.map((card, i) =>
+              card.type === "live" ? (
+                <LiveCard
+                  key="live"
+                  label={card.label}
+                  visible={visible}
+                />
+              ) : (
+                <StatCard
+                  key={card.value}
+                  card={card}
+                  visible={visible}
+                  delay={i * 80}
+                />
+              )
+            )}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
